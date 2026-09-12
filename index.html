@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Практика по методам искусственного интеллекта для групп 24ИС02 и 24ИС03. Один кейс, семь последовательных пар.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Практика ИИ · 24ИС</title>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/mobile-fix.css">
+<link rel="stylesheet" href="assets/front-ui.css">
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+<div id="banner" class="banner" hidden></div>
+<header class="topbar">
+  <div class="shell topbar-row">
+    <a class="brand" href="#home" aria-label="Практика ИИ, главная">
+      <span class="logo">AI</span>
+      <span class="brand-copy"><b>Практика ИИ</b><span>24ИС · 3 курс</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Основная навигация">
+      <button class="nav-btn active" data-view="home">Сейчас</button>
+      <button class="nav-btn" data-view="route">Все пары</button>
+      <button class="nav-btn" data-view="schedule">Расписание</button>
+      <button class="nav-btn" data-view="materials">Материалы</button>
+      <button class="nav-btn" data-view="portfolio">Моя работа</button>
+      <button class="nav-btn" data-view="help">Как учиться</button>
+    </nav>
+    <div class="top-actions">
+      <select id="group" class="group-select" aria-label="Подгруппа">
+        <option>24ИС02/1</option>
+        <option>24ИС02/2</option>
+        <option>24ИС03/1</option>
+        <option>24ИС03/2</option>
+      </select>
+      <button class="ghost-btn" data-view="help">Что это</button>
+    </div>
+  </div>
+</header>
+<main id="main" class="shell page" tabindex="-1"></main>
+<footer class="shell footer">
+  <p>Учебный прототип по «Методам искусственного интеллекта». Все компании, сообщения и данные вымышлены.</p>
+  <p>Прогресс хранится только в браузере. Это не журнал оценок и ничего само преподавателю не отправляет.</p>
+</footer>
+<dialog id="dialog" class="dialog" aria-labelledby="dialogTitle">
+  <div class="dialog-head"><strong id="dialogTitle">Окно</strong><button class="icon-btn" data-action="dialog-close" aria-label="Закрыть">×</button></div>
+  <div id="dialogBody" class="dialog-body"></div>
+</dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<input id="importFile" type="file" accept="application/json,.json" hidden>
+<script src="assets/app.js"></script>
+<script src="assets/front-ui.js"></script>
+</body>
+</html>
