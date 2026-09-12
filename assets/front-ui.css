@@ -1,0 +1,109 @@
+/* Frontend polish for the real subgroup schedule. Kept separate so the core course styles stay boringly maintainable. */
+body[data-page="schedule"]{background:#f3f4f6}
+body[data-page="schedule"] .page{padding-top:20px}
+body[data-page="schedule"] .section-head{margin-bottom:22px}
+body[data-page="schedule"] .section-head h2{font-size:30px;letter-spacing:-1px}
+body[data-page="schedule"] .section-head p{max-width:820px;font-size:14px;line-height:1.65}
+
+/* The next class should be the first thing the eye catches on the dashboard. */
+.job-card--next{position:relative;overflow:hidden;border-color:#e2e3e7;box-shadow:0 1px 2px rgba(20,24,32,.04),0 14px 38px rgba(20,24,32,.075)}
+.job-card--next:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--accent)}
+.job-card--next .eyebrow{color:#9e2940}
+.job-card--next .job-title{font-size:26px;max-width:760px}
+.job-card--next .job-company{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:#4f535a}
+.job-card--next .job-company:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.job-card--next .job-pay{padding:9px 11px;border-radius:11px;background:#f7f7f8;border:1px solid var(--line)}
+
+/* Selected subgroup summary reads more like a practical dashboard than a settings panel. */
+body[data-page="home"] .side-card:first-child{border-top:3px solid #2b2d31}
+body[data-page="home"] .side-card:first-child h3{font-size:24px;letter-spacing:-.6px}
+body[data-page="home"] .side-card:first-child .kv{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+
+/* Schedule: one clear card per subgroup. */
+.schedule-group-card{padding:0!important;overflow:hidden;box-shadow:0 1px 2px rgba(20,24,32,.04),0 8px 24px rgba(20,24,32,.045)}
+.schedule-group-card>.job-head{padding:20px 22px 17px;background:#fff;border-bottom:1px solid var(--line)}
+.schedule-group-card>.job-head h3{font-size:22px;letter-spacing:-.55px}
+.schedule-group-card>.job-head .job-company{font-size:12px;margin-top:7px}
+.schedule-group-card.is-selected{border-color:#edb1bd;box-shadow:0 1px 2px rgba(20,24,32,.04),0 10px 30px rgba(223,47,79,.08)}
+.schedule-group-card.is-selected>.job-head{background:linear-gradient(90deg,#fff7f9 0,#fff 55%)}
+.schedule-group-card.is-selected>.job-head:before{content:"Сейчас выбрана";display:inline-flex;margin:0 0 9px;padding:4px 7px;border-radius:6px;background:var(--accent-soft);color:#9f233b;font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.55px}
+.schedule-group-card.is-selected>.job-head .eyebrow{display:none}
+.schedule-group-card .table-wrap{margin:0;border:0;border-radius:0}
+.schedule-group-card table{table-layout:auto}
+.schedule-group-card th{padding:11px 14px;background:#fafafb;border-bottom:1px solid var(--line);font-size:10px;text-transform:uppercase;letter-spacing:.45px}
+.schedule-group-card td{padding:14px;border-top:1px solid #eceef1;line-height:1.45}
+.schedule-group-card tbody tr:first-child td{border-top:0}
+.schedule-group-card tbody tr{transition:background .12s ease}
+.schedule-group-card tbody tr:hover{background:#fafafb}
+.schedule-group-card td:first-child{width:46px;color:#777c84}
+.schedule-group-card td:nth-child(2){width:180px;font-weight:650}
+.schedule-group-card td:nth-child(3){width:170px;font-weight:650}
+.schedule-group-card td:nth-child(4){min-width:300px}
+.schedule-group-card td:last-child{width:128px;text-align:right}
+.schedule-group-card .tag{display:inline-flex;justify-content:center;min-width:70px}
+.schedule-group-card .ghost-btn{min-height:32px;padding:5px 9px;font-size:11px;color:#333}
+.schedule-group-card .ghost-btn:hover{background:var(--accent-soft);color:#9e2940}
+.schedule-collapse-toggle{display:none}
+
+/* A tiny visual hierarchy on the route so dates feel like actual timetable data. */
+body[data-page="route"] .route-item{grid-template-columns:48px minmax(0,1fr) 155px}
+body[data-page="route"] .route-item.current{box-shadow:inset 3px 0 0 var(--accent)}
+body[data-page="route"] .route-item.current h3{color:#9e2940}
+body[data-page="route"] .route-item p{max-width:760px}
+body[data-page="route"] .route-status{text-align:right;line-height:1.5}
+
+/* Lesson header: date/time/room should read like practical event metadata. */
+body[data-page="lesson"] .section-head>.div,
+body[data-page="lesson"] .section-head>div:first-child{min-width:0}
+body[data-page="lesson"] .section-head .tags{margin:13px 0 0}
+body[data-page="lesson"] .section-head .tag{padding:6px 9px;border:1px solid #e5e7eb;background:#fff}
+body[data-page="lesson"] .section-head .tag.red{border-color:#ffd1da;background:var(--accent-soft)}
+
+/* Navigation gets a little more room now that schedule is a first-class section. */
+.main-nav{scrollbar-width:none}
+.main-nav::-webkit-scrollbar{display:none}
+.nav-btn[data-view="schedule"].active{background:var(--accent-soft);color:#a3233b}
+
+@media(max-width:900px){
+  .job-card--next .job-title{font-size:23px}
+  .schedule-group-card td:nth-child(4){min-width:250px}
+  body[data-page="route"] .route-item{grid-template-columns:44px minmax(0,1fr)}
+  body[data-page="route"] .route-status{grid-column:2;text-align:left;white-space:normal}
+}
+
+/* On a phone a timetable should look like timetable cards, not a spreadsheet squeezed through a keyhole. */
+@media(max-width:640px){
+  body[data-page="schedule"] .section-head h2{font-size:26px}
+  body[data-page="schedule"] .section-head p{font-size:13px}
+  .schedule-group-card{transition:border-color .16s ease,box-shadow .16s ease}
+  .schedule-group-card>.job-head{padding:18px;display:block}
+  .schedule-group-card>.job-head>.tag{margin-top:11px}
+  .schedule-collapse-toggle{display:flex;width:100%;margin-top:13px;min-height:38px;background:#f7f7f8;border-color:#e4e5e9;color:#363a40}
+  .schedule-group-card.is-collapsed-mobile{box-shadow:0 1px 2px rgba(20,24,32,.03)}
+  .schedule-group-card.is-collapsed-mobile>.job-head{border-bottom:0}
+  .schedule-group-card.is-collapsed-mobile .table-wrap{display:none}
+  .schedule-group-card.is-selected .schedule-collapse-toggle{display:none}
+  .schedule-group-card .table-wrap{overflow:visible}
+  .schedule-group-card table,.schedule-group-card tbody{display:block;width:100%}
+  .schedule-group-card thead{display:none}
+  .schedule-group-card tr[data-testid="schedule-row"]{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:15px 17px;border-top:1px solid var(--line);background:#fff}
+  .schedule-group-card tr[data-testid="schedule-row"]:first-child{border-top:0}
+  .schedule-group-card tr[data-testid="schedule-row"]:hover{background:#fff}
+  .schedule-group-card tr[data-testid="schedule-row"] td{display:block;width:auto!important;min-width:0!important;padding:0;border:0;font-size:12px}
+  .schedule-group-card tr[data-testid="schedule-row"] td:before{content:attr(data-label);display:block;margin-bottom:2px;color:var(--muted);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.45px}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(1){grid-column:1;grid-row:1;color:#8d9198}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(1):before{display:none}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(1) strong:before{content:"Пара ";font-weight:500}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(2){grid-column:1;grid-row:2}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(3){grid-column:2;grid-row:1/3;text-align:right;align-self:end}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(3):before{content:"Время";text-align:right}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(4){grid-column:1/-1;grid-row:3;padding-top:7px!important;font-size:13px;font-weight:650}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(4):before{display:none}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(5){grid-column:1/-1;grid-row:4;text-align:left;margin-top:5px}
+  .schedule-group-card tr[data-testid="schedule-row"] td:nth-child(5):before{display:none}
+  .schedule-group-card .tag,.schedule-group-card .ghost-btn{min-width:0}
+  .job-card--next{padding-left:21px}
+  .job-card--next .job-head{display:block}
+  .job-card--next .job-pay{display:inline-block;margin-top:12px}
+  .job-card--next .job-pay small{text-align:left}
+}
