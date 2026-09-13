@@ -18,21 +18,26 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          import hashlib, io, json, pathlib, shutil, stat, tempfile, urllib.request, zipfile
-          # The short-lived link serves only the reviewed public export and synthetic
-          # browser-test screenshots. It grants no repository or account access.
-          source = 'https://sdmntprnortheu.oaiusercontent.com/files/00000000-9488-81f4-8d2d-c28387e5eaf8/raw?se=2026-09-13T20%3A17%3A53Z&sp=r&sv=2026-02-06&sr=b&scid=b34cb062-c5e8-50db-a2b3-98e5366359dc&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-13T09%3A56%3A40Z&ske=2026-09-14T09%3A56%3A40Z&sks=b&skv=2026-02-06&sig=d4/whIshMtELJsG0uUsujqbfM94pArkm0vfI%2Bb4%2BDzM%3D'
+          import hashlib, io, json, pathlib, shutil, stat, tempfile, urllib.request, urllib.error, zipfile
+          # This expiring link contains only the public student export and synthetic QA screenshots.
+          source = 'https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-73d4-8210-8f86-ded51056aa85/raw?se=2026-09-13T20%3A23%3A52Z&sp=r&sv=2026-02-06&sr=b&scid=b80b31f4-5ccc-5c28-9091-2231f147db17&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-13T09%3A56%3A42Z&ske=2026-09-14T09%3A56%3A42Z&sks=b&skv=2026-02-06&sig=p8vE5jJoVjHibUOgAlquGoq5TCCds1al6mSGte9RSto%3D'
           print('::add-mask::' + source)
-          with urllib.request.urlopen(source, timeout=45) as response:
-              payload = response.read(20_000_001)
+          request = urllib.request.Request(source, headers={'User-Agent':'Mozilla/5.0 (compatible; CoursePublisher/1.0)', 'Accept':'application/zip'})
+          try:
+              with urllib.request.urlopen(request, timeout=45) as response:
+                  payload = response.read(20_000_001)
+          except urllib.error.HTTPError as error:
+              print('Artifact download status:', error.code)
+              print(error.read(1000).decode('utf-8', errors='replace').replace(source, '[artifact URL]'))
+              raise RuntimeError('Public artifact transfer failed; existing site preserved') from None
           if len(payload) > 20_000_000:
               raise RuntimeError('Unexpected archive size')
           expected = '3e7111524cffbbf4ff76b0ef57d99d1155971fd379f272bc2454d760b7073c2e'
           if hashlib.sha256(payload).hexdigest() != expected:
-              raise RuntimeError('The artifact does not match the verified CI archive')
+              raise RuntimeError('Artifact differs from verified CI output')
           root = pathlib.Path.cwd().resolve()
           if {p.name for p in root.iterdir()} - {'.git', '.github', '.nojekyll', 'assets', 'index.html'}:
-              raise RuntimeError('Unexpected public repository files; refusing to replace them')
+              raise RuntimeError('Unexpected public repository files; preserved')
           with tempfile.TemporaryDirectory() as tmp:
               staging = pathlib.Path(tmp)
               with zipfile.ZipFile(io.BytesIO(payload)) as archive:
@@ -41,49 +46,43 @@ jobs:
                   for item in archive.infolist():
                       name = pathlib.PurePosixPath(item.filename)
                       if name.is_absolute() or '..' in name.parts or '\\' in item.filename:
-                          raise RuntimeError('Unsafe archive path')
-                      if not name.parts or name.parts[0] not in {'public', 'qa-output'}:
-                          raise RuntimeError('Unexpected artifact root')
-                      if set(name.parts) & {'.git', 'advanced', 'solutions', '__pycache__'}:
-                          raise RuntimeError('Private or unexpected content in artifact')
+                          raise RuntimeError('Unsafe path')
+                      if not name.parts or name.parts[0] not in {'public','qa-output'}:
+                          raise RuntimeError('Unexpected archive root')
+                      if set(name.parts) & {'.git','advanced','solutions','__pycache__'}:
+                          raise RuntimeError('Private content is forbidden')
                       if stat.S_ISLNK(item.external_attr >> 16):
                           raise RuntimeError('Symlinks are forbidden')
                       if item.is_dir() or name.parts[0] != 'public':
                           continue
                       rel = pathlib.Path(*name.parts[1:])
-                      if rel.parts[0] not in {'assets', 'index.html', '.nojekyll'}:
-                          raise RuntimeError('File outside the public allowlist')
-                      destination = staging / rel
-                      destination.parent.mkdir(parents=True, exist_ok=True)
-                      destination.write_bytes(archive.read(item))
-              courses = json.loads((staging/'assets/course.json').read_text(encoding='utf-8'))
-              if len(courses) != 7 or courses[0]['title'] != 'Правило или ИИ?':
-                  raise RuntimeError('Wrong course edition')
+                      if not rel.parts or rel.parts[0] not in {'assets','index.html','.nojekyll'}:
+                          raise RuntimeError('Outside public allowlist')
+                      target = staging/rel
+                      target.parent.mkdir(parents=True, exist_ok=True)
+                      target.write_bytes(archive.read(item))
+              course = json.loads((staging/'assets/course.json').read_text(encoding='utf-8'))
+              if len(course)!=7 or course[0]['title']!='Правило или ИИ?':
+                  raise RuntimeError('Wrong course version')
               downloads = list((staging/'assets/downloads').glob('*.zip'))
-              if len(downloads) != 8:
-                  raise RuntimeError('Incomplete student downloads')
+              if len(downloads)!=8:
+                  raise RuntimeError('Incomplete downloads')
               for path in downloads:
                   with zipfile.ZipFile(path) as package:
                       if package.testzip() is not None:
                           raise RuntimeError('Broken student package')
                       for name in package.namelist():
-                          parts = pathlib.PurePosixPath(name).parts
-                          if set(parts) & {'solutions', 'advanced', '.git'} or 'defense-cards' in name:
-                              raise RuntimeError('Private material in a student package')
-              for name in ('assets', 'index.html', '.nojekyll'):
-                  target = root/name
-                  if target.is_dir():
-                      shutil.rmtree(target)
-                  elif target.exists():
-                      target.unlink()
-                  source_path = staging/name
-                  if source_path.is_dir():
-                      shutil.copytree(source_path, target)
-                  else:
-                      shutil.copyfile(source_path, target)
-          # Remove this one-time bootstrap; ordinary future publishing is unchanged.
+                          if set(pathlib.PurePosixPath(name).parts)&{'solutions','advanced','.git'} or 'defense-cards' in name:
+                              raise RuntimeError('Private material in student package')
+              for name in ('assets','index.html','.nojekyll'):
+                  target=root/name
+                  if target.is_dir():shutil.rmtree(target)
+                  elif target.exists():target.unlink()
+                  source_path=staging/name
+                  if source_path.is_dir():shutil.copytree(source_path,target)
+                  else:shutil.copyfile(source_path,target)
           (root/'.github/workflows/publish-approved-v3.yml').unlink()
-          print('Verified public export installed: seven lessons and eight ZIP files.')
+          print('Verified public export installed: seven lessons and eight ZIPs.')
           PY
       - name: Commit public export without rewriting history
         shell: bash
