@@ -1,125 +1,66 @@
 'use strict';
 
-const ASSIGNMENT_UI = {
-  1: {
-    title:'Настроить правила, которые распределяют обращения по трём отделам',
-    short:'Прогнать 12 сообщений, найти ошибки, изменить правила и проверить результат ещё раз.',
-    why:'На этой паре ИИ пока не используем. Сначала нужен простой baseline, с которым потом будем сравнивать модель.',
-    steps:[
-      'Прогнать исходные правила на 12 сообщениях.',
-      'Найти минимум две ошибки или спорных случая.',
-      'Изменить хотя бы одно правило и проверить отдельное сообщение.',
-      'Снова прогнать все 12 сообщений и посмотреть, что изменилось.',
-      'Открыть готовый Python-каркас и повторить ту же проверку в коде.'
-    ],
-    result:'В конце у тебя должны быть изменённые правила, два разобранных ошибочных случая и короткий вывод на 2–3 предложения.',
-    startLabel:'Начать с 12 сообщений',
-    startAction:'jump-work'
-  },
-  2: {
-    title:'Обучить первую модель и сравнить её с простым baseline',
-    short:'Запустить notebook, проверить train/validation/test, сравнить baseline и модель и разобрать одну ошибку.',
-    why:'Теперь решаем ту же задачу не списком слов, а моделью, которая учится на размеченных примерах.',
-    steps:[
-      'Скачать notebook и учебные данные.',
-      'Запустить ячейки и посмотреть, как данные делятся на train, validation и test.',
-      'Запустить baseline и записать его результат.',
-      'Обучить TF-IDF + Logistic Regression и сравнить результат с baseline.',
-      'Выбрать хотя бы одну ошибку модели и объяснить, почему она могла возникнуть.'
-    ],
-    result:'В конце нужен запущенный notebook, сравнение model vs baseline и короткий разбор одной ошибки.',
-    startLabel:'Скачать notebook',
-    startDownload:'lab2'
-  }
+const COURSE_STORY = {
+  company:'Игровая студия «Север»',
+  role:'Ты в команде, которая помогает службе поддержки автоматизировать разбор обращений.',
+  problem:'Игроки пишут про аккаунты, оплату и технические проблемы. Сейчас сотрудник поддержки читает каждое сообщение и вручную решает, что с ним делать.',
+  goal:'К концу семестра должен получиться небольшой помощник: он принимает обращение, определяет тему, находит подходящую инструкцию, достаёт нужные данные и умеет остановиться, если не уверен.'
 };
 
-function assignmentBrief(l){
-  const a=ASSIGNMENT_UI[l.id];
-  if(!a)return '';
-  const action=a.startDownload
-    ? `<button class="primary-btn assignment-start" data-download="${a.startDownload}">${a.startLabel}</button>`
-    : `<button class="primary-btn assignment-start" data-ui-action="${a.startAction}">${a.startLabel}</button>`;
-  return `<section class="card assignment-brief" data-testid="assignment-brief">
-    <div class="assignment-head">
-      <div><div class="assignment-kicker">Задание на пару</div><h2>${esc(a.title)}</h2><p>${esc(a.short)}</p></div>
-      <span class="assignment-time">${esc(l.time)}</span>
-    </div>
-    <div class="assignment-grid">
-      <div class="assignment-panel">
-        <h3>Что нужно сделать</h3>
-        <ol class="assignment-steps">${a.steps.map((x,i)=>`<li><span>${i+1}</span><p>${esc(x)}</p></li>`).join('')}</ol>
-      </div>
-      <div class="assignment-side">
-        <div class="assignment-panel assignment-why"><h3>Зачем это делаем</h3><p>${esc(a.why)}</p></div>
-        <div class="assignment-panel assignment-result"><h3>Что должно получиться</h3><p>${esc(a.result)}</p></div>
-        ${action}
-      </div>
-    </div>
-  </section>`;
+const STORY_EPISODES = [
+  {id:1,title:'Сначала убираем ручную сортировку',problem:'Поддержка тратит время только на то, чтобы разнести обращения по трём отделам.',change:'Делаем самый простой рабочий вариант: правила по словам.',deliverable:'Первый маршрутизатор обращений + разбор его ошибок.'},
+  {id:2,title:'Правила начинают мешать',problem:'Список слов приходится постоянно дописывать, а новые формулировки всё равно ломают правила.',change:'Студия отдаёт старые размеченные обращения. Пробуем обучить модель на примерах.',deliverable:'Первая ML-модель + сравнение с простым baseline.'},
+  {id:3,title:'Красивый процент ничего не гарантирует',problem:'Модель показывает хорошую accuracy, но ошибки в оплате и аккаунтах стоят по-разному.',change:'Разбираем confusion matrix и считаем не только общий процент, но и типы ошибок.',deliverable:'Понятная оценка качества и список самых опасных ошибок.'},
+  {id:4,title:'Одной категории уже мало',problem:'Оператор знает отдел, но всё равно вручную ищет нужную инструкцию для ответа.',change:'Добавляем поиск по базе инструкций: сначала по словам, потом по смыслу.',deliverable:'Поиск, который возвращает подходящую инструкцию или честно говорит, что ничего не нашёл.'},
+  {id:5,title:'Из текста нужны нормальные данные',problem:'В обращении есть номер заказа, устройство и другие детали, но оператор каждый раз вытаскивает их глазами.',change:'Используем LLM только для извлечения структуры в JSON.',deliverable:'Структурированные данные без выдуманных значений.'},
+  {id:6,title:'Собираем части в одну систему',problem:'Классификация, поиск и извлечение данных работают отдельно и требуют ручных переключений.',change:'Соединяем уже знакомые блоки в один pipeline.',deliverable:'Одна цепочка: обращение → категория → инструкция → данные → результат.'},
+  {id:7,title:'Заказчик приносит новые обращения',problem:'На учебных примерах всё выглядит хорошо. Теперь приходят сообщения, которых система раньше не видела.',change:'Проводим приёмку на новых случаях и защищаем решения.',deliverable:'Финальная проверка, список ограничений и решение: что можно выпускать, а что ещё нет.'}
+];
+
+const ASSIGNMENT_UI = {
+  1:{title:'Сделать первый маршрутизатор обращений',short:'Настроить простые правила, которые отправляют сообщения в аккаунты, оплату или технику.',why:'Это первая версия системы. Она нужна не потому, что правила идеальны, а чтобы у нас появился понятный baseline, с которым дальше можно сравнивать более сложные методы.',steps:['Прогнать исходные правила на 12 сообщениях.','Найти минимум две ошибки или спорных случая.','Изменить хотя бы одно правило.','Прогнать те же 12 сообщений ещё раз и сравнить результат.','Повторить ту же логику в готовом Python-каркасе.'],result:'Изменённые правила, минимум две разобранные ошибки и короткий вывод: где такой способ работает, а где ему уже нельзя доверять.',startLabel:'Перейти к сообщениям',startAction:'jump-work'},
+  2:{title:'Заменить ручные правила моделью, которая учится на примерах',short:'Обучить простую модель на старых размеченных обращениях и проверить, лучше ли она baseline.',why:'После первой пары стало понятно, что правила надо постоянно поддерживать руками. Теперь проверяем, может ли модель сама выучить закономерности из примеров.',steps:['Скачать notebook и учебные данные.','Посмотреть, как данные разделены на train, validation и test.','Запустить самый простой baseline и записать его результат.','Обучить TF-IDF + Logistic Regression и сравнить с baseline.','Найти хотя бы одну ошибку модели и объяснить её.'],result:'Запущенный notebook, сравнение baseline и модели и один разобранный ошибочный пример.',startLabel:'Скачать notebook',startDownload:'lab2'}
+};
+
+function storyEpisode(id){return STORY_EPISODES.find(x=>x.id===id)}
+
+function storyStrip(active=currentLesson()){
+  return `<section class="card story-card"><div class="story-card-head"><div><div class="eyebrow">Сюжет курса</div><h2>Мы весь семестр собираем одну систему для поддержки</h2></div><span class="story-company">${esc(COURSE_STORY.company)}</span></div><div class="story-timeline">${STORY_EPISODES.map(ep=>`<button class="story-node ${ep.id===active?'active':''} ${ep.id<active?'past':''}" data-action="story-open" data-id="${ep.id}" ${RELEASED.includes(ep.id)?'':'disabled'}><span>${ep.id}</span><strong>${esc(ep.title)}</strong></button>`).join('')}</div><div class="story-note">Каждая следующая пара начинается с проблемы, которую предыдущая версия системы уже не решает.</div></section>`;
 }
 
-hero=function(){
-  return `<section class="hero course-intro"><div><div class="eyebrow">Методы искусственного интеллекта · 3 курс</div><h1>Практика по методам искусственного интеллекта</h1><p>На каждой паре есть одно конкретное задание. Сначала решаем его простым способом, потом пробуем методы машинного обучения, поиск и LLM. Открывай ближайшую пару и выполняй шаги сверху вниз.</p></div><div class="hero-meta"><div class="stat-chip"><strong>7</strong><span>пар</span></div><div class="stat-chip"><strong>4</strong><span>подгруппы</span></div><div class="stat-chip"><strong>${state.ready.length}/7</strong><span>готово</span></div></div></section>`;
-};
+function storyContext(id){
+  const ep=storyEpisode(id),prev=id>1?storyEpisode(id-1):null;
+  return `<section class="card story-context" data-testid="story-context"><div class="story-context-top"><div><div class="section-label">Где мы сейчас</div><h3>${esc(COURSE_STORY.company)} · этап ${id} из 7</h3></div><span class="story-role">Твоя роль: команда автоматизации поддержки</span></div><div class="story-context-grid"><div><span>До этой пары</span><p>${prev?`На прошлом этапе мы получили: ${esc(prev.deliverable)}`:'Мы только подключились к задаче. Поддержка пока сортирует обращения вручную.'}</p></div><div><span>Новая проблема заказчика</span><p>${esc(ep.problem)}</p></div><div><span>Что делаем сегодня</span><p>${esc(ep.change)}</p></div></div></section>`;
+}
 
-mainJobCard=function(){
-  const slot=nextSlot(group);
-  if(!slot){return `<article class="card job-card" data-testid="current-job"><div class="job-head"><div><div class="eyebrow">Семестр закончен</div><h2 class="job-title">Все занятия по расписанию уже прошли</h2></div></div><p class="job-text">Материалы и свои заметки можно открыть в разделе «Все пары».</p><div class="job-actions"><button class="primary-btn" data-view="route">Открыть все пары</button></div></article>`}
-  const l=lesson(slot.lesson),open=RELEASED.includes(slot.lesson),a=ASSIGNMENT_UI[slot.lesson];
-  return `<article class="card job-card job-card--next" data-testid="current-job"><div class="job-head"><div><div class="eyebrow">Следующая пара · ${formatDate(slot.date,true)}</div><h2 class="job-title">${esc(l.title)}</h2><div class="job-company">${esc(group)} · ${esc(slot.start)}–${esc(slot.end)} · ${esc(slot.room)}</div></div><div class="job-pay">${l.time}<small>${esc(l.stack)}</small></div></div>${a?`<div class="next-assignment"><span>Задание</span><strong>${esc(a.short)}</strong></div>`:''}<div class="job-actions">${open?`<button class="primary-btn" data-action="open-lesson" data-id="${slot.lesson}">Открыть задание</button>`:`<button class="primary-btn" data-view="route">Посмотреть план пары</button>`}<button class="secondary-btn" data-view="schedule">Расписание</button></div></article>`;
-};
+function assignmentBrief(l){
+  const a=ASSIGNMENT_UI[l.id]; if(!a)return '';
+  const action=a.startDownload?`<button class="primary-btn assignment-start" data-download="${a.startDownload}">${a.startLabel}</button>`:`<button class="primary-btn assignment-start" data-ui-action="${a.startAction}">${a.startLabel}</button>`;
+  return `<section class="card assignment-brief" data-testid="assignment-brief"><div class="assignment-head"><div><div class="assignment-kicker">Задача на сегодня</div><h2>${esc(a.title)}</h2><p>${esc(a.short)}</p></div><span class="assignment-time">${esc(l.time)}</span></div><div class="assignment-grid"><div class="assignment-panel"><h3>Что сделать</h3><ol class="assignment-steps">${a.steps.map((x,i)=>`<li><span>${i+1}</span><p>${esc(x)}</p></li>`).join('')}</ol></div><div class="assignment-side"><div class="assignment-panel assignment-why"><h3>Почему именно это</h3><p>${esc(a.why)}</p></div><div class="assignment-panel assignment-result"><h3>Что сдаём в конце</h3><p>${esc(a.result)}</p></div>${action}</div></div></section>`;
+}
 
-homeHTML=function(){
-  const next=nextSlot(group);
-  return `${hero()}${quickbar()}<div class="content-grid"><div class="stack">${mainJobCard()}
-    <article class="card job-card course-how"><div class="eyebrow">Как устроена каждая пара</div><h3>Одна задача, несколько способов её решить</h3><div class="course-flow"><span>1. Задание</span><span>2. Простой вариант</span><span>3. Проверка ошибок</span><span>4. Новый метод</span><span>5. Сравнение</span></div><p class="job-text">Главное не получить «красивый ИИ», а понять, какой способ работает лучше и почему.</p></article>
-  </div><aside class="stack"><section class="card side-card"><div class="side-title">Твоя подгруппа</div><h3>${esc(group)}</h3><dl class="kv"><dt>Когда</dt><dd>${esc(SCHEDULE_META[group].weekday)}, ${esc(SCHEDULE_META[group].time)}</dd><dt>Где</dt><dd>${esc(SCHEDULE_META[group].room)}</dd>${next?`<dt>Следующая</dt><dd>${formatDateShort(next.date)}, пара ${next.lesson}</dd>`:''}</dl><button class="secondary-btn" style="width:100%;margin-top:14px" data-view="schedule">Посмотреть расписание</button></section><section class="card side-card"><div class="side-title">Прогресс</div><h3>${state.ready.length} из 7</h3><div class="progress"><i style="width:${progress()}%"></i></div><p class="tiny muted">Отметки сохраняются только в этом браузере.</p></section></aside></div>`;
-};
+hero=function(){return `<section class="hero course-intro"><div><div class="eyebrow">Методы искусственного интеллекта · 3 курс</div><h1>Один кейс на весь семестр: автоматизируем поддержку игровой студии</h1><p>${esc(COURSE_STORY.problem)}</p></div><div class="hero-meta"><div class="stat-chip"><strong>7</strong><span>этапов</span></div><div class="stat-chip"><strong>1</strong><span>система</span></div><div class="stat-chip"><strong>${state.ready.length}/7</strong><span>готово</span></div></div></section>`};
 
-lessonTop=function(l){
-  const slot=slotForLesson(group,l.id);
-  return `<div class="lesson-page-head"><div><div class="eyebrow">Пара ${l.id} · ${esc(group)}</div><h1>${esc(l.title)}</h1><p>Сначала посмотри блок «Задание на пару». Ниже идут рабочая часть, примеры и материалы, которые помогают его выполнить.</p><div class="tags"><span class="tag red">${formatDate(slot.date,true)}</span><span class="tag">${esc(slot.start)}–${esc(slot.end)}</span><span class="tag">${esc(slot.room)}</span></div></div><button class="secondary-btn" data-view="route">← Все пары</button></div>`;
-};
+function courseBrief(){return `<section class="card course-brief"><div class="course-brief-grid"><div><span>Кто ты в этом кейсе</span><p>${esc(COURSE_STORY.role)}</p></div><div><span>Что болит у заказчика</span><p>${esc(COURSE_STORY.problem)}</p></div><div><span>Что должно получиться к финалу</span><p>${esc(COURSE_STORY.goal)}</p></div></div></section>`}
 
-lessonHTML=function(){
-  const l=lesson(activeLesson);
-  if(!RELEASED.includes(l.id))return routeHTML();
-  return `${quickbar()}${lessonTop(l)}${assignmentBrief(l)}<div class="lesson-shell lesson-shell--task"><div class="lesson-main">${l.id===1?lab1HTML():lab2HTML()}</div>${lessonSide(l)}</div>`;
-};
+mainJobCard=function(){const slot=nextSlot(group);if(!slot)return `<article class="card job-card" data-testid="current-job"><div class="job-head"><div><div class="eyebrow">Семестр закончен</div><h2 class="job-title">Все занятия по расписанию уже прошли</h2></div></div><p class="job-text">Материалы и свои заметки можно открыть в разделе «Все пары».</p><div class="job-actions"><button class="primary-btn" data-view="route">Открыть все пары</button></div></article>`;const l=lesson(slot.lesson),open=RELEASED.includes(slot.lesson),a=ASSIGNMENT_UI[slot.lesson],ep=storyEpisode(slot.lesson);return `<article class="card job-card job-card--next" data-testid="current-job"><div class="job-head"><div><div class="eyebrow">Следующий этап · ${formatDate(slot.date,true)}</div><h2 class="job-title">${esc(ep.title)}</h2><div class="job-company">${esc(group)} · ${esc(slot.start)}–${esc(slot.end)} · ${esc(slot.room)}</div></div><div class="job-pay">${l.time}<small>этап ${slot.lesson}/7</small></div></div><div class="next-story"><span>Проблема заказчика</span><p>${esc(ep.problem)}</p></div>${a?`<div class="next-assignment"><span>Что делаем на паре</span><strong>${esc(a.short)}</strong></div>`:''}<div class="job-actions">${open?`<button class="primary-btn" data-action="open-lesson" data-id="${slot.lesson}">Открыть этап ${slot.lesson}</button>`:`<button class="primary-btn" data-view="route">Посмотреть сюжет курса</button>`}<button class="secondary-btn" data-view="schedule">Расписание</button></div></article>`};
 
-lessonSide=function(l){
-  const checks=state.checks[l.id]||[];
-  return `<aside class="lesson-side"><section class="card side-card finish-card"><div class="side-title">Когда задание готово</div><div class="checklist">${l.checks.map((x,i)=>`<label class="checkrow"><input type="checkbox" data-check="${i}" data-lesson="${l.id}" ${checks[i]?'checked':''}><span>${esc(x)}</span></label>`).join('')}</div><label class="tiny muted" style="display:block;margin-top:14px">Короткий вывод</label><textarea data-note="${l.id}" placeholder="Что получилось, где была ошибка и что ты поменял.">${esc(state.notes[l.id]||'')}</textarea><button class="primary-btn" style="width:100%;margin-top:10px" data-action="ready" data-id="${l.id}">${state.ready.includes(l.id)?'Обновить отметку ✓':'Отметить как готовое'}</button><p class="tiny muted" style="margin-top:10px">Отметка сохраняется только в твоём браузере.</p></section></aside>`;
-};
+homeHTML=function(){const next=nextSlot(group);return `${hero()}${courseBrief()}${storyStrip(next?.lesson||7)}${quickbar()}<div class="content-grid"><div class="stack">${mainJobCard()}</div><aside class="stack"><section class="card side-card"><div class="side-title">Твоя подгруппа</div><h3>${esc(group)}</h3><dl class="kv"><dt>Когда</dt><dd>${esc(SCHEDULE_META[group].weekday)}, ${esc(SCHEDULE_META[group].time)}</dd><dt>Где</dt><dd>${esc(SCHEDULE_META[group].room)}</dd>${next?`<dt>Следующий этап</dt><dd>${formatDateShort(next.date)}, №${next.lesson}</dd>`:''}</dl><button class="secondary-btn" style="width:100%;margin-top:14px" data-view="schedule">Расписание</button></section><section class="card side-card"><div class="side-title">Прогресс по истории</div><h3>${state.ready.length} из 7</h3><div class="progress"><i style="width:${progress()}%"></i></div><p class="tiny muted">Отметки сохраняются только в этом браузере.</p></section></aside></div>`};
 
-lab1HTML=function(){return `
-<section class="card context-card"><div class="section-label">Перед началом</div><h3>Что за задача</h3><p>Есть 12 обращений игроков. Каждое надо отправить в один из трёх отделов: <strong>аккаунт</strong>, <strong>оплата</strong> или <strong>техника</strong>. Если сообщение подходит сразу под несколько вариантов или непонятно, куда его отнести, возвращаем <strong>«Нужен человек»</strong>.</p><div class="example"><b>Пример</b>«Не могу войти после смены пароля» → аккаунт. «Деньги списались два раза» → оплата.</div></section>
-<section id="work-area" class="card lesson-card work-card"><div class="section-label">Рабочая часть</div><h3>Выполняй по порядку</h3>
-  <div class="work-step"><span class="work-num">1</span><div><h4>Прогони исходные правила</h4><p>Ничего пока не меняй. Сначала посмотри, сколько сообщений они классифицируют правильно и на каких ошибаются.</p><button class="primary-btn" data-action="run-tests">Прогнать 12 сообщений</button></div></div>
-  <div id="testResults"></div>
-  <div class="work-step"><span class="work-num">2</span><div><h4>Выбери минимум две ошибки</h4><p>Посмотри строки, где ожидаемая категория и результат не совпали. Подумай, почему правило ошиблось: не хватает слова, совпало несколько категорий или текст вообще неоднозначный.</p></div></div>
-  <div class="work-step"><span class="work-num">3</span><div><h4>Измени хотя бы одно правило</h4><p>Добавь или убери слова. Перед повторным прогоном можно проверить одно сообщение вручную.</p><div class="rule-grid">${Object.keys(DEFAULT_RULES).map(k=>`<label>${LABELS[k]}<input type="text" data-rule="${k}" value="${esc(state.rules[k])}" maxlength="160"></label>`).join('')}</div><div class="input-actions"><input id="singleText" type="text" value="Не могу войти после смены пароля" maxlength="400"><button class="secondary-btn" data-action="classify">Проверить одно сообщение</button></div><div id="singleResult" aria-live="polite"></div><button class="ghost-btn" data-action="reset-rules">Вернуть исходные правила</button></div></div>
-  <div class="work-step"><span class="work-num">4</span><div><h4>Прогони все 12 сообщений ещё раз</h4><p>Сравни результат с первым запуском. Если общий процент вырос, всё равно проверь, какие конкретно случаи починились, а какие могли сломаться.</p><button class="primary-btn" data-action="run-tests">Проверить после изменений</button></div></div>
-  <div class="work-step"><span class="work-num">5</span><div><h4>Повтори ту же логику в Python</h4><p>Каркас уже готов. Твоя задача не написать всё с нуля, а разобраться в функции, изменить правила и получить тот же результат в коде.</p><div class="job-actions"><button class="primary-btn blue" data-download="lab1">Скачать notebook</button><button class="secondary-btn" data-download="lab1py">Версия .py</button><button class="secondary-btn" data-download="cases">12 сообщений .csv</button></div></div></div>
-</section>`};
+routeHTML=function(){const scheduled=currentLesson();return `${hero()}${courseBrief()}${quickbar()}<div class="section-head"><div><h2>Сюжет курса по этапам</h2><p>Это не семь независимых лабораторных. Каждый этап начинается с новой проблемы в той же системе поддержки.</p></div></div><div class="story-route">${STORY_EPISODES.map(ep=>{const slot=slotForLesson(group,ep.id),open=RELEASED.includes(ep.id);return `<article class="story-route-item ${ep.id===scheduled?'current':''} ${state.ready.includes(ep.id)?'done':''}"><div class="story-route-num">${state.ready.includes(ep.id)?'✓':ep.id}</div><div class="story-route-copy"><div class="eyebrow">${formatDate(slot.date,true)} · ${slot.start}–${slot.end}</div><h3>${esc(ep.title)}</h3><p><strong>Проблема:</strong> ${esc(ep.problem)}</p><p><strong>Что меняем:</strong> ${esc(ep.change)}</p><div class="story-route-result"><span>Результат этапа</span>${esc(ep.deliverable)}</div></div><div class="story-route-action">${open?`<button class="secondary-btn" data-action="open-lesson" data-id="${ep.id}">Открыть</button>`:'<span class="tag">пока закрыто</span>'}</div></article>`}).join('')}</div>`};
 
-lab2HTML=function(){return `
-<section class="card context-card"><div class="section-label">Перед началом</div><h3>Что меняется после первой пары</h3><p>Задача остаётся той же: распределять обращения по отделам. Но теперь список слов вручную не пишем. У нас есть сообщения с готовыми правильными категориями, и на них обучаем простую модель.</p><div class="example"><b>Важно</b>train — модель учится; validation — здесь сравниваем варианты; test — оставляем для финальной проверки.</div></section>
-<section id="work-area" class="card lesson-card work-card"><div class="section-label">Рабочая часть</div><h3>Выполняй по порядку</h3>
-  <div class="work-step"><span class="work-num">1</span><div><h4>Скачай notebook и данные</h4><p>Открой notebook в Jupyter. GPU и API-ключи не нужны.</p><div class="job-actions"><button class="primary-btn blue" data-download="lab2">Скачать notebook</button><button class="secondary-btn" data-download="dataset">Данные .csv</button></div></div></div>
-  <div class="work-step"><span class="work-num">2</span><div><h4>Посмотри, как разделены данные</h4><p>Запусти ячейки до блока train / validation / test. Убедись, что понимаешь, какая часть для чего нужна.</p></div></div>
-  <div class="work-step"><span class="work-num">3</span><div><h4>Запусти baseline</h4><p>Baseline специально очень простой: он всегда отвечает самой частой категорией. Запиши его accuracy.</p></div></div>
-  <div class="work-step"><span class="work-num">4</span><div><h4>Обучи модель и сравни</h4><p>Запусти TF-IDF + Logistic Regression. Сравни accuracy с baseline на тех же validation-примерах.</p></div></div>
-  <div class="work-step"><span class="work-num">5</span><div><h4>Разбери одну ошибку</h4><p>Найди сообщение, где модель ошиблась. Напиши, что ожидалось, что она предсказала и почему, по твоему мнению, могла ошибиться.</p></div></div>
-</section>`};
+lessonTop=function(l){const slot=slotForLesson(group,l.id),ep=storyEpisode(l.id);return `<div class="lesson-page-head"><div><div class="eyebrow">Этап ${l.id} из 7 · ${esc(group)}</div><h1>${esc(ep.title)}</h1><p>${esc(ep.problem)}</p><div class="tags"><span class="tag red">${formatDate(slot.date,true)}</span><span class="tag">${esc(slot.start)}–${esc(slot.end)}</span><span class="tag">${esc(slot.room)}</span></div></div><button class="secondary-btn" data-view="route">← Сюжет курса</button></div>`};
 
-openBrief=function(){showDialog('Что за задача',`<h2>Поддержка игровой студии</h2><p>Есть поток обращений игроков. Сейчас сотрудник вручную читает каждое сообщение и решает, в какой отдел его передать: аккаунт, оплата или техническая поддержка.</p><div class="example"><b>Наша задача</b>Автоматически предложить один из трёх отделов. Если уверенно определить отдел нельзя, вернуть «Нужен человек».</div><div class="example bad"><b>Чего здесь нет</b>Мы не отвечаем игроку, не меняем аккаунт и не проводим оплату. На этом курсе автоматизируем только определение категории обращения.</div>`)};
+lessonHTML=function(){const l=lesson(activeLesson);if(!RELEASED.includes(l.id))return routeHTML();return `${quickbar()}${lessonTop(l)}${storyContext(l.id)}${assignmentBrief(l)}<div class="lesson-shell lesson-shell--task"><div class="lesson-main">${l.id===1?lab1HTML():lab2HTML()}</div>${lessonSide(l)}</div>`};
 
-document.addEventListener('click',e=>{
-  const jump=e.target.closest('[data-ui-action="jump-work"]');
-  if(jump){document.querySelector('#work-area')?.scrollIntoView({behavior:'smooth',block:'start'});}
-  const run=e.target.closest('button[data-action="run-tests"]');
-  if(run){setTimeout(()=>document.querySelector('#testResults')?.scrollIntoView({behavior:'smooth',block:'nearest'}),0);}
-});
+lessonSide=function(l){const checks=state.checks[l.id]||[],ep=storyEpisode(l.id);return `<aside class="lesson-side"><section class="card side-card finish-card"><div class="side-title">Что отдаём заказчику после этого этапа</div><p class="finish-result">${esc(ep.deliverable)}</p><div class="checklist">${l.checks.map((x,i)=>`<label class="checkrow"><input type="checkbox" data-check="${i}" data-lesson="${l.id}" ${checks[i]?'checked':''}><span>${esc(x)}</span></label>`).join('')}</div><label class="tiny muted" style="display:block;margin-top:14px">Короткий вывод</label><textarea data-note="${l.id}" placeholder="Что получилось, где решение ошибается и что ты бы поменял дальше.">${esc(state.notes[l.id]||'')}</textarea><button class="primary-btn" style="width:100%;margin-top:10px" data-action="ready" data-id="${l.id}">${state.ready.includes(l.id)?'Обновить отметку ✓':'Этап готов'}</button><p class="tiny muted" style="margin-top:10px">Отметка сохраняется только в твоём браузере.</p></section></aside>`};
+
+lab1HTML=function(){return `<section class="card context-card"><div class="section-label">Исходная ситуация</div><h3>Поддержка вручную сортирует каждое сообщение</h3><p>У студии есть три команды: <strong>аккаунты</strong>, <strong>оплата</strong> и <strong>техническая поддержка</strong>. Пока оператор читает сообщение и вручную выбирает, кому его отправить. Наша первая версия должна хотя бы предлагать отдел автоматически.</p><div class="example"><b>Примеры</b>«Не могу войти после смены пароля» → аккаунты. «Деньги списались два раза» → оплата. Если сообщение непонятное или подходит сразу под несколько отделов → «Нужен человек».</div></section><section id="work-area" class="card lesson-card work-card"><div class="section-label">Делаем первую версию</div><h3>Собираем маршрутизатор на простых правилах</h3><div class="work-step"><span class="work-num">1</span><div><h4>Проверяем, что нам досталось</h4><p>Есть готовый набор слов для трёх отделов. Пока ничего не меняй. Прогони 12 сообщений и посмотри, где правила уже работают, а где ошибаются.</p><button class="primary-btn" data-action="run-tests">Прогнать 12 сообщений</button></div></div><div id="testResults"></div><div class="work-step"><span class="work-num">2</span><div><h4>Находим минимум две плохие ситуации</h4><p>Не просто смотри на итоговый процент. Выбери конкретные сообщения, где система отправила не туда или не смогла решить. Нам важно понять причину ошибки.</p></div></div><div class="work-step"><span class="work-num">3</span><div><h4>Пробуем починить правила</h4><p>Добавь или убери слова. Можно сначала проверить одно сообщение, чтобы понять, что изменилось.</p><div class="rule-grid">${Object.keys(DEFAULT_RULES).map(k=>`<label>${LABELS[k]}<input type="text" data-rule="${k}" value="${esc(state.rules[k])}" maxlength="160"></label>`).join('')}</div><div class="input-actions"><input id="singleText" type="text" value="Не могу войти после смены пароля" maxlength="400"><button class="secondary-btn" data-action="classify">Проверить одно сообщение</button></div><div id="singleResult" aria-live="polite"></div><button class="ghost-btn" data-action="reset-rules">Вернуть исходные правила</button></div></div><div class="work-step"><span class="work-num">4</span><div><h4>Снова прогоняем те же 12 сообщений</h4><p>Сравни с первым запуском. Если стало лучше, посмотри за счёт каких сообщений. Если одна ошибка исчезла, а появилась другая, это тоже важный результат.</p><button class="primary-btn" data-action="run-tests">Проверить после изменений</button></div></div><div class="work-step"><span class="work-num">5</span><div><h4>Переносим этот же вариант в Python</h4><p>Каркас уже готов. Нужно понять функцию, поменять правила и убедиться, что в коде система ведёт себя так же.</p><div class="job-actions"><button class="primary-btn blue" data-download="lab1">Скачать notebook</button><button class="secondary-btn" data-download="lab1py">Версия .py</button><button class="secondary-btn" data-download="cases">12 сообщений .csv</button></div></div></div></section>`};
+
+lab2HTML=function(){return `<section class="card context-card"><div class="section-label">Что произошло после первой версии</div><h3>Правила работают, но их приходится постоянно править руками</h3><p>В поддержку приходят новые формулировки. Для каждой надо придумывать новые слова и следить, чтобы они не ломали старые случаи. Руководитель поддержки отдаёт нам историю обращений, где правильный отдел уже размечен.</p><div class="example"><b>Новый запрос</b>Попробовать обучить модель на этих примерах и проверить, станет ли она лучше простого набора правил.</div></section><section id="work-area" class="card lesson-card work-card"><div class="section-label">Делаем вторую версию</div><h3>Учимся на старых обращениях</h3><div class="work-step"><span class="work-num">1</span><div><h4>Забираем данные студии</h4><p>Скачай notebook и набор из 36 вымышленных обращений с готовыми категориями.</p><div class="job-actions"><button class="primary-btn blue" data-download="lab2">Скачать notebook</button><button class="secondary-btn" data-download="dataset">Данные .csv</button></div></div></div><div class="work-step"><span class="work-num">2</span><div><h4>Разбираемся, что можно показывать модели</h4><p>Посмотри деление на train, validation и test. Train нужен для обучения, validation для сравнения вариантов, test оставляем на финальную проверку.</p></div></div><div class="work-step"><span class="work-num">3</span><div><h4>Ставим контрольную точку</h4><p>Сначала запускаем очень простой baseline, который всегда отвечает самой частой категорией. Иначе непонятно, модель вообще что-то улучшила или просто стала сложнее.</p></div></div><div class="work-step"><span class="work-num">4</span><div><h4>Обучаем модель</h4><p>Запусти TF-IDF + Logistic Regression и сравни accuracy с baseline на тех же validation-примерах.</p></div></div><div class="work-step"><span class="work-num">5</span><div><h4>Разбираем, где новая версия ошибается</h4><p>Выбери одно сообщение, где модель дала неправильную категорию. Запиши ожидаемый ответ, предсказание и возможную причину ошибки.</p></div></div></section>`};
+
+openBrief=function(){showDialog('Кейс курса',`<h2>${esc(COURSE_STORY.company)}</h2><p>${esc(COURSE_STORY.problem)}</p><div class="example"><b>Твоя роль</b>${esc(COURSE_STORY.role)}</div><div class="example"><b>Цель на семестр</b>${esc(COURSE_STORY.goal)}</div><p style="margin-top:14px">На каждой паре появляется новая проблема. Предыдущее решение не выбрасываем: либо сравниваем с новым, либо используем как часть следующей версии.</p>`)};
+
+document.addEventListener('click',e=>{const jump=e.target.closest('[data-ui-action="jump-work"]');if(jump)document.querySelector('#work-area')?.scrollIntoView({behavior:'smooth',block:'start'});const story=e.target.closest('button[data-action="story-open"]');if(story&&!story.disabled)route('lesson',Number(story.dataset.id));const run=e.target.closest('button[data-action="run-tests"]');if(run)setTimeout(()=>document.querySelector('#testResults')?.scrollIntoView({behavior:'smooth',block:'nearest'}),0)});
 
 render();
