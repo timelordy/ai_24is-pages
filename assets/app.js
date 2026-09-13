@@ -12,6 +12,7 @@ const KEY = "kgasu-ai-course-v2";
 let courses = [],
   schedule = [],
   playbook = [],
+  depth = [],
   state = { group: "24ИС02/1", done: {} },
   storageFailed = false;
 try {
@@ -51,14 +52,14 @@ function rows() {
   return courses
     .map(
       (c, i) =>
-        `<article class="lesson-row"><span class="number">${pad(i + 1)}</span><div><h3><a href="#lesson-${i + 1}">${escapeHTML(c.title)}</a></h3><p>${escapeHTML(c.result)}</p></div><a class="open" href="#lesson-${i + 1}">Открыть пару →</a></article>`,
+        `<article class="lesson-row"><span class="number">${pad(i + 1)}</span><div><h3><a href="#lesson-${i + 1}">${escapeHTML(c.title)}</a></h3><p><b>Результат пары:</b> ${escapeHTML(depth[i]?.product || c.result)}</p></div><a class="open" href="#lesson-${i + 1}">Открыть пару →</a></article>`,
     )
     .join("");
 }
 function home() {
   const { group, index } = nextLesson();
   const lesson = courses[index];
-  return `<section class="hero"><div><p class="eyebrow">Методы искусственного интеллекта</p><h1>Что делать<br>на каждой паре</h1><p class="lead">Откройте нужную пару и выберите свою роль. Студент получит пошаговое задание. Преподаватель — готовый сценарий: что сказать, показать и принять.</p><div class="role-choice"><a class="role-card" href="#lesson-1"><b>Я студент</b><span>Открыть первое задание →</span></a><a class="role-card teacher-card" href="#teacher"><b>Я преподаватель</b><span>Открыть сценарий занятия →</span></a></div></div><aside class="next"><p class="eyebrow">${index < 0 ? "Расписание завершено" : "Ближайшее занятие"} · ${escapeHTML(group.group)}</p>${lesson ? `<p class="meta">${dateLabel(group.dates[index])} 2026 · ${group.time}<br>Аудитория ${escapeHTML(group.room)}</p><h2>${pad(index + 1)} / ${escapeHTML(lesson.title)}</h2><p><b>Студент делает:</b> ${escapeHTML(lesson.steps[0])}</p><p><b>Сдаёт:</b> ${escapeHTML(lesson.result)}</p><a class="button" href="#lesson-${index + 1}">Открыть эту пару →</a>` : '<h2>Все семь встреч позади</h2><p>Материалы остаются доступны. Проверьте комплект отчётов и подготовьтесь к защите.</p><a class="button" href="#work">Моя работа</a>'}</aside></section><section class="principles"><article><b>На первой паре</b><p>Любой привычный чат с LLM, файл notes.txt и одна короткая функция Python. OpenCode пока не нужен.</p></article><article><b>Со второй пары</b><p>OpenCode читает файлы учебного проекта. Каждый раз используется новая готовая папка.</p></article><article><b>Чтобы сдать</b><p>Показать исходные данные, реальный результат проверки и объяснить его своими словами.</p></article></section><h2>Все семь пар</h2><div class="lesson-list">${rows()}</div>`;
+  return `<section class="hero"><div><p class="eyebrow">Методы искусственного интеллекта</p><h1>Семь полноценных<br>лабораторных работ</h1><p class="lead">Каждая пара — отдельный 90-минутный эксперимент: 10–15 минут объяснения, 65–70 минут практики и защита. За один показ интерфейса курс не закрыть.</p><div class="role-choice"><a class="role-card" href="#lesson-1"><b>Я студент</b><span>Открыть первую лабораторную →</span></a><a class="role-card teacher-card" href="#teacher"><b>Я преподаватель</b><span>Открыть сценарий занятия →</span></a></div></div><aside class="next"><p class="eyebrow">${index < 0 ? "Расписание завершено" : "Ближайшее занятие"} · ${escapeHTML(group.group)}</p>${lesson ? `<p class="meta">${dateLabel(group.dates[index])} 2026 · ${group.time}<br>Аудитория ${escapeHTML(group.room)}</p><h2>${pad(index + 1)} / ${escapeHTML(lesson.title)}</h2><p><b>Исследовательский вопрос:</b> ${escapeHTML(depth[index]?.question || lesson.learn)}</p><p><b>Результат:</b> ${escapeHTML(depth[index]?.product || lesson.result)}</p><a class="button" href="#lesson-${index + 1}">Открыть лабораторную →</a>` : '<h2>Все семь встреч позади</h2><p>Материалы остаются доступны. Проверьте комплект отчётов и подготовьтесь к защите.</p><a class="button" href="#work">Моя работа</a>'}</aside></section><section class="principles"><article><b>Не обзор сервисов</b><p>Каждая технология проверяется серией опытов на одном проекте.</p></article><article><b>65–70 минут работы</b><p>Нужно получить повторяемые результаты, ошибки и измерения.</p></article><article><b>Защита по новому входу</b><p>Готовый скриншот не заменяет объяснение и живую проверку.</p></article></section><h2>Семь лабораторных работ</h2><div class="lesson-list">${rows()}</div>`;
 }
 function bullets(items) {
   return `<ul class="check-list">${items.map((s) => `<li>${escapeHTML(s)}</li>`).join("")}</ul>`;
@@ -66,12 +67,14 @@ function bullets(items) {
 function lessonPage(n, role = "student") {
   const c = courses[n - 1];
   const t = playbook[n - 1];
+  const d = depth[n - 1];
   if (!c) return '<h1>Занятие не найдено</h1><a href="#plan">К плану курса</a>';
   const list = (items) =>
     `<ol class="steps">${items.map((s) => `<li>${escapeHTML(s)}</li>`).join("")}</ol>`;
-  const studentSection = `<section class="role-section"><p class="eyebrow">Студенту</p><h2>Сделайте по порядку</h2><div class="notice">Скачайте новую папку для этой пары и откройте START.md. ${[4, 6].includes(n) ? "Падение исходного теста здесь ожидается." : "Работа с прошлой пары не нужна."}</div>${list(t.student)}<div class="prompt-card"><span class="step-label">Запрос для старта — можно скопировать</span><pre>${escapeHTML(t.prompt)}</pre></div><h2>Покажите преподавателю</h2>${bullets(t.accept)}<p class="finish-line"><b>Главный вывод:</b> ${escapeHTML(t.finish)}</p></section>`;
-  const teacherSection = `<section class="role-section teacher-section"><p class="eyebrow">Преподавателю</p><h2>До пары</h2>${bullets(t.prepare)}<h2>Скажите группе</h2><blockquote>${escapeHTML(t.say)}</blockquote><h2>Покажите на экране</h2>${list(t.show)}<h2>Дайте студентам одно задание</h2>${bullets(t.student)}<h2>Примите работу, если</h2>${bullets(t.accept)}<div class="notice"><b>Если не работает:</b> ${escapeHTML(t.fallback)}</div><p class="finish-line"><b>Фраза в конце пары:</b> ${escapeHTML(t.finish)}</p></section>`;
-  return `<p class="eyebrow">Пара ${pad(n)} / 07 · 90 минут</p><h1>${escapeHTML(c.title)}</h1><div class="lesson-summary"><div><span class="step-label">Задача пары</span><p>${escapeHTML(t.purpose)}</p></div><div><span class="step-label">Что сдаёт студент</span><p>${escapeHTML(c.result)}</p></div></div><div class="role-tabs"><a class="${role === "student" ? "active" : ""}" href="#student-${n}">Студенту: что делать</a><a class="teacher-tab ${role === "teacher" ? "active" : ""}" href="#teach-${n}">Преподавателю: как провести</a></div>${role === "teacher" ? teacherSection : studentSection}<details class="more"><summary>Теория, полный тайминг и расширенное задание</summary><h2>Короткое объяснение</h2><p>${escapeHTML(c.explain)}</p><h2>План на 90 минут</h2><div class="table-wrap"><table><thead><tr><th>Время</th><th>Работа</th></tr></thead><tbody>${c.timeline.map(([time, activity]) => `<tr><td>${time}</td><td>${escapeHTML(activity)}</td></tr>`).join("")}</tbody></table></div><h2>Для сильных</h2><p>${escapeHTML(c.extension)}</p></details><aside class="download-bar"><div><b>Файлы пары ${n}</b><span>Распакуйте ZIP в отдельную папку.</span></div><a class="button" href="assets/downloads/lesson-${pad(n)}.zip" download>Скачать starter ZIP</a><a class="button secondary" href="assets/materials/lessons/${pad(n)}/report-template.md" download>Скачать шаблон отчёта</a></aside><div class="actions lesson-nav">${n > 1 ? `<a href="#${role === "teacher" ? "teach" : "student"}-${n - 1}">← Пара ${n - 1}</a>` : ""}${n < 7 ? `<a href="#${role === "teacher" ? "teach" : "student"}-${n + 1}">Пара ${n + 1} →</a>` : role === "teacher" ? '<a href="#teacher">К списку сценариев →</a>' : '<a href="#work">Проверить свою работу →</a>'}</div>`;
+  const labBlocks = d.blocks.map((block) => `<article class="lab-block"><div class="lab-time">${escapeHTML(block.time)}</div><div><h3>${escapeHTML(block.title)}</h3>${bullets(block.actions)}<p><b>Контрольная точка:</b> ${escapeHTML(block.evidence)}</p></div></article>`).join("");
+  const studentSection = `<section class="role-section"><p class="eyebrow">Студенту · полноценная лабораторная</p><h2>${escapeHTML(d.product)}</h2><p class="research-question"><b>Исследовательский вопрос:</b> ${escapeHTML(d.question)}</p><div class="notice">Скачайте новую папку, откройте LAB.md и выполняйте четыре этапа по времени. ${[4, 6].includes(n) ? "Падение исходного теста здесь ожидается." : "Работа с прошлой пары не нужна."}</div><div class="lab-plan">${labBlocks}</div><div class="prompt-card"><span class="step-label">Стартовый запрос — это только начало опыта</span><pre>${escapeHTML(t.prompt)}</pre></div><h2>Минимальный объём</h2><p>${escapeHTML(d.minimum)}</p><div class="notice danger"><b>Работа не принимается:</b> ${escapeHTML(d.reject)}</div><h2>Покажите преподавателю</h2>${bullets(t.accept)}<p class="finish-line"><b>Главный вывод:</b> ${escapeHTML(t.finish)}</p></section>`;
+  const teacherSection = `<section class="role-section teacher-section"><p class="eyebrow">Преподавателю · сценарий на 90 минут</p><h2>До пары</h2>${bullets(t.prepare)}<h2>Скажите группе</h2><blockquote>${escapeHTML(t.say)}</blockquote><h2>Покажите на экране</h2>${list(t.show)}<h2>Ведите по четырём контрольным точкам</h2><div class="lab-plan">${labBlocks}</div><h2>Минимальный объём сдачи</h2><p>${escapeHTML(d.minimum)}</p><div class="notice danger"><b>Не принимать:</b> ${escapeHTML(d.reject)}</div><h2>Примите работу, если</h2>${bullets(t.accept)}<div class="notice"><b>Если не работает:</b> ${escapeHTML(t.fallback)}</div><p class="finish-line"><b>Фраза в конце пары:</b> ${escapeHTML(t.finish)}</p></section>`;
+  return `<p class="eyebrow">Лабораторная ${pad(n)} / 07 · 90 минут</p><h1>${escapeHTML(c.title)}</h1><div class="lesson-summary"><div><span class="step-label">Что создаём</span><p>${escapeHTML(d.product)}</p></div><div><span class="step-label">Объём сдачи</span><p>${escapeHTML(d.minimum)}</p></div></div><div class="role-tabs"><a class="${role === "student" ? "active" : ""}" href="#student-${n}">Студенту: лабораторная</a><a class="teacher-tab ${role === "teacher" ? "active" : ""}" href="#teach-${n}">Преподавателю: как провести</a></div>${role === "teacher" ? teacherSection : studentSection}<details class="more"><summary>Теория и дополнительное задание</summary><h2>Короткое объяснение</h2><p>${escapeHTML(c.explain)}</p><h2>Для сильных</h2><p>${escapeHTML(c.extension)}</p></details><aside class="download-bar"><div><b>Файлы лабораторной ${n}</b><span>Распакуйте ZIP и сначала откройте LAB.md.</span></div><a class="button" href="assets/downloads/lesson-${pad(n)}.zip" download>Скачать starter ZIP</a><a class="button secondary" href="assets/materials/lessons/${pad(n)}/report-template.md" download>Скачать шаблон отчёта</a></aside><div class="actions lesson-nav">${n > 1 ? `<a href="#${role === "teacher" ? "teach" : "student"}-${n - 1}">← Лабораторная ${n - 1}</a>` : ""}${n < 7 ? `<a href="#${role === "teacher" ? "teach" : "student"}-${n + 1}">Лабораторная ${n + 1} →</a>` : role === "teacher" ? '<a href="#teacher">К списку сценариев →</a>' : '<a href="#work">Проверить свою работу →</a>'}</div>`;
 }
 function teacherPage() {
   const first = playbook[0];
@@ -178,17 +181,18 @@ function bindWork() {
   };
 }
 Promise.all(
-  ["course", "schedule", "playbook"].map((name) =>
+  ["course", "schedule", "playbook", "course-depth"].map((name) =>
     fetch(`assets/${name}.json`).then((r) => {
       if (!r.ok) throw Error("Не удалось загрузить " + name);
       return r.json();
     }),
   ),
 )
-  .then(([c, s, p]) => {
+  .then(([c, s, p, d]) => {
     courses = c;
     schedule = s;
     playbook = p;
+    depth = d;
     if (!schedule.some((g) => g.group === state.group))
       state.group = schedule[0].group;
     $("#group").innerHTML = schedule
