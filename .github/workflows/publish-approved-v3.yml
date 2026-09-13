@@ -2,7 +2,9 @@ name: Publish verified beginner course
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/publish-approved-v3.yml']
+    paths:
+      - '.github/workflows/publish-approved-v3.yml'
+      - '.publish/**'
 permissions:
   contents: write
 concurrency:
@@ -14,82 +16,97 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Verify and install approved public export
+      - name: Reconstruct and verify the public-only snapshot
         shell: bash
         run: |
           python - <<'PY'
-          import hashlib, io, json, pathlib, shutil, stat, tempfile, urllib.request, urllib.error, zipfile
-          # This expiring link contains only the public student export and synthetic QA screenshots.
-          source = 'https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-73d4-8210-8f86-ded51056aa85/raw?se=2026-09-13T20%3A23%3A52Z&sp=r&sv=2026-02-06&sr=b&scid=b80b31f4-5ccc-5c28-9091-2231f147db17&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-13T09%3A56%3A42Z&ske=2026-09-14T09%3A56%3A42Z&sks=b&skv=2026-02-06&sig=p8vE5jJoVjHibUOgAlquGoq5TCCds1al6mSGte9RSto%3D'
-          print('::add-mask::' + source)
-          request = urllib.request.Request(source, headers={'User-Agent':'Mozilla/5.0 (compatible; CoursePublisher/1.0)', 'Accept':'application/zip'})
-          try:
-              with urllib.request.urlopen(request, timeout=45) as response:
-                  payload = response.read(20_000_001)
-          except urllib.error.HTTPError as error:
-              print('Artifact download status:', error.code)
-              print(error.read(1000).decode('utf-8', errors='replace').replace(source, '[artifact URL]'))
-              raise RuntimeError('Public artifact transfer failed; existing site preserved') from None
-          if len(payload) > 20_000_000:
-              raise RuntimeError('Unexpected archive size')
-          expected = '3e7111524cffbbf4ff76b0ef57d99d1155971fd379f272bc2454d760b7073c2e'
+          from pathlib import Path, PurePosixPath
+          import base64, hashlib, io, json, lzma, shutil, tarfile, tempfile, zipfile
+          root = Path.cwd().resolve()
+          allowed = {'.git', '.github', '.publish', '.nojekyll', 'assets', 'index.html'}
+          if {p.name for p in root.iterdir()} - allowed:
+              raise RuntimeError('Unexpected repository files; refusing to replace them')
+          parts = [root/f'.publish/v3-{n:02}.b64' for n in range(8)]
+          payload = base64.b64decode(''.join(p.read_text(encoding='ascii').strip() for p in parts), validate=True)
+          expected = '0e87fc10e4d470aeb411390c8c9ca3abf821922841339bf1913ace6d8dd41d16'
           if hashlib.sha256(payload).hexdigest() != expected:
-              raise RuntimeError('Artifact differs from verified CI output')
-          root = pathlib.Path.cwd().resolve()
-          if {p.name for p in root.iterdir()} - {'.git', '.github', '.nojekyll', 'assets', 'index.html'}:
-              raise RuntimeError('Unexpected public repository files; preserved')
-          with tempfile.TemporaryDirectory() as tmp:
-              staging = pathlib.Path(tmp)
-              with zipfile.ZipFile(io.BytesIO(payload)) as archive:
-                  if archive.testzip() is not None:
-                      raise RuntimeError('Corrupt archive')
-                  for item in archive.infolist():
-                      name = pathlib.PurePosixPath(item.filename)
-                      if name.is_absolute() or '..' in name.parts or '\\' in item.filename:
-                          raise RuntimeError('Unsafe path')
-                      if not name.parts or name.parts[0] not in {'public','qa-output'}:
-                          raise RuntimeError('Unexpected archive root')
-                      if set(name.parts) & {'.git','advanced','solutions','__pycache__'}:
+              raise RuntimeError('Snapshot checksum mismatch')
+          raw = lzma.decompress(payload)
+          if len(raw) > 5_000_000:
+              raise RuntimeError('Unexpected expanded size')
+          with tempfile.TemporaryDirectory() as temporary:
+              staging = Path(temporary)
+              with tarfile.open(fileobj=io.BytesIO(raw), mode='r:') as tar:
+                  seen = set()
+                  for member in tar.getmembers():
+                      rel = PurePosixPath(member.name)
+                      if not member.isfile() or rel.is_absolute() or '..' in rel.parts or '\\' in member.name:
+                          raise RuntimeError('Unsafe snapshot entry')
+                      if rel.parts[0] not in {'assets', 'index.html', '.nojekyll'} or member.name in seen:
+                          raise RuntimeError('Entry outside the public allowlist')
+                      if set(rel.parts) & {'solutions', 'advanced', '.git'}:
                           raise RuntimeError('Private content is forbidden')
-                      if stat.S_ISLNK(item.external_attr >> 16):
-                          raise RuntimeError('Symlinks are forbidden')
-                      if item.is_dir() or name.parts[0] != 'public':
-                          continue
-                      rel = pathlib.Path(*name.parts[1:])
-                      if not rel.parts or rel.parts[0] not in {'assets','index.html','.nojekyll'}:
-                          raise RuntimeError('Outside public allowlist')
-                      target = staging/rel
+                      seen.add(member.name)
+                      target = staging.joinpath(*rel.parts)
                       target.parent.mkdir(parents=True, exist_ok=True)
-                      target.write_bytes(archive.read(item))
-              course = json.loads((staging/'assets/course.json').read_text(encoding='utf-8'))
-              if len(course)!=7 or course[0]['title']!='Правило или ИИ?':
-                  raise RuntimeError('Wrong course version')
-              downloads = list((staging/'assets/downloads').glob('*.zip'))
-              if len(downloads)!=8:
-                  raise RuntimeError('Incomplete downloads')
-              for path in downloads:
-                  with zipfile.ZipFile(path) as package:
-                      if package.testzip() is not None:
-                          raise RuntimeError('Broken student package')
-                      for name in package.namelist():
-                          if set(pathlib.PurePosixPath(name).parts)&{'solutions','advanced','.git'} or 'defense-cards' in name:
-                              raise RuntimeError('Private material in student package')
-              for name in ('assets','index.html','.nojekyll'):
-                  target=root/name
-                  if target.is_dir():shutil.rmtree(target)
-                  elif target.exists():target.unlink()
-                  source_path=staging/name
-                  if source_path.is_dir():shutil.copytree(source_path,target)
-                  else:shutil.copyfile(source_path,target)
-          (root/'.github/workflows/publish-approved-v3.yml').unlink()
-          print('Verified public export installed: seven lessons and eight ZIPs.')
+                      target.write_bytes(tar.extractfile(member).read())
+              materials = staging/'assets/materials'
+              docs = ['START_HERE.md', 'COURSE_RUNBOOK.md', 'free-stack.md', 'pilot-checklist.md',
+                      'security/README.md', 'assessment/RUBRIC.md', 'assessment/DEFENSE.md',
+                      'teacher/FALLBACK.md', 'teacher/QUICK_START.md']
+              bundle = {name: (materials/name).read_bytes() for name in docs}
+              def archive(path, files):
+                  path.parent.mkdir(parents=True, exist_ok=True)
+                  with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as out:
+                      for name, content in sorted(files.items()):
+                          info = zipfile.ZipInfo(name, (2026, 9, 13, 0, 0, 0))
+                          info.create_system = 3
+                          info.external_attr = 0o100644 << 16
+                          info.compress_type = zipfile.ZIP_DEFLATED
+                          out.writestr(info, content)
+              for n in range(1, 8):
+                  prefix = f'lessons/{n:02}'
+                  names = ['workshop.html', 'LAB.md', 'report-template.md', 'data.json', 'documents.txt']
+                  if n == 1:
+                      names.append('optional.py')
+                  files = {name: (materials/prefix/'starter'/name).read_bytes() for name in names}
+                  archive(staging/f'assets/downloads/lesson-{n:02}.zip', files)
+                  bundle.update({prefix+'/starter/'+name: content for name, content in files.items()})
+                  for name in ['README.md', 'report-template.md']:
+                      bundle[prefix+'/'+name] = (materials/prefix/name).read_bytes()
+              archive(staging/'assets/downloads/course-student.zip', bundle)
+              manifest = {p.relative_to(staging).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                          for p in staging.rglob('*') if p.is_file()}
+              digest = hashlib.sha256(json.dumps(manifest, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+              expected_manifest = 'b991fdc88935200849f8eb61428ac3c8e00592816ea71c4c9ce64b509f685cb0'
+              if len(manifest) != 110 or digest != expected_manifest:
+                  raise RuntimeError('Generated files differ from the verified CI artifact')
+              for name in ('assets', 'index.html', '.nojekyll'):
+                  target = root/name
+                  if target.is_symlink():
+                      raise RuntimeError('Unexpected destination symlink')
+                  if target.is_dir():
+                      shutil.rmtree(target)
+                  elif target.exists():
+                      target.unlink()
+                  source = staging/name
+                  if source.is_dir():
+                      shutil.copytree(source, target)
+                  else:
+                      shutil.copyfile(source, target)
+          print('All 110 public files match the approved CI artifact byte for byte.')
+          print('Seven independent lesson ZIPs and the complete student ZIP are present.')
           PY
-      - name: Commit public export without rewriting history
+      - name: Commit verified public files without rewriting history
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- index.html assets .nojekyll .github/workflows/publish-approved-v3.yml
+          git add -- index.html assets .nojekyll
           git diff --cached --check
+          if git diff --cached --quiet; then
+            echo 'The verified course is already published in the repository.'
+            exit 0
+          fi
           git commit -m 'Publish verified beginner AI course from 78761813c125d43fc6e8233de47c419208aa794f'
           git push origin HEAD:main
