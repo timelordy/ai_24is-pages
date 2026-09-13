@@ -1,10 +1,10 @@
-<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Материалы · КГАСУ</title><link rel="stylesheet" href="../../../../style.css"><body><main class="document"><a href="../../../../../index.html">← Учебный портал</a><h1>Старт пары 1: Запрос, контекст и проверка ответа</h1>
-<p>Это независимое состояние: предыдущая пара не нужна.
-Работайте в копии этой папки. Полное задание находится на портале или в lessons/01/README.md учебного репозитория.</p>
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Материалы · КГАСУ</title><link rel="stylesheet" href="../../../../style.css"><body><main class="document"><a href="../../../../../index.html">← Учебный портал</a><h1>Пара 1 — сделайте четыре действия</h1>
+<p>Сегодня OpenCode и Git не нужны. Нужны эта папка, любой доступный чат с LLM и Python 3.11+.</p>
 <ol>
-<li><code>python --version</code> — нужен Python 3.11+.</li>
-<li><code>python -m unittest -v</code> — ожидаются 5 успешных тестов.</li>
-<li><code>opencode</code> — запускать именно в этой папке; модель выбирается через <code>/models</code>.</li>
-<li>Результаты храните в reports/01.md. Для baseline-профиля запись отчёта выполняет студент вручную.</li>
+<li>Откройте <code>notes.txt</code>. Отправьте модели запрос: «Выдели учебные задачи из заметок. Для каждой укажи название, статус и срок». Сам файл пока не прикладывайте. Сохраните запрос и ответ.</li>
+<li>Отправьте второй запрос вместе с текстом <code>notes.txt</code>: попросите JSON с полями <code>title</code>, <code>status</code>, <code>due</code>; если точной даты нет — <code>due=null</code>; ничего не придумывать. Сохраните запрос и ответ.</li>
+<li>Сверьте каждое поле второго ответа с <code>notes.txt</code>. Запишите хотя бы одну найденную ошибку или спорное место.</li>
+<li>Выполните <code>python diagnosis.py</code>. Исправьте функцию <code>done_ids</code>, чтобы программа напечатала <code>Python diagnosis passed</code>.</li>
 </ol>
-<p>Никаких личных данных или платных ключей. Подробнее: START_HERE.md и free-stack.md в полном комплекте.</p></main></body></html>
+<p>Покажите преподавателю: оба запроса и ответа, проверку по <code>notes.txt</code>, работающий <code>diagnosis.py</code> и объяснение, почему результат функции равен <code>[3]</code>.</p>
+<p>Никаких личных данных и платных ключей. Полное задание находится на портале.</p></main></body></html>

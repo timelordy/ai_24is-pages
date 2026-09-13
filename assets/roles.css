@@ -1,0 +1,215 @@
+.role-choice {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 30px;
+}
+.role-card {
+  min-height: 112px;
+  padding: 20px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--white);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.role-card:hover {
+  color: var(--white);
+  transform: translateY(-2px);
+}
+.role-card b {
+  font-size: 21px;
+}
+.role-card span {
+  font-size: 14px;
+}
+.teacher-card {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.lesson-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 26px 0;
+}
+.lesson-summary > div {
+  padding: 20px 28px 10px 0;
+}
+.lesson-summary > div + div {
+  padding-left: 28px;
+  border-left: 1px solid var(--line);
+}
+.step-label {
+  display: block;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.role-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 28px 0 16px;
+}
+.role-tabs a {
+  padding: 11px 16px;
+  background: var(--ink);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 3px;
+}
+.role-tabs a:not(.active) {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+.role-tabs .teacher-tab {
+  background: var(--accent);
+}
+.role-section {
+  max-width: 850px;
+  padding: 30px;
+  margin: 0 0 26px;
+  background: var(--white);
+  border-top: 5px solid var(--ink);
+}
+.teacher-section {
+  border-color: var(--accent);
+  background: #f1e9dd;
+}
+.role-section h2:first-of-type {
+  margin-top: 0;
+}
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 28px;
+}
+.check-list li {
+  position: relative;
+  padding: 8px 0 8px 34px;
+  border-bottom: 1px solid var(--line);
+}
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 4px;
+  color: var(--accent);
+  font-weight: 700;
+}
+.prompt-card {
+  margin: 30px 0;
+  border: 1px solid var(--line);
+  padding: 20px;
+  background: #e9ede5;
+}
+.prompt-card pre {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+blockquote {
+  margin: 18px 0 30px;
+  padding: 18px 24px;
+  border-left: 4px solid var(--accent);
+  background: var(--white);
+  font:
+    21px/1.55 Georgia,
+    serif;
+}
+.finish-line {
+  margin: 30px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.more {
+  max-width: 850px;
+  margin: 30px 0;
+  border: 1px solid var(--line);
+  background: var(--white);
+  padding: 0 24px 24px;
+}
+.more summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 18px 0;
+}
+.download-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px;
+  margin: 30px 0;
+  background: var(--green);
+}
+.download-bar div {
+  margin-right: auto;
+}
+.download-bar span {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+}
+.teacher-now {
+  background: #f1e9dd;
+  border-top: 5px solid var(--accent);
+  padding: 30px;
+  margin: 34px 0;
+  max-width: 900px;
+}
+.teacher-cycle {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 24px 0 44px;
+}
+.teacher-cycle article {
+  min-height: 150px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 20px;
+}
+.teacher-cycle b {
+  color: var(--accent);
+}
+.teacher-cycle p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.lesson-nav {
+  justify-content: space-between;
+}
+@media (max-width: 760px) {
+  .role-choice,
+  .lesson-summary,
+  .teacher-cycle {
+    grid-template-columns: 1fr;
+  }
+  .lesson-summary > div + div {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .role-tabs,
+  .download-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .role-tabs a,
+  .download-bar .button {
+    text-align: center;
+  }
+  .role-section,
+  .teacher-now {
+    padding: 22px;
+  }
+}
