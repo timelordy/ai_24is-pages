@@ -1,61 +1,24 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light">
-<meta name="description" content="Практические задания по методам искусственного интеллекта для 24ИС.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
-<title>Практика ИИ · 24ИС</title>
-<link rel="stylesheet" href="assets/style.css">
-<link rel="stylesheet" href="assets/mobile-fix.css">
-<link rel="stylesheet" href="assets/front-ui.css">
-<link rel="stylesheet" href="assets/ux.css">
-<link rel="stylesheet" href="assets/clarity.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="КГАСУ: 7 практических занятий по работе с LLM, OpenCode, skills, MCP и агентами. Задания, расписание и бесплатные учебные материалы.">
+  <title>Методы искусственного интеллекта · КГАСУ</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/app.js" defer></script>
 </head>
 <body>
-<a class="skip" href="#main">К содержанию</a>
-<div id="banner" class="banner" hidden></div>
-<header class="topbar">
-  <div class="shell topbar-row">
-    <a class="brand" href="#home" aria-label="Практика ИИ, главная">
-      <span class="logo">AI</span>
-      <span class="brand-copy"><b>Практика ИИ</b><span>24ИС · 3 курс</span></span>
-    </a>
-    <nav class="main-nav" aria-label="Основная навигация">
-      <button class="nav-btn active" data-view="home">Главная</button>
-      <button class="nav-btn" data-view="route">План курса</button>
-      <button class="nav-btn" data-view="schedule">Расписание</button>
-      <button class="nav-btn" data-view="materials">Материалы</button>
-      <button class="nav-btn" data-view="portfolio">Моя работа</button>
-      <button class="nav-btn" data-view="help">Как работать</button>
-    </nav>
-    <div class="top-actions">
-      <select id="group" class="group-select" aria-label="Подгруппа">
-        <option>24ИС02/1</option>
-        <option>24ИС02/2</option>
-        <option>24ИС03/1</option>
-        <option>24ИС03/2</option>
-      </select>
-      <button class="ghost-btn" data-view="help">О курсе</button>
-    </div>
-  </div>
-</header>
-<main id="main" class="shell page" tabindex="-1"></main>
-<footer class="shell footer">
-  <p>Практические задания по «Методам искусственного интеллекта» для 24ИС.</p>
-  <p>Прогресс хранится в этом браузере. Я его автоматически не вижу.</p>
-</footer>
-<dialog id="dialog" class="dialog" aria-labelledby="dialogTitle">
-  <div class="dialog-head"><strong id="dialogTitle">Окно</strong><button class="icon-btn" data-action="dialog-close" aria-label="Закрыть">×</button></div>
-  <div id="dialogBody" class="dialog-body"></div>
-</dialog>
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
-<input id="importFile" type="file" accept="application/json,.json" hidden>
-<script src="assets/app.js"></script>
-<script src="assets/copy.js"></script>
-<script src="assets/ux.js"></script>
-<script src="assets/clarity.js"></script>
-<script src="assets/front-ui.js"></script>
+  <a class="skip" href="#content">К содержанию</a>
+  <header>
+    <a class="brand" href="#home"><b>КГАСУ<span> / ИИ</span></b><small>Практические занятия · 2026</small></a>
+    <label class="group-label">Ваша подгруппа<select id="group" aria-label="Ваша подгруппа"></select></label>
+  </header>
+  <nav aria-label="Основная навигация">
+    <a href="#home">Главная</a><a href="#plan">План курса</a><a href="#schedule">Расписание</a><a href="#materials">Материалы</a><a href="#work">Моя работа</a><a href="#guide">Как работать</a>
+  </nav>
+  <main id="content" tabindex="-1"><p>Загрузка материалов… Если загрузка не завершилась, откройте сайт через локальный HTTP-сервер или Pages.</p></main>
+  <footer><span>Методы искусственного интеллекта · 7 × 90 минут</span><span>Только учебные данные. Отметки сохраняются в этом браузере.</span></footer>
+  <noscript>Для навигации нужен JavaScript. <a href="assets/materials/START_HERE.html">Открыть текстовую инструкцию</a> или <a href="assets/downloads/course-student.zip">скачать материалы</a>.</noscript>
 </body>
 </html>
