@@ -1,0 +1,24 @@
+.clarity-hero{padding-top:38px;padding-bottom:28px}
+.clarity-hero h1{max-width:980px;font-size:50px;line-height:1.08;letter-spacing:-1.6px}
+.clarity-hero p{max-width:920px;font-size:16px;line-height:1.7;color:#555b63}
+.clarity-brief{margin-top:6px}
+.clarity-brief .course-brief-grid>div{min-height:132px}
+.clarity-brief .course-brief-grid span{font-size:11px;text-transform:none;letter-spacing:0;color:#363b42}
+.clarity-brief .course-brief-grid p{font-size:14px;line-height:1.65}
+.clarity-plan-card .story-card-head h2{font-size:24px}
+.clarity-plan-card .story-node strong{font-size:12px;line-height:1.35}
+.clarity-plan-card .story-node{min-height:112px}
+.clarity-context .story-context-grid span{font-size:10px;text-transform:none;letter-spacing:0;color:#353a41}
+.clarity-context .story-context-grid p{font-size:13px;line-height:1.65}
+.next-story span,.next-assignment span{font-size:10px;text-transform:none;letter-spacing:0}
+.assignment-kicker,.section-label{font-size:10px;text-transform:none;letter-spacing:0}
+.story-route-result span{font-size:9px;text-transform:none;letter-spacing:0}
+@media(max-width:900px){
+  .clarity-hero h1{font-size:42px}
+}
+@media(max-width:640px){
+  .clarity-hero{padding-top:24px}
+  .clarity-hero h1{font-size:34px;letter-spacing:-1px}
+  .clarity-hero p{font-size:14px}
+  .clarity-brief .course-brief-grid>div{min-height:auto}
+}
