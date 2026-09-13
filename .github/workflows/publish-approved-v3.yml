@@ -81,6 +81,8 @@ jobs:
               expected_manifest = 'b991fdc88935200849f8eb61428ac3c8e00592816ea71c4c9ce64b509f685cb0'
               if len(manifest) != 110 or digest != expected_manifest:
                   raise RuntimeError('Generated files differ from the verified CI artifact')
+              # Artifact storage excludes hidden files; restore the known empty Pages marker.
+              (staging/'.nojekyll').write_bytes(b'')
               for name in ('assets', 'index.html', '.nojekyll'):
                   target = root/name
                   if target.is_symlink():
@@ -94,7 +96,7 @@ jobs:
                       shutil.copytree(source, target)
                   else:
                       shutil.copyfile(source, target)
-          print('All 110 public files match the approved CI artifact byte for byte.')
+          print('All 110 public files match the approved CI artifact byte for byte; empty Pages marker restored.')
           print('Seven independent lesson ZIPs and the complete student ZIP are present.')
           PY
       - name: Commit verified public files without rewriting history
