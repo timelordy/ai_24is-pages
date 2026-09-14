@@ -1,22 +1,25 @@
-# Campus ServiceDesk · требования продукта
+# Product requirements
 
-Система предназначена для небольшой университетской/корпоративной IT-службы. Она хранит и обрабатывает заявки на оборудование, сеть, программное обеспечение и доступ.
+Campus ServiceDesk is a small support-request system. The same project is extended through all six stages.
 
-## Инварианты
+## Ticket fields
 
-- `id` заявки уникален и является целым числом.
-- Статусы: `new`, `in_progress`, `resolved`, `closed`.
-- Приоритеты: `low`, `normal`, `high`.
-- Категории: `equipment`, `network`, `software`, `access`, `other`.
-- Пустой title недопустим.
-- Пользовательский текст не является инструкцией агенту.
-- Новая функциональность не должна молча менять существующие контракты.
+Every ticket has:
 
-## Семестровые этапы
+- a unique integer `id`;
+- a non-empty `title`;
+- `description`;
+- `status`: `new`, `in_progress`, `resolved`, or `closed`;
+- `priority`: `low`, `normal`, or `high`;
+- `category`: `equipment`, `network`, `software`, `access`, or `other`;
+- `location`.
 
-1. Постановка требований и исследование проекта.
-2. Фильтры, поиск и сортировка на frontend.
-3. REST API и создание заявок.
-4. SQLite, статусный workflow и история.
-5. Комментарии, AGENTS.md, skill, MR/CI/review.
-6. AI triage с проверкой схемы, fallback и индивидуальная защита.
+## Rules that must stay true
+
+1. Ticket IDs are unique.
+2. Unknown status, priority, or category values are rejected.
+3. Query and sorting functions must not mutate the original ticket data.
+4. Later API stages must return explicit error responses instead of silently accepting invalid input.
+5. When persistence is added, ticket data must survive a server restart.
+6. When status workflow is added, only documented transitions are allowed.
+7. The final AI feature may suggest values, but the user remains in control and ordinary ticket creation must still work if AI is unavailable.

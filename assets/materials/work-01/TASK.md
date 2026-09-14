@@ -1,48 +1,56 @@
-# 01. Разбираем Campus ServiceDesk и фиксируем контракт
+# 01. Understand the project and write a clear contract
 
-**Цель:** Настроить рабочую среду, понять существующую систему и зафиксировать проверяемый контракт frontend-workspace до изменения продуктового кода.
+**Goal:** Set up your workspace, understand the starting application, and turn a vague feature request into exact behaviour that can be tested.
 
-**Рабочая ветка:** `lab/01-discovery`
+**Branch:** `stage/01-discovery`
 
-## Задание
+## Starting point
 
-1. Откройте свой семестровый репозиторий Campus ServiceDesk, выполните `npm test` и `npm run start`.
-2. Попросите GigaCode объяснить роли `src/data.js`, `src/tickets.js`, `src/app.js`, `server.mjs` и `docs/REQUIREMENTS.md`. Выберите 3 утверждения и проверьте их по исходникам.
-3. Создайте GitVerse Issue `Frontend workspace` и отделите факты из требований от решений, которые ещё не приняты.
-4. Зафиксируйте точный контракт следующего milestone: status filter, priority filter, поиск по title/description/location и сортировка.
-5. Для фиксированных 12 заявок запишите ожидаемые ID: `status=new → [101,104,107,108,112]`; `priority=high → [101,102,107,108]`; `search=ПРОЕКТОР → [101]`; `search=305 → [101]`; `status=new + priority=high → [101,107,108]`.
-6. Добавьте в Issue отрицательные случаи: неизвестный status/priority/sort должны быть ошибкой, исходный массив не мутируется, поиск без совпадений даёт пустой список.
-7. Выполните `git diff --exit-code -- index.html src server.mjs tests styles.css`: продуктовый код должен остаться без изменений.
-8. Заполните `REPORT.md`: три проверенных утверждения AI, ссылка на Issue, собственные уточнения и реальный вывод команд.
+Campus ServiceDesk already shows 12 sample support tickets. There is no search, filtering, sorting, API, or database yet.
 
-## Успешный результат
+Your goal today is **not** to implement the next feature. First understand the project and define exactly what Stage 02 must do.
 
-- `npm test` показывает **5 PASS**;
-- приложение показывает **12 заявок**, в консоли браузера нет ошибок;
-- в `REPORT.md` есть **3 утверждения GigaCode** и конкретные файлы/функции, которыми они проверены;
-- Issue содержит все пять точных ожидаемых наборов ID из шага 5 и отрицательные случаи из шага 6;
-- `git diff --exit-code -- index.html src server.mjs tests styles.css` возвращает код `0`.
+## Task
 
-## Не засчитывается, если
+1. Open your personal GitVerse repository, clone it, and open the project root in VS Code.
+2. Run `npm test`, then `npm run start`. Open the address from the terminal and confirm that 12 tickets are visible.
+3. Ask GigaCode to explain `src/data.js`, `src/tickets.js`, and `src/app.js`. Pick three claims from its answer and verify each one against the actual file.
+4. Read `docs/REQUIREMENTS.md` and explain which rules Stage 02 must preserve.
+5. Create a GitVerse issue named `Search, filters and sorting` using the provided issue template.
+6. Write the exact Stage 02 contract in the issue: status filter, priority filter, case-insensitive search across title/location, and title sorting.
+7. Add concrete examples: `status=new → [101,104,107,108,112]`, `priority=high → [101,102,107,108]`, `search=projector → [101]`, `search=305 → [101]`, `status=new + priority=high → [101,107,108]`.
+8. Run `git diff --exit-code -- index.html src tests styles.css` and save the result in `REPORT.md`. Application code must still be unchanged.
 
-- критерии звучат как «фильтр должен работать корректно» без входов и ожидаемых выходов;
-- студент изменил product code до согласования контракта;
-- есть только текст AI без проверки по файлам;
-- `npm test` не запускался лично студентом.
+## What counts as complete
 
-## Что сдавать
+- `npm test` passes all 5 starting tests;
+- the application shows 12 tickets and the browser console has no errors;
+- `REPORT.md` contains three GigaCode claims and the file/function used to verify each one;
+- the GitVerse issue contains all five concrete examples from Step 7;
+- the issue states what is out of scope: no API, database, authentication, or new dependency in Stage 02;
+- `git diff --exit-code -- index.html src tests styles.css` returns exit code 0.
 
-- ссылка на семестровый repo и Issue `Frontend workspace`;
-- `REPORT.md`;
-- вывод `npm test` и `git diff --exit-code ...`.
+## This does not count as complete
 
-## Индивидуальный вопрос
+- the report only says “GigaCode explained the project” without checking its claims;
+- the issue says “search should work correctly” without concrete examples;
+- application code was already changed on this stage;
+- the only evidence is a screenshot or an AI message saying everything is correct.
 
-Почему точный набор ID является более сильным критерием, чем фраза «фильтр работает»? Чем ответ AI отличается от изменения файла и commit?
+## What to submit
 
-## Что принимает преподаватель
+- link to your GitVerse issue;
+- `REPORT.md` with three verified AI claims;
+- real output from `npm test`;
+- the clean `git diff --exit-code` result.
 
-- 5 базовых тестов PASS
-- Issue содержит точный контракт следующего этапа
-- три утверждения AI проверены по исходникам
-- product diff пуст
+## Individual question
+
+What is the difference between a statement from GigaCode, a file change in your working tree, and a Git commit? Which one of them proves that the program behaves correctly?
+
+## What will be checked
+
+- the project runs and 5 tests pass
+- three AI claims are checked against real files
+- the issue contains exact input → expected output examples
+- application code is still unchanged

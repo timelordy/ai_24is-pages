@@ -1,11 +1,17 @@
-# HANDOFF
+# Handoff
 
-## Что изменено
+## What changed
 
-## Как воспроизвести проверку
+## How to check it
 
-## Какие команды должны пройти
+## Commands I ran
 
-## Какие риски или части не проверены
+```bash
+npm test
+```
 
-## На каком commit выполнена проверка
+## What I checked manually
+
+## What is still not checked
+
+## Known risks

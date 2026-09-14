@@ -1,15 +1,17 @@
-# REPORT
+# Work report
 
-## Ссылка на задачу / ветку / Merge Request
+## GitVerse links
 
-## Что ожидал до запуска AI
+Issue / branch / Merge Request:
 
-## Что предложил или сделал AI
+## What I expected before using AI
 
-## Что я проверил сам
+## What the coding assistant suggested or changed
 
-## Реальный вывод тестов или CI
+## What I checked myself
 
-## Что осталось неизвестным или непроверенным
+## Actual test / CI output
 
-## Мой вывод
+## What is still unknown or unverified
+
+## My conclusion

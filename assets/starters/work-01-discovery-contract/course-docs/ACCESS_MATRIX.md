@@ -1,16 +1,16 @@
-# Матрица обязательности возможностей GitVerse
+# Tool availability
 
-| Возможность | Статус курса | Резерв |
+The course is designed to work even when some GitVerse AI features are not enabled for every account.
+
+| Capability | Required? | Fallback |
 |---|---|---|
-| GitVerse Lab и персональный форк | обязательно | преподаватель создаёт отдельный форк вручную |
-| VS Code + GigaCode | обязательно | подготовленный ПК или работа в паре |
-| Git, branch, commit, push | обязательно | нет: это часть результата |
-| GitVerse CI/CD | обязательно с пары 4 | локальный `npm test` только при подтверждённом сбое платформы |
-| Merge Request | обязательно с пары 6 | ручная передача ветки только при сбое GitVerse |
-| GigaCode Sessions Plan/Build | желательно | GigaCode в VS Code + `git diff` |
-| `/init`, `/review`, skills | желательно | ручное выполнение той же процедуры |
-| GigaIDE Cloud | резерв | локальный VS Code |
-| GitVerse MCP | демонстрация | не требуется |
-| GigaCode-разработчик | демонстрация | не требуется |
+| Personal GitVerse repository | Yes | Ask the instructor for a working repository before starting |
+| VS Code + GigaCode | Yes | Use the prepared classroom machine |
+| GitVerse automatic checks | Yes | Run the same checks locally, then repeat CI when access returns |
+| GigaCode Sessions | No | Use GigaCode in VS Code |
+| `/review` | No | Start a separate review conversation and verify every finding yourself |
+| Agent skills | No | Follow the same checklist manually |
+| GigaIDE Cloud | No | Use local VS Code |
+| GitVerse MCP | No | Instructor demonstration only |
 
-Если доступность функции неизвестна, она не может нести обязательные баллы. Платформа не должна превращать проверку знаний в лотерею приглашений на beta.
+A missing optional feature must not block a student from completing the core task.

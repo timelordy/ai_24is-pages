@@ -1,29 +1,29 @@
-# Задача
+# Problem
 
-## Пользователь и проблема
+What problem are we solving?
 
-## Требуемый результат
+## Known facts
 
-## Что уже известно
+- 
 
-## Неизвестные данные и вопросы
+## Unknowns / questions
 
-## Границы
+- 
 
-- [ ] без новых зависимостей
-- [ ] без изменения формата данных
-- [ ] не переписывать приложение
+## Expected behaviour
 
-## Критерии приёмки
+Write concrete examples as `input → expected result`.
 
-1.
-2.
-3.
-4.
+- 
 
-## Как проверить
+## Out of scope
 
-```bash
-npm test
-npm run start
-```
+What must not change?
+
+- 
+
+## How we will check it
+
+- automated test:
+- manual scenario:
+- command:
