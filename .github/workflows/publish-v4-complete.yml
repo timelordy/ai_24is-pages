@@ -1,0 +1,130 @@
+name: Publish complete GitVerse course portal
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-v4-complete.yml'
+      - '.publish/v4-*.b64'
+permissions:
+  contents: write
+concurrency:
+  group: publish-complete-v4
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Reconstruct and verify complete portal
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path, PurePosixPath
+          import base64, hashlib, io, json, lzma, shutil, tarfile, tempfile
+
+          root = Path.cwd().resolve()
+          parts = sorted((root / '.publish').glob('v4-*.b64'))
+          if len(parts) != 7:
+              raise RuntimeError(f'expected 7 payload parts, got {len(parts)}')
+
+          payload = base64.b64decode(
+              ''.join(path.read_text(encoding='ascii').strip() for path in parts),
+              validate=True,
+          )
+          if hashlib.sha256(payload).hexdigest() != 'fa685f5a7186c75f529b346afd2c20a964f3e293eaddda55cef44c34abc5fd55':
+              raise RuntimeError('payload checksum mismatch')
+
+          raw = lzma.decompress(payload)
+          if len(raw) > 1_000_000:
+              raise RuntimeError('expanded payload too large')
+
+          with tempfile.TemporaryDirectory() as temp:
+              staging = Path(temp)
+              with tarfile.open(fileobj=io.BytesIO(raw), mode='r:') as archive:
+                  seen = set()
+                  for member in archive.getmembers():
+                      rel = PurePosixPath(member.name)
+                      if (
+                          not member.isfile()
+                          or rel.is_absolute()
+                          or '..' in rel.parts
+                          or '\\' in member.name
+                          or member.issym()
+                          or member.islnk()
+                      ):
+                          raise RuntimeError(f'unsafe entry {member.name}')
+                      if rel.parts[0] not in {'assets', 'index.html', '.nojekyll'} or member.name in seen:
+                          raise RuntimeError(f'entry outside allowlist {member.name}')
+                      if set(rel.parts) & {'teacher', 'hidden-tests', 'solutions', '.git'}:
+                          raise RuntimeError(f'private content {member.name}')
+                      seen.add(member.name)
+                      target = staging.joinpath(*rel.parts)
+                      target.parent.mkdir(parents=True, exist_ok=True)
+                      target.write_bytes(archive.extractfile(member).read())
+
+              manifest = {
+                  path.relative_to(staging).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+                  for path in staging.rglob('*')
+                  if path.is_file()
+              }
+              digest = hashlib.sha256(
+                  json.dumps(manifest, sort_keys=True, separators=(',', ':')).encode()
+              ).hexdigest()
+              if len(manifest) != 169 or digest != '550fc87600a4dc93c9db30dde66eb1331cb263e03d3044068e85a74f6157ed02':
+                  raise RuntimeError('public manifest differs from verified artifact')
+
+              required = [
+                  'index.html',
+                  'assets/app.js',
+                  'assets/lib.js',
+                  'assets/pages-home.js',
+                  'assets/pages-course.js',
+                  'assets/task-page.js',
+                  'assets/starter-download.js',
+                  'assets/style.css',
+                  'assets/course.json',
+                  'assets/schedule.json',
+                  'assets/starters/manifest.json',
+                  'assets/materials/lab-01/TASK.md',
+                  'assets/materials/lab-07/REPORT.md',
+              ]
+              for name in required:
+                  if not (staging / name).is_file():
+                      raise RuntimeError(f'missing {name}')
+
+              course = json.loads((staging / 'assets/course.json').read_text(encoding='utf-8'))
+              if len(course) != 7 or not all('steps' in item and 'downloads' in item for item in course):
+                  raise RuntimeError('task data is incomplete')
+
+              for name in ('assets', 'index.html', '.nojekyll'):
+                  target = root / name
+                  if target.is_symlink():
+                      raise RuntimeError(f'unexpected destination symlink: {name}')
+                  if target.is_dir():
+                      shutil.rmtree(target)
+                  elif target.exists():
+                      target.unlink()
+                  source = staging / name
+                  if source.is_dir():
+                      shutil.copytree(source, target)
+                  else:
+                      shutil.copyfile(source, target)
+
+          print('Verified complete portal: 7 tasks, 169 public files.')
+          PY
+      - name: Commit complete portal
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- index.html assets .nojekyll
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo 'Portal already complete.'
+            exit 0
+          fi
+          git commit -m 'Publish complete task-first GitVerse course portal'
+          git push origin HEAD:main
