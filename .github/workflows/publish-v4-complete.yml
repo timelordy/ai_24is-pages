@@ -62,7 +62,7 @@ jobs:
                           or member.islnk()
                       ):
                           raise RuntimeError(f'unsafe entry {member.name}')
-                      if rel.parts[0] not in {'assets', 'index.html', '.nojekyll'} or member.name in seen:
+                      if rel.parts[0] not in {'assets', 'index.html'} or member.name in seen:
                           raise RuntimeError(f'entry outside allowlist {member.name}')
                       if set(rel.parts) & {'teacher', 'hidden-tests', 'solutions', '.git'}:
                           raise RuntimeError(f'private content {member.name}')
@@ -105,7 +105,7 @@ jobs:
               if len(course) != 7 or not all('steps' in item and 'downloads' in item for item in course):
                   raise RuntimeError('task data is incomplete')
 
-              for name in ('assets', 'index.html', '.nojekyll'):
+              for name in ('assets', 'index.html'):
                   target = root / name
                   if target.is_symlink():
                       raise RuntimeError(f'unexpected destination symlink: {name}')
@@ -118,6 +118,8 @@ jobs:
                       shutil.copytree(source, target)
                   else:
                       shutil.copyfile(source, target)
+
+              (root / '.nojekyll').write_text('', encoding='utf-8')
 
           print('Verified complete portal: 7 tasks, 169 public files.')
           PY
