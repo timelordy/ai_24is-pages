@@ -2,15 +2,18 @@
   "work-01-discovery-contract": [
     {
       "path": ".github/workflows/check.yml",
-      "url": "assets/starters/work-01-discovery-contract/.github/workflows/check.yml"
+      "url": "assets/starters/work-01-discovery-contract/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
     },
     {
       "path": ".gitignore",
-      "url": "assets/starters/work-01-discovery-contract/.gitignore"
+      "url": "assets/starters/work-01-discovery-contract/.gitignore",
+      "content": "node_modules/\n.env\n*.db\n*.db-shm\n*.db-wal\n.DS_Store\n"
     },
     {
       "path": ".gitverse/workflows/check.yml",
-      "url": "assets/starters/work-01-discovery-contract/.gitverse/workflows/check.yml"
+      "url": "assets/starters/work-01-discovery-contract/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
     },
     {
       "path": "COURSE_METADATA.json",
@@ -96,15 +99,18 @@
   "course-all": [
     {
       "path": "work-01-discovery-contract/.github/workflows/check.yml",
-      "url": "assets/starters/work-01-discovery-contract/.github/workflows/check.yml"
+      "url": "assets/starters/work-01-discovery-contract/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
     },
     {
       "path": "work-01-discovery-contract/.gitignore",
-      "url": "assets/starters/work-01-discovery-contract/.gitignore"
+      "url": "assets/starters/work-01-discovery-contract/.gitignore",
+      "content": "node_modules/\n.env\n*.db\n*.db-shm\n*.db-wal\n.DS_Store\n"
     },
     {
       "path": "work-01-discovery-contract/.gitverse/workflows/check.yml",
-      "url": "assets/starters/work-01-discovery-contract/.gitverse/workflows/check.yml"
+      "url": "assets/starters/work-01-discovery-contract/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
     },
     {
       "path": "work-01-discovery-contract/COURSE_METADATA.json",

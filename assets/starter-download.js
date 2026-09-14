@@ -89,8 +89,8 @@ function makeStoredZip(files) {
 }
 
 async function getManifest() {
-  manifestPromise ||= fetch('assets/starters/manifest.json').then(response => {
-    if (!response.ok) throw new Error('Не удалось загрузить состав starter-репозитория.');
+  manifestPromise ||= fetch('assets/starters/manifest.json?v=13', {cache: 'no-cache'}).then(response => {
+    if (!response.ok) throw new Error('Не удалось загрузить состав архива проекта.');
     return response.json();
   });
   return manifestPromise;
@@ -98,6 +98,9 @@ async function getManifest() {
 
 async function loadFiles(entries) {
   return Promise.all(entries.map(async entry => {
+    if (typeof entry.content === 'string') {
+      return {path: entry.path, data: encoder.encode(entry.content)};
+    }
     const response = await fetch(entry.url);
     if (!response.ok) throw new Error(`Не удалось загрузить ${entry.path}`);
     return {path: entry.path, data: new Uint8Array(await response.arrayBuffer())};
@@ -113,7 +116,7 @@ async function downloadStarter(button) {
   try {
     const manifest = await getManifest();
     const entries = manifest[key];
-    if (!Array.isArray(entries) || !entries.length) throw new Error('Starter не найден в публичном комплекте.');
+    if (!Array.isArray(entries) || !entries.length) throw new Error('Архив не найден в опубликованных материалах.');
     const blob = makeStoredZip(await loadFiles(entries));
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement('a');
@@ -138,7 +141,7 @@ export function bindStarterDownloads() {
     try {
       await downloadStarter(button);
     } catch (error) {
-      window.alert(`Starter не скачан: ${error.message}`);
+      window.alert(`Архив не скачан: ${error.message}`);
     }
   });
 }
