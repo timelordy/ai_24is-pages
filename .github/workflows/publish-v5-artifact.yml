@@ -1,4 +1,4 @@
-name: Publish six-lab GitVerse course
+name: Publish Campus ServiceDesk release
 on:
   push:
     branches: [main]
@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: publish-v5-artifact
+  group: publish-campus-servicedesk
   cancel-in-progress: false
 jobs:
   publish:
@@ -17,11 +17,11 @@ jobs:
       - name: Download and verify source CI artifact
         shell: bash
         env:
-          ARTIFACT_URL: 'https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-5aa4-8210-aae3-633d984983e0/raw?se=2026-09-14T12%3A40%3A49Z&sp=r&sv=2026-02-06&sr=b&scid=ead4cfdf-fe9d-5de9-bff7-9e97f8b23bcb&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T11%3A19%3A46Z&ske=2026-09-15T11%3A19%3A46Z&sks=b&skv=2026-02-06&sig=bwO9VCxs663hHYEUT8PRq4ecpcNOp8r3tRflq/c/FVU%3D'
+          ARTIFACT_URL: 'https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-d758-820c-8fd2-57dd258ce225/raw?se=2026-09-14T13%3A35%3A38Z&sp=r&sv=2026-02-06&sr=b&scid=cc646f80-7356-561b-92bd-83fd063f0a40&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T08%3A10%3A41Z&ske=2026-09-15T08%3A10%3A41Z&sks=b&skv=2026-02-06&sig=WUHnFSBVQMRMFnHExVeYLsBkxrdeviE7PtCD/yq76dk%3D'
         run: |
           set -euo pipefail
           curl --fail --location --silent --show-error "$ARTIFACT_URL" -o /tmp/course.zip
-          echo 'c356310c356d0c54cc698f897c8f57779fa2939fe7356a6c192369d7b2d917cd  /tmp/course.zip' | sha256sum -c -
+          echo '4e539efc46c66efb234a15d0a433a0a216845e775c92ce8281edd5bcf2e57f10  /tmp/course.zip' | sha256sum -c -
           rm -rf /tmp/course-public && mkdir /tmp/course-public
           unzip -q /tmp/course.zip -d /tmp/course-public
           python - <<'PY'
@@ -29,19 +29,23 @@ jobs:
           import json
           root=Path('/tmp/course-public')
           files=[p for p in root.rglob('*') if p.is_file()]
-          if len(files)!=148: raise SystemExit(f'unexpected file count: {len(files)}')
+          if len(files)!=36: raise SystemExit(f'unexpected file count: {len(files)}')
           for p in files:
               rel=p.relative_to(root)
               if '..' in rel.parts or rel.parts[0] not in {'assets','index.html'}: raise SystemExit(f'bad path: {rel}')
               if set(rel.parts)&{'teacher','hidden-tests','solutions','.git'}: raise SystemExit(f'private path: {rel}')
           course=json.loads((root/'assets/course.json').read_text(encoding='utf-8'))
           schedule=json.loads((root/'assets/schedule.json').read_text(encoding='utf-8'))
-          if len(course)!=6 or any(not x.get('success') or not x.get('failure') for x in course): raise SystemExit('bad six-lab course data')
-          if any(len(x.get('dates',[]))!=6 for x in schedule): raise SystemExit('bad schedule')
-          required=['index.html','assets/app.js','assets/task-page.js','assets/course.json','assets/schedule.json','assets/starters/manifest.json','assets/materials/lab-01/TASK.md','assets/materials/lab-06/TASK.md']
+          release=json.loads((root/'assets/release.json').read_text(encoding='utf-8'))
+          if len(course)!=6 or release.get('releasedThrough')!=1: raise SystemExit('bad release boundary')
+          if sum(not x.get('locked') for x in course)!=1: raise SystemExit('only work 01 must be open')
+          if '24ИС' in json.dumps(schedule, ensure_ascii=False): raise SystemExit('public group codes are not anonymized')
+          required=['index.html','assets/app.js','assets/task-page.js','assets/course.json','assets/schedule.json','assets/release.json','assets/starters/manifest.json','assets/materials/work-01/TASK.md']
           for name in required:
               if not (root/name).is_file(): raise SystemExit(f'missing {name}')
-          print('Verified 148-file six-lab public artifact')
+          for n in range(2,7):
+              if (root/f'assets/materials/work-{n:02}').exists(): raise SystemExit(f'future work {n} leaked')
+          print('Verified Campus ServiceDesk release 1/6: future TASK/checkpoints absent')
           PY
       - name: Replace public portal
         shell: bash
@@ -53,8 +57,8 @@ jobs:
           : > .nojekyll
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- assets index.html .nojekyll
+          git add -A -- assets index.html .nojekyll
           git diff --cached --check
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Publish six-lab objective GitVerse course'
+          git commit -m 'Publish Campus ServiceDesk release 1 of 6'
           git push origin HEAD:main
