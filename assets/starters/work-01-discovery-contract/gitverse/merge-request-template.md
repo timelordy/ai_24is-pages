@@ -1,17 +1,24 @@
-## What changed
+# Что изменено
 
-## Why
+# Зачем
 
-## How to check it
+# Как проверить
 
 ```bash
 npm test
+npm run start
 ```
 
-## Manual scenario
+# Результаты проверок
 
-## What I checked myself
+- [ ] локальные тесты
+- [ ] GitVerse CI
+- [ ] обычный сценарий
+- [ ] проблемный сценарий
+- [ ] просмотрен diff
 
-## What I did not check
+# Что не проверено
 
-## Risks / follow-up
+# Риски и ограничения
+
+# Связанная задача

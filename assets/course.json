@@ -2,38 +2,172 @@
   {
     "number": 1,
     "slug": "discovery-contract",
-    "title": "Understand the project and write a clear contract",
-    "ability": "Set up the workspace, understand the existing application, and turn a vague request into exact behaviour that can be tested.",
-    "gitverse": "One personal semester repository, one GitVerse issue, and branch stage/01-discovery.",
-    "agent": "GigaCode reads the existing files and explains the project. You verify its claims and do not let it change the application code yet.",
-    "artifact": "A GitVerse issue with exact inputs and expected outputs for Stage 02, a checked work report, and no application-code changes.",
+    "title": "Настроить среду, разобраться в проекте и зафиксировать требования",
+    "ability": "Подготовить GitVerse, VS Code и GigaCode, запустить готовое приложение, понять его устройство и превратить расплывчатую просьбу в точные проверяемые требования следующего этапа.",
+    "gitverse": "Один личный репозиторий на весь семестр, задача GitVerse и ветка stage/01-discovery.",
+    "agent": "GigaCode читает существующие файлы и объясняет проект. Студент проверяет его утверждения и пока не разрешает менять код приложения.",
+    "artifact": "Работающий личный репозиторий, 5 пройденных тестов, приложение с 12 заявками, задача GitVerse с точными примерами и заполненный отчёт без изменений в коде приложения.",
     "state": "base",
     "task": "lessons/01/TASK.md",
-    "goal": "Set up your workspace, understand the starting application, and turn a vague feature request into exact behaviour that can be tested.",
+    "goal": "К концу занятия у вас должен быть работающий личный репозиторий Campus ServiceDesk, установленный GigaCode, 5 пройденных тестов, открывающееся приложение с 12 заявками и задача GitVerse с точными требованиями следующего этапа.",
     "branch": "stage/01-discovery",
     "steps": [
-      "Open your personal GitVerse repository, clone it, and open the project root in VS Code.",
-      "Run `npm test`, then `npm run start`. Open the address from the terminal and confirm that 12 tickets are visible.",
-      "Ask GigaCode to explain `src/data.js`, `src/tickets.js`, and `src/app.js`. Pick three claims from its answer and verify each one against the actual file.",
-      "Read `docs/REQUIREMENTS.md` and explain which rules Stage 02 must preserve.",
-      "Create a GitVerse issue named `Search, filters and sorting` using the provided issue template.",
-      "Write the exact Stage 02 contract in the issue: status filter, priority filter, case-insensitive search across title/location, and title sorting.",
-      "Add concrete examples: `status=new → [101,104,107,108,112]`, `priority=high → [101,102,107,108]`, `search=projector → [101]`, `search=305 → [101]`, `status=new + priority=high → [101,107,108]`.",
-      "Run `git diff --exit-code -- index.html src tests styles.css` and save the result in `REPORT.md`. Application code must still be unchanged."
+      "Часть 1. Создать аккаунт GitVerse",
+      "Часть 2. Установить Git",
+      "Часть 3. Установить Visual Studio Code",
+      "Часть 4. Установить Node.js",
+      "Часть 5. Установить GigaCode в Visual Studio Code",
+      "Часть 6. Подготовить доступ Git к приватному репозиторию",
+      "Часть 7. Скопировать личный репозиторий на компьютер",
+      "Часть 8. Создать рабочую ветку",
+      "Часть 9. Проверить исходный проект",
+      "Часть 10. Первый запрос к GigaCode — только чтение",
+      "Часть 11. Создать задачу следующего этапа в GitVerse",
+      "Часть 12. Доказать, что код приложения не менялся",
+      "Часть 13. Заполнить отчёт и отправить его в GitVerse"
     ],
-    "minimum": ["link to your GitVerse issue","`REPORT.md` with three verified AI claims","real output from `npm test`","the clean `git diff --exit-code` result."],
-    "success": ["`npm test` passes all 5 starting tests","the application shows 12 tickets and the browser console has no errors","`REPORT.md` contains three GigaCode claims and the file/function used to verify each one","the GitVerse issue contains all five concrete examples from Step 7","the issue states what is out of scope: no API, database, authentication, or new dependency in Stage 02","`git diff --exit-code -- index.html src tests styles.css` returns exit code 0."],
-    "failure": ["the report only says “GigaCode explained the project” without checking its claims","the issue says “search should work correctly” without concrete examples","application code was already changed on this stage","the only evidence is a screenshot or an AI message saying everything is correct."],
-    "acceptance": ["the project runs and 5 tests pass","three AI claims are checked against real files","the issue contains exact input → expected output examples","application code is still unchanged"],
-    "defense": "What is the difference between a statement from GigaCode, a file change in your working tree, and a Git commit? Which one of them proves that the program behaves correctly?",
+    "minimum": [
+      "ссылку на свой репозиторий GitVerse",
+      "ссылку на задачу `Поиск, фильтры и сортировка`",
+      "ветку `stage/01-discovery`",
+      "заполненный `REPORT.md`",
+      "реальный вывод `npm test`",
+      "результат проверки `git diff --exit-code ...`."
+    ],
+    "success": [
+      "вы можете открыть свой личный репозиторий GitVerse",
+      "`git --version`, `code --version`, `node --version`, `npm --version` работают",
+      "GigaCode установлен и показывает `Ready`",
+      "`git branch --show-current` показывает `stage/01-discovery`",
+      "`npm test` показывает **5 пройденных тестов**",
+      "Campus ServiceDesk показывает **12 заявок**, в консоли браузера нет ошибок",
+      "в `REPORT.md` есть **3 проверенных утверждения GigaCode**",
+      "задача GitVerse содержит все точные примеры из части 11",
+      "`git diff --exit-code -- index.html src server.mjs tests styles.css` завершается без отличий",
+      "ветка `stage/01-discovery` отправлена в GitVerse."
+    ],
+    "failure": [
+      "есть только скриншот, но студент не может повторить запуск",
+      "GigaCode написал «всё работает», но `npm test` не запускался",
+      "требования сформулированы как «поиск должен работать нормально» без точных входов и результатов",
+      "код приложения уже изменён на первом занятии",
+      "пароль, токен или другой секрет попал в репозиторий",
+      "студент не может объяснить разницу между ответом GigaCode, изменением файла и коммитом Git."
+    ],
+    "acceptance": [
+      "рабочая среда и GigaCode `Ready`",
+      "5 тестов пройдены и приложение показывает 12 заявок",
+      "три утверждения GigaCode проверены по реальным файлам",
+      "задача GitVerse содержит точные требования следующего этапа",
+      "код приложения не менялся",
+      "ветка и отчёт реально находятся в GitVerse."
+    ],
+    "defense": "Чем отличаются три вещи: текст, который написал GigaCode; изменение файла на вашем компьютере; коммит Git? Какая из них сама по себе доказывает, что программа работает правильно?",
     "choices": [],
-    "context": [{"title":"Starting point","body":"Campus ServiceDesk already shows 12 sample support tickets. There is no search, filtering, sorting, API, or database yet.\n\nYour goal today is **not** to implement the next feature. First understand the project and define exactly what Stage 02 must do."}],
+    "context": [
+      {
+        "title": "Что должно быть готово к концу пары",
+        "body": "- есть личный аккаунт GitVerse и открыт ваш личный репозиторий курса;\n- на компьютере установлены Git, Visual Studio Code и Node.js;\n- GigaCode установлен в Visual Studio Code и показывает состояние `Ready`;\n- репозиторий скопирован на компьютер и открыт в Visual Studio Code;\n- `npm test` показывает **5 пройденных тестов**;\n- `npm run start` запускает Campus ServiceDesk, в браузере видно **12 заявок**;\n- вы проверили по исходным файлам три утверждения GigaCode;\n- в GitVerse создана задача `Поиск, фильтры и сортировка` с точными ожидаемыми результатами;\n- код приложения на этом занятии не изменён."
+      },
+      {
+        "title": "Часть 1. Создать аккаунт GitVerse",
+        "body": "1. Откройте [gitverse.ru](https://gitverse.ru/).\n2. В правом верхнем углу нажмите **«Вход в сервис»**.\n3. Выберите способ входа. Для нового аккаунта проще использовать **GigaID**. Также GitVerse поддерживает Cloud.ru ID и Сбер ID.\n4. Если GigaID ещё нет, нажмите **«Создать GigaID»** и пройдите регистрацию.\n5. После входа GitVerse попросит придумать имя пользователя. Выберите нормальное имя, по которому преподаватель сможет понять, чей это аккаунт.\n6. Подтвердите адрес электронной почты, если GitVerse попросит подтверждение.\n7. Откройте ссылку-приглашение в учебный модуль, которую дал преподаватель, и примите приглашение.\n8. После принятия приглашения у вас должен быть доступ к **личному репозиторию Campus ServiceDesk**.\n\n**Проверка:** вы вошли в GitVerse и можете открыть страницу своего репозитория."
+      },
+      {
+        "title": "Часть 2. Установить Git",
+        "body": "1. Откройте [официальную страницу Git для Windows](https://git-scm.com/install/windows).\n2. Скачайте обычный установщик **Git for Windows x64 Setup**.\n3. Запустите установку. Для этой работы стандартные параметры установщика подходят, специально менять их не нужно.\n4. После установки закройте и снова откройте терминал или Visual Studio Code.\n5. Выполните:\n\n```bash\ngit --version\n```\n\n**Успех:** команда выводит номер версии Git, а не сообщение «команда не найдена»."
+      },
+      {
+        "title": "Часть 3. Установить Visual Studio Code",
+        "body": "1. Откройте [страницу загрузки Visual Studio Code](https://code.visualstudio.com/Download).\n2. Для обычного личного компьютера на Windows скачайте **User Installer x64**.\n3. Запустите установщик и завершите установку.\n4. Перезапустите терминал после установки. Установщик Visual Studio Code добавляет команду `code` в PATH.\n5. Проверьте:\n\n```bash\ncode --version\n```\n\n**Успех:** команда выводит версию Visual Studio Code."
+      },
+      {
+        "title": "Часть 4. Установить Node.js",
+        "body": "Для проекта нужен Node.js, потому что тесты и локальный сервер запускаются через `npm`.\n\n1. Откройте [официальную страницу загрузки Node.js](https://nodejs.org/en/download).\n2. Используйте Node.js **22 или новее**. Курс и автоматические проверки проверяются на Node.js 22.\n3. Для Windows удобнее обычный установщик `.msi`.\n4. После установки перезапустите Visual Studio Code.\n5. Откройте **Terminal → New Terminal** и выполните:\n\n```bash\nnode --version\nnpm --version\n```\n\n**Успех:** обе команды выводят номера версий."
+      },
+      {
+        "title": "Часть 5. Установить GigaCode в Visual Studio Code",
+        "body": "1. Откройте [официальную инструкцию GigaCode](https://gitverse.ru/features/gigacode/install/).\n2. Выберите **Visual Studio Code** и скачайте плагин в формате `.vsix`.\n3. В Visual Studio Code откройте раздел **Extensions**. Быстрая клавиша: `Ctrl+Shift+X`.\n4. В верхней части раздела Extensions нажмите кнопку `...`.\n5. Выберите **Install from VSIX...**.\n6. Укажите скачанный файл GigaCode `.vsix`.\n7. После установки в нижней панели Visual Studio Code появится **Connect GigaCode**.\n8. Нажмите **Connect GigaCode**. Откроется браузер с GitVerse.\n9. Разрешите подключение устройства к своему аккаунту GitVerse.\n10. Вернитесь в Visual Studio Code и перезапустите его.\n11. В нижней панели рядом с GigaCode должно появиться состояние **Ready**.\n\n**Проверка:** GigaCode отвечает в Visual Studio Code и в нижней панели написано `Ready`."
+      },
+      {
+        "title": "Часть 6. Подготовить доступ Git к приватному репозиторию",
+        "body": "GitVerse требует отдельную проверку для работы с приватным репозиторием по HTTPS. Вход через GigaID сам по себе не является паролем для команды `git clone`.\n\nСамый простой вариант для первой пары:\n\n1. В GitVerse нажмите на аватар → **Настройки**.\n2. Откройте настройки аккаунта и создайте пароль для работы по HTTPS, если он ещё не создан.\n3. Не записывайте пароль или токен в `README.md`, `REPORT.md`, исходный код или сообщения GigaCode.\n\nЕсли преподаватель заранее настроил другой способ доступа, например токен или SSH-ключ, используйте именно его."
+      },
+      {
+        "title": "Часть 7. Скопировать личный репозиторий на компьютер",
+        "body": "1. Откройте свой Campus ServiceDesk в GitVerse.\n2. Перейдите на вкладку **Код**.\n3. Нажмите **Код → Клонирование → HTTPS** и скопируйте адрес.\n4. Создайте на компьютере отдельную папку для учебных проектов, например:\n\n```text\nC:\\Projects\n```\n\n5. Откройте эту папку в терминале и выполните:\n\n```bash\ncd C:\\Projects\ngit clone <сюда-вставьте-адрес-из-GitVerse>\n```\n\n6. Если Git спросит логин и пароль, используйте имя пользователя GitVerse и пароль/токен, настроенный для Git по HTTPS.\n7. Перейдите в скачанную папку проекта:\n\n```bash\ncd <имя-папки-репозитория>\n```\n\n8. Откройте её в Visual Studio Code:\n\n```bash\ncode .\n```\n\n9. В терминале Visual Studio Code выполните:\n\n```bash\ngit status\ngit remote -v\n```\n\n**Успех:** `git status` не показывает ошибку, а `git remote -v` показывает адрес вашего репозитория на GitVerse."
+      },
+      {
+        "title": "Часть 8. Создать рабочую ветку",
+        "body": "Не работаем прямо в `main`.\n\nВ терминале выполните:\n\n```bash\ngit switch -c stage/01-discovery\n```\n\nПроверьте:\n\n```bash\ngit branch --show-current\n```\n\n**Ожидаемый результат:**\n\n```text\nstage/01-discovery\n```"
+      },
+      {
+        "title": "Часть 9. Проверить исходный проект",
+        "body": "1. Запустите тесты:\n\n```bash\nnpm test\n```\n\n2. Должны пройти **5 тестов**.\n3. Запустите приложение:\n\n```bash\nnpm run start\n```\n\n4. Терминал покажет локальный адрес. Откройте его в браузере.\n5. На странице должно быть **12 заявок**.\n6. Нажмите `F12` → **Console** и убедитесь, что красных ошибок нет.\n\n**Не продолжайте**, если тесты не проходят или приложение не запускается. Сначала исправьте именно проблему запуска."
+      },
+      {
+        "title": "Часть 10. Первый запрос к GigaCode — только чтение",
+        "body": "На этом этапе GigaCode **не должен менять файлы**.\n\nОткройте чат GigaCode и отправьте:\n\n```text\nНе изменяй файлы.\nПрочитай src/data.js, src/tickets.js, src/app.js, server.mjs и docs/REQUIREMENTS.md.\nКоротко объясни:\n1. откуда берутся заявки;\n2. где проверяется корректность заявки;\n3. где формируется интерфейс;\n4. что делает server.mjs;\n5. какие ограничения из REQUIREMENTS.md нельзя нарушать.\nДля каждого утверждения указывай файл и функцию или конкретный фрагмент, на который опираешься.\n```\n\nПосле ответа выберите **три утверждения** GigaCode и проверьте их вручную по реальным файлам.\n\nВ `REPORT.md` запишите:\n\n| № | Что утверждал GigaCode | Где проверили | Верно / неверно |\n|---|---|---|---|\n| 1 | ... | `src/...` | ... |\n| 2 | ... | `src/...` | ... |\n| 3 | ... | `src/...` | ... |"
+      },
+      {
+        "title": "Часть 11. Создать задачу следующего этапа в GitVerse",
+        "body": "На втором занятии вы будете делать поиск, фильтры и сортировку. Сейчас нужно заранее определить, что именно будет считаться правильным результатом.\n\n1. В своём репозитории GitVerse откройте **Задачи**.\n2. Создайте новую задачу с названием:\n\n```text\nПоиск, фильтры и сортировка\n```\n\n3. Вставьте в неё следующие требования:\n\n```text\nСтатус new → [101,104,107,108,112]\nПриоритет high → [101,102,107,108]\nПоиск \"проектор\" → [101]\nПоиск \"305\" → [101]\nСтатус new + приоритет high → [101,107,108]\nПоиск без совпадений → []\nНеизвестный status / priority / sort → ошибка\nИсходный массив заявок не должен изменяться\n```\n\n4. Отдельно запишите, что **не входит** во второй этап:\n\n```text\nHTTP API\nбаза данных\nавторизация пользователей\nновые внешние библиотеки\n```"
+      },
+      {
+        "title": "Часть 12. Доказать, что код приложения не менялся",
+        "body": "Выполните:\n\n```bash\ngit diff --exit-code -- index.html src server.mjs tests styles.css\n```\n\nЕсли команда ничего не вывела и завершилась успешно, код приложения не менялся.\n\nПроверьте также:\n\n```bash\ngit status\n```\n\nНа первом занятии допустимо изменить только учебный отчёт и документы, но не код приложения."
+      },
+      {
+        "title": "Часть 13. Заполнить отчёт и отправить его в GitVerse",
+        "body": "1. Заполните `REPORT.md`.\n2. Добавьте в Git только отчёт:\n\n```bash\ngit add REPORT.md\n```\n\n3. Сделайте фиксацию изменений:\n\n```bash\ngit commit -m \"docs: complete stage 01 report\"\n```\n\n4. Отправьте ветку в GitVerse:\n\n```bash\ngit push -u origin stage/01-discovery\n```\n\n5. Откройте GitVerse и убедитесь, что ветка появилась в вашем репозитории."
+      }
+    ],
     "locked": false,
-    "downloads": {"starterKey":"work-01-discovery-contract","starterFilename":"campus-servicedesk-backup-01.zip","task":"assets/materials/work-01/TASK.md","report":"assets/materials/work-01/REPORT.md"}
+    "downloads": {
+      "starterKey": "work-01-discovery-contract",
+      "starterFilename": "campus-servicedesk-recovery-01.zip",
+      "task": "assets/materials/work-01/TASK.md",
+      "report": "assets/materials/work-01/REPORT.md"
+    }
   },
-  {"number":2,"slug":"frontend-query","title":"Build search, filters, and sorting","ability":"Turn the ticket list into a useful workspace where filters, search, and sorting work together.","locked":true,"releaseHint":"Opens after the previous stage is complete."},
-  {"number":3,"slug":"rest-api","title":"Add the HTTP API and ticket creation","ability":"Move from a static page to a small client-server system with real HTTP requests, ticket creation, and clear error handling.","locked":true,"releaseHint":"Opens after the previous stage is complete."},
-  {"number":4,"slug":"sqlite-workflow","title":"Save data in SQLite and enforce status rules","ability":"Make data survive a server restart and enforce the allowed ticket-status transitions.","locked":true,"releaseHint":"Opens after the previous stage is complete."},
-  {"number":5,"slug":"comments-engineering","title":"Add comments and a repeatable review process","ability":"Add a new product feature while making the AI-assisted development process repeatable and reviewable.","locked":true,"releaseHint":"Opens after the previous stage is complete."},
-  {"number":6,"slug":"ai-triage-defense","title":"Add AI suggestions and defend the finished system","ability":"Add a safe AI suggestion feature, handle bad model output, and explain the whole system on a new scenario.","locked":true,"releaseHint":"Opens after the previous stage is complete."}
+  {
+    "number": 2,
+    "slug": "frontend-query",
+    "title": "Добавить поиск, фильтры и сортировку",
+    "ability": "Превратить список заявок в рабочий экран, где поиск, фильтры и сортировка работают вместе и дают заранее известный результат.",
+    "locked": true,
+    "releaseHint": "Откроется после завершения предыдущего этапа."
+  },
+  {
+    "number": 3,
+    "slug": "rest-api",
+    "title": "Добавить HTTP API и создание заявок",
+    "ability": "Перейти от статической страницы к небольшой клиент-серверной системе с реальными HTTP-запросами, созданием заявки и понятной обработкой ошибок.",
+    "locked": true,
+    "releaseHint": "Откроется после завершения предыдущего этапа."
+  },
+  {
+    "number": 4,
+    "slug": "sqlite-workflow",
+    "title": "Подключить SQLite и правила смены статусов",
+    "ability": "Сделать данные постоянными и ввести допустимые переходы заявки между статусами.",
+    "locked": true,
+    "releaseHint": "Откроется после завершения предыдущего этапа."
+  },
+  {
+    "number": 5,
+    "slug": "comments-engineering",
+    "title": "Добавить комментарии и наладить проверку изменений",
+    "ability": "Добавить новую возможность продукта и сделать работу с ИИ повторяемой и проверяемой.",
+    "locked": true,
+    "releaseHint": "Откроется после завершения предыдущего этапа."
+  },
+  {
+    "number": 6,
+    "slug": "ai-triage-defense",
+    "title": "Добавить подсказки ИИ и защитить готовую систему",
+    "ability": "Добавить безопасную функцию с ИИ, обработать неправильный ответ модели и объяснить всю систему на новом сценарии.",
+    "locked": true,
+    "releaseHint": "Откроется после завершения предыдущего этапа."
+  }
 ]

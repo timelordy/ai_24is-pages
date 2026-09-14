@@ -1,5 +1,5 @@
 {
   "releasedThrough": 1,
   "policy": "manual-after-all-groups",
-  "note": "Future stage instructions and backup files are not published early."
+  "note": "Будущие TASK и recovery-файлы физически не опубликованы."
 }

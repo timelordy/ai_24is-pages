@@ -1,56 +1,332 @@
-# 01. Understand the project and write a clear contract
+# 01. Настроить среду, разобраться в проекте и зафиксировать требования
 
-**Goal:** Set up your workspace, understand the starting application, and turn a vague feature request into exact behaviour that can be tested.
+**Цель:** К концу занятия у вас должен быть работающий личный репозиторий Campus ServiceDesk, установленный GigaCode, 5 пройденных тестов, открывающееся приложение с 12 заявками и задача GitVerse с точными требованиями следующего этапа.
 
-**Branch:** `stage/01-discovery`
+**Рабочая ветка:** `stage/01-discovery`
 
-## Starting point
+## Что должно быть готово к концу пары
 
-Campus ServiceDesk already shows 12 sample support tickets. There is no search, filtering, sorting, API, or database yet.
+- есть личный аккаунт GitVerse и открыт ваш личный репозиторий курса;
+- на компьютере установлены Git, Visual Studio Code и Node.js;
+- GigaCode установлен в Visual Studio Code и показывает состояние `Ready`;
+- репозиторий скопирован на компьютер и открыт в Visual Studio Code;
+- `npm test` показывает **5 пройденных тестов**;
+- `npm run start` запускает Campus ServiceDesk, в браузере видно **12 заявок**;
+- вы проверили по исходным файлам три утверждения GigaCode;
+- в GitVerse создана задача `Поиск, фильтры и сортировка` с точными ожидаемыми результатами;
+- код приложения на этом занятии не изменён.
 
-Your goal today is **not** to implement the next feature. First understand the project and define exactly what Stage 02 must do.
+## Часть 1. Создать аккаунт GitVerse
 
-## Task
+1. Откройте [gitverse.ru](https://gitverse.ru/).
+2. В правом верхнем углу нажмите **«Вход в сервис»**.
+3. Выберите способ входа. Для нового аккаунта проще использовать **GigaID**. Также GitVerse поддерживает Cloud.ru ID и Сбер ID.
+4. Если GigaID ещё нет, нажмите **«Создать GigaID»** и пройдите регистрацию.
+5. После входа GitVerse попросит придумать имя пользователя. Выберите нормальное имя, по которому преподаватель сможет понять, чей это аккаунт.
+6. Подтвердите адрес электронной почты, если GitVerse попросит подтверждение.
+7. Откройте ссылку-приглашение в учебный модуль, которую дал преподаватель, и примите приглашение.
+8. После принятия приглашения у вас должен быть доступ к **личному репозиторию Campus ServiceDesk**.
 
-1. Open your personal GitVerse repository, clone it, and open the project root in VS Code.
-2. Run `npm test`, then `npm run start`. Open the address from the terminal and confirm that 12 tickets are visible.
-3. Ask GigaCode to explain `src/data.js`, `src/tickets.js`, and `src/app.js`. Pick three claims from its answer and verify each one against the actual file.
-4. Read `docs/REQUIREMENTS.md` and explain which rules Stage 02 must preserve.
-5. Create a GitVerse issue named `Search, filters and sorting` using the provided issue template.
-6. Write the exact Stage 02 contract in the issue: status filter, priority filter, case-insensitive search across title/location, and title sorting.
-7. Add concrete examples: `status=new → [101,104,107,108,112]`, `priority=high → [101,102,107,108]`, `search=projector → [101]`, `search=305 → [101]`, `status=new + priority=high → [101,107,108]`.
-8. Run `git diff --exit-code -- index.html src tests styles.css` and save the result in `REPORT.md`. Application code must still be unchanged.
+**Проверка:** вы вошли в GitVerse и можете открыть страницу своего репозитория.
 
-## What counts as complete
+## Часть 2. Установить Git
 
-- `npm test` passes all 5 starting tests;
-- the application shows 12 tickets and the browser console has no errors;
-- `REPORT.md` contains three GigaCode claims and the file/function used to verify each one;
-- the GitVerse issue contains all five concrete examples from Step 7;
-- the issue states what is out of scope: no API, database, authentication, or new dependency in Stage 02;
-- `git diff --exit-code -- index.html src tests styles.css` returns exit code 0.
+1. Откройте [официальную страницу Git для Windows](https://git-scm.com/install/windows).
+2. Скачайте обычный установщик **Git for Windows x64 Setup**.
+3. Запустите установку. Для этой работы стандартные параметры установщика подходят, специально менять их не нужно.
+4. После установки закройте и снова откройте терминал или Visual Studio Code.
+5. Выполните:
 
-## This does not count as complete
+```bash
+git --version
+```
 
-- the report only says “GigaCode explained the project” without checking its claims;
-- the issue says “search should work correctly” without concrete examples;
-- application code was already changed on this stage;
-- the only evidence is a screenshot or an AI message saying everything is correct.
+**Успех:** команда выводит номер версии Git, а не сообщение «команда не найдена».
 
-## What to submit
+## Часть 3. Установить Visual Studio Code
 
-- link to your GitVerse issue;
-- `REPORT.md` with three verified AI claims;
-- real output from `npm test`;
-- the clean `git diff --exit-code` result.
+1. Откройте [страницу загрузки Visual Studio Code](https://code.visualstudio.com/Download).
+2. Для обычного личного компьютера на Windows скачайте **User Installer x64**.
+3. Запустите установщик и завершите установку.
+4. Перезапустите терминал после установки. Установщик Visual Studio Code добавляет команду `code` в PATH.
+5. Проверьте:
 
-## Individual question
+```bash
+code --version
+```
 
-What is the difference between a statement from GigaCode, a file change in your working tree, and a Git commit? Which one of them proves that the program behaves correctly?
+**Успех:** команда выводит версию Visual Studio Code.
 
-## What will be checked
+## Часть 4. Установить Node.js
 
-- the project runs and 5 tests pass
-- three AI claims are checked against real files
-- the issue contains exact input → expected output examples
-- application code is still unchanged
+Для проекта нужен Node.js, потому что тесты и локальный сервер запускаются через `npm`.
+
+1. Откройте [официальную страницу загрузки Node.js](https://nodejs.org/en/download).
+2. Используйте Node.js **22 или новее**. Курс и автоматические проверки проверяются на Node.js 22.
+3. Для Windows удобнее обычный установщик `.msi`.
+4. После установки перезапустите Visual Studio Code.
+5. Откройте **Terminal → New Terminal** и выполните:
+
+```bash
+node --version
+npm --version
+```
+
+**Успех:** обе команды выводят номера версий.
+
+## Часть 5. Установить GigaCode в Visual Studio Code
+
+1. Откройте [официальную инструкцию GigaCode](https://gitverse.ru/features/gigacode/install/).
+2. Выберите **Visual Studio Code** и скачайте плагин в формате `.vsix`.
+3. В Visual Studio Code откройте раздел **Extensions**. Быстрая клавиша: `Ctrl+Shift+X`.
+4. В верхней части раздела Extensions нажмите кнопку `...`.
+5. Выберите **Install from VSIX...**.
+6. Укажите скачанный файл GigaCode `.vsix`.
+7. После установки в нижней панели Visual Studio Code появится **Connect GigaCode**.
+8. Нажмите **Connect GigaCode**. Откроется браузер с GitVerse.
+9. Разрешите подключение устройства к своему аккаунту GitVerse.
+10. Вернитесь в Visual Studio Code и перезапустите его.
+11. В нижней панели рядом с GigaCode должно появиться состояние **Ready**.
+
+**Проверка:** GigaCode отвечает в Visual Studio Code и в нижней панели написано `Ready`.
+
+## Часть 6. Подготовить доступ Git к приватному репозиторию
+
+GitVerse требует отдельную проверку для работы с приватным репозиторием по HTTPS. Вход через GigaID сам по себе не является паролем для команды `git clone`.
+
+Самый простой вариант для первой пары:
+
+1. В GitVerse нажмите на аватар → **Настройки**.
+2. Откройте настройки аккаунта и создайте пароль для работы по HTTPS, если он ещё не создан.
+3. Не записывайте пароль или токен в `README.md`, `REPORT.md`, исходный код или сообщения GigaCode.
+
+Если преподаватель заранее настроил другой способ доступа, например токен или SSH-ключ, используйте именно его.
+
+## Часть 7. Скопировать личный репозиторий на компьютер
+
+1. Откройте свой Campus ServiceDesk в GitVerse.
+2. Перейдите на вкладку **Код**.
+3. Нажмите **Код → Клонирование → HTTPS** и скопируйте адрес.
+4. Создайте на компьютере отдельную папку для учебных проектов, например:
+
+```text
+C:\Projects
+```
+
+5. Откройте эту папку в терминале и выполните:
+
+```bash
+cd C:\Projects
+git clone <сюда-вставьте-адрес-из-GitVerse>
+```
+
+6. Если Git спросит логин и пароль, используйте имя пользователя GitVerse и пароль/токен, настроенный для Git по HTTPS.
+7. Перейдите в скачанную папку проекта:
+
+```bash
+cd <имя-папки-репозитория>
+```
+
+8. Откройте её в Visual Studio Code:
+
+```bash
+code .
+```
+
+9. В терминале Visual Studio Code выполните:
+
+```bash
+git status
+git remote -v
+```
+
+**Успех:** `git status` не показывает ошибку, а `git remote -v` показывает адрес вашего репозитория на GitVerse.
+
+## Часть 8. Создать рабочую ветку
+
+Не работаем прямо в `main`.
+
+В терминале выполните:
+
+```bash
+git switch -c stage/01-discovery
+```
+
+Проверьте:
+
+```bash
+git branch --show-current
+```
+
+**Ожидаемый результат:**
+
+```text
+stage/01-discovery
+```
+
+## Часть 9. Проверить исходный проект
+
+1. Запустите тесты:
+
+```bash
+npm test
+```
+
+2. Должны пройти **5 тестов**.
+3. Запустите приложение:
+
+```bash
+npm run start
+```
+
+4. Терминал покажет локальный адрес. Откройте его в браузере.
+5. На странице должно быть **12 заявок**.
+6. Нажмите `F12` → **Console** и убедитесь, что красных ошибок нет.
+
+**Не продолжайте**, если тесты не проходят или приложение не запускается. Сначала исправьте именно проблему запуска.
+
+## Часть 10. Первый запрос к GigaCode — только чтение
+
+На этом этапе GigaCode **не должен менять файлы**.
+
+Откройте чат GigaCode и отправьте:
+
+```text
+Не изменяй файлы.
+Прочитай src/data.js, src/tickets.js, src/app.js, server.mjs и docs/REQUIREMENTS.md.
+Коротко объясни:
+1. откуда берутся заявки;
+2. где проверяется корректность заявки;
+3. где формируется интерфейс;
+4. что делает server.mjs;
+5. какие ограничения из REQUIREMENTS.md нельзя нарушать.
+Для каждого утверждения указывай файл и функцию или конкретный фрагмент, на который опираешься.
+```
+
+После ответа выберите **три утверждения** GigaCode и проверьте их вручную по реальным файлам.
+
+В `REPORT.md` запишите:
+
+| № | Что утверждал GigaCode | Где проверили | Верно / неверно |
+|---|---|---|---|
+| 1 | ... | `src/...` | ... |
+| 2 | ... | `src/...` | ... |
+| 3 | ... | `src/...` | ... |
+
+## Часть 11. Создать задачу следующего этапа в GitVerse
+
+На втором занятии вы будете делать поиск, фильтры и сортировку. Сейчас нужно заранее определить, что именно будет считаться правильным результатом.
+
+1. В своём репозитории GitVerse откройте **Задачи**.
+2. Создайте новую задачу с названием:
+
+```text
+Поиск, фильтры и сортировка
+```
+
+3. Вставьте в неё следующие требования:
+
+```text
+Статус new → [101,104,107,108,112]
+Приоритет high → [101,102,107,108]
+Поиск "проектор" → [101]
+Поиск "305" → [101]
+Статус new + приоритет high → [101,107,108]
+Поиск без совпадений → []
+Неизвестный status / priority / sort → ошибка
+Исходный массив заявок не должен изменяться
+```
+
+4. Отдельно запишите, что **не входит** во второй этап:
+
+```text
+HTTP API
+база данных
+авторизация пользователей
+новые внешние библиотеки
+```
+
+## Часть 12. Доказать, что код приложения не менялся
+
+Выполните:
+
+```bash
+git diff --exit-code -- index.html src server.mjs tests styles.css
+```
+
+Если команда ничего не вывела и завершилась успешно, код приложения не менялся.
+
+Проверьте также:
+
+```bash
+git status
+```
+
+На первом занятии допустимо изменить только учебный отчёт и документы, но не код приложения.
+
+## Часть 13. Заполнить отчёт и отправить его в GitVerse
+
+1. Заполните `REPORT.md`.
+2. Добавьте в Git только отчёт:
+
+```bash
+git add REPORT.md
+```
+
+3. Сделайте фиксацию изменений:
+
+```bash
+git commit -m "docs: complete stage 01 report"
+```
+
+4. Отправьте ветку в GitVerse:
+
+```bash
+git push -u origin stage/01-discovery
+```
+
+5. Откройте GitVerse и убедитесь, что ветка появилась в вашем репозитории.
+
+## Успешный результат
+
+- вы можете открыть свой личный репозиторий GitVerse;
+- `git --version`, `code --version`, `node --version`, `npm --version` работают;
+- GigaCode установлен и показывает `Ready`;
+- `git branch --show-current` показывает `stage/01-discovery`;
+- `npm test` показывает **5 пройденных тестов**;
+- Campus ServiceDesk показывает **12 заявок**, в консоли браузера нет ошибок;
+- в `REPORT.md` есть **3 проверенных утверждения GigaCode**;
+- задача GitVerse содержит все точные примеры из части 11;
+- `git diff --exit-code -- index.html src server.mjs tests styles.css` завершается без отличий;
+- ветка `stage/01-discovery` отправлена в GitVerse.
+
+## Не засчитывается, если
+
+- есть только скриншот, но студент не может повторить запуск;
+- GigaCode написал «всё работает», но `npm test` не запускался;
+- требования сформулированы как «поиск должен работать нормально» без точных входов и результатов;
+- код приложения уже изменён на первом занятии;
+- пароль, токен или другой секрет попал в репозиторий;
+- студент не может объяснить разницу между ответом GigaCode, изменением файла и коммитом Git.
+
+## Что сдавать
+
+- ссылку на свой репозиторий GitVerse;
+- ссылку на задачу `Поиск, фильтры и сортировка`;
+- ветку `stage/01-discovery`;
+- заполненный `REPORT.md`;
+- реальный вывод `npm test`;
+- результат проверки `git diff --exit-code ...`.
+
+## Индивидуальный вопрос
+
+Чем отличаются три вещи: текст, который написал GigaCode; изменение файла на вашем компьютере; коммит Git? Какая из них сама по себе доказывает, что программа работает правильно?
+
+## Что принимает преподаватель
+
+- рабочая среда и GigaCode `Ready`;
+- 5 тестов пройдены и приложение показывает 12 заявок;
+- три утверждения GigaCode проверены по реальным файлам;
+- задача GitVerse содержит точные требования следующего этапа;
+- код приложения не менялся;
+- ветка и отчёт реально находятся в GitVerse.

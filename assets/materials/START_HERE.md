@@ -1,44 +1,49 @@
-# Campus ServiceDesk — start here
+# Студенту: Campus ServiceDesk
 
-## One repository for the whole semester
+## Один репозиторий на весь семестр
 
-You keep the same personal GitVerse repository from the first stage to the last one. Each stage adds something real to the same application.
+Не скачивайте новый проект на каждую пару. Ваш персональный GitVerse repo развивается последовательно:
 
 ```text
-starting ticket list
-→ search, filters, sorting
-→ HTTP API and ticket creation
-→ SQLite storage and status rules
-→ comments and review workflow
-→ AI suggestions and final demonstration
+main
+ ↓
+frontend workspace
+ ↓
+REST API
+ ↓
+SQLite + workflow/history
+ ↓
+comments + agent rules/review
+ ↓
+AI triage + defense
 ```
 
-## Before every stage
+Каждая функциональная работа выполняется в отдельной ветке, проходит tests/CI/review и только потом вливается в `main`.
 
-1. Open the course page and check that the stage is **Open**.
-2. Read the full instructions and the section **What counts as complete**.
-3. Update `main`, then create the branch named in the task.
-4. Write down the expected result before asking AI to make changes.
-5. Use GigaCode to inspect the project, make a short plan, and implement only the requested change.
-6. Check the actual diff, run `npm test`, and reproduce the required scenario yourself.
-7. Merge only after every required check passes.
+## Перед каждой работой
 
-## Backup project download
+1. Откройте портал и убедитесь, что milestone **OPEN**, а не `LOCKED`.
+2. Прочитайте `TASK.md`, особенно **Definition of Done** и **Не засчитывается, если**.
+3. Обновите `main` и создайте указанную feature-ветку.
+4. До prompt запишите ожидаемый результат ключевых сценариев.
+5. Используйте GigaCode/агента для исследования, плана и ограниченной реализации.
+6. Проверяйте реальный `git diff`, `npm test`, UI/API-сценарии и GitVerse CI.
+7. Merge выполняется только после совпадения Definition of Done.
 
-The course page includes a backup project for the current stage. Use it only if you missed an earlier stage or your local repository is too broken to continue.
+## Recovery checkpoint
 
-The normal path is to keep working in your own repository. Future-stage backups are not published early.
+Если предыдущая работа пропущена или repo сломан, на странице текущего milestone есть **Recovery checkpoint ZIP** — состояние проекта непосредственно перед этой работой.
 
-## What is real evidence?
+Это аварийный путь. Он не подменяет сдачу предыдущих работ и не содержит будущих решений.
 
-- a command you actually ran;
-- a test result you can reproduce;
-- a working browser or API scenario;
-- a GitVerse branch and automatic check attached to the commit you are submitting;
-- your own explanation of what changed and why.
+## Что доказательством не является
 
-A message from the coding assistant saying “done” is not evidence.
+- «GigaCode написал, что готово»;
+- красивый UI без точных сценариев;
+- зелёный CI от старого commit;
+- тесты, переписанные под неправильное поведение;
+- screenshot без воспроизводимого результата.
 
-## Keep secrets out of Git
+## Секреты
 
-Do not commit `.env`, API keys, passwords, personal data, or files from unrelated work. The final AI stage uses a fake provider in automated tests, so a paid cloud key is not required to prove that the boundary works.
+`.env`, API key, пароли и реальные данные студентов не коммитятся. На финальном AI-этапе автоматические тесты используют fake provider; реальный облачный provider не нужен для зачёта корректности boundary.

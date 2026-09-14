@@ -1,31 +1,43 @@
-# Student setup
+# Настройка студента
 
-## What you need
+## Аккаунт и форк
 
-- a GitVerse account;
-- Git;
-- Node.js 22 or newer;
-- VS Code;
-- the GigaCode extension signed in with your own account.
+1. Войдите в GitVerse своим аккаунтом.
+2. Откройте ссылку задания GitVerse Lab.
+3. Дождитесь создания персонального форка.
+4. Не работайте в чужом форке и не отправляйте преподавателю пароль.
 
-## First run
+## Локальная среда
+
+Проверьте:
 
 ```bash
-git clone <your-repository-url>
-cd <your-repository>
+git --version
+node --version
+npm --version
+```
+
+Требуется Node.js 20+. Установите VS Code и плагин GigaCode по официальной инструкции GitVerse, затем выполните вход.
+
+## Клонирование
+
+```bash
+git clone <URL вашего форка>
+cd <папка проекта>
 npm test
 npm run start
 ```
 
-Open the address shown in the terminal. You should see Campus ServiceDesk and the sample tickets.
+## Git-процесс
 
-## If GigaCode Sessions are unavailable
+```bash
+git switch -c lab/01-environment
+git status
+git diff
+npm test
+git add .
+git commit -m "lab01: verify AI explanation"
+git push -u origin lab/01-environment
+```
 
-Use GigaCode inside VS Code. The task does not depend on a special agent mode. You still need to show the real files, diff, tests, and GitVerse checks.
-
-## Never do this
-
-- do not paste passwords or API keys into chat;
-- do not use someone else's account;
-- do not open unrelated personal or work folders to the coding assistant;
-- do not accept a change only because the assistant says it is correct.
+Никогда не добавляйте в репозиторий токены, `.env`, пароли и реальные персональные данные.
