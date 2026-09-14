@@ -26,9 +26,15 @@ jobs:
           import base64, hashlib, io, json, lzma, shutil, tarfile, tempfile
 
           root = Path.cwd().resolve()
-          parts = sorted((root / '.publish').glob('v4-*.b64'))
-          if len(parts) != 7:
-              raise RuntimeError(f'expected 7 payload parts, got {len(parts)}')
+          part_names = [
+              'v4-00.b64', 'v4-01.b64', 'v4-02.b64', 'v4-03.b64',
+              'v4-04a1.b64', 'v4-04a2.b64', 'v4-04b.b64',
+              'v4-05.b64', 'v4-06.b64',
+          ]
+          parts = [root / '.publish' / name for name in part_names]
+          missing = [path.name for path in parts if not path.is_file()]
+          if missing:
+              raise RuntimeError(f'missing payload parts: {missing}')
 
           payload = base64.b64decode(
               ''.join(path.read_text(encoding='ascii').strip() for path in parts),
