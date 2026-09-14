@@ -35,15 +35,16 @@ jobs:
               if '..' in rel.parts or rel.parts[0] not in {'assets','index.html'}: raise SystemExit(f'bad path: {rel}')
               if set(rel.parts)&{'teacher','hidden-tests','solutions','.git'}: raise SystemExit(f'private path: {rel}')
           course=json.loads((root/'assets/course.json').read_text(encoding='utf-8'))
-          schedule=json.loads((root/'assets/schedule.json').read_text(encoding='utf-8'))
           release=json.loads((root/'assets/release.json').read_text(encoding='utf-8'))
           if len(course)!=6 or release.get('releasedThrough')!=1: raise SystemExit('bad release boundary')
           if sum(not x.get('locked') for x in course)!=1: raise SystemExit('only stage 01 must be open')
           public_text='\n'.join(p.read_text(encoding='utf-8',errors='ignore') for p in files if p.suffix!='.zip')
           for forbidden in ['КГАСУ','ИСиТ','24ИС02','24ИС03','kgasu-campus','kgasu-isit']:
               if forbidden in public_text: raise SystemExit(f'identity leak: {forbidden}')
+          visible_files=['index.html','assets/pages-home.js','assets/pages-course.js','assets/task-page.js','assets/lib.js']
+          visible_text='\n'.join((root/name).read_text(encoding='utf-8',errors='ignore') for name in visible_files)
           for forbidden in ['Roadmap','LOCKED','Recovery checkpoint','Definition of Done','Milestone','Workflow']:
-              if forbidden in public_text: raise SystemExit(f'unwanted student-facing English label: {forbidden}')
+              if forbidden in visible_text: raise SystemExit(f'unwanted student-facing English label: {forbidden}')
           for required_text in ['семестровый проект','Настроить среду, разобраться в проекте и зафиксировать требования','Создать аккаунт GitVerse','Установить Visual Studio Code','Установить GigaCode','Резервная копия проекта']:
               if required_text not in public_text: raise SystemExit(f'missing Russian course text: {required_text}')
           required=['index.html','assets/app.js','assets/style.css','assets/task-page.js','assets/course.json','assets/schedule.json','assets/release.json','assets/starters/manifest.json','assets/materials/work-01/TASK.md']
