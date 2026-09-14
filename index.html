@@ -2,24 +2,42 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="КГАСУ: 7 понятных практических занятий. Правила, обучение на примерах, проверка ошибок, поиск и LLM. Практикум в браузере без API-ключей.">
-  <title>Методы искусственного интеллекта · КГАСУ</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Практический курс КГАСУ для ИСиТ: GitVerse Lab, GigaCode, AI-агенты, Git, CI и Merge Request.">
+  <title>КГАСУ · ИСиТ · ИИ и агенты</title>
   <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/roles.css">
   <script src="assets/app.js" defer></script>
 </head>
 <body>
-  <a class="skip" href="#content">К содержанию</a>
-  <header>
-    <a class="brand" href="#home"><b>КГАСУ<span> / ИИ</span></b><small>Практические занятия · 2026</small></a>
-    <label class="group-label">Ваша подгруппа<select id="group" aria-label="Ваша подгруппа"></select></label>
-  </header>
-  <nav aria-label="Основная навигация">
-    <a href="#home">Главная</a><a href="#teacher">Преподавателю</a><a href="#plan">7 пар</a><a href="#schedule">Расписание</a><a href="#materials">Файлы</a><a href="#work">Моя работа</a><a href="#guide">Помощь</a>
-  </nav>
-  <main id="content" tabindex="-1"><p>Загрузка материалов… Если загрузка не завершилась, откройте сайт через локальный HTTP-сервер или Pages.</p></main>
-  <footer><span>Методы искусственного интеллекта · 7 × 90 минут</span><span>Только учебные данные. Отметки сохраняются в этом браузере.</span></footer>
-  <noscript>Для навигации нужен JavaScript. <a href="assets/materials/START_HERE.html">Открыть текстовую инструкцию</a> или <a href="assets/downloads/course-student.zip">скачать материалы</a>.</noscript>
+<header>
+  <div><b>КГАСУ / ИСиТ</b><span>Практика с ИИ и агентами</span></div>
+  <label>Подгруппа<select id="group" aria-label="Подгруппа"></select></label>
+</header>
+<main>
+  <section class="hero">
+    <p class="eyebrow">7 практических занятий · GitVerse + GigaCode</p>
+    <h1>От задачи до проверенного Merge Request</h1>
+    <p>Реальные репозитории, ветки, AI-агенты, diff, тесты, CI и защита. Без обучения моделей и без симуляции агентных действий.</p>
+    <p class="hero-note">Учебные репозитории выдаются через GitVerse Lab. GigaCode Sessions, GigaIDE Cloud и MCP остаются дополнительными возможностями до проверки массового доступа.</p>
+  </section>
+  <section id="next" class="next" aria-live="polite"></section>
+  <section>
+    <h2>Программа</h2>
+    <div id="lessons" class="grid"></div>
+  </section>
+  <section class="workflow">
+    <h2>Рабочий цикл студента</h2>
+    <ol>
+      <li>Получить персональный форк в GitVerse Lab.</li>
+      <li>Создать задачу и feature-ветку.</li>
+      <li>Дать агенту контекст и сначала получить план.</li>
+      <li>Разрешить одно ограниченное изменение.</li>
+      <li>Проверить diff, тесты и поведение приложения.</li>
+      <li>Создать Merge Request, дождаться CI и разобрать review.</li>
+      <li>Объяснить результат и ограничения своими словами.</li>
+    </ol>
+  </section>
+</main>
+<footer>Все данные учебные и синтетические. Ответ агента не считается доказательством без проверки.</footer>
 </body>
 </html>
