@@ -17,11 +17,11 @@ jobs:
       - name: Download and verify source CI artifact
         shell: bash
         env:
-          ARTIFACT_URL: 'https://sdmntprsoutheastus3.oaiusercontent.com/files/00000000-d758-820c-8fd2-57dd258ce225/raw?se=2026-09-14T13%3A35%3A38Z&sp=r&sv=2026-02-06&sr=b&scid=cc646f80-7356-561b-92bd-83fd063f0a40&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T08%3A10%3A41Z&ske=2026-09-15T08%3A10%3A41Z&sks=b&skv=2026-02-06&sig=WUHnFSBVQMRMFnHExVeYLsBkxrdeviE7PtCD/yq76dk%3D'
+          ARTIFACT_URL: 'https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-de88-8210-89bd-204b854ea5c1/raw?se=2026-09-14T13%3A51%3A58Z&sp=r&sv=2026-02-06&sr=b&scid=aacf29be-04ea-5a4f-baf2-280f3213d3ba&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T08%3A47%3A16Z&ske=2026-09-15T08%3A47%3A16Z&sks=b&skv=2026-02-06&sig=/ZHk%2B6B7q%2BDudXu2dOl5Q716hZ7eScDWnZO7QMFEMMg%3D'
         run: |
           set -euo pipefail
           curl --fail --location --silent --show-error "$ARTIFACT_URL" -o /tmp/course.zip
-          echo '4e539efc46c66efb234a15d0a433a0a216845e775c92ce8281edd5bcf2e57f10  /tmp/course.zip' | sha256sum -c -
+          echo 'fc617992692d48e4311a40430ad34f49a078bc665dd743b09d1ebed92709b3f4  /tmp/course.zip' | sha256sum -c -
           rm -rf /tmp/course-public && mkdir /tmp/course-public
           unzip -q /tmp/course.zip -d /tmp/course-public
           python - <<'PY'
@@ -29,7 +29,7 @@ jobs:
           import json
           root=Path('/tmp/course-public')
           files=[p for p in root.rglob('*') if p.is_file()]
-          if len(files)!=37: raise SystemExit(f'unexpected file count: {len(files)}')
+          if len(files)!=35: raise SystemExit(f'unexpected file count: {len(files)}')
           for p in files:
               rel=p.relative_to(root)
               if '..' in rel.parts or rel.parts[0] not in {'assets','index.html'}: raise SystemExit(f'bad path: {rel}')
@@ -38,14 +38,16 @@ jobs:
           schedule=json.loads((root/'assets/schedule.json').read_text(encoding='utf-8'))
           release=json.loads((root/'assets/release.json').read_text(encoding='utf-8'))
           if len(course)!=6 or release.get('releasedThrough')!=1: raise SystemExit('bad release boundary')
-          if sum(not x.get('locked') for x in course)!=1: raise SystemExit('only work 01 must be open')
-          if '24ИС' in json.dumps(schedule, ensure_ascii=False): raise SystemExit('public group codes are not anonymized')
-          required=['index.html','assets/app.js','assets/task-page.js','assets/course.json','assets/schedule.json','assets/release.json','assets/starters/manifest.json','assets/materials/work-01/TASK.md']
+          if sum(not x.get('locked') for x in course)!=1: raise SystemExit('only stage 01 must be open')
+          public_text='\n'.join(p.read_text(encoding='utf-8',errors='ignore') for p in files if p.suffix!='.zip')
+          for forbidden in ['КГАСУ','ИСиТ','24ИС02','24ИС03','kgasu-campus','kgasu-isit']:
+              if forbidden in public_text: raise SystemExit(f'identity leak: {forbidden}')
+          required=['index.html','assets/app.js','assets/style.css','assets/task-page.js','assets/course.json','assets/schedule.json','assets/release.json','assets/starters/manifest.json','assets/materials/work-01/TASK.md']
           for name in required:
               if not (root/name).is_file(): raise SystemExit(f'missing {name}')
           for n in range(2,7):
               if (root/f'assets/materials/work-{n:02}').exists(): raise SystemExit(f'future work {n} leaked')
-          print('Verified Campus ServiceDesk release 1/6: future TASK/checkpoints absent')
+          print('Verified anonymous Apple-inspired Campus ServiceDesk release 1/6')
           PY
       - name: Replace public portal
         shell: bash
@@ -60,5 +62,5 @@ jobs:
           git add -A -- assets index.html .nojekyll
           git diff --cached --check
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Publish Campus ServiceDesk release 1 of 6'
+          git commit -m 'Publish anonymized Apple-inspired Campus ServiceDesk UI'
           git push origin HEAD:main
