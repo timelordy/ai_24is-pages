@@ -17,11 +17,11 @@ jobs:
       - name: Download and verify source CI artifact
         shell: bash
         env:
-          ARTIFACT_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-33c8-81f7-812b-4bc1d4bde5b5/raw?se=2026-09-14T15%3A08%3A54Z&sp=r&sv=2026-02-06&sr=b&scid=ddbf1557-95f3-52b9-b941-0781ecb45663&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T14%3A36%3A26Z&ske=2026-09-15T14%3A36%3A26Z&sks=b&skv=2026-02-06&sig=ClwKzx6pv/fez0076979lY/NigBGIuQI3Uk9tK86tEo%3D'
+          ARTIFACT_URL: 'https://sdmntprbrazilsouth.oaiusercontent.com/files/00000000-277c-820e-90d7-8b889dc856c0/raw?se=2026-09-14T15%3A15%3A32Z&sp=r&sv=2026-02-06&sr=b&scid=84f9a296-d54e-5fe4-ba0f-e00422a3d192&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T07%3A06%3A59Z&ske=2026-09-15T07%3A06%3A59Z&sks=b&skv=2026-02-06&sig=MuQlm%2B3TlOhnmY53V4UFCKIaaMSBcff2dlSkac74%2BZU%3D'
         run: |
           set -euo pipefail
           curl --fail --location --silent --show-error "$ARTIFACT_URL" -o /tmp/course.zip
-          echo '9738767212dde47b1548e007fcff52b07be0f6f56447e26860dc77e90e4e35b8  /tmp/course.zip' | sha256sum -c -
+          echo 'b1e207f07860fd65a95911009381259d9a87d25c6896c08b77b4b0da0bab6014  /tmp/course.zip' | sha256sum -c -
           rm -rf /tmp/course-public && mkdir /tmp/course-public
           unzip -q /tmp/course.zip -d /tmp/course-public
           python - <<'PY'
