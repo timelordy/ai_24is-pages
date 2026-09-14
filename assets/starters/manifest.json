@@ -1,1378 +1,1192 @@
 {
-  "lab-01-gitverse-start": [
+  "lab-01-gitverse-task-context": [
     {
       "path": ".github/workflows/check.yml",
-      "url": "assets/starters/lab-01-gitverse-start/.github/workflows/check.yml"
+      "url": "assets/starters/lab-01-gitverse-task-context/.github/workflows/check.yml"
     },
     {
       "path": ".gitignore",
-      "url": "assets/starters/lab-01-gitverse-start/.gitignore"
+      "url": "assets/starters/lab-01-gitverse-task-context/.gitignore"
     },
     {
       "path": ".gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-01-gitverse-start/.gitverse/workflows/check.yml"
+      "url": "assets/starters/lab-01-gitverse-task-context/.gitverse/workflows/check.yml"
     },
     {
       "path": ".vscode/tasks.json",
-      "url": "assets/starters/lab-01-gitverse-start/.vscode/tasks.json"
+      "url": "assets/starters/lab-01-gitverse-task-context/.vscode/tasks.json"
     },
     {
       "path": "BRIEF.md",
-      "url": "assets/starters/lab-01-gitverse-start/BRIEF.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/BRIEF.md"
     },
     {
       "path": "CHECKS.md",
-      "url": "assets/starters/lab-01-gitverse-start/CHECKS.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/CHECKS.md"
     },
     {
       "path": "COURSE_METADATA.json",
-      "url": "assets/starters/lab-01-gitverse-start/COURSE_METADATA.json"
+      "url": "assets/starters/lab-01-gitverse-task-context/COURSE_METADATA.json"
     },
     {
       "path": "README.md",
-      "url": "assets/starters/lab-01-gitverse-start/README.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/README.md"
     },
     {
       "path": "REPORT.md",
-      "url": "assets/starters/lab-01-gitverse-start/REPORT.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/REPORT.md"
     },
     {
       "path": "REQUIREMENTS.md",
-      "url": "assets/starters/lab-01-gitverse-start/REQUIREMENTS.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/REQUIREMENTS.md"
     },
     {
       "path": "TASK.md",
-      "url": "assets/starters/lab-01-gitverse-start/TASK.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/TASK.md"
     },
     {
       "path": "course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-01-gitverse-start/course-docs/ACCESS_MATRIX.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/course-docs/ACCESS_MATRIX.md"
     },
     {
       "path": "course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-01-gitverse-start/course-docs/STUDENT_SETUP.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/course-docs/STUDENT_SETUP.md"
     },
     {
       "path": "gitverse/issue-template.md",
-      "url": "assets/starters/lab-01-gitverse-start/gitverse/issue-template.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/gitverse/issue-template.md"
     },
     {
       "path": "gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-01-gitverse-start/gitverse/merge-request-template.md"
+      "url": "assets/starters/lab-01-gitverse-task-context/gitverse/merge-request-template.md"
     },
     {
       "path": "index.html",
-      "url": "assets/starters/lab-01-gitverse-start/index.html"
+      "url": "assets/starters/lab-01-gitverse-task-context/index.html"
     },
     {
       "path": "package.json",
-      "url": "assets/starters/lab-01-gitverse-start/package.json"
+      "url": "assets/starters/lab-01-gitverse-task-context/package.json"
     },
     {
       "path": "server.mjs",
-      "url": "assets/starters/lab-01-gitverse-start/server.mjs"
+      "url": "assets/starters/lab-01-gitverse-task-context/server.mjs"
     },
     {
       "path": "src/app.js",
-      "url": "assets/starters/lab-01-gitverse-start/src/app.js"
+      "url": "assets/starters/lab-01-gitverse-task-context/src/app.js"
     },
     {
       "path": "src/data.js",
-      "url": "assets/starters/lab-01-gitverse-start/src/data.js"
+      "url": "assets/starters/lab-01-gitverse-task-context/src/data.js"
     },
     {
       "path": "src/tickets.js",
-      "url": "assets/starters/lab-01-gitverse-start/src/tickets.js"
+      "url": "assets/starters/lab-01-gitverse-task-context/src/tickets.js"
     },
     {
       "path": "styles.css",
-      "url": "assets/starters/lab-01-gitverse-start/styles.css"
+      "url": "assets/starters/lab-01-gitverse-task-context/styles.css"
     },
     {
       "path": "tests/base.test.mjs",
-      "url": "assets/starters/lab-01-gitverse-start/tests/base.test.mjs"
+      "url": "assets/starters/lab-01-gitverse-task-context/tests/base.test.mjs"
     }
   ],
-  "lab-02-task-context": [
+  "lab-02-agent-plan": [
     {
       "path": ".github/workflows/check.yml",
-      "url": "assets/starters/lab-02-task-context/.github/workflows/check.yml"
+      "url": "assets/starters/lab-02-agent-plan/.github/workflows/check.yml"
     },
     {
       "path": ".gitignore",
-      "url": "assets/starters/lab-02-task-context/.gitignore"
+      "url": "assets/starters/lab-02-agent-plan/.gitignore"
     },
     {
       "path": ".gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-02-task-context/.gitverse/workflows/check.yml"
+      "url": "assets/starters/lab-02-agent-plan/.gitverse/workflows/check.yml"
     },
     {
       "path": ".vscode/tasks.json",
-      "url": "assets/starters/lab-02-task-context/.vscode/tasks.json"
+      "url": "assets/starters/lab-02-agent-plan/.vscode/tasks.json"
     },
     {
       "path": "BRIEF.md",
-      "url": "assets/starters/lab-02-task-context/BRIEF.md"
+      "url": "assets/starters/lab-02-agent-plan/BRIEF.md"
     },
     {
       "path": "CHECKS.md",
-      "url": "assets/starters/lab-02-task-context/CHECKS.md"
+      "url": "assets/starters/lab-02-agent-plan/CHECKS.md"
     },
     {
       "path": "COURSE_METADATA.json",
-      "url": "assets/starters/lab-02-task-context/COURSE_METADATA.json"
+      "url": "assets/starters/lab-02-agent-plan/COURSE_METADATA.json"
     },
     {
       "path": "README.md",
-      "url": "assets/starters/lab-02-task-context/README.md"
+      "url": "assets/starters/lab-02-agent-plan/README.md"
     },
     {
       "path": "REPORT.md",
-      "url": "assets/starters/lab-02-task-context/REPORT.md"
+      "url": "assets/starters/lab-02-agent-plan/REPORT.md"
     },
     {
       "path": "REQUIREMENTS.md",
-      "url": "assets/starters/lab-02-task-context/REQUIREMENTS.md"
+      "url": "assets/starters/lab-02-agent-plan/REQUIREMENTS.md"
     },
     {
       "path": "TASK.md",
-      "url": "assets/starters/lab-02-task-context/TASK.md"
+      "url": "assets/starters/lab-02-agent-plan/TASK.md"
     },
     {
       "path": "course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-02-task-context/course-docs/ACCESS_MATRIX.md"
+      "url": "assets/starters/lab-02-agent-plan/course-docs/ACCESS_MATRIX.md"
     },
     {
       "path": "course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-02-task-context/course-docs/STUDENT_SETUP.md"
+      "url": "assets/starters/lab-02-agent-plan/course-docs/STUDENT_SETUP.md"
     },
     {
       "path": "gitverse/issue-template.md",
-      "url": "assets/starters/lab-02-task-context/gitverse/issue-template.md"
+      "url": "assets/starters/lab-02-agent-plan/gitverse/issue-template.md"
     },
     {
       "path": "gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-02-task-context/gitverse/merge-request-template.md"
+      "url": "assets/starters/lab-02-agent-plan/gitverse/merge-request-template.md"
     },
     {
       "path": "index.html",
-      "url": "assets/starters/lab-02-task-context/index.html"
+      "url": "assets/starters/lab-02-agent-plan/index.html"
     },
     {
       "path": "package.json",
-      "url": "assets/starters/lab-02-task-context/package.json"
+      "url": "assets/starters/lab-02-agent-plan/package.json"
     },
     {
       "path": "server.mjs",
-      "url": "assets/starters/lab-02-task-context/server.mjs"
+      "url": "assets/starters/lab-02-agent-plan/server.mjs"
     },
     {
       "path": "src/app.js",
-      "url": "assets/starters/lab-02-task-context/src/app.js"
+      "url": "assets/starters/lab-02-agent-plan/src/app.js"
     },
     {
       "path": "src/data.js",
-      "url": "assets/starters/lab-02-task-context/src/data.js"
+      "url": "assets/starters/lab-02-agent-plan/src/data.js"
     },
     {
       "path": "src/tickets.js",
-      "url": "assets/starters/lab-02-task-context/src/tickets.js"
+      "url": "assets/starters/lab-02-agent-plan/src/tickets.js"
     },
     {
       "path": "styles.css",
-      "url": "assets/starters/lab-02-task-context/styles.css"
+      "url": "assets/starters/lab-02-agent-plan/styles.css"
     },
     {
       "path": "tests/base.test.mjs",
-      "url": "assets/starters/lab-02-task-context/tests/base.test.mjs"
+      "url": "assets/starters/lab-02-agent-plan/tests/base.test.mjs"
     }
   ],
-  "lab-03-agent-plan": [
+  "lab-03-agent-change": [
     {
       "path": ".github/workflows/check.yml",
-      "url": "assets/starters/lab-03-agent-plan/.github/workflows/check.yml"
+      "url": "assets/starters/lab-03-agent-change/.github/workflows/check.yml"
     },
     {
       "path": ".gitignore",
-      "url": "assets/starters/lab-03-agent-plan/.gitignore"
+      "url": "assets/starters/lab-03-agent-change/.gitignore"
     },
     {
       "path": ".gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-03-agent-plan/.gitverse/workflows/check.yml"
+      "url": "assets/starters/lab-03-agent-change/.gitverse/workflows/check.yml"
     },
     {
       "path": ".vscode/tasks.json",
-      "url": "assets/starters/lab-03-agent-plan/.vscode/tasks.json"
+      "url": "assets/starters/lab-03-agent-change/.vscode/tasks.json"
     },
     {
       "path": "BRIEF.md",
-      "url": "assets/starters/lab-03-agent-plan/BRIEF.md"
+      "url": "assets/starters/lab-03-agent-change/BRIEF.md"
     },
     {
       "path": "CHECKS.md",
-      "url": "assets/starters/lab-03-agent-plan/CHECKS.md"
+      "url": "assets/starters/lab-03-agent-change/CHECKS.md"
     },
     {
       "path": "COURSE_METADATA.json",
-      "url": "assets/starters/lab-03-agent-plan/COURSE_METADATA.json"
+      "url": "assets/starters/lab-03-agent-change/COURSE_METADATA.json"
     },
     {
       "path": "README.md",
-      "url": "assets/starters/lab-03-agent-plan/README.md"
+      "url": "assets/starters/lab-03-agent-change/README.md"
     },
     {
       "path": "REPORT.md",
-      "url": "assets/starters/lab-03-agent-plan/REPORT.md"
+      "url": "assets/starters/lab-03-agent-change/REPORT.md"
     },
     {
       "path": "REQUIREMENTS.md",
-      "url": "assets/starters/lab-03-agent-plan/REQUIREMENTS.md"
+      "url": "assets/starters/lab-03-agent-change/REQUIREMENTS.md"
     },
     {
       "path": "TASK.md",
-      "url": "assets/starters/lab-03-agent-plan/TASK.md"
+      "url": "assets/starters/lab-03-agent-change/TASK.md"
     },
     {
       "path": "course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-03-agent-plan/course-docs/ACCESS_MATRIX.md"
+      "url": "assets/starters/lab-03-agent-change/course-docs/ACCESS_MATRIX.md"
     },
     {
       "path": "course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-03-agent-plan/course-docs/STUDENT_SETUP.md"
+      "url": "assets/starters/lab-03-agent-change/course-docs/STUDENT_SETUP.md"
     },
     {
       "path": "gitverse/issue-template.md",
-      "url": "assets/starters/lab-03-agent-plan/gitverse/issue-template.md"
+      "url": "assets/starters/lab-03-agent-change/gitverse/issue-template.md"
     },
     {
       "path": "gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-03-agent-plan/gitverse/merge-request-template.md"
+      "url": "assets/starters/lab-03-agent-change/gitverse/merge-request-template.md"
     },
     {
       "path": "index.html",
-      "url": "assets/starters/lab-03-agent-plan/index.html"
+      "url": "assets/starters/lab-03-agent-change/index.html"
     },
     {
       "path": "package.json",
-      "url": "assets/starters/lab-03-agent-plan/package.json"
+      "url": "assets/starters/lab-03-agent-change/package.json"
     },
     {
       "path": "server.mjs",
-      "url": "assets/starters/lab-03-agent-plan/server.mjs"
+      "url": "assets/starters/lab-03-agent-change/server.mjs"
     },
     {
       "path": "src/app.js",
-      "url": "assets/starters/lab-03-agent-plan/src/app.js"
+      "url": "assets/starters/lab-03-agent-change/src/app.js"
     },
     {
       "path": "src/data.js",
-      "url": "assets/starters/lab-03-agent-plan/src/data.js"
+      "url": "assets/starters/lab-03-agent-change/src/data.js"
     },
     {
       "path": "src/tickets.js",
-      "url": "assets/starters/lab-03-agent-plan/src/tickets.js"
+      "url": "assets/starters/lab-03-agent-change/src/tickets.js"
     },
     {
       "path": "styles.css",
-      "url": "assets/starters/lab-03-agent-plan/styles.css"
+      "url": "assets/starters/lab-03-agent-change/styles.css"
     },
     {
       "path": "tests/base.test.mjs",
-      "url": "assets/starters/lab-03-agent-plan/tests/base.test.mjs"
+      "url": "assets/starters/lab-03-agent-change/tests/base.test.mjs"
     }
   ],
-  "lab-04-agent-change": [
+  "lab-04-agents-rules": [
     {
       "path": ".github/workflows/check.yml",
-      "url": "assets/starters/lab-04-agent-change/.github/workflows/check.yml"
+      "url": "assets/starters/lab-04-agents-rules/.github/workflows/check.yml"
     },
     {
       "path": ".gitignore",
-      "url": "assets/starters/lab-04-agent-change/.gitignore"
+      "url": "assets/starters/lab-04-agents-rules/.gitignore"
     },
     {
       "path": ".gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-04-agent-change/.gitverse/workflows/check.yml"
+      "url": "assets/starters/lab-04-agents-rules/.gitverse/workflows/check.yml"
     },
     {
       "path": ".vscode/tasks.json",
-      "url": "assets/starters/lab-04-agent-change/.vscode/tasks.json"
+      "url": "assets/starters/lab-04-agents-rules/.vscode/tasks.json"
     },
     {
       "path": "BRIEF.md",
-      "url": "assets/starters/lab-04-agent-change/BRIEF.md"
+      "url": "assets/starters/lab-04-agents-rules/BRIEF.md"
     },
     {
       "path": "CHECKS.md",
-      "url": "assets/starters/lab-04-agent-change/CHECKS.md"
+      "url": "assets/starters/lab-04-agents-rules/CHECKS.md"
     },
     {
       "path": "COURSE_METADATA.json",
-      "url": "assets/starters/lab-04-agent-change/COURSE_METADATA.json"
+      "url": "assets/starters/lab-04-agents-rules/COURSE_METADATA.json"
     },
     {
       "path": "README.md",
-      "url": "assets/starters/lab-04-agent-change/README.md"
+      "url": "assets/starters/lab-04-agents-rules/README.md"
     },
     {
       "path": "REPORT.md",
-      "url": "assets/starters/lab-04-agent-change/REPORT.md"
+      "url": "assets/starters/lab-04-agents-rules/REPORT.md"
     },
     {
       "path": "REQUIREMENTS.md",
-      "url": "assets/starters/lab-04-agent-change/REQUIREMENTS.md"
+      "url": "assets/starters/lab-04-agents-rules/REQUIREMENTS.md"
     },
     {
       "path": "TASK.md",
-      "url": "assets/starters/lab-04-agent-change/TASK.md"
+      "url": "assets/starters/lab-04-agents-rules/TASK.md"
     },
     {
       "path": "course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-04-agent-change/course-docs/ACCESS_MATRIX.md"
+      "url": "assets/starters/lab-04-agents-rules/course-docs/ACCESS_MATRIX.md"
     },
     {
       "path": "course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-04-agent-change/course-docs/STUDENT_SETUP.md"
+      "url": "assets/starters/lab-04-agents-rules/course-docs/STUDENT_SETUP.md"
     },
     {
       "path": "gitverse/issue-template.md",
-      "url": "assets/starters/lab-04-agent-change/gitverse/issue-template.md"
+      "url": "assets/starters/lab-04-agents-rules/gitverse/issue-template.md"
     },
     {
       "path": "gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-04-agent-change/gitverse/merge-request-template.md"
+      "url": "assets/starters/lab-04-agents-rules/gitverse/merge-request-template.md"
     },
     {
       "path": "index.html",
-      "url": "assets/starters/lab-04-agent-change/index.html"
+      "url": "assets/starters/lab-04-agents-rules/index.html"
     },
     {
       "path": "package.json",
-      "url": "assets/starters/lab-04-agent-change/package.json"
+      "url": "assets/starters/lab-04-agents-rules/package.json"
     },
     {
       "path": "server.mjs",
-      "url": "assets/starters/lab-04-agent-change/server.mjs"
+      "url": "assets/starters/lab-04-agents-rules/server.mjs"
     },
     {
       "path": "src/app.js",
-      "url": "assets/starters/lab-04-agent-change/src/app.js"
+      "url": "assets/starters/lab-04-agents-rules/src/app.js"
     },
     {
       "path": "src/data.js",
-      "url": "assets/starters/lab-04-agent-change/src/data.js"
+      "url": "assets/starters/lab-04-agents-rules/src/data.js"
     },
     {
       "path": "src/tickets.js",
-      "url": "assets/starters/lab-04-agent-change/src/tickets.js"
+      "url": "assets/starters/lab-04-agents-rules/src/tickets.js"
     },
     {
       "path": "styles.css",
-      "url": "assets/starters/lab-04-agent-change/styles.css"
+      "url": "assets/starters/lab-04-agents-rules/styles.css"
     },
     {
       "path": "tests/base.test.mjs",
-      "url": "assets/starters/lab-04-agent-change/tests/base.test.mjs"
-    }
-  ],
-  "lab-05-agents-rules": [
-    {
-      "path": ".github/workflows/check.yml",
-      "url": "assets/starters/lab-05-agents-rules/.github/workflows/check.yml"
-    },
-    {
-      "path": ".gitignore",
-      "url": "assets/starters/lab-05-agents-rules/.gitignore"
-    },
-    {
-      "path": ".gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-05-agents-rules/.gitverse/workflows/check.yml"
-    },
-    {
-      "path": ".vscode/tasks.json",
-      "url": "assets/starters/lab-05-agents-rules/.vscode/tasks.json"
-    },
-    {
-      "path": "BRIEF.md",
-      "url": "assets/starters/lab-05-agents-rules/BRIEF.md"
-    },
-    {
-      "path": "CHECKS.md",
-      "url": "assets/starters/lab-05-agents-rules/CHECKS.md"
-    },
-    {
-      "path": "COURSE_METADATA.json",
-      "url": "assets/starters/lab-05-agents-rules/COURSE_METADATA.json"
-    },
-    {
-      "path": "README.md",
-      "url": "assets/starters/lab-05-agents-rules/README.md"
-    },
-    {
-      "path": "REPORT.md",
-      "url": "assets/starters/lab-05-agents-rules/REPORT.md"
-    },
-    {
-      "path": "REQUIREMENTS.md",
-      "url": "assets/starters/lab-05-agents-rules/REQUIREMENTS.md"
-    },
-    {
-      "path": "TASK.md",
-      "url": "assets/starters/lab-05-agents-rules/TASK.md"
-    },
-    {
-      "path": "course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-05-agents-rules/course-docs/ACCESS_MATRIX.md"
-    },
-    {
-      "path": "course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-05-agents-rules/course-docs/STUDENT_SETUP.md"
-    },
-    {
-      "path": "gitverse/issue-template.md",
-      "url": "assets/starters/lab-05-agents-rules/gitverse/issue-template.md"
-    },
-    {
-      "path": "gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-05-agents-rules/gitverse/merge-request-template.md"
-    },
-    {
-      "path": "index.html",
-      "url": "assets/starters/lab-05-agents-rules/index.html"
-    },
-    {
-      "path": "package.json",
-      "url": "assets/starters/lab-05-agents-rules/package.json"
-    },
-    {
-      "path": "server.mjs",
-      "url": "assets/starters/lab-05-agents-rules/server.mjs"
-    },
-    {
-      "path": "src/app.js",
-      "url": "assets/starters/lab-05-agents-rules/src/app.js"
-    },
-    {
-      "path": "src/data.js",
-      "url": "assets/starters/lab-05-agents-rules/src/data.js"
-    },
-    {
-      "path": "src/tickets.js",
-      "url": "assets/starters/lab-05-agents-rules/src/tickets.js"
-    },
-    {
-      "path": "styles.css",
-      "url": "assets/starters/lab-05-agents-rules/styles.css"
-    },
-    {
-      "path": "tests/base.test.mjs",
-      "url": "assets/starters/lab-05-agents-rules/tests/base.test.mjs"
+      "url": "assets/starters/lab-04-agents-rules/tests/base.test.mjs"
     },
     {
       "path": "tests/filter.test.mjs",
-      "url": "assets/starters/lab-05-agents-rules/tests/filter.test.mjs"
+      "url": "assets/starters/lab-04-agents-rules/tests/filter.test.mjs"
     }
   ],
-  "lab-06-mr-ci-review-skill": [
+  "lab-05-mr-ci-review-skill": [
     {
       "path": ".github/workflows/check.yml",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/.github/workflows/check.yml"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/.github/workflows/check.yml"
     },
     {
       "path": ".gitignore",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/.gitignore"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/.gitignore"
     },
     {
       "path": ".gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/.gitverse/workflows/check.yml"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/.gitverse/workflows/check.yml"
     },
     {
       "path": ".vscode/tasks.json",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/.vscode/tasks.json"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/.vscode/tasks.json"
     },
     {
       "path": "AGENTS.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/AGENTS.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/AGENTS.md"
     },
     {
       "path": "BRIEF.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/BRIEF.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/BRIEF.md"
     },
     {
       "path": "CHECKS.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/CHECKS.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/CHECKS.md"
     },
     {
       "path": "COURSE_METADATA.json",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/COURSE_METADATA.json"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/COURSE_METADATA.json"
     },
     {
       "path": "README.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/README.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/README.md"
     },
     {
       "path": "REPORT.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/REPORT.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/REPORT.md"
     },
     {
       "path": "REQUIREMENTS.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/REQUIREMENTS.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/REQUIREMENTS.md"
     },
     {
       "path": "TASK.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/TASK.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/TASK.md"
     },
     {
       "path": "course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/course-docs/ACCESS_MATRIX.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/course-docs/ACCESS_MATRIX.md"
     },
     {
       "path": "course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/course-docs/STUDENT_SETUP.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/course-docs/STUDENT_SETUP.md"
     },
     {
       "path": "gitverse/issue-template.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/gitverse/issue-template.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/gitverse/issue-template.md"
     },
     {
       "path": "gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/gitverse/merge-request-template.md"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/gitverse/merge-request-template.md"
     },
     {
       "path": "index.html",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/index.html"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/index.html"
     },
     {
       "path": "package.json",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/package.json"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/package.json"
     },
     {
       "path": "server.mjs",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/server.mjs"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/server.mjs"
     },
     {
       "path": "src/app.js",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/src/app.js"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/src/app.js"
     },
     {
       "path": "src/data.js",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/src/data.js"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/src/data.js"
     },
     {
       "path": "src/tickets.js",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/src/tickets.js"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/src/tickets.js"
     },
     {
       "path": "styles.css",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/styles.css"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/styles.css"
     },
     {
       "path": "tests/base.test.mjs",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/tests/base.test.mjs"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/tests/base.test.mjs"
     },
     {
       "path": "tests/filter.test.mjs",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/tests/filter.test.mjs"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/tests/filter.test.mjs"
     },
     {
       "path": "tests/search.test.mjs",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/tests/search.test.mjs"
+      "url": "assets/starters/lab-05-mr-ci-review-skill/tests/search.test.mjs"
     }
   ],
-  "lab-07-final-project": [
+  "lab-06-final-project": [
     {
       "path": ".agents/skills/acceptance-check/SKILL.md",
-      "url": "assets/starters/lab-07-final-project/.agents/skills/acceptance-check/SKILL.md"
+      "url": "assets/starters/lab-06-final-project/.agents/skills/acceptance-check/SKILL.md"
     },
     {
       "path": ".github/workflows/check.yml",
-      "url": "assets/starters/lab-07-final-project/.github/workflows/check.yml"
+      "url": "assets/starters/lab-06-final-project/.github/workflows/check.yml"
     },
     {
       "path": ".gitignore",
-      "url": "assets/starters/lab-07-final-project/.gitignore"
+      "url": "assets/starters/lab-06-final-project/.gitignore"
     },
     {
       "path": ".gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-07-final-project/.gitverse/workflows/check.yml"
+      "url": "assets/starters/lab-06-final-project/.gitverse/workflows/check.yml"
     },
     {
       "path": ".vscode/tasks.json",
-      "url": "assets/starters/lab-07-final-project/.vscode/tasks.json"
+      "url": "assets/starters/lab-06-final-project/.vscode/tasks.json"
     },
     {
       "path": "AGENTS.md",
-      "url": "assets/starters/lab-07-final-project/AGENTS.md"
+      "url": "assets/starters/lab-06-final-project/AGENTS.md"
     },
     {
       "path": "BRIEF.md",
-      "url": "assets/starters/lab-07-final-project/BRIEF.md"
+      "url": "assets/starters/lab-06-final-project/BRIEF.md"
     },
     {
       "path": "CHECKS.md",
-      "url": "assets/starters/lab-07-final-project/CHECKS.md"
+      "url": "assets/starters/lab-06-final-project/CHECKS.md"
     },
     {
       "path": "COURSE_METADATA.json",
-      "url": "assets/starters/lab-07-final-project/COURSE_METADATA.json"
+      "url": "assets/starters/lab-06-final-project/COURSE_METADATA.json"
     },
     {
       "path": "README.md",
-      "url": "assets/starters/lab-07-final-project/README.md"
+      "url": "assets/starters/lab-06-final-project/README.md"
     },
     {
       "path": "REPORT.md",
-      "url": "assets/starters/lab-07-final-project/REPORT.md"
+      "url": "assets/starters/lab-06-final-project/REPORT.md"
     },
     {
       "path": "REQUIREMENTS.md",
-      "url": "assets/starters/lab-07-final-project/REQUIREMENTS.md"
+      "url": "assets/starters/lab-06-final-project/REQUIREMENTS.md"
     },
     {
       "path": "TASK.md",
-      "url": "assets/starters/lab-07-final-project/TASK.md"
+      "url": "assets/starters/lab-06-final-project/TASK.md"
     },
     {
       "path": "course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-07-final-project/course-docs/ACCESS_MATRIX.md"
+      "url": "assets/starters/lab-06-final-project/course-docs/ACCESS_MATRIX.md"
     },
     {
       "path": "course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-07-final-project/course-docs/STUDENT_SETUP.md"
+      "url": "assets/starters/lab-06-final-project/course-docs/STUDENT_SETUP.md"
     },
     {
       "path": "gitverse/issue-template.md",
-      "url": "assets/starters/lab-07-final-project/gitverse/issue-template.md"
+      "url": "assets/starters/lab-06-final-project/gitverse/issue-template.md"
     },
     {
       "path": "gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-07-final-project/gitverse/merge-request-template.md"
+      "url": "assets/starters/lab-06-final-project/gitverse/merge-request-template.md"
     },
     {
       "path": "index.html",
-      "url": "assets/starters/lab-07-final-project/index.html"
+      "url": "assets/starters/lab-06-final-project/index.html"
     },
     {
       "path": "package.json",
-      "url": "assets/starters/lab-07-final-project/package.json"
+      "url": "assets/starters/lab-06-final-project/package.json"
     },
     {
       "path": "server.mjs",
-      "url": "assets/starters/lab-07-final-project/server.mjs"
+      "url": "assets/starters/lab-06-final-project/server.mjs"
     },
     {
       "path": "src/app.js",
-      "url": "assets/starters/lab-07-final-project/src/app.js"
+      "url": "assets/starters/lab-06-final-project/src/app.js"
     },
     {
       "path": "src/data.js",
-      "url": "assets/starters/lab-07-final-project/src/data.js"
+      "url": "assets/starters/lab-06-final-project/src/data.js"
     },
     {
       "path": "src/tickets.js",
-      "url": "assets/starters/lab-07-final-project/src/tickets.js"
+      "url": "assets/starters/lab-06-final-project/src/tickets.js"
     },
     {
       "path": "styles.css",
-      "url": "assets/starters/lab-07-final-project/styles.css"
+      "url": "assets/starters/lab-06-final-project/styles.css"
     },
     {
       "path": "tests/base.test.mjs",
-      "url": "assets/starters/lab-07-final-project/tests/base.test.mjs"
+      "url": "assets/starters/lab-06-final-project/tests/base.test.mjs"
     },
     {
       "path": "tests/filter.test.mjs",
-      "url": "assets/starters/lab-07-final-project/tests/filter.test.mjs"
+      "url": "assets/starters/lab-06-final-project/tests/filter.test.mjs"
     },
     {
       "path": "tests/search.test.mjs",
-      "url": "assets/starters/lab-07-final-project/tests/search.test.mjs"
+      "url": "assets/starters/lab-06-final-project/tests/search.test.mjs"
     },
     {
       "path": "tests/sort.test.mjs",
-      "url": "assets/starters/lab-07-final-project/tests/sort.test.mjs"
+      "url": "assets/starters/lab-06-final-project/tests/sort.test.mjs"
     }
   ],
   "course-all": [
     {
-      "path": "lab-01-gitverse-start/.github/workflows/check.yml",
-      "url": "assets/starters/lab-01-gitverse-start/.github/workflows/check.yml"
+      "path": "lab-01-gitverse-task-context/.github/workflows/check.yml",
+      "url": "assets/starters/lab-01-gitverse-task-context/.github/workflows/check.yml"
     },
     {
-      "path": "lab-01-gitverse-start/.gitignore",
-      "url": "assets/starters/lab-01-gitverse-start/.gitignore"
+      "path": "lab-01-gitverse-task-context/.gitignore",
+      "url": "assets/starters/lab-01-gitverse-task-context/.gitignore"
     },
     {
-      "path": "lab-01-gitverse-start/.gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-01-gitverse-start/.gitverse/workflows/check.yml"
+      "path": "lab-01-gitverse-task-context/.gitverse/workflows/check.yml",
+      "url": "assets/starters/lab-01-gitverse-task-context/.gitverse/workflows/check.yml"
     },
     {
-      "path": "lab-01-gitverse-start/.vscode/tasks.json",
-      "url": "assets/starters/lab-01-gitverse-start/.vscode/tasks.json"
+      "path": "lab-01-gitverse-task-context/.vscode/tasks.json",
+      "url": "assets/starters/lab-01-gitverse-task-context/.vscode/tasks.json"
     },
     {
-      "path": "lab-01-gitverse-start/BRIEF.md",
-      "url": "assets/starters/lab-01-gitverse-start/BRIEF.md"
+      "path": "lab-01-gitverse-task-context/BRIEF.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/BRIEF.md"
     },
     {
-      "path": "lab-01-gitverse-start/CHECKS.md",
-      "url": "assets/starters/lab-01-gitverse-start/CHECKS.md"
+      "path": "lab-01-gitverse-task-context/CHECKS.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/CHECKS.md"
     },
     {
-      "path": "lab-01-gitverse-start/COURSE_METADATA.json",
-      "url": "assets/starters/lab-01-gitverse-start/COURSE_METADATA.json"
+      "path": "lab-01-gitverse-task-context/COURSE_METADATA.json",
+      "url": "assets/starters/lab-01-gitverse-task-context/COURSE_METADATA.json"
     },
     {
-      "path": "lab-01-gitverse-start/README.md",
-      "url": "assets/starters/lab-01-gitverse-start/README.md"
+      "path": "lab-01-gitverse-task-context/README.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/README.md"
     },
     {
-      "path": "lab-01-gitverse-start/REPORT.md",
-      "url": "assets/starters/lab-01-gitverse-start/REPORT.md"
+      "path": "lab-01-gitverse-task-context/REPORT.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/REPORT.md"
     },
     {
-      "path": "lab-01-gitverse-start/REQUIREMENTS.md",
-      "url": "assets/starters/lab-01-gitverse-start/REQUIREMENTS.md"
+      "path": "lab-01-gitverse-task-context/REQUIREMENTS.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/REQUIREMENTS.md"
     },
     {
-      "path": "lab-01-gitverse-start/TASK.md",
-      "url": "assets/starters/lab-01-gitverse-start/TASK.md"
+      "path": "lab-01-gitverse-task-context/TASK.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/TASK.md"
     },
     {
-      "path": "lab-01-gitverse-start/course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-01-gitverse-start/course-docs/ACCESS_MATRIX.md"
+      "path": "lab-01-gitverse-task-context/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/course-docs/ACCESS_MATRIX.md"
     },
     {
-      "path": "lab-01-gitverse-start/course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-01-gitverse-start/course-docs/STUDENT_SETUP.md"
+      "path": "lab-01-gitverse-task-context/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/course-docs/STUDENT_SETUP.md"
     },
     {
-      "path": "lab-01-gitverse-start/gitverse/issue-template.md",
-      "url": "assets/starters/lab-01-gitverse-start/gitverse/issue-template.md"
+      "path": "lab-01-gitverse-task-context/gitverse/issue-template.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/gitverse/issue-template.md"
     },
     {
-      "path": "lab-01-gitverse-start/gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-01-gitverse-start/gitverse/merge-request-template.md"
+      "path": "lab-01-gitverse-task-context/gitverse/merge-request-template.md",
+      "url": "assets/starters/lab-01-gitverse-task-context/gitverse/merge-request-template.md"
     },
     {
-      "path": "lab-01-gitverse-start/index.html",
-      "url": "assets/starters/lab-01-gitverse-start/index.html"
+      "path": "lab-01-gitverse-task-context/index.html",
+      "url": "assets/starters/lab-01-gitverse-task-context/index.html"
     },
     {
-      "path": "lab-01-gitverse-start/package.json",
-      "url": "assets/starters/lab-01-gitverse-start/package.json"
+      "path": "lab-01-gitverse-task-context/package.json",
+      "url": "assets/starters/lab-01-gitverse-task-context/package.json"
     },
     {
-      "path": "lab-01-gitverse-start/server.mjs",
-      "url": "assets/starters/lab-01-gitverse-start/server.mjs"
+      "path": "lab-01-gitverse-task-context/server.mjs",
+      "url": "assets/starters/lab-01-gitverse-task-context/server.mjs"
     },
     {
-      "path": "lab-01-gitverse-start/src/app.js",
-      "url": "assets/starters/lab-01-gitverse-start/src/app.js"
+      "path": "lab-01-gitverse-task-context/src/app.js",
+      "url": "assets/starters/lab-01-gitverse-task-context/src/app.js"
     },
     {
-      "path": "lab-01-gitverse-start/src/data.js",
-      "url": "assets/starters/lab-01-gitverse-start/src/data.js"
+      "path": "lab-01-gitverse-task-context/src/data.js",
+      "url": "assets/starters/lab-01-gitverse-task-context/src/data.js"
     },
     {
-      "path": "lab-01-gitverse-start/src/tickets.js",
-      "url": "assets/starters/lab-01-gitverse-start/src/tickets.js"
+      "path": "lab-01-gitverse-task-context/src/tickets.js",
+      "url": "assets/starters/lab-01-gitverse-task-context/src/tickets.js"
     },
     {
-      "path": "lab-01-gitverse-start/styles.css",
-      "url": "assets/starters/lab-01-gitverse-start/styles.css"
+      "path": "lab-01-gitverse-task-context/styles.css",
+      "url": "assets/starters/lab-01-gitverse-task-context/styles.css"
     },
     {
-      "path": "lab-01-gitverse-start/tests/base.test.mjs",
-      "url": "assets/starters/lab-01-gitverse-start/tests/base.test.mjs"
+      "path": "lab-01-gitverse-task-context/tests/base.test.mjs",
+      "url": "assets/starters/lab-01-gitverse-task-context/tests/base.test.mjs"
     },
     {
-      "path": "lab-02-task-context/.github/workflows/check.yml",
-      "url": "assets/starters/lab-02-task-context/.github/workflows/check.yml"
+      "path": "lab-02-agent-plan/.github/workflows/check.yml",
+      "url": "assets/starters/lab-02-agent-plan/.github/workflows/check.yml"
     },
     {
-      "path": "lab-02-task-context/.gitignore",
-      "url": "assets/starters/lab-02-task-context/.gitignore"
+      "path": "lab-02-agent-plan/.gitignore",
+      "url": "assets/starters/lab-02-agent-plan/.gitignore"
     },
     {
-      "path": "lab-02-task-context/.gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-02-task-context/.gitverse/workflows/check.yml"
+      "path": "lab-02-agent-plan/.gitverse/workflows/check.yml",
+      "url": "assets/starters/lab-02-agent-plan/.gitverse/workflows/check.yml"
     },
     {
-      "path": "lab-02-task-context/.vscode/tasks.json",
-      "url": "assets/starters/lab-02-task-context/.vscode/tasks.json"
+      "path": "lab-02-agent-plan/.vscode/tasks.json",
+      "url": "assets/starters/lab-02-agent-plan/.vscode/tasks.json"
     },
     {
-      "path": "lab-02-task-context/BRIEF.md",
-      "url": "assets/starters/lab-02-task-context/BRIEF.md"
+      "path": "lab-02-agent-plan/BRIEF.md",
+      "url": "assets/starters/lab-02-agent-plan/BRIEF.md"
     },
     {
-      "path": "lab-02-task-context/CHECKS.md",
-      "url": "assets/starters/lab-02-task-context/CHECKS.md"
+      "path": "lab-02-agent-plan/CHECKS.md",
+      "url": "assets/starters/lab-02-agent-plan/CHECKS.md"
     },
     {
-      "path": "lab-02-task-context/COURSE_METADATA.json",
-      "url": "assets/starters/lab-02-task-context/COURSE_METADATA.json"
+      "path": "lab-02-agent-plan/COURSE_METADATA.json",
+      "url": "assets/starters/lab-02-agent-plan/COURSE_METADATA.json"
     },
     {
-      "path": "lab-02-task-context/README.md",
-      "url": "assets/starters/lab-02-task-context/README.md"
+      "path": "lab-02-agent-plan/README.md",
+      "url": "assets/starters/lab-02-agent-plan/README.md"
     },
     {
-      "path": "lab-02-task-context/REPORT.md",
-      "url": "assets/starters/lab-02-task-context/REPORT.md"
+      "path": "lab-02-agent-plan/REPORT.md",
+      "url": "assets/starters/lab-02-agent-plan/REPORT.md"
     },
     {
-      "path": "lab-02-task-context/REQUIREMENTS.md",
-      "url": "assets/starters/lab-02-task-context/REQUIREMENTS.md"
+      "path": "lab-02-agent-plan/REQUIREMENTS.md",
+      "url": "assets/starters/lab-02-agent-plan/REQUIREMENTS.md"
     },
     {
-      "path": "lab-02-task-context/TASK.md",
-      "url": "assets/starters/lab-02-task-context/TASK.md"
+      "path": "lab-02-agent-plan/TASK.md",
+      "url": "assets/starters/lab-02-agent-plan/TASK.md"
     },
     {
-      "path": "lab-02-task-context/course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-02-task-context/course-docs/ACCESS_MATRIX.md"
+      "path": "lab-02-agent-plan/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/lab-02-agent-plan/course-docs/ACCESS_MATRIX.md"
     },
     {
-      "path": "lab-02-task-context/course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-02-task-context/course-docs/STUDENT_SETUP.md"
+      "path": "lab-02-agent-plan/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/lab-02-agent-plan/course-docs/STUDENT_SETUP.md"
     },
     {
-      "path": "lab-02-task-context/gitverse/issue-template.md",
-      "url": "assets/starters/lab-02-task-context/gitverse/issue-template.md"
+      "path": "lab-02-agent-plan/gitverse/issue-template.md",
+      "url": "assets/starters/lab-02-agent-plan/gitverse/issue-template.md"
     },
     {
-      "path": "lab-02-task-context/gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-02-task-context/gitverse/merge-request-template.md"
+      "path": "lab-02-agent-plan/gitverse/merge-request-template.md",
+      "url": "assets/starters/lab-02-agent-plan/gitverse/merge-request-template.md"
     },
     {
-      "path": "lab-02-task-context/index.html",
-      "url": "assets/starters/lab-02-task-context/index.html"
+      "path": "lab-02-agent-plan/index.html",
+      "url": "assets/starters/lab-02-agent-plan/index.html"
     },
     {
-      "path": "lab-02-task-context/package.json",
-      "url": "assets/starters/lab-02-task-context/package.json"
+      "path": "lab-02-agent-plan/package.json",
+      "url": "assets/starters/lab-02-agent-plan/package.json"
     },
     {
-      "path": "lab-02-task-context/server.mjs",
-      "url": "assets/starters/lab-02-task-context/server.mjs"
+      "path": "lab-02-agent-plan/server.mjs",
+      "url": "assets/starters/lab-02-agent-plan/server.mjs"
     },
     {
-      "path": "lab-02-task-context/src/app.js",
-      "url": "assets/starters/lab-02-task-context/src/app.js"
+      "path": "lab-02-agent-plan/src/app.js",
+      "url": "assets/starters/lab-02-agent-plan/src/app.js"
     },
     {
-      "path": "lab-02-task-context/src/data.js",
-      "url": "assets/starters/lab-02-task-context/src/data.js"
+      "path": "lab-02-agent-plan/src/data.js",
+      "url": "assets/starters/lab-02-agent-plan/src/data.js"
     },
     {
-      "path": "lab-02-task-context/src/tickets.js",
-      "url": "assets/starters/lab-02-task-context/src/tickets.js"
+      "path": "lab-02-agent-plan/src/tickets.js",
+      "url": "assets/starters/lab-02-agent-plan/src/tickets.js"
     },
     {
-      "path": "lab-02-task-context/styles.css",
-      "url": "assets/starters/lab-02-task-context/styles.css"
+      "path": "lab-02-agent-plan/styles.css",
+      "url": "assets/starters/lab-02-agent-plan/styles.css"
     },
     {
-      "path": "lab-02-task-context/tests/base.test.mjs",
-      "url": "assets/starters/lab-02-task-context/tests/base.test.mjs"
+      "path": "lab-02-agent-plan/tests/base.test.mjs",
+      "url": "assets/starters/lab-02-agent-plan/tests/base.test.mjs"
     },
     {
-      "path": "lab-03-agent-plan/.github/workflows/check.yml",
-      "url": "assets/starters/lab-03-agent-plan/.github/workflows/check.yml"
+      "path": "lab-03-agent-change/.github/workflows/check.yml",
+      "url": "assets/starters/lab-03-agent-change/.github/workflows/check.yml"
     },
     {
-      "path": "lab-03-agent-plan/.gitignore",
-      "url": "assets/starters/lab-03-agent-plan/.gitignore"
+      "path": "lab-03-agent-change/.gitignore",
+      "url": "assets/starters/lab-03-agent-change/.gitignore"
     },
     {
-      "path": "lab-03-agent-plan/.gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-03-agent-plan/.gitverse/workflows/check.yml"
+      "path": "lab-03-agent-change/.gitverse/workflows/check.yml",
+      "url": "assets/starters/lab-03-agent-change/.gitverse/workflows/check.yml"
     },
     {
-      "path": "lab-03-agent-plan/.vscode/tasks.json",
-      "url": "assets/starters/lab-03-agent-plan/.vscode/tasks.json"
+      "path": "lab-03-agent-change/.vscode/tasks.json",
+      "url": "assets/starters/lab-03-agent-change/.vscode/tasks.json"
     },
     {
-      "path": "lab-03-agent-plan/BRIEF.md",
-      "url": "assets/starters/lab-03-agent-plan/BRIEF.md"
+      "path": "lab-03-agent-change/BRIEF.md",
+      "url": "assets/starters/lab-03-agent-change/BRIEF.md"
     },
     {
-      "path": "lab-03-agent-plan/CHECKS.md",
-      "url": "assets/starters/lab-03-agent-plan/CHECKS.md"
+      "path": "lab-03-agent-change/CHECKS.md",
+      "url": "assets/starters/lab-03-agent-change/CHECKS.md"
     },
     {
-      "path": "lab-03-agent-plan/COURSE_METADATA.json",
-      "url": "assets/starters/lab-03-agent-plan/COURSE_METADATA.json"
+      "path": "lab-03-agent-change/COURSE_METADATA.json",
+      "url": "assets/starters/lab-03-agent-change/COURSE_METADATA.json"
     },
     {
-      "path": "lab-03-agent-plan/README.md",
-      "url": "assets/starters/lab-03-agent-plan/README.md"
+      "path": "lab-03-agent-change/README.md",
+      "url": "assets/starters/lab-03-agent-change/README.md"
     },
     {
-      "path": "lab-03-agent-plan/REPORT.md",
-      "url": "assets/starters/lab-03-agent-plan/REPORT.md"
+      "path": "lab-03-agent-change/REPORT.md",
+      "url": "assets/starters/lab-03-agent-change/REPORT.md"
     },
     {
-      "path": "lab-03-agent-plan/REQUIREMENTS.md",
-      "url": "assets/starters/lab-03-agent-plan/REQUIREMENTS.md"
+      "path": "lab-03-agent-change/REQUIREMENTS.md",
+      "url": "assets/starters/lab-03-agent-change/REQUIREMENTS.md"
     },
     {
-      "path": "lab-03-agent-plan/TASK.md",
-      "url": "assets/starters/lab-03-agent-plan/TASK.md"
+      "path": "lab-03-agent-change/TASK.md",
+      "url": "assets/starters/lab-03-agent-change/TASK.md"
     },
     {
-      "path": "lab-03-agent-plan/course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-03-agent-plan/course-docs/ACCESS_MATRIX.md"
+      "path": "lab-03-agent-change/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/lab-03-agent-change/course-docs/ACCESS_MATRIX.md"
     },
     {
-      "path": "lab-03-agent-plan/course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-03-agent-plan/course-docs/STUDENT_SETUP.md"
+      "path": "lab-03-agent-change/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/lab-03-agent-change/course-docs/STUDENT_SETUP.md"
     },
     {
-      "path": "lab-03-agent-plan/gitverse/issue-template.md",
-      "url": "assets/starters/lab-03-agent-plan/gitverse/issue-template.md"
+      "path": "lab-03-agent-change/gitverse/issue-template.md",
+      "url": "assets/starters/lab-03-agent-change/gitverse/issue-template.md"
     },
     {
-      "path": "lab-03-agent-plan/gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-03-agent-plan/gitverse/merge-request-template.md"
+      "path": "lab-03-agent-change/gitverse/merge-request-template.md",
+      "url": "assets/starters/lab-03-agent-change/gitverse/merge-request-template.md"
     },
     {
-      "path": "lab-03-agent-plan/index.html",
-      "url": "assets/starters/lab-03-agent-plan/index.html"
+      "path": "lab-03-agent-change/index.html",
+      "url": "assets/starters/lab-03-agent-change/index.html"
     },
     {
-      "path": "lab-03-agent-plan/package.json",
-      "url": "assets/starters/lab-03-agent-plan/package.json"
+      "path": "lab-03-agent-change/package.json",
+      "url": "assets/starters/lab-03-agent-change/package.json"
     },
     {
-      "path": "lab-03-agent-plan/server.mjs",
-      "url": "assets/starters/lab-03-agent-plan/server.mjs"
+      "path": "lab-03-agent-change/server.mjs",
+      "url": "assets/starters/lab-03-agent-change/server.mjs"
     },
     {
-      "path": "lab-03-agent-plan/src/app.js",
-      "url": "assets/starters/lab-03-agent-plan/src/app.js"
+      "path": "lab-03-agent-change/src/app.js",
+      "url": "assets/starters/lab-03-agent-change/src/app.js"
     },
     {
-      "path": "lab-03-agent-plan/src/data.js",
-      "url": "assets/starters/lab-03-agent-plan/src/data.js"
+      "path": "lab-03-agent-change/src/data.js",
+      "url": "assets/starters/lab-03-agent-change/src/data.js"
     },
     {
-      "path": "lab-03-agent-plan/src/tickets.js",
-      "url": "assets/starters/lab-03-agent-plan/src/tickets.js"
+      "path": "lab-03-agent-change/src/tickets.js",
+      "url": "assets/starters/lab-03-agent-change/src/tickets.js"
     },
     {
-      "path": "lab-03-agent-plan/styles.css",
-      "url": "assets/starters/lab-03-agent-plan/styles.css"
+      "path": "lab-03-agent-change/styles.css",
+      "url": "assets/starters/lab-03-agent-change/styles.css"
     },
     {
-      "path": "lab-03-agent-plan/tests/base.test.mjs",
-      "url": "assets/starters/lab-03-agent-plan/tests/base.test.mjs"
+      "path": "lab-03-agent-change/tests/base.test.mjs",
+      "url": "assets/starters/lab-03-agent-change/tests/base.test.mjs"
     },
     {
-      "path": "lab-04-agent-change/.github/workflows/check.yml",
-      "url": "assets/starters/lab-04-agent-change/.github/workflows/check.yml"
+      "path": "lab-04-agents-rules/.github/workflows/check.yml",
+      "url": "assets/starters/lab-04-agents-rules/.github/workflows/check.yml"
     },
     {
-      "path": "lab-04-agent-change/.gitignore",
-      "url": "assets/starters/lab-04-agent-change/.gitignore"
+      "path": "lab-04-agents-rules/.gitignore",
+      "url": "assets/starters/lab-04-agents-rules/.gitignore"
     },
     {
-      "path": "lab-04-agent-change/.gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-04-agent-change/.gitverse/workflows/check.yml"
+      "path": "lab-04-agents-rules/.gitverse/workflows/check.yml",
+      "url": "assets/starters/lab-04-agents-rules/.gitverse/workflows/check.yml"
     },
     {
-      "path": "lab-04-agent-change/.vscode/tasks.json",
-      "url": "assets/starters/lab-04-agent-change/.vscode/tasks.json"
+      "path": "lab-04-agents-rules/.vscode/tasks.json",
+      "url": "assets/starters/lab-04-agents-rules/.vscode/tasks.json"
     },
     {
-      "path": "lab-04-agent-change/BRIEF.md",
-      "url": "assets/starters/lab-04-agent-change/BRIEF.md"
+      "path": "lab-04-agents-rules/BRIEF.md",
+      "url": "assets/starters/lab-04-agents-rules/BRIEF.md"
     },
     {
-      "path": "lab-04-agent-change/CHECKS.md",
-      "url": "assets/starters/lab-04-agent-change/CHECKS.md"
+      "path": "lab-04-agents-rules/CHECKS.md",
+      "url": "assets/starters/lab-04-agents-rules/CHECKS.md"
     },
     {
-      "path": "lab-04-agent-change/COURSE_METADATA.json",
-      "url": "assets/starters/lab-04-agent-change/COURSE_METADATA.json"
+      "path": "lab-04-agents-rules/COURSE_METADATA.json",
+      "url": "assets/starters/lab-04-agents-rules/COURSE_METADATA.json"
     },
     {
-      "path": "lab-04-agent-change/README.md",
-      "url": "assets/starters/lab-04-agent-change/README.md"
+      "path": "lab-04-agents-rules/README.md",
+      "url": "assets/starters/lab-04-agents-rules/README.md"
     },
     {
-      "path": "lab-04-agent-change/REPORT.md",
-      "url": "assets/starters/lab-04-agent-change/REPORT.md"
+      "path": "lab-04-agents-rules/REPORT.md",
+      "url": "assets/starters/lab-04-agents-rules/REPORT.md"
     },
     {
-      "path": "lab-04-agent-change/REQUIREMENTS.md",
-      "url": "assets/starters/lab-04-agent-change/REQUIREMENTS.md"
+      "path": "lab-04-agents-rules/REQUIREMENTS.md",
+      "url": "assets/starters/lab-04-agents-rules/REQUIREMENTS.md"
     },
     {
-      "path": "lab-04-agent-change/TASK.md",
-      "url": "assets/starters/lab-04-agent-change/TASK.md"
+      "path": "lab-04-agents-rules/TASK.md",
+      "url": "assets/starters/lab-04-agents-rules/TASK.md"
     },
     {
-      "path": "lab-04-agent-change/course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-04-agent-change/course-docs/ACCESS_MATRIX.md"
+      "path": "lab-04-agents-rules/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/lab-04-agents-rules/course-docs/ACCESS_MATRIX.md"
     },
     {
-      "path": "lab-04-agent-change/course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-04-agent-change/course-docs/STUDENT_SETUP.md"
+      "path": "lab-04-agents-rules/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/lab-04-agents-rules/course-docs/STUDENT_SETUP.md"
     },
     {
-      "path": "lab-04-agent-change/gitverse/issue-template.md",
-      "url": "assets/starters/lab-04-agent-change/gitverse/issue-template.md"
+      "path": "lab-04-agents-rules/gitverse/issue-template.md",
+      "url": "assets/starters/lab-04-agents-rules/gitverse/issue-template.md"
     },
     {
-      "path": "lab-04-agent-change/gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-04-agent-change/gitverse/merge-request-template.md"
+      "path": "lab-04-agents-rules/gitverse/merge-request-template.md",
+      "url": "assets/starters/lab-04-agents-rules/gitverse/merge-request-template.md"
     },
     {
-      "path": "lab-04-agent-change/index.html",
-      "url": "assets/starters/lab-04-agent-change/index.html"
+      "path": "lab-04-agents-rules/index.html",
+      "url": "assets/starters/lab-04-agents-rules/index.html"
     },
     {
-      "path": "lab-04-agent-change/package.json",
-      "url": "assets/starters/lab-04-agent-change/package.json"
+      "path": "lab-04-agents-rules/package.json",
+      "url": "assets/starters/lab-04-agents-rules/package.json"
     },
     {
-      "path": "lab-04-agent-change/server.mjs",
-      "url": "assets/starters/lab-04-agent-change/server.mjs"
+      "path": "lab-04-agents-rules/server.mjs",
+      "url": "assets/starters/lab-04-agents-rules/server.mjs"
     },
     {
-      "path": "lab-04-agent-change/src/app.js",
-      "url": "assets/starters/lab-04-agent-change/src/app.js"
+      "path": "lab-04-agents-rules/src/app.js",
+      "url": "assets/starters/lab-04-agents-rules/src/app.js"
     },
     {
-      "path": "lab-04-agent-change/src/data.js",
-      "url": "assets/starters/lab-04-agent-change/src/data.js"
+      "path": "lab-04-agents-rules/src/data.js",
+      "url": "assets/starters/lab-04-agents-rules/src/data.js"
     },
     {
-      "path": "lab-04-agent-change/src/tickets.js",
-      "url": "assets/starters/lab-04-agent-change/src/tickets.js"
+      "path": "lab-04-agents-rules/src/tickets.js",
+      "url": "assets/starters/lab-04-agents-rules/src/tickets.js"
     },
     {
-      "path": "lab-04-agent-change/styles.css",
-      "url": "assets/starters/lab-04-agent-change/styles.css"
+      "path": "lab-04-agents-rules/styles.css",
+      "url": "assets/starters/lab-04-agents-rules/styles.css"
     },
     {
-      "path": "lab-04-agent-change/tests/base.test.mjs",
-      "url": "assets/starters/lab-04-agent-change/tests/base.test.mjs"
+      "path": "lab-04-agents-rules/tests/base.test.mjs",
+      "url": "assets/starters/lab-04-agents-rules/tests/base.test.mjs"
     },
     {
-      "path": "lab-05-agents-rules/.github/workflows/check.yml",
-      "url": "assets/starters/lab-05-agents-rules/.github/workflows/check.yml"
+      "path": "lab-04-agents-rules/tests/filter.test.mjs",
+      "url": "assets/starters/lab-04-agents-rules/tests/filter.test.mjs"
     },
     {
-      "path": "lab-05-agents-rules/.gitignore",
-      "url": "assets/starters/lab-05-agents-rules/.gitignore"
+      "path": "lab-05-mr-ci-review-skill/.github/workflows/check.yml",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/.github/workflows/check.yml"
     },
     {
-      "path": "lab-05-agents-rules/.gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-05-agents-rules/.gitverse/workflows/check.yml"
+      "path": "lab-05-mr-ci-review-skill/.gitignore",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/.gitignore"
     },
     {
-      "path": "lab-05-agents-rules/.vscode/tasks.json",
-      "url": "assets/starters/lab-05-agents-rules/.vscode/tasks.json"
+      "path": "lab-05-mr-ci-review-skill/.gitverse/workflows/check.yml",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/.gitverse/workflows/check.yml"
     },
     {
-      "path": "lab-05-agents-rules/BRIEF.md",
-      "url": "assets/starters/lab-05-agents-rules/BRIEF.md"
+      "path": "lab-05-mr-ci-review-skill/.vscode/tasks.json",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/.vscode/tasks.json"
     },
     {
-      "path": "lab-05-agents-rules/CHECKS.md",
-      "url": "assets/starters/lab-05-agents-rules/CHECKS.md"
+      "path": "lab-05-mr-ci-review-skill/AGENTS.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/AGENTS.md"
     },
     {
-      "path": "lab-05-agents-rules/COURSE_METADATA.json",
-      "url": "assets/starters/lab-05-agents-rules/COURSE_METADATA.json"
+      "path": "lab-05-mr-ci-review-skill/BRIEF.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/BRIEF.md"
     },
     {
-      "path": "lab-05-agents-rules/README.md",
-      "url": "assets/starters/lab-05-agents-rules/README.md"
+      "path": "lab-05-mr-ci-review-skill/CHECKS.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/CHECKS.md"
     },
     {
-      "path": "lab-05-agents-rules/REPORT.md",
-      "url": "assets/starters/lab-05-agents-rules/REPORT.md"
+      "path": "lab-05-mr-ci-review-skill/COURSE_METADATA.json",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/COURSE_METADATA.json"
     },
     {
-      "path": "lab-05-agents-rules/REQUIREMENTS.md",
-      "url": "assets/starters/lab-05-agents-rules/REQUIREMENTS.md"
+      "path": "lab-05-mr-ci-review-skill/README.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/README.md"
     },
     {
-      "path": "lab-05-agents-rules/TASK.md",
-      "url": "assets/starters/lab-05-agents-rules/TASK.md"
+      "path": "lab-05-mr-ci-review-skill/REPORT.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/REPORT.md"
     },
     {
-      "path": "lab-05-agents-rules/course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-05-agents-rules/course-docs/ACCESS_MATRIX.md"
+      "path": "lab-05-mr-ci-review-skill/REQUIREMENTS.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/REQUIREMENTS.md"
     },
     {
-      "path": "lab-05-agents-rules/course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-05-agents-rules/course-docs/STUDENT_SETUP.md"
+      "path": "lab-05-mr-ci-review-skill/TASK.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/TASK.md"
     },
     {
-      "path": "lab-05-agents-rules/gitverse/issue-template.md",
-      "url": "assets/starters/lab-05-agents-rules/gitverse/issue-template.md"
+      "path": "lab-05-mr-ci-review-skill/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/course-docs/ACCESS_MATRIX.md"
     },
     {
-      "path": "lab-05-agents-rules/gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-05-agents-rules/gitverse/merge-request-template.md"
+      "path": "lab-05-mr-ci-review-skill/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/course-docs/STUDENT_SETUP.md"
     },
     {
-      "path": "lab-05-agents-rules/index.html",
-      "url": "assets/starters/lab-05-agents-rules/index.html"
+      "path": "lab-05-mr-ci-review-skill/gitverse/issue-template.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/gitverse/issue-template.md"
     },
     {
-      "path": "lab-05-agents-rules/package.json",
-      "url": "assets/starters/lab-05-agents-rules/package.json"
+      "path": "lab-05-mr-ci-review-skill/gitverse/merge-request-template.md",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/gitverse/merge-request-template.md"
     },
     {
-      "path": "lab-05-agents-rules/server.mjs",
-      "url": "assets/starters/lab-05-agents-rules/server.mjs"
+      "path": "lab-05-mr-ci-review-skill/index.html",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/index.html"
     },
     {
-      "path": "lab-05-agents-rules/src/app.js",
-      "url": "assets/starters/lab-05-agents-rules/src/app.js"
+      "path": "lab-05-mr-ci-review-skill/package.json",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/package.json"
     },
     {
-      "path": "lab-05-agents-rules/src/data.js",
-      "url": "assets/starters/lab-05-agents-rules/src/data.js"
+      "path": "lab-05-mr-ci-review-skill/server.mjs",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/server.mjs"
     },
     {
-      "path": "lab-05-agents-rules/src/tickets.js",
-      "url": "assets/starters/lab-05-agents-rules/src/tickets.js"
+      "path": "lab-05-mr-ci-review-skill/src/app.js",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/src/app.js"
     },
     {
-      "path": "lab-05-agents-rules/styles.css",
-      "url": "assets/starters/lab-05-agents-rules/styles.css"
+      "path": "lab-05-mr-ci-review-skill/src/data.js",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/src/data.js"
     },
     {
-      "path": "lab-05-agents-rules/tests/base.test.mjs",
-      "url": "assets/starters/lab-05-agents-rules/tests/base.test.mjs"
+      "path": "lab-05-mr-ci-review-skill/src/tickets.js",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/src/tickets.js"
     },
     {
-      "path": "lab-05-agents-rules/tests/filter.test.mjs",
-      "url": "assets/starters/lab-05-agents-rules/tests/filter.test.mjs"
+      "path": "lab-05-mr-ci-review-skill/styles.css",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/styles.css"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/.github/workflows/check.yml",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/.github/workflows/check.yml"
+      "path": "lab-05-mr-ci-review-skill/tests/base.test.mjs",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/tests/base.test.mjs"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/.gitignore",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/.gitignore"
+      "path": "lab-05-mr-ci-review-skill/tests/filter.test.mjs",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/tests/filter.test.mjs"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/.gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/.gitverse/workflows/check.yml"
+      "path": "lab-05-mr-ci-review-skill/tests/search.test.mjs",
+      "url": "assets/starters/lab-05-mr-ci-review-skill/tests/search.test.mjs"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/.vscode/tasks.json",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/.vscode/tasks.json"
+      "path": "lab-06-final-project/.agents/skills/acceptance-check/SKILL.md",
+      "url": "assets/starters/lab-06-final-project/.agents/skills/acceptance-check/SKILL.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/AGENTS.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/AGENTS.md"
+      "path": "lab-06-final-project/.github/workflows/check.yml",
+      "url": "assets/starters/lab-06-final-project/.github/workflows/check.yml"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/BRIEF.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/BRIEF.md"
+      "path": "lab-06-final-project/.gitignore",
+      "url": "assets/starters/lab-06-final-project/.gitignore"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/CHECKS.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/CHECKS.md"
+      "path": "lab-06-final-project/.gitverse/workflows/check.yml",
+      "url": "assets/starters/lab-06-final-project/.gitverse/workflows/check.yml"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/COURSE_METADATA.json",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/COURSE_METADATA.json"
+      "path": "lab-06-final-project/.vscode/tasks.json",
+      "url": "assets/starters/lab-06-final-project/.vscode/tasks.json"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/README.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/README.md"
+      "path": "lab-06-final-project/AGENTS.md",
+      "url": "assets/starters/lab-06-final-project/AGENTS.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/REPORT.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/REPORT.md"
+      "path": "lab-06-final-project/BRIEF.md",
+      "url": "assets/starters/lab-06-final-project/BRIEF.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/REQUIREMENTS.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/REQUIREMENTS.md"
+      "path": "lab-06-final-project/CHECKS.md",
+      "url": "assets/starters/lab-06-final-project/CHECKS.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/TASK.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/TASK.md"
+      "path": "lab-06-final-project/COURSE_METADATA.json",
+      "url": "assets/starters/lab-06-final-project/COURSE_METADATA.json"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/course-docs/ACCESS_MATRIX.md"
+      "path": "lab-06-final-project/README.md",
+      "url": "assets/starters/lab-06-final-project/README.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/course-docs/STUDENT_SETUP.md"
+      "path": "lab-06-final-project/REPORT.md",
+      "url": "assets/starters/lab-06-final-project/REPORT.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/gitverse/issue-template.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/gitverse/issue-template.md"
+      "path": "lab-06-final-project/REQUIREMENTS.md",
+      "url": "assets/starters/lab-06-final-project/REQUIREMENTS.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/gitverse/merge-request-template.md"
+      "path": "lab-06-final-project/TASK.md",
+      "url": "assets/starters/lab-06-final-project/TASK.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/index.html",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/index.html"
+      "path": "lab-06-final-project/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/lab-06-final-project/course-docs/ACCESS_MATRIX.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/package.json",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/package.json"
+      "path": "lab-06-final-project/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/lab-06-final-project/course-docs/STUDENT_SETUP.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/server.mjs",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/server.mjs"
+      "path": "lab-06-final-project/gitverse/issue-template.md",
+      "url": "assets/starters/lab-06-final-project/gitverse/issue-template.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/src/app.js",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/src/app.js"
+      "path": "lab-06-final-project/gitverse/merge-request-template.md",
+      "url": "assets/starters/lab-06-final-project/gitverse/merge-request-template.md"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/src/data.js",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/src/data.js"
+      "path": "lab-06-final-project/index.html",
+      "url": "assets/starters/lab-06-final-project/index.html"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/src/tickets.js",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/src/tickets.js"
+      "path": "lab-06-final-project/package.json",
+      "url": "assets/starters/lab-06-final-project/package.json"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/styles.css",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/styles.css"
+      "path": "lab-06-final-project/server.mjs",
+      "url": "assets/starters/lab-06-final-project/server.mjs"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/tests/base.test.mjs",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/tests/base.test.mjs"
+      "path": "lab-06-final-project/src/app.js",
+      "url": "assets/starters/lab-06-final-project/src/app.js"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/tests/filter.test.mjs",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/tests/filter.test.mjs"
+      "path": "lab-06-final-project/src/data.js",
+      "url": "assets/starters/lab-06-final-project/src/data.js"
     },
     {
-      "path": "lab-06-mr-ci-review-skill/tests/search.test.mjs",
-      "url": "assets/starters/lab-06-mr-ci-review-skill/tests/search.test.mjs"
+      "path": "lab-06-final-project/src/tickets.js",
+      "url": "assets/starters/lab-06-final-project/src/tickets.js"
     },
     {
-      "path": "lab-07-final-project/.agents/skills/acceptance-check/SKILL.md",
-      "url": "assets/starters/lab-07-final-project/.agents/skills/acceptance-check/SKILL.md"
+      "path": "lab-06-final-project/styles.css",
+      "url": "assets/starters/lab-06-final-project/styles.css"
     },
     {
-      "path": "lab-07-final-project/.github/workflows/check.yml",
-      "url": "assets/starters/lab-07-final-project/.github/workflows/check.yml"
+      "path": "lab-06-final-project/tests/base.test.mjs",
+      "url": "assets/starters/lab-06-final-project/tests/base.test.mjs"
     },
     {
-      "path": "lab-07-final-project/.gitignore",
-      "url": "assets/starters/lab-07-final-project/.gitignore"
+      "path": "lab-06-final-project/tests/filter.test.mjs",
+      "url": "assets/starters/lab-06-final-project/tests/filter.test.mjs"
     },
     {
-      "path": "lab-07-final-project/.gitverse/workflows/check.yml",
-      "url": "assets/starters/lab-07-final-project/.gitverse/workflows/check.yml"
+      "path": "lab-06-final-project/tests/search.test.mjs",
+      "url": "assets/starters/lab-06-final-project/tests/search.test.mjs"
     },
     {
-      "path": "lab-07-final-project/.vscode/tasks.json",
-      "url": "assets/starters/lab-07-final-project/.vscode/tasks.json"
-    },
-    {
-      "path": "lab-07-final-project/AGENTS.md",
-      "url": "assets/starters/lab-07-final-project/AGENTS.md"
-    },
-    {
-      "path": "lab-07-final-project/BRIEF.md",
-      "url": "assets/starters/lab-07-final-project/BRIEF.md"
-    },
-    {
-      "path": "lab-07-final-project/CHECKS.md",
-      "url": "assets/starters/lab-07-final-project/CHECKS.md"
-    },
-    {
-      "path": "lab-07-final-project/COURSE_METADATA.json",
-      "url": "assets/starters/lab-07-final-project/COURSE_METADATA.json"
-    },
-    {
-      "path": "lab-07-final-project/README.md",
-      "url": "assets/starters/lab-07-final-project/README.md"
-    },
-    {
-      "path": "lab-07-final-project/REPORT.md",
-      "url": "assets/starters/lab-07-final-project/REPORT.md"
-    },
-    {
-      "path": "lab-07-final-project/REQUIREMENTS.md",
-      "url": "assets/starters/lab-07-final-project/REQUIREMENTS.md"
-    },
-    {
-      "path": "lab-07-final-project/TASK.md",
-      "url": "assets/starters/lab-07-final-project/TASK.md"
-    },
-    {
-      "path": "lab-07-final-project/course-docs/ACCESS_MATRIX.md",
-      "url": "assets/starters/lab-07-final-project/course-docs/ACCESS_MATRIX.md"
-    },
-    {
-      "path": "lab-07-final-project/course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/lab-07-final-project/course-docs/STUDENT_SETUP.md"
-    },
-    {
-      "path": "lab-07-final-project/gitverse/issue-template.md",
-      "url": "assets/starters/lab-07-final-project/gitverse/issue-template.md"
-    },
-    {
-      "path": "lab-07-final-project/gitverse/merge-request-template.md",
-      "url": "assets/starters/lab-07-final-project/gitverse/merge-request-template.md"
-    },
-    {
-      "path": "lab-07-final-project/index.html",
-      "url": "assets/starters/lab-07-final-project/index.html"
-    },
-    {
-      "path": "lab-07-final-project/package.json",
-      "url": "assets/starters/lab-07-final-project/package.json"
-    },
-    {
-      "path": "lab-07-final-project/server.mjs",
-      "url": "assets/starters/lab-07-final-project/server.mjs"
-    },
-    {
-      "path": "lab-07-final-project/src/app.js",
-      "url": "assets/starters/lab-07-final-project/src/app.js"
-    },
-    {
-      "path": "lab-07-final-project/src/data.js",
-      "url": "assets/starters/lab-07-final-project/src/data.js"
-    },
-    {
-      "path": "lab-07-final-project/src/tickets.js",
-      "url": "assets/starters/lab-07-final-project/src/tickets.js"
-    },
-    {
-      "path": "lab-07-final-project/styles.css",
-      "url": "assets/starters/lab-07-final-project/styles.css"
-    },
-    {
-      "path": "lab-07-final-project/tests/base.test.mjs",
-      "url": "assets/starters/lab-07-final-project/tests/base.test.mjs"
-    },
-    {
-      "path": "lab-07-final-project/tests/filter.test.mjs",
-      "url": "assets/starters/lab-07-final-project/tests/filter.test.mjs"
-    },
-    {
-      "path": "lab-07-final-project/tests/search.test.mjs",
-      "url": "assets/starters/lab-07-final-project/tests/search.test.mjs"
-    },
-    {
-      "path": "lab-07-final-project/tests/sort.test.mjs",
-      "url": "assets/starters/lab-07-final-project/tests/sort.test.mjs"
+      "path": "lab-06-final-project/tests/sort.test.mjs",
+      "url": "assets/starters/lab-06-final-project/tests/sort.test.mjs"
     },
     {
       "path": "START_HERE.md",

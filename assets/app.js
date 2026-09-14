@@ -1,9 +1,9 @@
 'use strict';
-import {$, esc, runtime, save, routeName, updateProgressPill} from './lib.js';
-import {renderTask, bindTaskPage} from './task-page.js?v=20260914-1205';
-import {bindStarterDownloads} from './starter-download.js';
-import {renderHome, renderTasks, renderStart} from './pages-home.js';
-import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js';
+import {$, esc, runtime, save, routeName, updateProgressPill} from './lib.js?v=5';
+import {renderTask, bindTaskPage} from './task-page.js?v=5';
+import {bindStarterDownloads} from './starter-download.js?v=5';
+import {renderHome, renderTasks, renderStart} from './pages-home.js?v=5';
+import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=5';
 
 function setActiveNav(route) {
   document.querySelectorAll('.tabs a').forEach(link => {
@@ -23,7 +23,7 @@ function render() {
   else if (route === 'route') html = renderRoute();
   else if (route === 'schedule') html = renderSchedule();
   else if (route === 'work') html = renderWork();
-  else if (/^task-[1-7]$/.test(route)) html = renderTask(Number(route.split('-')[1]));
+  else if (/^task-[1-6]$/.test(route)) html = renderTask(Number(route.split('-')[1]));
   else html = renderHome();
   $('#app').innerHTML = html;
   setActiveNav(route);
@@ -36,8 +36,8 @@ function render() {
 bindStarterDownloads();
 
 Promise.all([
-  fetch('assets/course.json').then(response => { if (!response.ok) throw new Error('course.json'); return response.json(); }),
-  fetch('assets/schedule.json').then(response => { if (!response.ok) throw new Error('schedule.json'); return response.json(); }),
+  fetch('assets/course.json?v=5').then(response => { if (!response.ok) throw new Error('course.json'); return response.json(); }),
+  fetch('assets/schedule.json?v=5').then(response => { if (!response.ok) throw new Error('schedule.json'); return response.json(); }),
 ]).then(([courseData, scheduleData]) => {
   runtime.course = courseData;
   runtime.schedule = scheduleData;

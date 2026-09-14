@@ -3,7 +3,7 @@
 export const $ = selector => document.querySelector(selector);
 export const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export const pad = value => String(value).padStart(2, '0');
-const STORE = 'kgasu-isit-ai-agents-v4';
+const STORE = 'kgasu-isit-ai-agents-v5';
 
 export const runtime = {course: [], schedule: [], state: {group: '', done: {}, steps: {}}};
 try {
@@ -87,15 +87,20 @@ export function setTaskStep(number, index, checked) {
 
 export function updateProgressPill() {
   const node = $('#progress-pill');
-  if (node) node.textContent = `${doneSet().size} / 7 подготовлено`;
+  if (node) node.textContent = `${doneSet().size} / ${runtime.course.length || 6} подготовлено`;
 }
 
 export function nearestLesson() {
   const group = currentGroup();
   const today = todayMoscow();
-  let index = group.dates.findIndex(date => date >= today);
+  const requiredIndex = group.dates.findIndex(date => date >= today);
+  const nextRequired = requiredIndex >= 0 ? group.dates[requiredIndex] : null;
+  if (group.intro?.date >= today && (!nextRequired || group.intro.date <= nextRequired)) {
+    return {group, lesson: null, intro: group.intro, date: group.intro.date, index: -1};
+  }
+  let index = requiredIndex;
   if (index < 0) index = group.dates.length - 1;
-  return {group, lesson: runtime.course[index], date: group.dates[index], index};
+  return {group, lesson: runtime.course[index], intro: null, date: group.dates[index], index};
 }
 
 export function taskCard(item) {
