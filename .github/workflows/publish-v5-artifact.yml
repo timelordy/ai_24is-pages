@@ -17,11 +17,11 @@ jobs:
       - name: Download and verify source CI artifact
         shell: bash
         env:
-          ARTIFACT_URL: 'https://sdmntprdenmarkeast.oaiusercontent.com/files/00000000-de88-8210-89bd-204b854ea5c1/raw?se=2026-09-14T13%3A51%3A58Z&sp=r&sv=2026-02-06&sr=b&scid=aacf29be-04ea-5a4f-baf2-280f3213d3ba&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T08%3A47%3A16Z&ske=2026-09-15T08%3A47%3A16Z&sks=b&skv=2026-02-06&sig=/ZHk%2B6B7q%2BDudXu2dOl5Q716hZ7eScDWnZO7QMFEMMg%3D'
+          ARTIFACT_URL: 'https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-33c8-81f7-812b-4bc1d4bde5b5/raw?se=2026-09-14T15%3A08%3A54Z&sp=r&sv=2026-02-06&sr=b&scid=ddbf1557-95f3-52b9-b941-0781ecb45663&skoid=3804227d-1b52-417d-afd9-9ffbb50fa53e&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T14%3A36%3A26Z&ske=2026-09-15T14%3A36%3A26Z&sks=b&skv=2026-02-06&sig=ClwKzx6pv/fez0076979lY/NigBGIuQI3Uk9tK86tEo%3D'
         run: |
           set -euo pipefail
           curl --fail --location --silent --show-error "$ARTIFACT_URL" -o /tmp/course.zip
-          echo 'fc617992692d48e4311a40430ad34f49a078bc665dd743b09d1ebed92709b3f4  /tmp/course.zip' | sha256sum -c -
+          echo '9738767212dde47b1548e007fcff52b07be0f6f56447e26860dc77e90e4e35b8  /tmp/course.zip' | sha256sum -c -
           rm -rf /tmp/course-public && mkdir /tmp/course-public
           unzip -q /tmp/course.zip -d /tmp/course-public
           python - <<'PY'
@@ -42,12 +42,16 @@ jobs:
           public_text='\n'.join(p.read_text(encoding='utf-8',errors='ignore') for p in files if p.suffix!='.zip')
           for forbidden in ['КГАСУ','ИСиТ','24ИС02','24ИС03','kgasu-campus','kgasu-isit']:
               if forbidden in public_text: raise SystemExit(f'identity leak: {forbidden}')
+          for forbidden in ['Roadmap','LOCKED','Recovery checkpoint','Definition of Done','Milestone','Workflow']:
+              if forbidden in public_text: raise SystemExit(f'unwanted student-facing English label: {forbidden}')
+          for required_text in ['семестровый проект','Настроить среду, разобраться в проекте и зафиксировать требования','Создать аккаунт GitVerse','Установить Visual Studio Code','Установить GigaCode','Резервная копия проекта']:
+              if required_text not in public_text: raise SystemExit(f'missing Russian course text: {required_text}')
           required=['index.html','assets/app.js','assets/style.css','assets/task-page.js','assets/course.json','assets/schedule.json','assets/release.json','assets/starters/manifest.json','assets/materials/work-01/TASK.md']
           for name in required:
               if not (root/name).is_file(): raise SystemExit(f'missing {name}')
           for n in range(2,7):
               if (root/f'assets/materials/work-{n:02}').exists(): raise SystemExit(f'future work {n} leaked')
-          print('Verified anonymous Apple-inspired Campus ServiceDesk release 1/6')
+          print('Verified Russian Campus ServiceDesk release 1/6')
           PY
       - name: Replace public portal
         shell: bash
@@ -62,5 +66,5 @@ jobs:
           git add -A -- assets index.html .nojekyll
           git diff --cached --check
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Publish anonymized Apple-inspired Campus ServiceDesk UI'
+          git commit -m 'Publish Russian Campus ServiceDesk v12'
           git push origin HEAD:main
