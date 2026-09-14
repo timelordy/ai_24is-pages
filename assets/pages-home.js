@@ -1,5 +1,5 @@
 'use strict';
-import {runtime,esc,pad,inline,dateLabel,nearestLesson,currentOpenLesson,taskCard} from './lib.js';
+import {runtime,esc,pad,inline,dateLabel,nearestLesson,currentOpenLesson,taskCard} from './lib.js?v=99b18c7fecee';
 
 function nearestCard(n){
   if(n.intro)return`<section class="next-card panel"><div class="next-number">00</div><div><p class="eyebrow">Вводная встреча</p><h2>${esc(n.intro.title)}</h2><p>${esc(n.intro.note)}</p></div><a class="button primary" href="#start">Открыть инструкцию</a></section>`;

@@ -1,5 +1,5 @@
 'use strict';
-import {runtime,esc,pad,dateLabel,currentGroup,doneSet,setDone} from './lib.js';
+import {runtime,esc,pad,dateLabel,currentGroup,doneSet,setDone} from './lib.js?v=99b18c7fecee';
 
 export function renderRoute(){return`<header class="page-head"><p class="eyebrow">План проекта</p><h1>Шесть слоёв одного продукта</h1><p class="lead">Каждый этап расширяет одну и ту же систему. Новый учебный проект каждый раз не создаётся.</p></header><section class="route-grid">${runtime.course.map(item=>`<article class="stage-card panel ${item.locked?'locked':''}"><div class="stage-head"><span class="stage-number">ЭТАП ${pad(item.number)}</span><span class="status">${item.locked?'ОТКРОЕТСЯ ПОЗЖЕ':'ОТКРЫТО'}</span></div><h3>${esc(item.title)}</h3><p>${esc(item.ability)}</p>${item.locked?`<div class="accept"><b>Материалы пока недоступны</b>${esc(item.releaseHint)}</div>`:`<div class="accept"><b>Что должно получиться</b>${esc(item.artifact)}</div><div class="actions"><a class="button text" href="#task-${item.number}">Открыть этап →</a></div>`}</article>`).join('')}</section>`;}
 

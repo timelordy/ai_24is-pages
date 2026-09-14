@@ -89,7 +89,7 @@ function makeStoredZip(files) {
 }
 
 async function getManifest() {
-  manifestPromise ||= fetch('assets/starters/manifest.json?v=13', {cache: 'no-cache'}).then(response => {
+  manifestPromise ||= fetch('assets/starters/manifest.json?v=99b18c7fecee', {cache: 'no-cache'}).then(response => {
     if (!response.ok) throw new Error('Не удалось загрузить состав архива проекта.');
     return response.json();
   });

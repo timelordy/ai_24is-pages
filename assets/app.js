@@ -2,11 +2,11 @@
 
 // All page modules must use the same canonical shared-state import.
 // Cache versions are assigned once in index.html, not per importing module.
-import {$, esc, runtime, save, routeName, updateProgressPill} from './lib.js';
-import {renderTask, bindTaskPage} from './task-page.js';
-import {bindStarterDownloads} from './starter-download.js';
-import {renderHome, renderTasks, renderCurrent, renderStart} from './pages-home.js';
-import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js';
+import {$, esc, runtime, save, routeName, updateProgressPill} from './lib.js?v=99b18c7fecee';
+import {renderTask, bindTaskPage} from './task-page.js?v=99b18c7fecee';
+import {bindStarterDownloads} from './starter-download.js?v=99b18c7fecee';
+import {renderHome, renderTasks, renderCurrent, renderStart} from './pages-home.js?v=99b18c7fecee';
+import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=99b18c7fecee';
 
 function setActiveNav(route) {
   document.querySelectorAll('.tabs a').forEach(link => {
@@ -46,8 +46,8 @@ async function loadJson(path) {
 
 bindStarterDownloads();
 Promise.all([
-  loadJson('assets/course.json?v=13'),
-  loadJson('assets/schedule.json?v=13'),
+  loadJson('assets/course.json?v=99b18c7fecee'),
+  loadJson('assets/schedule.json?v=99b18c7fecee'),
 ]).then(([course, schedule]) => {
   runtime.course = course;
   runtime.schedule = schedule;

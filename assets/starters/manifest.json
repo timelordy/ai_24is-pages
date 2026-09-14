@@ -40,8 +40,56 @@
       "url": "assets/starters/work-01-discovery-contract/course-docs/ACCESS_MATRIX.md"
     },
     {
+      "path": "course-docs/SCREENSHOTS.md",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/SCREENSHOTS.md"
+    },
+    {
       "path": "course-docs/STUDENT_SETUP.md",
       "url": "assets/starters/work-01-discovery-contract/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "course-docs/screenshots/gigacode-connect.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/gigacode-connect.webp"
+    },
+    {
+      "path": "course-docs/screenshots/gigacode-install-vsix.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/gigacode-install-vsix.webp"
+    },
+    {
+      "path": "course-docs/screenshots/gigacode-ready.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/gigacode-ready.webp"
+    },
+    {
+      "path": "course-docs/screenshots/git-download.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/git-download.webp"
+    },
+    {
+      "path": "course-docs/screenshots/gitverse-sign-in.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/gitverse-sign-in.webp"
+    },
+    {
+      "path": "course-docs/screenshots/node-download.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/node-download.webp"
+    },
+    {
+      "path": "course-docs/screenshots/project-running.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/project-running.webp"
+    },
+    {
+      "path": "course-docs/screenshots/project-terminal.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/project-terminal.webp"
+    },
+    {
+      "path": "course-docs/screenshots/sources.json",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/sources.json"
+    },
+    {
+      "path": "course-docs/screenshots/test-output.txt",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/test-output.txt"
+    },
+    {
+      "path": "course-docs/screenshots/vscode-download.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/vscode-download.webp"
     },
     {
       "path": "docs/ARCHITECTURE.md",
@@ -137,8 +185,56 @@
       "url": "assets/starters/work-01-discovery-contract/course-docs/ACCESS_MATRIX.md"
     },
     {
+      "path": "work-01-discovery-contract/course-docs/SCREENSHOTS.md",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/SCREENSHOTS.md"
+    },
+    {
       "path": "work-01-discovery-contract/course-docs/STUDENT_SETUP.md",
       "url": "assets/starters/work-01-discovery-contract/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/gigacode-connect.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/gigacode-connect.webp"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/gigacode-install-vsix.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/gigacode-install-vsix.webp"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/gigacode-ready.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/gigacode-ready.webp"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/git-download.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/git-download.webp"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/gitverse-sign-in.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/gitverse-sign-in.webp"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/node-download.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/node-download.webp"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/project-running.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/project-running.webp"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/project-terminal.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/project-terminal.webp"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/sources.json",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/sources.json"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/test-output.txt",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/test-output.txt"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/screenshots/vscode-download.webp",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/vscode-download.webp"
     },
     {
       "path": "work-01-discovery-contract/docs/ARCHITECTURE.md",
