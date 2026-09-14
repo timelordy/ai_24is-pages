@@ -1,0 +1,109 @@
+'use strict';
+
+export const $ = selector => document.querySelector(selector);
+export const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+export const pad = value => String(value).padStart(2, '0');
+const STORE = 'kgasu-isit-ai-agents-v4';
+
+export const runtime = {course: [], schedule: [], state: {group: '', done: {}, steps: {}}};
+try {
+  const saved = JSON.parse(localStorage.getItem(STORE) || '{}');
+  if (saved && typeof saved === 'object') runtime.state = {...runtime.state, ...saved};
+} catch {}
+
+export function save() {
+  try { localStorage.setItem(STORE, JSON.stringify(runtime.state)); } catch {}
+  updateProgressPill();
+}
+
+export function inline(value) {
+  let text = esc(value);
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  return text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+}
+
+export function block(value) {
+  const source = String(value || '').trim();
+  if (!source) return '';
+  const chunks = [];
+  let rest = source;
+  while (rest.includes('```')) {
+    const start = rest.indexOf('```');
+    const end = rest.indexOf('```', start + 3);
+    if (end < 0) break;
+    chunks.push({type: 'text', value: rest.slice(0, start)});
+    chunks.push({type: 'code', value: rest.slice(start + 3, end).replace(/^\w+\n/, '').trim()});
+    rest = rest.slice(end + 3);
+  }
+  chunks.push({type: 'text', value: rest});
+  return chunks.map(chunk => {
+    if (chunk.type === 'code') return `<pre class="command">${esc(chunk.value)}</pre>`;
+    return chunk.value.split(/\n{2,}/).filter(Boolean).map(paragraph => {
+      const clean = paragraph.replace(/^>\s?/gm, '').trim();
+      return paragraph.trim().startsWith('>')
+        ? `<blockquote class="question">${inline(clean)}</blockquote>`
+        : `<p>${inline(clean).replace(/\n/g, '<br>')}</p>`;
+    }).join('');
+  }).join('');
+}
+
+export function todayMoscow() {
+  return new Intl.DateTimeFormat('sv-SE', {timeZone: 'Europe/Moscow', year: 'numeric', month: '2-digit', day: '2-digit'}).format(new Date());
+}
+
+export function dateLabel(value) {
+  return new Date(`${value}T12:00:00+03:00`).toLocaleDateString('ru-RU', {day: 'numeric', month: 'long', year: 'numeric'});
+}
+
+export const routeName = () => location.hash.slice(1) || 'home';
+export const currentGroup = () => runtime.schedule.find(item => item.group === runtime.state.group) || runtime.schedule[0];
+
+export function doneSet() {
+  const list = runtime.state.done?.[runtime.state.group];
+  return new Set(Array.isArray(list) ? list : []);
+}
+
+export function setDone(number, isDone) {
+  const set = doneSet();
+  isDone ? set.add(number) : set.delete(number);
+  runtime.state.done ||= {};
+  runtime.state.done[runtime.state.group] = [...set].sort((a, b) => a - b);
+  save();
+}
+
+export function taskSteps(number) {
+  const group = runtime.state.steps?.[runtime.state.group] || {};
+  return new Set(Array.isArray(group[number]) ? group[number] : []);
+}
+
+export function setTaskStep(number, index, checked) {
+  runtime.state.steps ||= {};
+  runtime.state.steps[runtime.state.group] ||= {};
+  const set = taskSteps(number);
+  checked ? set.add(index) : set.delete(index);
+  runtime.state.steps[runtime.state.group][number] = [...set].sort((a, b) => a - b);
+  save();
+}
+
+export function updateProgressPill() {
+  const node = $('#progress-pill');
+  if (node) node.textContent = `${doneSet().size} / 7 подготовлено`;
+}
+
+export function nearestLesson() {
+  const group = currentGroup();
+  const today = todayMoscow();
+  let index = group.dates.findIndex(date => date >= today);
+  if (index < 0) index = group.dates.length - 1;
+  return {group, lesson: runtime.course[index], date: group.dates[index], index};
+}
+
+export function taskCard(item) {
+  const done = doneSet().has(item.number);
+  return `<article class="task-card panel ${done ? 'done' : ''}">
+    <div class="task-card-top"><span class="task-number">${pad(item.number)}</span><span class="status ${done ? 'done' : ''}">${done ? 'ПОДГОТОВЛЕНО' : 'ЗАДАНИЕ'}</span></div>
+    <h3>${esc(item.title)}</h3><p>${esc(item.goal || item.ability)}</p>
+    <div class="task-artifact"><b>Что сдавать</b>${esc(item.artifact)}</div>
+    <div class="actions"><a class="button primary" href="#task-${item.number}">Открыть задание</a><a class="button starter-download" href="#" data-starter="${esc(item.downloads.starterKey)}" data-filename="${esc(item.downloads.starterFilename)}">Starter ZIP</a></div>
+  </article>`;
+}

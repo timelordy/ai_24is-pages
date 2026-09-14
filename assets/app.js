@@ -1,49 +1,54 @@
 'use strict';
-const $ = selector => document.querySelector(selector);
-const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-const formatDate = date => new Date(date + 'T12:00:00+03:00').toLocaleDateString('ru-RU', {day:'numeric', month:'long'});
+import {$, esc, runtime, save, routeName, updateProgressPill} from './lib.js';
+import {renderTask, bindTaskPage} from './task-page.js';
+import {bindStarterDownloads} from './starter-download.js';
+import {renderHome, renderTasks, renderStart} from './pages-home.js';
+import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js';
+
+function setActiveNav(route) {
+  document.querySelectorAll('.tabs a').forEach(link => {
+    const target = link.dataset.route;
+    const active = target === route || (route.startsWith('task-') && target === 'tasks');
+    link.classList.toggle('active', active);
+    active ? link.setAttribute('aria-current', 'page') : link.removeAttribute('aria-current');
+  });
+}
+
+function render() {
+  const route = routeName();
+  let html;
+  if (route === 'home') html = renderHome();
+  else if (route === 'tasks') html = renderTasks();
+  else if (route === 'start') html = renderStart();
+  else if (route === 'route') html = renderRoute();
+  else if (route === 'schedule') html = renderSchedule();
+  else if (route === 'work') html = renderWork();
+  else if (/^task-[1-7]$/.test(route)) html = renderTask(Number(route.split('-')[1]));
+  else html = renderHome();
+  $('#app').innerHTML = html;
+  setActiveNav(route);
+  updateProgressPill();
+  bindTaskPage(route, render);
+  if (route === 'work') bindWork(render);
+  $('#app').focus({preventScroll: true});
+}
+
+bindStarterDownloads();
 
 Promise.all([
-  fetch('assets/course.json').then(response => {
-    if (!response.ok) throw new Error('Не удалось загрузить программу');
-    return response.json();
-  }),
-  fetch('assets/schedule.json').then(response => {
-    if (!response.ok) throw new Error('Не удалось загрузить расписание');
-    return response.json();
-  })
-]).then(([course, schedule]) => {
-  const groupSelect = $('#group');
-  groupSelect.innerHTML = schedule.map(item => `<option value="${escapeHtml(item.group)}">${escapeHtml(item.group)}</option>`).join('');
-
-  function renderNext() {
-    const group = schedule.find(item => item.group === groupSelect.value);
-    const now = new Date();
-    const lessonIndex = group.dates.findIndex(date => new Date(date + 'T23:59:00+03:00') >= now);
-    if (lessonIndex < 0) {
-      $('#next').innerHTML = '<p class="eyebrow">Курс</p><h2>Расписание завершено</h2><p>Материалы остаются доступны для повторения и защиты.</p>';
-      return;
-    }
-    const lesson = course[lessonIndex];
-    $('#next').innerHTML = `
-      <p class="eyebrow">Ближайшая пара · ${escapeHtml(group.group)}</p>
-      <h2>${formatDate(group.dates[lessonIndex])} · ${escapeHtml(group.time)}</h2>
-      <p><b>${String(lesson.number).padStart(2, '0')} · ${escapeHtml(lesson.title)}</b></p>
-      <p>${escapeHtml(lesson.artifact)}</p>
-      <p class="muted">Аудитория: ${escapeHtml(group.room)}</p>`;
-  }
-
-  $('#lessons').innerHTML = course.map(lesson => `
-    <article class="card">
-      <span class="number">${String(lesson.number).padStart(2, '0')}</span>
-      <h3>${escapeHtml(lesson.title)}</h3>
-      <p>${escapeHtml(lesson.ability)}</p>
-      <p><b>GitVerse:</b> ${escapeHtml(lesson.gitverse)}</p>
-      <p><b>Артефакт:</b> ${escapeHtml(lesson.artifact)}</p>
-    </article>`).join('');
-
-  groupSelect.addEventListener('change', renderNext);
-  renderNext();
+  fetch('assets/course.json').then(response => { if (!response.ok) throw new Error('course.json'); return response.json(); }),
+  fetch('assets/schedule.json').then(response => { if (!response.ok) throw new Error('schedule.json'); return response.json(); }),
+]).then(([courseData, scheduleData]) => {
+  runtime.course = courseData;
+  runtime.schedule = scheduleData;
+  if (!runtime.schedule.some(item => item.group === runtime.state.group)) runtime.state.group = runtime.schedule[0].group;
+  const picker = $('#group');
+  picker.innerHTML = runtime.schedule.map(item => `<option value="${esc(item.group)}">${esc(item.group)}</option>`).join('');
+  picker.value = runtime.state.group;
+  picker.addEventListener('change', () => { runtime.state.group = picker.value; save(); render(); });
+  window.addEventListener('hashchange', render);
+  if (!location.hash) history.replaceState(null, '', '#home');
+  render();
 }).catch(error => {
-  $('main').innerHTML = `<section class="next"><h1>Материалы не загрузились</h1><p>${escapeHtml(error.message)}</p></section>`;
+  $('#app').innerHTML = `<section class="empty panel"><h1>Материалы не загрузились</h1><p>${esc(error.message)}</p><a class="button primary" href="#start">Открыть инструкцию</a></section>`;
 });
