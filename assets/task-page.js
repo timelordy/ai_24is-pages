@@ -1,6 +1,6 @@
 'use strict';
-import {runtime, esc, pad, inline, block, doneSet, setDone, taskSteps, setTaskStep, isSetupMeeting} from './lib.js?v=d1ec070f5910';
-import {renderLessonImages} from './lesson-images.js?v=d1ec070f5910';
+import {runtime, esc, pad, inline, block, doneSet, setDone, taskSteps, setTaskStep, isSetupMeeting} from './lib.js?v=18dc50422886';
+import {renderLessonImages} from './lesson-images.js?v=18dc50422886';
 function bulletList(items, tone = 'success') { return `<ul class="result-list ${tone === 'success' ? 'success-list' : 'failure-list'}">${(items || []).map(value => `<li><b aria-hidden="true">${tone === 'success' ? '✓' : '×'}</b><span>${inline(value)}</span></li>`).join('')}</ul>`; }
 function files(item) {
   if (!item.downloads) return '';

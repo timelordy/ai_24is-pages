@@ -1,5 +1,5 @@
 'use strict';
-import {runtime, esc, pad, dateLabel, currentGroup, doneSet, setDone, taskCard, nearestLesson} from './lib.js?v=d1ec070f5910';
+import {runtime, esc, pad, dateLabel, currentGroup, doneSet, setDone, taskCard, nearestLesson} from './lib.js?v=18dc50422886';
 export function renderRoute() { return `<header class="page-head"><p class="eyebrow">${esc(runtime.state.group)}</p><h1>Как будем развивать проект</h1><p class="lead">От готового списка заявок — к приложению с сервером, базой и подсказками ИИ.</p></header><section class="task-grid">${runtime.course.map(taskCard).join('')}</section>`; }
 export function renderSchedule() {
   const group = currentGroup(); if (!group) return '';

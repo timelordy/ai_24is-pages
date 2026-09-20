@@ -1,9 +1,9 @@
 'use strict';
-import {$, esc, runtime, selectGroup, routeName, updateProgressPill, nearestLesson, dayLabel, dateLabel, currentOpenLesson, isSetupMeeting} from './lib.js?v=d1ec070f5910';
-import {renderTask, bindTaskPage} from './task-page.js?v=d1ec070f5910';
-import {bindStarterDownloads} from './starter-download.js?v=d1ec070f5910';
-import {renderHome, renderTasks, renderStart} from './pages-home.js?v=d1ec070f5910';
-import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=d1ec070f5910';
+import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentOpenLesson, isSetupMeeting} from './lib.js?v=18dc50422886';
+import {renderTask, bindTaskPage} from './task-page.js?v=18dc50422886';
+import {bindStarterDownloads} from './starter-download.js?v=18dc50422886';
+import {renderHome, renderTasks, renderStart} from './pages-home.js?v=18dc50422886';
+import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=18dc50422886';
 let entered = false;
 // The sticky offset follows wrapped navigation, rotation and larger user text.
 if ('ResizeObserver' in window) {
@@ -16,7 +16,7 @@ if ('ResizeObserver' in window) {
 }
 function setActiveNav(route) {
   document.querySelectorAll('.tabs a').forEach(link => {
-    const active = link.dataset.route === route || ((route.startsWith('task-') || route === 'start') && link.dataset.route === 'current');
+    const active = link.dataset.route === route || ((route.startsWith('task-') || route === 'start') && link.dataset.route === 'tasks');
     link.classList.toggle('active', active);
     if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
@@ -44,11 +44,10 @@ function render() {
 function openGroupPicker() {
   const dialog = $('#group-dialog'); $('#close-group').hidden = !entered;
   $('#group-options').innerHTML = runtime.schedule.map((group, index) => {
-    const nearest = nearestLesson(group); const [name, subgroup] = group.group.split(' — ');
-    const remembered = runtime.state.groupChosen && runtime.state.group === group.group; const date = nearest?.date;
-    const shortDate = date ? new Date(`${date}T12:00:00+03:00`).toLocaleDateString('ru-RU', {day: 'numeric', month: 'long', timeZone: 'Europe/Moscow'}) : '';
+    const [name, subgroup] = group.group.split(' — ');
+    const remembered = runtime.state.groupChosen && runtime.state.group === group.group;
     const indicator = remembered ? '<path d="m4 8 2.5 2.5L12 5"/>' : '<path d="m6 4 4 4-4 4"/>';
-    return `<button class="group-option ${remembered ? 'remembered' : ''}" type="button" data-group-index="${index}" aria-label="${esc(group.group)}"><span class="group-option-title"><span class="group-option-name">${esc(name)}</span><strong>${esc(subgroup || group.group)}</strong></span><span class="group-option-time">${esc(dayLabel(date || group.dates[0]))} · ${esc(group.time)}</span><span class="group-option-next">${date ? `Ближайшая: <time datetime="${esc(date)}" title="${esc(dateLabel(date))}">${esc(shortDate)}</time>` : 'Встречи по расписанию завершены'}</span><span class="choice-indicator" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${indicator}</svg></span>${remembered ? '<span class="sr-only">Ранее выбрана</span>' : ''}</button>`;
+    return `<button class="group-option ${remembered ? 'remembered' : ''}" type="button" data-group-index="${index}" aria-label="${esc(group.group)}"><span class="group-option-title"><span class="group-option-name">${esc(name)}</span><strong>${esc(subgroup || group.group)}</strong></span><span class="group-option-time">${esc(dayLabel(group.dates[0]))} · ${esc(group.time)}</span><span class="choice-indicator" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${indicator}</svg></span>${remembered ? '<span class="sr-only">Ранее выбрана</span>' : ''}</button>`;
   }).join('');
   $('#group-options').querySelectorAll('[data-group-index]').forEach(button => {
     button.addEventListener('click', () => {
@@ -70,7 +69,7 @@ $('#group-dialog').addEventListener('cancel', event => { if (!entered) event.pre
 $('#close-group').addEventListener('click', () => { if (entered) $('#group-dialog').close(); });
 $('#change-group').addEventListener('click', openGroupPicker);
 bindStarterDownloads();
-Promise.all([loadJson('assets/course.json?v=d1ec070f5910'), loadJson('assets/schedule.json?v=d1ec070f5910')]).then(([course, schedule]) => {
+Promise.all([loadJson('assets/course.json?v=18dc50422886'), loadJson('assets/schedule.json?v=18dc50422886')]).then(([course, schedule]) => {
   validateData(course, schedule);
   runtime.course = course;
   runtime.schedule = schedule;
