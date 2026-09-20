@@ -16,36 +16,8 @@
       "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
     },
     {
-      "path": "COURSE_METADATA.json",
-      "url": "assets/starters/work-01-discovery-contract/COURSE_METADATA.json"
-    },
-    {
-      "path": "HANDOFF.md",
-      "url": "assets/starters/work-01-discovery-contract/HANDOFF.md"
-    },
-    {
-      "path": "README.md",
-      "url": "assets/starters/work-01-discovery-contract/README.md"
-    },
-    {
-      "path": "REPORT.md",
-      "url": "assets/starters/work-01-discovery-contract/REPORT.md"
-    },
-    {
-      "path": "TASK.md",
-      "url": "assets/starters/work-01-discovery-contract/TASK.md"
-    },
-    {
       "path": "course-docs/ACCESS_MATRIX.md",
       "url": "assets/starters/work-01-discovery-contract/course-docs/ACCESS_MATRIX.md"
-    },
-    {
-      "path": "course-docs/SCREENSHOTS.md",
-      "url": "assets/starters/work-01-discovery-contract/course-docs/SCREENSHOTS.md"
-    },
-    {
-      "path": "course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/work-01-discovery-contract/course-docs/STUDENT_SETUP.md"
     },
     {
       "path": "course-docs/screenshots/gigacode-connect.webp",
@@ -92,6 +64,18 @@
       "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/vscode-download.webp"
     },
     {
+      "path": "course-docs/SCREENSHOTS.md",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/SCREENSHOTS.md"
+    },
+    {
+      "path": "course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "COURSE_METADATA.json",
+      "url": "assets/starters/work-01-discovery-contract/COURSE_METADATA.json"
+    },
+    {
       "path": "docs/ARCHITECTURE.md",
       "url": "assets/starters/work-01-discovery-contract/docs/ARCHITECTURE.md"
     },
@@ -112,12 +96,24 @@
       "url": "assets/starters/work-01-discovery-contract/gitverse/merge-request-template.md"
     },
     {
+      "path": "HANDOFF.md",
+      "url": "assets/starters/work-01-discovery-contract/HANDOFF.md"
+    },
+    {
       "path": "index.html",
       "url": "assets/starters/work-01-discovery-contract/index.html"
     },
     {
       "path": "package.json",
       "url": "assets/starters/work-01-discovery-contract/package.json"
+    },
+    {
+      "path": "README.md",
+      "url": "assets/starters/work-01-discovery-contract/README.md"
+    },
+    {
+      "path": "REPORT.md",
+      "url": "assets/starters/work-01-discovery-contract/REPORT.md"
     },
     {
       "path": "server.mjs",
@@ -138,6 +134,10 @@
     {
       "path": "styles.css",
       "url": "assets/starters/work-01-discovery-contract/styles.css"
+    },
+    {
+      "path": "TASK.md",
+      "url": "assets/starters/work-01-discovery-contract/TASK.md"
     },
     {
       "path": "tests/base.test.mjs",
@@ -161,36 +161,8 @@
       "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
     },
     {
-      "path": "work-01-discovery-contract/COURSE_METADATA.json",
-      "url": "assets/starters/work-01-discovery-contract/COURSE_METADATA.json"
-    },
-    {
-      "path": "work-01-discovery-contract/HANDOFF.md",
-      "url": "assets/starters/work-01-discovery-contract/HANDOFF.md"
-    },
-    {
-      "path": "work-01-discovery-contract/README.md",
-      "url": "assets/starters/work-01-discovery-contract/README.md"
-    },
-    {
-      "path": "work-01-discovery-contract/REPORT.md",
-      "url": "assets/starters/work-01-discovery-contract/REPORT.md"
-    },
-    {
-      "path": "work-01-discovery-contract/TASK.md",
-      "url": "assets/starters/work-01-discovery-contract/TASK.md"
-    },
-    {
       "path": "work-01-discovery-contract/course-docs/ACCESS_MATRIX.md",
       "url": "assets/starters/work-01-discovery-contract/course-docs/ACCESS_MATRIX.md"
-    },
-    {
-      "path": "work-01-discovery-contract/course-docs/SCREENSHOTS.md",
-      "url": "assets/starters/work-01-discovery-contract/course-docs/SCREENSHOTS.md"
-    },
-    {
-      "path": "work-01-discovery-contract/course-docs/STUDENT_SETUP.md",
-      "url": "assets/starters/work-01-discovery-contract/course-docs/STUDENT_SETUP.md"
     },
     {
       "path": "work-01-discovery-contract/course-docs/screenshots/gigacode-connect.webp",
@@ -237,6 +209,18 @@
       "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/vscode-download.webp"
     },
     {
+      "path": "work-01-discovery-contract/course-docs/SCREENSHOTS.md",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/SCREENSHOTS.md"
+    },
+    {
+      "path": "work-01-discovery-contract/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "work-01-discovery-contract/COURSE_METADATA.json",
+      "url": "assets/starters/work-01-discovery-contract/COURSE_METADATA.json"
+    },
+    {
       "path": "work-01-discovery-contract/docs/ARCHITECTURE.md",
       "url": "assets/starters/work-01-discovery-contract/docs/ARCHITECTURE.md"
     },
@@ -257,12 +241,24 @@
       "url": "assets/starters/work-01-discovery-contract/gitverse/merge-request-template.md"
     },
     {
+      "path": "work-01-discovery-contract/HANDOFF.md",
+      "url": "assets/starters/work-01-discovery-contract/HANDOFF.md"
+    },
+    {
       "path": "work-01-discovery-contract/index.html",
       "url": "assets/starters/work-01-discovery-contract/index.html"
     },
     {
       "path": "work-01-discovery-contract/package.json",
       "url": "assets/starters/work-01-discovery-contract/package.json"
+    },
+    {
+      "path": "work-01-discovery-contract/README.md",
+      "url": "assets/starters/work-01-discovery-contract/README.md"
+    },
+    {
+      "path": "work-01-discovery-contract/REPORT.md",
+      "url": "assets/starters/work-01-discovery-contract/REPORT.md"
     },
     {
       "path": "work-01-discovery-contract/server.mjs",
@@ -283,6 +279,10 @@
     {
       "path": "work-01-discovery-contract/styles.css",
       "url": "assets/starters/work-01-discovery-contract/styles.css"
+    },
+    {
+      "path": "work-01-discovery-contract/TASK.md",
+      "url": "assets/starters/work-01-discovery-contract/TASK.md"
     },
     {
       "path": "work-01-discovery-contract/tests/base.test.mjs",

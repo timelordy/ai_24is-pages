@@ -19,7 +19,7 @@ node --version:
 npm --version:
 ```
 
-**GigaCode показывает Ready:** да / нет
+**GigaCode отвечает в VS Code:** да / нет
 
 ## Проверка исходного проекта
 
@@ -59,7 +59,8 @@ npm --version:
 Вставьте результат команды:
 
 ```bash
-git diff --exit-code -- index.html src server.mjs tests styles.css
+git diff --exit-code main -- index.html src server.mjs tests styles.css package.json
+git status --short -- index.html src server.mjs tests styles.css package.json
 ```
 
 **Код приложения не изменён:** да / нет
@@ -72,4 +73,4 @@ git diff --exit-code -- index.html src server.mjs tests styles.css
 
 ## Итог
 
-**Работа готова к приёмке:** да / нет
+**Отчёт отправлен в GitVerse, ветка открывается в браузере:** да / нет

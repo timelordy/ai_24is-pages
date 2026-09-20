@@ -1,71 +1,77 @@
 'use strict';
-
-// All page modules must use the same canonical shared-state import.
-// Cache versions are assigned once in index.html, not per importing module.
-import {$, esc, runtime, save, routeName, updateProgressPill} from './lib.js?v=99b18c7fecee';
-import {renderTask, bindTaskPage} from './task-page.js?v=99b18c7fecee';
-import {bindStarterDownloads} from './starter-download.js?v=99b18c7fecee';
-import {renderHome, renderTasks, renderCurrent, renderStart} from './pages-home.js?v=99b18c7fecee';
-import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=99b18c7fecee';
-
+import {$, esc, runtime, selectGroup, routeName, updateProgressPill, nearestLesson, dayLabel, dateLabel, currentOpenLesson, isSetupMeeting} from './lib.js?v=359ee70d123b';
+import {renderTask, bindTaskPage} from './task-page.js?v=359ee70d123b';
+import {bindStarterDownloads} from './starter-download.js?v=359ee70d123b';
+import {renderHome, renderTasks, renderStart} from './pages-home.js?v=359ee70d123b';
+import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=359ee70d123b';
+let entered = false;
 function setActiveNav(route) {
   document.querySelectorAll('.tabs a').forEach(link => {
-    const active = link.dataset.route === route ||
-      (route.startsWith('task-') && link.dataset.route === 'current');
+    const active = link.dataset.route === route || ((route.startsWith('task-') || route === 'start') && link.dataset.route === 'current');
     link.classList.toggle('active', active);
-    if (active) link.setAttribute('aria-current', 'page');
-    else link.removeAttribute('aria-current');
+    if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
 }
-
 function render() {
-  const route = routeName();
+  if (!entered) return;
+  let route = routeName();
+  if (route === 'current') { route = isSetupMeeting() ? 'start' : `task-${currentOpenLesson()?.number || 1}`; history.replaceState(null, '', `#${route}`); }
   let html;
   if (route === 'home') html = renderHome();
   else if (route === 'tasks') html = renderTasks();
-  else if (route === 'current') html = renderCurrent();
   else if (route === 'start') html = renderStart();
   else if (route === 'route') html = renderRoute();
   else if (route === 'schedule') html = renderSchedule();
   else if (route === 'work') html = renderWork();
   else if (/^task-[1-6]$/.test(route)) html = renderTask(Number(route.split('-')[1]));
   else html = renderHome();
-  $('#app').innerHTML = html;
-  setActiveNav(route);
-  updateProgressPill();
-  bindTaskPage(route, render);
-  if (route === 'work') bindWork(render);
-  $('#app').focus({preventScroll: true});
+  $('#app').innerHTML = html; $('#selected-group').textContent = runtime.state.group;
+  setActiveNav(route); updateProgressPill(); bindTaskPage(route, render); if (route === 'work') bindWork(render);
+  const anchor = location.hash.split('/')[1];
+  const target = anchor && /^(part-\d+|checks|submit|files)$/.test(anchor) ? document.getElementById(anchor) : null;
+  if (target) { if (target.tagName === 'DETAILS') target.open = true; requestAnimationFrame(() => { target.scrollIntoView({block: 'start'}); (target.querySelector('summary') || target).focus({preventScroll: true}); }); }
+  else { window.scrollTo(0, 0); $('#app').focus({preventScroll: true}); }
 }
-
-async function loadJson(path) {
-  const response = await fetch(path, {cache: 'no-cache'});
-  if (!response.ok) throw new Error(`Не удалось загрузить ${path}`);
-  return response.json();
+function openGroupPicker() {
+  const dialog = $('#group-dialog'); $('#close-group').hidden = !entered;
+  $('#group-options').innerHTML = runtime.schedule.map((group, index) => {
+    const nearest = nearestLesson(group); const [name, subgroup] = group.group.split(' — ');
+    const remembered = runtime.state.groupChosen && runtime.state.group === group.group; const date = nearest?.date;
+    return `<button class="group-option ${remembered ? 'remembered' : ''}" type="button" data-group-index="${index}" aria-label="${esc(group.group)}"><span class="group-option-name">${esc(name)}</span><strong>${esc(subgroup || group.group)}</strong><span>${esc(dayLabel(group.dates[0]))} · ${esc(group.time)}</span><span class="group-option-next">${date ? `Ближайшая встреча — ${dateLabel(date)}` : 'Запланированные встречи завершены'}</span><span class="group-option-action">${remembered ? 'Вы выбирали эту группу · Войти →' : 'Выбрать →'}</span></button>`;
+  }).join('');
+  $('#group-options').querySelectorAll('[data-group-index]').forEach(button => {
+    button.addEventListener('click', () => {
+      const group = runtime.schedule[Number(button.dataset.groupIndex)]; if (!group || !selectGroup(group.group)) return;
+      const switching = entered; entered = true; $('#course-shell').hidden = false;
+      // Incoming lesson links survive entry. Switching later returns to the new group's dashboard.
+      if (switching || !location.hash) history.replaceState(null, '', '#home');
+      dialog.close(); render();
+    });
+  });
+  if (!dialog.open) dialog.showModal(); (dialog.querySelector('.remembered') || dialog.querySelector('[data-group-index]'))?.focus();
 }
-
+async function loadJson(path) { const response = await fetch(path, {cache: 'no-cache'}); if (!response.ok) throw new Error(`Не удалось загрузить ${path}`); return response.json(); }
+function validateData(course, schedule) {
+  if (!Array.isArray(course) || !course.length || !course.some(item => !item.locked)) throw new Error('Список заданий пока недоступен.');
+  if (!Array.isArray(schedule) || !schedule.length || !schedule.every(item => typeof item.group === 'string' && Array.isArray(item.dates) && item.dates.length && typeof item.time === 'string')) throw new Error('Список групп пока недоступен.');
+}
+$('#group-dialog').addEventListener('cancel', event => { if (!entered) event.preventDefault(); });
+$('#close-group').addEventListener('click', () => { if (entered) $('#group-dialog').close(); });
+$('#change-group').addEventListener('click', openGroupPicker);
 bindStarterDownloads();
-Promise.all([
-  loadJson('assets/course.json?v=99b18c7fecee'),
-  loadJson('assets/schedule.json?v=99b18c7fecee'),
-]).then(([course, schedule]) => {
+Promise.all([loadJson('assets/course.json?v=359ee70d123b'), loadJson('assets/schedule.json?v=359ee70d123b')]).then(([course, schedule]) => {
+  validateData(course, schedule);
   runtime.course = course;
   runtime.schedule = schedule;
-  if (!schedule.some(item => item.group === runtime.state.group)) {
-    runtime.state.group = schedule[0].group;
-  }
-  const picker = $('#group');
-  picker.innerHTML = schedule.map(item =>
-    `<option value="${esc(item.group)}">${esc(item.group)}</option>`).join('');
-  picker.value = runtime.state.group;
-  picker.addEventListener('change', () => {
-    runtime.state.group = picker.value;
-    save();
-    render();
-  });
+  $('#boot-status').hidden = true;
   window.addEventListener('hashchange', render);
-  if (!location.hash) history.replaceState(null, '', '#home');
-  render();
+  openGroupPicker();
 }).catch(error => {
-  $('#app').innerHTML = `<section class="empty panel"><h1>Материалы не загрузились</h1><p>${esc(error.message)}</p><a class="button" href="?reload=13#task-1">Повторить загрузку первого урока</a></section>`;
+  const status = $('#boot-status');
+  status.textContent = 'Не получилось загрузить курс. Проверьте интернет. ' + error.message;
+  const retry = document.createElement('button');
+  retry.textContent = 'Попробовать ещё раз';
+  retry.id = 'retry-load';
+  retry.addEventListener('click', () => location.reload());
+  status.append(retry);
 });

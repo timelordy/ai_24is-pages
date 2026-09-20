@@ -6,31 +6,31 @@ TAP version 13
 # Subtest: baseline contains twelve valid unique tickets
 ok 1 - baseline contains twelve valid unique tickets
   ---
-  duration_ms: 0.975106
+  duration_ms: 0.678152
   type: 'test'
   ...
 # Subtest: status labels are human-readable
 ok 2 - status labels are human-readable
   ---
-  duration_ms: 0.24549
+  duration_ms: 0.119564
   type: 'test'
   ...
 # Subtest: priority labels are human-readable
 ok 3 - priority labels are human-readable
   ---
-  duration_ms: 0.17056
+  duration_ms: 0.13081
   type: 'test'
   ...
 # Subtest: copyTickets deep-copies top-level ticket objects
 ok 4 - copyTickets deep-copies top-level ticket objects
   ---
-  duration_ms: 0.255438
+  duration_ms: 0.896726
   type: 'test'
   ...
 # Subtest: unknown status and priority are rejected
 ok 5 - unknown status and priority are rejected
   ---
-  duration_ms: 0.492913
+  duration_ms: 0.329056
   type: 'test'
   ...
 1..5
@@ -41,4 +41,4 @@ ok 5 - unknown status and priority are rejected
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 61.174897
+# duration_ms 55.03845
