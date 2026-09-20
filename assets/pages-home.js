@@ -1,5 +1,5 @@
 'use strict';
-import {runtime, esc, dateLabel, nearestLesson, currentOpenLesson, currentGroup, taskCard, isSetupMeeting, doneSet} from './lib.js?v=359ee70d123b';
+import {runtime, esc, dateLabel, nearestLesson, currentOpenLesson, currentGroup, taskCard, isSetupMeeting, doneSet} from './lib.js?v=d1ec070f5910';
 function nextMeeting() {
   const next = nearestLesson();
   if (!next || next.finished) return '<section class="notice panel"><b>Все встречи по этому расписанию прошли.</b> Открытые задания и ваши отметки остаются на сайте.</section>';

@@ -1,10 +1,19 @@
 'use strict';
-import {$, esc, runtime, selectGroup, routeName, updateProgressPill, nearestLesson, dayLabel, dateLabel, currentOpenLesson, isSetupMeeting} from './lib.js?v=359ee70d123b';
-import {renderTask, bindTaskPage} from './task-page.js?v=359ee70d123b';
-import {bindStarterDownloads} from './starter-download.js?v=359ee70d123b';
-import {renderHome, renderTasks, renderStart} from './pages-home.js?v=359ee70d123b';
-import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=359ee70d123b';
+import {$, esc, runtime, selectGroup, routeName, updateProgressPill, nearestLesson, dayLabel, dateLabel, currentOpenLesson, isSetupMeeting} from './lib.js?v=d1ec070f5910';
+import {renderTask, bindTaskPage} from './task-page.js?v=d1ec070f5910';
+import {bindStarterDownloads} from './starter-download.js?v=d1ec070f5910';
+import {renderHome, renderTasks, renderStart} from './pages-home.js?v=d1ec070f5910';
+import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=d1ec070f5910';
 let entered = false;
+// The sticky offset follows wrapped navigation, rotation and larger user text.
+if ('ResizeObserver' in window) {
+  const headerObserver = new ResizeObserver(([entry]) => {
+    const height = entry.target.getBoundingClientRect().height;
+    const spacing = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    if (height > 0) document.documentElement.style.setProperty('--header-offset', `${Math.ceil(height + spacing)}px`);
+  });
+  headerObserver.observe(document.querySelector('.topbar'));
+}
 function setActiveNav(route) {
   document.querySelectorAll('.tabs a').forEach(link => {
     const active = link.dataset.route === route || ((route.startsWith('task-') || route === 'start') && link.dataset.route === 'current');
@@ -37,7 +46,9 @@ function openGroupPicker() {
   $('#group-options').innerHTML = runtime.schedule.map((group, index) => {
     const nearest = nearestLesson(group); const [name, subgroup] = group.group.split(' — ');
     const remembered = runtime.state.groupChosen && runtime.state.group === group.group; const date = nearest?.date;
-    return `<button class="group-option ${remembered ? 'remembered' : ''}" type="button" data-group-index="${index}" aria-label="${esc(group.group)}"><span class="group-option-name">${esc(name)}</span><strong>${esc(subgroup || group.group)}</strong><span>${esc(dayLabel(group.dates[0]))} · ${esc(group.time)}</span><span class="group-option-next">${date ? `Ближайшая встреча — ${dateLabel(date)}` : 'Запланированные встречи завершены'}</span><span class="group-option-action">${remembered ? 'Вы выбирали эту группу · Войти →' : 'Выбрать →'}</span></button>`;
+    const shortDate = date ? new Date(`${date}T12:00:00+03:00`).toLocaleDateString('ru-RU', {day: 'numeric', month: 'long', timeZone: 'Europe/Moscow'}) : '';
+    const indicator = remembered ? '<path d="m4 8 2.5 2.5L12 5"/>' : '<path d="m6 4 4 4-4 4"/>';
+    return `<button class="group-option ${remembered ? 'remembered' : ''}" type="button" data-group-index="${index}" aria-label="${esc(group.group)}"><span class="group-option-title"><span class="group-option-name">${esc(name)}</span><strong>${esc(subgroup || group.group)}</strong></span><span class="group-option-time">${esc(dayLabel(date || group.dates[0]))} · ${esc(group.time)}</span><span class="group-option-next">${date ? `Ближайшая: <time datetime="${esc(date)}" title="${esc(dateLabel(date))}">${esc(shortDate)}</time>` : 'Встречи по расписанию завершены'}</span><span class="choice-indicator" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${indicator}</svg></span>${remembered ? '<span class="sr-only">Ранее выбрана</span>' : ''}</button>`;
   }).join('');
   $('#group-options').querySelectorAll('[data-group-index]').forEach(button => {
     button.addEventListener('click', () => {
@@ -48,7 +59,7 @@ function openGroupPicker() {
       dialog.close(); render();
     });
   });
-  if (!dialog.open) dialog.showModal(); (dialog.querySelector('.remembered') || dialog.querySelector('[data-group-index]'))?.focus();
+  if (!dialog.open) dialog.showModal(); (dialog.querySelector('.remembered') || $('#group-dialog-title'))?.focus({preventScroll: true});
 }
 async function loadJson(path) { const response = await fetch(path, {cache: 'no-cache'}); if (!response.ok) throw new Error(`Не удалось загрузить ${path}`); return response.json(); }
 function validateData(course, schedule) {
@@ -59,7 +70,7 @@ $('#group-dialog').addEventListener('cancel', event => { if (!entered) event.pre
 $('#close-group').addEventListener('click', () => { if (entered) $('#group-dialog').close(); });
 $('#change-group').addEventListener('click', openGroupPicker);
 bindStarterDownloads();
-Promise.all([loadJson('assets/course.json?v=359ee70d123b'), loadJson('assets/schedule.json?v=359ee70d123b')]).then(([course, schedule]) => {
+Promise.all([loadJson('assets/course.json?v=d1ec070f5910'), loadJson('assets/schedule.json?v=d1ec070f5910')]).then(([course, schedule]) => {
   validateData(course, schedule);
   runtime.course = course;
   runtime.schedule = schedule;
