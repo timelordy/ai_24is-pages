@@ -1,6 +1,69 @@
 'use strict';
 import {runtime, esc, pad, inline, block, doneSet, setDone, taskSteps, setTaskStep, isSetupMeeting} from './lib.js?v=18dc50422886';
 import {renderLessonImages} from './lesson-images.js?v=18dc50422886';
+let disposeTaskToc = () => {};
+
+function bindTaskToc() {
+  const nav = document.querySelector('.task-nav');
+  if (!nav) return () => {};
+  const entries = [...nav.querySelectorAll('[data-toc-target]')].map(link => ({link, target: document.getElementById(link.dataset.tocTarget)})).filter(entry => entry.target);
+  if (!entries.length) return () => {};
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let activeId = '';
+  let frame = 0;
+
+  function reveal(link) {
+    const padding = 8;
+    let left = nav.scrollLeft;
+    let top = nav.scrollTop;
+    if (link.offsetLeft < left + padding) left = link.offsetLeft - padding;
+    else if (link.offsetLeft + link.offsetWidth > left + nav.clientWidth - padding) left = link.offsetLeft + link.offsetWidth - nav.clientWidth + padding;
+    if (link.offsetTop < top + padding) top = link.offsetTop - padding;
+    else if (link.offsetTop + link.offsetHeight > top + nav.clientHeight - padding) top = link.offsetTop + link.offsetHeight - nav.clientHeight + padding;
+    nav.scrollTo({left: Math.max(0, left), top: Math.max(0, top), behavior: reducedMotion.matches ? 'auto' : 'smooth'});
+  }
+
+  function activate(id) {
+    if (!id || id === activeId) return;
+    activeId = id;
+    entries.forEach(({link}) => {
+      const active = link.dataset.tocTarget === id;
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    const activeLink = entries.find(({link}) => link.dataset.tocTarget === id)?.link;
+    if (activeLink) reveal(activeLink);
+  }
+
+  function sync() {
+    frame = 0;
+    const headerOffset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-offset')) || 0;
+    const activationLine = headerOffset + 24;
+    let current = entries[0];
+    for (const entry of entries) {
+      if (entry.target.getBoundingClientRect().top <= activationLine) current = entry;
+      else break;
+    }
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) current = entries.at(-1);
+    activate(current.target.id);
+  }
+
+  function scheduleSync() {
+    if (!frame) frame = requestAnimationFrame(sync);
+  }
+
+  window.addEventListener('scroll', scheduleSync, {passive: true});
+  window.addEventListener('resize', scheduleSync);
+  document.querySelectorAll('.lesson-part, .lesson-files').forEach(details => details.addEventListener('toggle', scheduleSync));
+  scheduleSync();
+  return () => {
+    if (frame) cancelAnimationFrame(frame);
+    window.removeEventListener('scroll', scheduleSync);
+    window.removeEventListener('resize', scheduleSync);
+  };
+}
+
 function bulletList(items, tone = 'success') { return `<ul class="result-list ${tone === 'success' ? 'success-list' : 'failure-list'}">${(items || []).map(value => `<li><b aria-hidden="true">${tone === 'success' ? '✓' : '×'}</b><span>${inline(value)}</span></li>`).join('')}</ul>`; }
 function files(item) {
   if (!item.downloads) return '';
@@ -24,13 +87,15 @@ export function renderTask(number) {
   return `<header class="page-head lesson-heading"><p class="eyebrow">${esc(runtime.state.group)} · Работа ${pad(number)} из ${pad(runtime.course.length)}</p><h1>${esc(item.title)}</h1><p class="lead">${esc(item.goal || item.ability)}</p><div class="actions"><a class="button primary" href="#task-${number}/part-1">${number === 1 ? 'Начать с установки' : 'К шагам'}</a>${number === 1 ? '<a class="button" href="#task-1/part-7">Всё установлено — открыть проект</a>' : ''}<a class="button text" href="#task-${number}/submit">Что сдавать →</a></div></header>
   ${intro ? '<section class="notice panel"><b>У вашей группы сначала вводная встреча.</b> На ней достаточно шагов 1–9: установка и запуск. Шаги 10–13 и отчёт — для первой работы. <a href="#start">Открыть план вводной →</a></section>' : ''}
 
-  <div class="task-layout lesson-layout"><nav class="task-nav panel lesson-toc" aria-label="На этой странице"><b class="toc-title">В этой работе</b>${number === 1 ? '<a href="#task-1/part-1">Установка программ</a><a href="#task-1/part-7">Проект и запуск</a><a href="#task-1/part-10">Работа с GigaCode</a>' : ''}<a href="#task-${number}/checks">Как проверить</a><a href="#task-${number}/submit">Что сдавать</a><a href="#task-${number}/files">Скачать файлы</a><a href="#tasks">Все задания →</a></nav><div class="task-main">${taskParts(item)}
+  <div class="task-layout lesson-layout"><nav class="task-nav panel lesson-toc" aria-label="На этой странице"><b class="toc-title">В этой работе</b>${number === 1 ? '<a href="#task-1/part-1" data-toc-target="part-1">Установка программ</a><a href="#task-1/part-7" data-toc-target="part-7">Проект и запуск</a><a href="#task-1/part-10" data-toc-target="part-10">Работа с GigaCode</a>' : ''}<a href="#task-${number}/checks" data-toc-target="checks">Как проверить</a><a href="#task-${number}/submit" data-toc-target="submit">Что сдавать</a><a href="#task-${number}/files" data-toc-target="files">Скачать файлы</a><a href="#tasks">Все задания →</a></nav><div class="task-main">${taskParts(item)}
   <section id="checks" tabindex="-1" class="task-section panel success-panel"><p class="eyebrow">Проверяем себя</p><h2>Как понять, что работа готова</h2><p>Успешный результат — когда каждый пункт можно показать, а не просто отметить.</p>${bulletList(item.success)}<details class="inline-help"><summary>Это не считается готовым</summary>${bulletList(item.failure, 'failure')}</details></section>
   <section id="submit" tabindex="-1" class="task-section panel"><p class="eyebrow">Отправляем результат</p><h2>Что сдавать</h2><p>Покажите свой проект и подготовьте:</p><ul class="submission-list">${(item.minimum || []).map(value => `<li>${inline(value)}</li>`).join('')}</ul><p><b>Ничего не отправляется с этого сайта.</b> Отчёт должен лежать в вашей ветке GitVerse. После отправки откройте ветку в браузере и проверьте, что файл там есть.</p>${item.defense ? `<details class="inline-help"><summary>Что я спрошу при сдаче</summary><p>${inline(item.defense)}</p></details>` : ''}<details class="inline-help"><summary>Что будем проверять вместе</summary>${bulletList(item.acceptance)}</details></section>
   ${files(item)}<section class="progress-action panel"><div><b>${done ? 'Вы отметили эту работу' : 'Работа готова и отправлена?'}</b><p>Эта кнопка только для вашего списка. Преподавателю она ничего не отправляет.</p></div><button id="toggle-done" data-number="${number}" aria-pressed="${done}">${done ? 'Снять отметку' : 'Отметить для себя'}</button></section>
   <div class="task-controls"><a href="#home">← К моей группе</a><a href="#tasks">Все задания →</a></div></div></div>`;
 }
 export function bindTaskPage(route, rerender) {
+  disposeTaskToc();
+  disposeTaskToc = bindTaskToc();
   const number = Number(route.split('-')[1]);
   document.querySelectorAll('[data-step]').forEach(input => input.addEventListener('change', () => {
     setTaskStep(number, Number(input.dataset.step), input.checked);

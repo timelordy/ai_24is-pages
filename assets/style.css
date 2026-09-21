@@ -140,8 +140,9 @@ main { max-width: 70rem; min-height: 72vh; margin: 0 auto; padding: 1.75rem 1.5r
 /* Lesson reading area keeps its body size; only chrome becomes denser. */
 .task-layout { display: grid; grid-template-columns: 11.5rem minmax(0, 1fr); align-items: start; gap: 1.5rem; margin-top: .25rem; }
 .task-main { min-width: 0; }
-.task-nav { position: sticky; top: var(--header-offset); padding: .375rem; border-radius: .75rem; box-shadow: none; }
+.task-nav { position: sticky; top: var(--header-offset); max-height: calc(100dvh - var(--header-offset) - 1rem); padding: .375rem; overflow: auto; overscroll-behavior: contain; border-radius: .75rem; box-shadow: none; scrollbar-width: thin; }
 .task-nav a { display: block; padding: .5625rem .625rem; border-radius: .375rem; color: #575760; font-size: .8125rem; line-height: 1.45; text-decoration: none; }
+.task-nav a.active { background: rgba(0, 110, 219, .09); color: var(--blue); font-weight: 650; }
 .toc-title { display: block; padding: .5rem .625rem; color: var(--muted); font-size: .6875rem; font-weight: 600; }
 .lesson-instructions .section-head { margin: 0 0 .875rem; align-items: center; }
 .lesson-instructions .section-head p { font-size: .8125rem; }
@@ -241,7 +242,7 @@ footer { display: flex; justify-content: space-between; gap: 1rem; max-width: 70
 @media (max-width: 54rem) {
   main { padding-top: 1.25rem; }
   .task-layout { grid-template-columns: 1fr; gap: 1rem; }
-  .task-nav { position: static; display: flex; overflow-x: auto; gap: .125rem; }
+  .task-nav { position: static; display: flex; max-height: none; overflow-x: auto; overflow-y: hidden; gap: .125rem; }
   .task-nav a { flex-shrink: 0; white-space: nowrap; }
   .toc-title { display: none; }
   .schedule-item { grid-template-columns: 4rem 8rem minmax(0, 1fr); gap: .75rem; }
