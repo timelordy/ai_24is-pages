@@ -44,10 +44,10 @@ function render() {
 function openGroupPicker() {
   const dialog = $('#group-dialog'); $('#close-group').hidden = !entered;
   $('#group-options').innerHTML = runtime.schedule.map((group, index) => {
-    const [name, subgroup] = group.group.split(' — ');
+    const [name, subgroupNumber] = group.group.split('/');
     const remembered = runtime.state.groupChosen && runtime.state.group === group.group;
     const indicator = remembered ? '<path d="m4 8 2.5 2.5L12 5"/>' : '<path d="m6 4 4 4-4 4"/>';
-    return `<button class="group-option ${remembered ? 'remembered' : ''}" type="button" data-group-index="${index}" aria-label="${esc(group.group)}"><span class="group-option-title"><span class="group-option-name">${esc(name)}</span><strong>${esc(subgroup || group.group)}</strong></span><span class="group-option-time">${esc(dayLabel(group.dates[0]))} · ${esc(group.time)}</span><span class="choice-indicator" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${indicator}</svg></span>${remembered ? '<span class="sr-only">Ранее выбрана</span>' : ''}</button>`;
+    return `<button class="group-option ${remembered ? 'remembered' : ''}" type="button" data-group-index="${index}" aria-label="${esc(group.group)}"><span class="group-option-title"><span class="group-option-name">${esc(name)}</span><strong>${esc(subgroupNumber ? `${subgroupNumber} подгруппа` : group.group)}</strong></span><span class="group-option-time">${esc(dayLabel(group.dates[0]))} · ${esc(group.time)}</span><span class="choice-indicator" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${indicator}</svg></span>${remembered ? '<span class="sr-only">Ранее выбрана</span>' : ''}</button>`;
   }).join('');
   $('#group-options').querySelectorAll('[data-group-index]').forEach(button => {
     button.addEventListener('click', () => {
