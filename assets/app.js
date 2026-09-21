@@ -77,7 +77,18 @@ Promise.all([loadJson('assets/course.json?v=9b3f6db4c111'), loadJson('assets/sch
   runtime.schedule = schedule;
   $('#boot-status').hidden = true;
   window.addEventListener('hashchange', render);
-  openGroupPicker();
+
+  const savedGroupIsValid =
+    runtime.state.groupChosen &&
+    runtime.schedule.some(item => item.group === runtime.state.group);
+
+  if (savedGroupIsValid) {
+    entered = true;
+    $('#course-shell').hidden = false;
+    render();
+  } else {
+    openGroupPicker();
+  }
 }).catch(error => {
   const status = $('#boot-status');
   status.textContent = 'Не получилось загрузить курс. Проверьте интернет. ' + error.message;
