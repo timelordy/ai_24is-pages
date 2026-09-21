@@ -1,9 +1,9 @@
 'use strict';
-import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentOpenLesson, isSetupMeeting} from './lib.js?v=20260921-local';
-import {renderTask, bindTaskPage} from './task-page.js?v=19';
-import {bindStarterDownloads} from './starter-download.js?v=20260921-local';
-import {renderHome, renderTasks, renderStart} from './pages-home.js?v=20260921-local';
-import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=20260921-local';
+import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentOpenLesson, isSetupMeeting} from './lib.js?v=9b3f6db4c111';
+import {renderTask, bindTaskPage} from './task-page.js?v=9b3f6db4c111';
+import {bindStarterDownloads} from './starter-download.js?v=9b3f6db4c111';
+import {renderHome, renderTasks, renderStart} from './pages-home.js?v=9b3f6db4c111';
+import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=9b3f6db4c111';
 let entered = false;
 // The sticky offset follows wrapped navigation, rotation and larger user text.
 if ('ResizeObserver' in window) {
@@ -69,7 +69,7 @@ $('#group-dialog').addEventListener('cancel', event => { if (!entered) event.pre
 $('#close-group').addEventListener('click', () => { if (entered) $('#group-dialog').close(); });
 $('#change-group').addEventListener('click', openGroupPicker);
 bindStarterDownloads();
-Promise.all([loadJson('assets/course.json?v=20260921-local'), loadJson('assets/schedule.json?v=20260921-local')]).then(([course, schedule]) => {
+Promise.all([loadJson('assets/course.json?v=9b3f6db4c111'), loadJson('assets/schedule.json?v=9b3f6db4c111')]).then(([course, schedule]) => {
   validateData(course, schedule);
   runtime.course = course;
   runtime.schedule = schedule;
