@@ -1,6 +1,7 @@
 import {createReadStream,existsSync,statSync} from "node:fs";
 import {createServer} from "node:http";
 import {extname,resolve,sep} from "node:path";
+import {pathToFileURL} from "node:url";
 
 export function createStaticServer({root=process.cwd()}={}){
   return createServer((req,res)=>{
@@ -13,4 +14,4 @@ export function createStaticServer({root=process.cwd()}={}){
   });
 }
 
-if(import.meta.url===`file://${process.argv[1]}`){const server=createStaticServer();server.listen(Number(process.env.PORT||4173),"127.0.0.1",()=>console.log(`Campus ServiceDesk: http://127.0.0.1:${server.address().port}`));}
+if(import.meta.url===pathToFileURL(process.argv[1]).href){const server=createStaticServer();server.listen(Number(process.env.PORT||4173),"127.0.0.1",()=>console.log(`Campus ServiceDesk: http://127.0.0.1:${server.address().port}`));}

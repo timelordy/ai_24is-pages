@@ -110,14 +110,14 @@
   {
     "id": "project-running",
     "part": 9,
-    "file": "project-running.webp",
+    "file": "project-running-windows.png",
     "title": "Так выглядит исходный Campus ServiceDesk",
-    "caption": "Снимок запущенного проекта из архива занятия 01: счётчик показывает 12, в списке 12 заявок. Поиск, API, база и создание заявок на этом этапе ещё не реализованы.",
+    "caption": "Снимок сделан Playwright на Windows из той же версии проекта, которую студенты клонируют и запускают локально: счётчик показывает 12, заявки имеют номера 101–112, приоритеты и места.",
     "sourceUrl": "",
     "kind": "project",
-    "capturedAt": "2026-09-14T17:28:57.518100+00:00",
+    "capturedAt": "2026-09-21T13:57:46.8961789+03:00",
     "width": 1280,
-    "height": 1245,
-    "sha256": "7a24706369fffab5ddcedd20ba6109660b7b979e3459b047b4306eb06d8ef06f"
+    "height": 1258,
+    "sha256": "dc0ed414a60ca45e0d01bee8c6dee6065e4251529cb0e6a9fef760d6fbd309cb"
   }
 ]

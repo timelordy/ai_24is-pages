@@ -70,4 +70,4 @@
 
 Снимок запущенного проекта из архива занятия 01: счётчик показывает 12, в списке 12 заявок. Поиск, API, база и создание заявок на этом этапе ещё не реализованы.
 
-![Так выглядит исходный Campus ServiceDesk](screenshots/project-running.webp)
+![Так выглядит исходный Campus ServiceDesk](screenshots/project-running-windows.png)

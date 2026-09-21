@@ -1,6 +1,10 @@
 node_modules/
+dist/
+.vite/
+deep-dive/
 .env
 *.db
+*.sqlite
 *.db-shm
 *.db-wal
 .DS_Store

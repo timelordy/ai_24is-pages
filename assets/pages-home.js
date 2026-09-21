@@ -1,5 +1,5 @@
 'use strict';
-import {runtime, esc, nearestLesson, currentOpenLesson, currentGroup, taskCard, isSetupMeeting, doneSet} from './lib.js?v=18dc50422886';
+import {runtime, esc, nearestLesson, currentOpenLesson, currentGroup, taskCard, isSetupMeeting, doneSet} from './lib.js?v=20260921-local';
 
 function shortDate(value) {
   return new Date(`${value}T12:00:00+03:00`).toLocaleDateString('ru-RU', {day:'numeric', month:'long', timeZone:'Europe/Moscow'});

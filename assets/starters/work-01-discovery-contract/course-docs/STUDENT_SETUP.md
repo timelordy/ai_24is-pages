@@ -1,11 +1,11 @@
 # Настройка студента
 
-## Аккаунт и форк
+## Аккаунт и рабочая папка
 
-1. Войдите в GitVerse своим аккаунтом.
-2. Откройте ссылку задания GitVerse Lab.
-3. Дождитесь создания персонального форка.
-4. Не работайте в чужом форке и не отправляйте преподавателю пароль.
+1. Войдите в GitVerse своим аккаунтом, чтобы подключить GigaCode.
+2. Создайте на компьютере обычную папку для учебных проектов.
+3. Вся работа выполняется локально в VS Code. Отдельный форк или задача GitVerse не нужны.
+4. Не отправляйте преподавателю пароль и не сохраняйте секреты в проекте.
 
 ## Локальная среда
 
@@ -22,8 +22,8 @@ npm --version
 ## Клонирование
 
 ```bash
-git clone <URL вашего форка>
-cd <папка проекта>
+git clone https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk.git
+cd Campus-ServiceDesk
 npm test
 npm run start
 ```
@@ -31,13 +31,13 @@ npm run start
 ## Git-процесс
 
 ```bash
-git switch -c lab/01-environment
+git switch -c stage/01-discovery
 git status
 git diff
 npm test
 git add .
-git commit -m "lab01: verify AI explanation"
-git push -u origin lab/01-environment
+git commit -m "docs: complete stage 01 report"
+git log -1 --oneline
 ```
 
-Никогда не добавляйте в репозиторий токены, `.env`, пароли и реальные персональные данные.
+Отправлять ветку в GitVerse на первой работе не нужно. Никогда не добавляйте в файлы токены, `.env`, пароли и реальные персональные данные.
