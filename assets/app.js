@@ -1,6 +1,6 @@
 'use strict';
 import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentOpenLesson, isSetupMeeting} from './lib.js?v=9b3f6db4c111';
-import {renderTask, bindTaskPage} from './task-page.js?v=9b3f6db4c111';
+import {renderTask, bindTaskPage} from './task-page.js?v=lesson-resume-20261005-1';
 import {bindStarterDownloads} from './starter-download.js?v=9b3f6db4c111';
 import {renderHome, renderTasks, renderStart} from './pages-home.js?v=9b3f6db4c111';
 import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=9b3f6db4c111';
