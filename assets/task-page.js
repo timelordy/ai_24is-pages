@@ -1,5 +1,5 @@
 'use strict';
-import {runtime, esc, pad, inline, block, doneSet, setDone, taskSteps, setTaskStep, isSetupMeeting} from './lib.js?v=9b3f6db4c111';
+import {runtime, esc, pad, inline, block, doneSet, setDone, taskSteps, setTaskStep, isSetupMeeting, currentGroup, todayMoscow} from './lib.js?v=9b3f6db4c111';
 import {renderLessonImages} from './lesson-images.js?v=9b3f6db4c111';
 let disposeTaskToc = () => {};
 
@@ -79,13 +79,38 @@ function taskParts(item) {
     return `${item.number === 1 && phases[part] ? `<h3 class="phase-heading">${phases[part]}</h3>` : ''}<details id="part-${part}" class="lesson-part panel ${checked.has(index) ? 'step-complete' : ''}" ${index === firstUnchecked ? 'open' : ''}><summary><span class="part-number">${pad(part)}</span><span class="part-title">${esc(title)}</span><span class="part-state" data-step-badge="${index}">${checked.has(index) ? 'Готово' : 'Открыть'}</span></summary><div class="part-body">${block(section.body)}${archive}${renderLessonImages(item, section.title)}<label class="step-check"><input type="checkbox" data-step="${index}" ${checked.has(index) ? 'checked' : ''}><span>Этот шаг сделал, результат проверил</span></label>${index < parts.length - 1 ? `<a class="next-step" href="#task-${item.number}/part-${part + 1}">Следующий шаг →</a>` : ''}</div></details>`;
   }).join('')}</section>`;
 }
+function taskHeaderActions(number) {
+  if (number !== 1) return `<a class="button primary" href="#task-${number}/part-1">К шагам</a><a class="button text" href="#task-${number}/submit">Что показать →</a>`;
+  const checked = taskSteps(1);
+  const firstUnchecked = Array.from({length: 13}, (_, index) => index).find(index => !checked.has(index));
+  if (checked.size && firstUnchecked !== undefined) {
+    const part = firstUnchecked + 1;
+    return `<a class="button primary" href="#task-1/part-${part}">Продолжить с шага ${part}</a><a class="button" href="#task-1/part-1">Установка и настройка</a><a class="button" href="#task-1/part-7">Проект и запуск</a><a class="button" href="#task-1/part-10">GigaCode и отчёт</a><a class="button text" href="#task-1/submit">Что показать →</a>`;
+  }
+  if (checked.size === 13) {
+    return '<a class="button primary" href="#task-1/submit">Перейти к проверке</a><a class="button" href="#task-1/part-10">GigaCode и отчёт</a><a class="button text" href="#task-1/part-1">Открыть все шаги →</a>';
+  }
+  return '<a class="button" href="#task-1/part-1">Установка и настройка</a><a class="button primary" href="#task-1/part-7">Проект и запуск</a><a class="button" href="#task-1/part-10">GigaCode и отчёт</a><a class="button text" href="#task-1/submit">Что показать →</a>';
+}
+
+function workOneResumeNotice() {
+  const group = currentGroup();
+  const introPast = Boolean(group?.intro?.date && group.intro.date < todayMoscow());
+  if (!introPast) return '';
+  const checked = taskSteps(1);
+  if (checked.size) {
+    return `<section class="notice panel"><b>Вводная уже была. Продолжайте с первого незавершённого шага.</b> Сайт нашёл ваши отметки на этом устройстве: ${checked.size} из 13. Если отметки неточные, откройте нужный раздел кнопками сверху.</section>`;
+  }
+  return '<section class="notice panel"><b>Вводная уже была, но сайт не знает, что вы успели на прошлом занятии.</b> Если установка не закончена — откройте «Установка и настройка». Если программы стоят, но проект не запускался — «Проект и запуск». Если проект уже открывался, 5 тестов проходили и были видны 12 заявок — переходите к «GigaCode и отчёт».</section>';
+}
+
 export function renderTask(number) {
   const item = runtime.course.find(entry => entry.number === number);
   if (!item) return '<section class="empty panel"><h1>Задание не найдено</h1><a href="#tasks">Все задания</a></section>';
   if (item.locked) return `<header class="page-head"><p class="eyebrow">${esc(runtime.state.group)} · Работа ${pad(number)}</p><h1>${esc(item.title)}</h1></header><section class="task-section panel"><h2>Материалы пока закрыты</h2><p>Эту работу ещё не открыл преподаватель. Дата в расписании и галочки на сайте не открывают её автоматически.</p><p>Подробное задание, отчёт и архив появятся после публикации. Пока продолжайте открытые работы.</p><a class="button primary" href="#current">К открытой работе</a></section>`;
   const done = doneSet().has(number); const intro = number === 1 && isSetupMeeting();
-  return `<header class="page-head lesson-heading"><p class="eyebrow">${esc(runtime.state.group)} · Работа ${pad(number)} из ${pad(runtime.course.length)}</p><h1>${esc(item.title)}</h1><p class="lead">${esc(item.goal || item.ability)}</p><div class="actions"><a class="button primary" href="#task-${number}/part-1">${number === 1 ? 'Начать с установки' : 'К шагам'}</a>${number === 1 ? '<a class="button" href="#task-1/part-7">Всё установлено — открыть проект</a>' : ''}<a class="button text" href="#task-${number}/submit">Что показать →</a></div></header>
-  ${intro ? '<section class="notice panel"><b>У вашей группы сначала вводная встреча.</b> На ней достаточно шагов 1–9: установка и запуск. Шаги 10–13 и отчёт — для первой работы. <a href="#start">Открыть план вводной →</a></section>' : ''}
+  return `<header class="page-head lesson-heading"><p class="eyebrow">${esc(runtime.state.group)} · Работа ${pad(number)} из ${pad(runtime.course.length)}</p><h1>${esc(item.title)}</h1><p class="lead">${esc(item.goal || item.ability)}</p><div class="actions">${taskHeaderActions(number)}</div></header>
+  ${intro ? '<section class="notice panel"><b>У вашей группы сначала вводная встреча.</b> На ней достаточно шагов 1–9: установка и запуск. Шаги 10–13 и отчёт — для первой работы. <a href="#start">Открыть план вводной →</a></section>' : number === 1 ? workOneResumeNotice() : ''}
 
   <div class="task-layout lesson-layout"><nav class="task-nav panel lesson-toc" aria-label="На этой странице"><b class="toc-title">В этой работе</b>${number === 1 ? '<a href="#task-1/part-1" data-toc-target="part-1">Установка программ</a><a href="#task-1/part-7" data-toc-target="part-7">Проект и запуск</a><a href="#task-1/part-10" data-toc-target="part-10">Работа с GigaCode</a>' : ''}<a href="#task-${number}/checks" data-toc-target="checks">Как проверить</a><a href="#task-${number}/submit" data-toc-target="submit">Что показать</a><a href="#task-${number}/files" data-toc-target="files">Скачать файлы</a><a href="#tasks">Все задания →</a></nav><div class="task-main">${taskParts(item)}
   <section id="checks" tabindex="-1" class="task-section panel success-panel"><p class="eyebrow">Проверяем себя</p><h2>Как понять, что работа готова</h2><p>Успешный результат — когда каждый пункт можно показать, а не просто отметить.</p>${bulletList(item.success)}<details class="inline-help"><summary>Это не считается готовым</summary>${bulletList(item.failure, 'failure')}</details></section>
