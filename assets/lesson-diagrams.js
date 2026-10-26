@@ -1,4 +1,4 @@
-import {esc} from './lib.js?v=05de98df22b4';
+import {esc} from './lib.js?v=9038b0b85a19';
 
 const folder = '<svg viewBox="0 0 40 32" aria-hidden="true"><path d="M3 8V4h12l4 4h18v21H3z" fill="currentColor" opacity=".18"/><path d="M3 8V4h12l4 4h18v21H3z" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
 

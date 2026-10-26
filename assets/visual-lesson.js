@@ -1,6 +1,6 @@
 'use strict';
-import {runtime, esc, inline, pad, taskSteps, setTaskStep, doneSet, setDone, lessonPosition, rememberLessonPosition} from './lib.js?v=05de98df22b4';
-import {renderConceptDiagram, bindConceptDiagrams} from './lesson-diagrams.js?v=05de98df22b4';
+import {runtime, esc, inline, pad, taskSteps, setTaskStep, doneSet, setDone, lessonPosition, rememberLessonPosition} from './lib.js?v=9038b0b85a19';
+import {renderConceptDiagram, bindConceptDiagrams} from './lesson-diagrams.js?v=9038b0b85a19';
 
 const workspaceIcons = {
   instructions:'<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/>',

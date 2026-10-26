@@ -1,7 +1,7 @@
 'use strict';
-import {runtime, esc, pad, inline, block, doneSet, setDone, taskSteps, setTaskStep, isSetupMeeting} from './lib.js?v=05de98df22b4';
-import {renderLessonImages} from './lesson-images.js?v=05de98df22b4';
-import {renderVisualLesson, bindVisualLesson} from './visual-lesson.js?v=05de98df22b4';
+import {runtime, esc, pad, inline, block, doneSet, setDone, taskSteps, setTaskStep, isSetupMeeting} from './lib.js?v=9038b0b85a19';
+import {renderLessonImages} from './lesson-images.js?v=9038b0b85a19';
+import {renderVisualLesson, bindVisualLesson} from './visual-lesson.js?v=9038b0b85a19';
 let disposeTaskToc = () => {};
 
 function bindTaskToc() {

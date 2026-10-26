@@ -1,5 +1,5 @@
 'use strict';
-import {runtime, esc, pad, dateLabel, currentGroup, doneSet, setDone, nearestLesson} from './lib.js?v=05de98df22b4';
+import {runtime, esc, pad, dateLabel, currentGroup, doneSet, setDone, nearestLesson} from './lib.js?v=9038b0b85a19';
 
 const workSteps = [
   ['Установи программы', 'В первой работе показано, что скачать и куда нажать. VS Code откроет файлы, Node.js понадобится для запуска сайта, а OpenCode — для поручений ИИ.', 'Программы открываются, команды проверки показывают номера версий.', '#start', 'Подготовить программы'],

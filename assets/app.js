@@ -1,9 +1,9 @@
 'use strict';
-import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentGroup, currentOpenLesson, isSetupMeeting} from './lib.js?v=05de98df22b4';
-import {renderTask, bindTaskPage} from './task-page.js?v=05de98df22b4';
-import {bindStarterDownloads} from './starter-download.js?v=05de98df22b4';
-import {renderHome, renderTasks, renderStart} from './pages-home.js?v=05de98df22b4';
-import {renderRoute, renderStack, renderSchedule, renderWork, bindWork} from './pages-course.js?v=05de98df22b4';
+import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentGroup, currentOpenLesson, isSetupMeeting} from './lib.js?v=9038b0b85a19';
+import {renderTask, bindTaskPage} from './task-page.js?v=9038b0b85a19';
+import {bindStarterDownloads} from './starter-download.js?v=9038b0b85a19';
+import {renderHome, renderTasks, renderStart} from './pages-home.js?v=9038b0b85a19';
+import {renderRoute, renderStack, renderSchedule, renderWork, bindWork} from './pages-course.js?v=9038b0b85a19';
 let entered = false;
 // The sticky offset follows wrapped navigation, rotation and larger user text.
 if ('ResizeObserver' in window) {
@@ -21,7 +21,7 @@ function setActiveNav(route) {
     if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
 }
-function render() {
+function render(focusContent = true) {
   if (!entered) return;
   let route = routeName();
   if (route === 'current') { route = isSetupMeeting() ? 'start' : `task-${currentOpenLesson()?.number || 1}`; history.replaceState(null, '', `#${route}`); }
@@ -36,7 +36,8 @@ function render() {
   else if (/^task-[1-6]$/.test(route)) html = renderTask(Number(route.split('-')[1]));
   else html = renderHome();
   $('#app').innerHTML = html; $('#selected-group').textContent = runtime.state.group;
-  setActiveNav(route); updateProgressPill(); bindTaskPage(route, render); if (route === 'work') bindWork(render);
+  const rerender = () => render(false);
+  setActiveNav(route); updateProgressPill(); bindTaskPage(route, rerender); if (route === 'work') bindWork(rerender);
   document.querySelectorAll('.code-block').forEach(container => {
     const button = document.createElement('button');
     button.type = 'button'; button.className = 'copy-command'; button.textContent = 'Копировать';
@@ -46,6 +47,7 @@ function render() {
     });
     container.append(button);
   });
+  if (!focusContent) return;
   const anchor = location.hash.split('/')[1];
   const target = anchor && /^(part-\d+|checks|submit|files)$/.test(anchor) ? document.getElementById(anchor) : null;
   if (target) { if (target.tagName === 'DETAILS') target.open = true; requestAnimationFrame(() => { target.scrollIntoView({block: 'start'}); (target.tagName === 'DETAILS' ? target.querySelector('summary') : target).focus({preventScroll: true}); }); }
@@ -83,12 +85,12 @@ document.querySelector('.skip[href="#app"]').addEventListener('click', event => 
   $('#app').scrollIntoView({block: 'start'});
 });
 bindStarterDownloads();
-Promise.all([loadJson('assets/course.json?v=05de98df22b4'), loadJson('assets/schedule.json?v=05de98df22b4')]).then(([course, schedule]) => {
+Promise.all([loadJson('assets/course.json?v=9038b0b85a19'), loadJson('assets/schedule.json?v=9038b0b85a19')]).then(([course, schedule]) => {
   validateData(course, schedule);
   runtime.course = course;
   runtime.schedule = schedule;
   $('#boot-status').hidden = true;
-  window.addEventListener('hashchange', render);
+  window.addEventListener('hashchange', () => render());
   if (runtime.state.groupChosen && currentGroup()) {
     entered = true;
     $('#course-shell').hidden = false;
