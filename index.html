@@ -2,29 +2,30 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
-<meta name="description" content="Методы искусственного интеллекта. Выберите группу, откройте задание и продолжайте свой учебный проект.">
-<title>Методы искусственного интеллекта · ServiceDesk</title>
-<link rel="stylesheet" href="assets/style.css?v=9b3f6db4c111">
+<meta name="description" content="Методы ИИ. OpenCode, GitVerse и один проект ServiceDesk: от первого запуска к проверяемой системе с ИИ.">
+<title>Методы ИИ · Методичка</title>
+<link rel="stylesheet" href="assets/style.css?v=05de98df22b4">
+<link rel="stylesheet" href="assets/visual-lesson.css?v=05de98df22b4">
 <script type="importmap">
 {"imports":{"./assets/lib.js":"./assets/lib.js?v=14","./assets/task-page.js":"./assets/task-page.js?v=14","./assets/starter-download.js":"./assets/starter-download.js?v=14","./assets/pages-home.js":"./assets/pages-home.js?v=14","./assets/pages-course.js":"./assets/pages-course.js?v=14"}}
 </script>
-<script type="module" src="assets/app.js?v=lesson-resume-20261005-1"></script>
-<link rel="stylesheet" href="assets/lesson-images.css?v=9b3f6db4c111">
+<script type="module" src="assets/app.js?v=05de98df22b4"></script>
+<link rel="stylesheet" href="assets/lesson-images.css?v=05de98df22b4">
 </head>
 <body>
-<noscript><p class="notice">Для выбора группы и открытия заданий включите JavaScript. <a href="assets/materials/work-01/TASK.md">Скачать инструкцию к первой работе</a>.</p></noscript>
+<noscript><style>#boot-status{display:none}</style><p class="notice">Для выбора группы и открытия заданий включите JavaScript. <a href="assets/materials/work-01/TASK.md">Скачать инструкцию к первой работе</a>.</p></noscript>
 <div id="course-shell" hidden>
 <a class="skip" href="#app">К содержанию</a>
-<header class="topbar"><a class="brand" href="#home"><span><b>Методы ИИ</b><small>ServiceDesk студенческого кампуса</small></span></a>
-<nav class="tabs" aria-label="Разделы курса"><a href="#home" data-route="home">Сейчас</a><a href="#tasks" data-route="tasks">Работы</a><a href="#schedule" data-route="schedule">Расписание</a><a href="#work" data-route="work">Отметки</a></nav>
+<header class="topbar"><a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">м<span>и</span></span><span><b>Методы ИИ</b><small>Интерактивная методичка</small></span></a>
+<nav class="tabs" aria-label="Разделы курса"><a href="#home" data-route="home">Методичка</a><a href="#route" data-route="route">Как работать</a><a href="#tasks" data-route="tasks">Работы</a><a href="#stack" data-route="stack">Программы</a><a href="#schedule" data-route="schedule">Расписание</a><a href="#work" data-route="work">Отметки</a></nav>
 <div class="top-actions"><button id="change-group" aria-haspopup="dialog" aria-controls="group-dialog"><span id="selected-group">Выбрать группу</span><span aria-hidden="true">⌄</span></button><span id="progress-pill" class="progress-pill" aria-live="polite"></span></div></header>
 <main id="app" tabindex="-1"></main>
-<footer><span>Один проект на весь семестр</span><span>Галочки на сайте для себя. Первую работу показываем локально в VS Code.</span></footer>
+<footer><span>Методы ИИ · Осенний семестр 2026</span><span>Отметки сохраняются в этом браузере. Результат работы проверяет преподаватель.</span><a href="#route">Как выполнять работу</a></footer>
 </div>
 <section id="boot-status" class="loading" role="status">Загружаем группы и задания…</section>
 <dialog id="group-dialog" class="group-dialog" aria-labelledby="group-dialog-title" aria-describedby="group-dialog-description">
-<div class="group-dialog-head"><p class="eyebrow">Методы искусственного интеллекта</p><button id="close-group" type="button" aria-label="Закрыть выбор группы" hidden>×</button></div>
-<h1 id="group-dialog-title" tabindex="-1">Выбери свою группу</h1><p id="group-dialog-description">Дальше сразу покажу текущее задание. Группу можно поменять потом.</p>
+<div class="group-dialog-head"><span class="brand-mark" aria-hidden="true">м<span>и</span></span><button id="close-group" type="button" aria-label="Закрыть выбор группы" hidden>×</button></div>
+<p class="entry-course">Методы искусственного интеллекта</p><h1 id="group-dialog-title" tabindex="-1">Выбери свою группу</h1><p id="group-dialog-description">Выбери свой код группы. Откроются её расписание и задания. Выбор можно изменить позже.</p>
 <div id="group-options" class="group-options"></div><p class="group-footnote">Без регистрации. Выбор запомнится в этом браузере.</p>
 </dialog>
 </body></html>

@@ -1,0 +1,15 @@
+[
+  {
+    "id": "inception-google",
+    "file": "inception-google.png",
+    "title": "Вход в Inception через Google",
+    "caption": "На странице Sign in to Inception нажми Continue with Google. Дальше Google может предложить выбрать аккаунт или войти в него. На снимке вход ещё не выполнен.",
+    "sourceUrl": "https://platform.inceptionlabs.ai/auth/login?callbackUrl=%2F",
+    "width": 632,
+    "height": 270,
+    "kind": "capture",
+    "sha256": "230574fe104de26f6115606c6d5f46d5dd63601ad5b411099964ae0e1aa76efe",
+    "versionNotes": "Фрагмент настоящего снимка inception-login.png из web-guide, снятого 26.10.2026 во встроенном браузере без входа. Обрезка x=0, y=40, width=632, height=270 сохраняет логотип, заголовок Sign in to Inception и кнопку Continue with Google. Кнопка не нажималась; выбор Google-аккаунта, согласие, вход и кабинет API Keys не проверялись. При подготовке фрагмента повторная съёмка была недоступна. Изображение сохранено в формате PNG, сигнатура проверена.",
+    "role": "Где выбрать вход через Google"
+  }
+]

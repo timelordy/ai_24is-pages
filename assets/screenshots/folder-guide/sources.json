@@ -1,0 +1,67 @@
+[
+  {
+    "id": "folder-empty",
+    "file": "folder-empty.png",
+    "title": "Пустая учебная папка",
+    "caption": "В Explorer VS Code открыта новая пустая папка «Методы ИИ». Файлов и дочерних папок ещё нет.",
+    "sourceUrl": "https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk",
+    "width": 500,
+    "height": 450,
+    "kind": "capture",
+    "sha256": "a9571d119c32432628611a0ab7a56d16ee56aa43cfb939e37436792e75e6ec95",
+    "versionNotes": "Windows; VS Code 1.142.0, отдельный профиль; настоящий Explorer VS Code. Захват Chromium Page.captureScreenshot на отдельном неактивном Win32 desktop CodexFolderGuideCapture. Заголовок Extension Development Host сохранён. Физический ввод и SwitchDesktop не использовались. Пустой кадр снят до git clone; затем выполнен git clone --depth 1 из GitVerse, commit c6751d759ff64878c018c1214b556acf9a196343. Это VS Code, не Проводник Windows. Для методички оставлен нужный фрагмент настоящего кадра; полный исходный снимок сохранён отдельно.",
+    "role": "Ориентир в VS Code"
+  },
+  {
+    "id": "folder-parent",
+    "file": "folder-parent.png",
+    "title": "Проект внутри учебной папки",
+    "caption": "После git clone внутри той же папки «Методы ИИ» появилась дочерняя папка Campus-ServiceDesk.",
+    "sourceUrl": "https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk",
+    "width": 500,
+    "height": 450,
+    "kind": "capture",
+    "sha256": "1fd0e70f1e69e0bdbf63924f6ee16e25559246fb24df68291f8f140913d87447",
+    "versionNotes": "Windows; VS Code 1.142.0, отдельный профиль; настоящий Explorer VS Code. Захват Chromium Page.captureScreenshot на отдельном неактивном Win32 desktop CodexFolderGuideCapture. Заголовок Extension Development Host сохранён. Физический ввод и SwitchDesktop не использовались. Пустой кадр снят до git clone; затем выполнен git clone --depth 1 из GitVerse, commit c6751d759ff64878c018c1214b556acf9a196343. Это VS Code, не Проводник Windows. Для методички оставлен нужный фрагмент настоящего кадра; полный исходный снимок сохранён отдельно.",
+    "role": "Ориентир в VS Code"
+  },
+  {
+    "id": "folder-project",
+    "file": "folder-project.png",
+    "title": "Содержимое Campus-ServiceDesk",
+    "caption": "Открыта дочерняя папка Campus-ServiceDesk. В дереве видны src, package.json и server.mjs; в редакторе открыт настоящий package.json клона.",
+    "sourceUrl": "https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk",
+    "width": 1150,
+    "height": 530,
+    "kind": "capture",
+    "sha256": "ae2815b0c4beef86246b4a8e8fd854e52ae4642cfb0c668912a51914824242ad",
+    "versionNotes": "Windows; VS Code 1.142.0, отдельный профиль; настоящий Explorer VS Code. Захват Chromium Page.captureScreenshot на отдельном неактивном Win32 desktop CodexFolderGuideCapture. Заголовок Extension Development Host сохранён. Физический ввод и SwitchDesktop не использовались. Пустой кадр снят до git clone; затем выполнен git clone --depth 1 из GitVerse, commit c6751d759ff64878c018c1214b556acf9a196343. Это VS Code, не Проводник Windows. Для методички оставлен нужный фрагмент настоящего кадра; полный исходный снимок сохранён отдельно.",
+    "role": "Ориентир в VS Code"
+  },
+  {
+    "id": "vscode-clone-command",
+    "file": "vscode-clone-command.png",
+    "title": "Команда Git: Clone",
+    "caption": "В палитре команд VS Code введено Git: Clone. Для обычного клонирования выберите Git: Clone, первую строку списка.",
+    "sourceUrl": "https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk",
+    "width": 745,
+    "height": 206,
+    "kind": "capture",
+    "sha256": "602583fed2b749b3556d65228a3233e19e01dcd7b1e0147453626a0931ce2bcf",
+    "versionNotes": "Windows; VS Code 1.142.0, встроенное расширение Git, отдельный профиль. Настоящий интерфейс захвачен Chromium Page.captureScreenshot на отдельном неактивном Win32 desktop CodexFolderGuideCapture. Заголовок Extension Development Host сохранён. Открыта отдельная пустая папка «Методы ИИ» для демонстрации первого клонирования. Палитра открыта встроенной командой workbench.action.quickOpen; git.clone открыл штатное поле URL. Текст введён через Chromium Input.insertText. Enter не отправлялся, повторное клонирование из этого поля не выполнялось. Физический ввод и SwitchDesktop не использовались. Для методички оставлен нужный фрагмент настоящего кадра; полный исходный снимок сохранён отдельно.",
+    "role": "Ориентир в VS Code"
+  },
+  {
+    "id": "vscode-clone-url",
+    "file": "vscode-clone-url.png",
+    "title": "Адрес репозитория для клонирования",
+    "caption": "Настоящее поле URL встроенной команды Git: Clone. Введена ссылка https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk.git. Нажатие Enter и выбор папки на этом кадре ещё не выполнены.",
+    "sourceUrl": "https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk",
+    "width": 745,
+    "height": 131,
+    "kind": "capture",
+    "sha256": "6834bdf81e8337410edf43022f9ddde7c61a026558a676bb37a7693533c97a9d",
+    "versionNotes": "Windows; VS Code 1.142.0, встроенное расширение Git, отдельный профиль. Настоящий интерфейс захвачен Chromium Page.captureScreenshot на отдельном неактивном Win32 desktop CodexFolderGuideCapture. Заголовок Extension Development Host сохранён. Открыта отдельная пустая папка «Методы ИИ» для демонстрации первого клонирования. Палитра открыта встроенной командой workbench.action.quickOpen; git.clone открыл штатное поле URL. Текст введён через Chromium Input.insertText. Enter не отправлялся, повторное клонирование из этого поля не выполнялось. Физический ввод и SwitchDesktop не использовались. Для методички оставлен нужный фрагмент настоящего кадра; полный исходный снимок сохранён отдельно.",
+    "role": "Ориентир в VS Code"
+  }
+]

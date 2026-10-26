@@ -4,8 +4,40 @@ export const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'
 export const pad = value => String(value).padStart(2, '0');
 const STORE = 'campus-servicedesk-progress-v11';
 const record = value => value && typeof value === 'object' && !Array.isArray(value);
-export const runtime = {course: [], schedule: [], state: {group: '', groupChosen: false, done: {}, steps: {}}};
-try { const saved = JSON.parse(localStorage.getItem(STORE) || '{}'); if (record(saved)) { runtime.state.group = typeof saved.group === 'string' ? saved.group : ''; runtime.state.groupChosen = saved.groupChosen === true; runtime.state.done = record(saved.done) ? saved.done : {}; runtime.state.steps = record(saved.steps) ? saved.steps : {}; } } catch { /* Storage is optional. */ }
+export const runtime = {course: [], schedule: [], state: {group: '', groupChosen: false, done: {}, steps: {}, positions: {}}};
+try { const saved = JSON.parse(localStorage.getItem(STORE) || '{}'); if (record(saved)) { runtime.state.group = typeof saved.group === 'string' ? saved.group : ''; runtime.state.groupChosen = saved.groupChosen === true; runtime.state.done = record(saved.done) ? saved.done : {}; runtime.state.steps = record(saved.steps) ? saved.steps : {}; runtime.state.positions = record(saved.positions) ? saved.positions : {}; runtime.state.lesson1Order = saved.lesson1Order; } } catch { /* Storage is optional. */ }
+export function migrateLessonOrder() {
+  if (runtime.state.lesson1Order === 2) return;
+  const indices = {7:8,8:9,9:7}, ids = {8:9,9:10,10:8};
+  for (const lessons of Object.values(runtime.state.steps)) {
+    if (record(lessons) && Array.isArray(lessons[1])) lessons[1] = [...new Set(lessons[1].map(index=>indices[index] ?? index))].sort((a,b)=>a-b);
+  }
+  for (const lessons of Object.values(runtime.state.positions)) {
+    if (record(lessons) && Object.hasOwn(ids,lessons[1])) lessons[1] = ids[lessons[1]];
+  }
+  runtime.state.lesson1Order = 2;
+}
+migrateLessonOrder();
+export function migrateGroupLabels() {
+  const aliases = {'1 группа — 1 подгруппа':'24ИС02/1','1 группа — 2 подгруппа':'24ИС02/2','2 группа — 1 подгруппа':'24ИС03/1','2 группа — 2 подгруппа':'24ИС03/2','Group 1 — subgroup 1':'24ИС02/1','Group 1 — subgroup 2':'24ИС02/2','Group 2 — subgroup 1':'24ИС03/1','Group 2 — subgroup 2':'24ИС03/2'};
+  const merge = (a, b) => [...new Set([...(Array.isArray(a) ? a : []), ...(Array.isArray(b) ? b : [])])].filter(Number.isInteger).sort((a,b) => a-b);
+  for (const [oldName, name] of Object.entries(aliases)) {
+    if (runtime.state.group === oldName) runtime.state.group = name;
+    if (Object.hasOwn(runtime.state.done, oldName)) { runtime.state.done[name] = merge(runtime.state.done[name], runtime.state.done[oldName]); delete runtime.state.done[oldName]; }
+    const oldSteps = runtime.state.steps[oldName];
+    if (record(oldSteps)) {
+      if (!record(runtime.state.steps[name])) runtime.state.steps[name] = {};
+      for (const [lesson, marks] of Object.entries(oldSteps)) runtime.state.steps[name][lesson] = merge(runtime.state.steps[name][lesson], marks);
+    }
+    delete runtime.state.steps[oldName];
+    if (record(runtime.state.positions?.[oldName])) {
+      if (!record(runtime.state.positions[name])) runtime.state.positions[name] = {};
+      runtime.state.positions[name] = {...runtime.state.positions[oldName],...runtime.state.positions[name]};
+      delete runtime.state.positions[oldName];
+    }
+  }
+}
+migrateGroupLabels();
 export function save() { try { localStorage.setItem(STORE, JSON.stringify(runtime.state)); } catch { /* Keep the current session usable. */ } updateProgressPill(); }
 export function inline(value) { let text = esc(value); text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>'); text = text.replace(/`([^`]+)`/g, '<code>$1</code>'); return text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>'); }
 function textBlock(value) {
@@ -29,6 +61,14 @@ export function selectGroup(group) { if (!runtime.schedule.some(item => item.gro
 export function doneSet() { const values = runtime.state.done?.[runtime.state.group]; return new Set(Array.isArray(values) ? values.filter(Number.isInteger) : []); }
 export function setDone(number, isDone) { const item = runtime.course.find(item => item.number === number); if (!currentGroup() || !item || item.locked) return; const values = doneSet(); isDone ? values.add(number) : values.delete(number); runtime.state.done[runtime.state.group] = [...values].sort((a, b) => a - b); save(); }
 export function taskSteps(number) { const values = runtime.state.steps?.[runtime.state.group]?.[number]; return new Set(Array.isArray(values) ? values.filter(Number.isInteger) : []); }
+export function lessonPosition(number) { const part = runtime.state.positions?.[runtime.state.group]?.[number]; return Number.isInteger(part) && part > 0 ? part : null; }
+export function rememberLessonPosition(number, part) {
+  const lesson = runtime.course.find(item=>item.number===number);
+  if (!currentGroup() || !lesson || lesson.locked || !lesson.guide?.steps.some(step=>step.id===part)) return;
+  if (!record(runtime.state.positions)) runtime.state.positions = {};
+  if (!record(runtime.state.positions[runtime.state.group])) runtime.state.positions[runtime.state.group] = {};
+  runtime.state.positions[runtime.state.group][number] = part; save();
+}
 export function setTaskStep(number, index, checked) { const item = runtime.course.find(item => item.number === number); if (!currentGroup() || !item || item.locked || !Number.isInteger(index) || index < 0 || index >= (item.steps?.length || 0)) return; if (!record(runtime.state.steps[runtime.state.group])) runtime.state.steps[runtime.state.group] = {}; const values = taskSteps(number); checked ? values.add(index) : values.delete(index); runtime.state.steps[runtime.state.group][number] = [...values].sort((a, b) => a - b); save(); }
 export function updateProgressPill() { if (typeof document === 'undefined') return; const node = $('#progress-pill'); const completed = runtime.course.filter(item => !item.locked && doneSet().has(item.number)).length; if (node) node.textContent = `${completed} / ${runtime.course.length || 6} отмечено`; }
 export function nearestLesson(group = currentGroup(), today = todayMoscow()) {

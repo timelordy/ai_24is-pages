@@ -4,38 +4,6 @@
 
 Точные названия пунктов меню могут оставаться на английском, как в самой программе. Подписи и объяснения ниже на русском.
 
-## Часть 1. Выбор способа входа в GitVerse
-
-Скриншот из официальной инструкции. Выберите GigaID; затем создайте аккаунт или войдите в существующий. Здесь не показан личный кабинет преподавателя.
-
-![Выбор способа входа в GitVerse](screenshots/gitverse-sign-in.webp)
-
-[Официальный источник](https://gitverse.ru/docs/gitverse/account-profile/quick-start)
-
-## Часть 5. Установка GigaCode из файла
-
-В Visual Studio Code откройте Extensions (Расширения), нажмите многоточие и выберите Install from VSIX… (Установить из VSIX). Укажите скачанный файл расширения.
-
-![Установка GigaCode из файла](screenshots/gigacode-install-vsix.webp)
-
-[Официальный источник](https://gitverse.ru/features/gigacode/install/)
-
-## Часть 5. Подключение GigaCode
-
-Нажмите Connect GigaCode (Подключить GigaCode) в нижней панели. Подтвердите вход в браузере и вернитесь в редактор.
-
-![Подключение GigaCode](screenshots/gigacode-connect.webp)
-
-[Официальный источник](https://gitverse.ru/features/gigacode/install/)
-
-## Часть 5. Панель GigaCode после установки
-
-Официальный скриншот открытой панели чата. Сам по себе этот экран не доказывает работоспособность: отправьте запрос и проверьте ответ. Название и положение индикатора подключения могут отличаться в вашей версии.
-
-![Панель GigaCode после установки](screenshots/gigacode-ready.webp)
-
-[Официальный источник](https://gitverse.ru/features/gigacode/install/)
-
 ## Часть 2. Откуда скачать Git
 
 Настоящая страница загрузки Git. Для обычного компьютера Windows выберите Git for Windows/x64 Setup. Номер версии со временем меняется.
@@ -54,9 +22,9 @@
 
 ## Часть 4. Где выбрать Node.js
 
-Настоящая страница загрузки Node.js. Здесь сайт автоматически выбрал Linux. На вашем Windows-компьютере выберите Windows, архитектуру x64, ветку 22 LTS и установщик .msi. Команды установки для Linux копировать не нужно.
+Нужный блок на настоящей странице Node.js: Windows, x64 и кнопка Windows Installer (.msi). Прокрути страницу до этого блока. Команды Docker выше для нашей работы не нужны.
 
-![Где выбрать Node.js](screenshots/node-download.webp)
+![Где выбрать Node.js](screenshots/node-download-windows.png)
 
 [Официальный источник](https://nodejs.org/en/download)
 

@@ -89,9 +89,12 @@ function makeStoredZip(files) {
 }
 
 async function getManifest() {
-  manifestPromise ||= fetch('assets/starters/manifest.json?v=9b3f6db4c111', {cache: 'no-cache'}).then(response => {
+  manifestPromise ||= fetch('assets/starters/manifest.json?v=05de98df22b4', {cache: 'no-cache'}).then(response => {
     if (!response.ok) throw new Error('Не удалось загрузить состав архива проекта.');
     return response.json();
+  }).catch(error => {
+    manifestPromise = undefined;
+    throw error;
   });
   return manifestPromise;
 }
@@ -133,15 +136,26 @@ async function downloadStarter(button) {
 }
 
 export function bindStarterDownloads() {
+  const statuses = new WeakMap();
   document.addEventListener('click', async event => {
     const button = event.target.closest('[data-starter]');
     if (!button) return;
     event.preventDefault();
     if (button.getAttribute('aria-busy') === 'true') return;
+    let status = statuses.get(button);
+    if (!status) {
+      status = document.createElement('p');
+      button.after(status);
+      statuses.set(button, status);
+    }
+    status.setAttribute('role', 'status');
+    status.textContent = '';
     try {
       await downloadStarter(button);
+      status.textContent = 'ZIP подготовлен. Проверьте загрузки браузера.';
     } catch (error) {
-      window.alert(`Архив не скачан: ${error.message}`);
+      status.setAttribute('role', 'alert');
+      status.textContent = `Архив не скачан: ${error.message} Нажмите кнопку скачивания ещё раз, чтобы повторить.`;
     }
   });
 }

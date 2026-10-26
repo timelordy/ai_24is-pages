@@ -1,9 +1,9 @@
 'use strict';
-import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentOpenLesson, isSetupMeeting} from './lib.js?v=9b3f6db4c111';
-import {renderTask, bindTaskPage} from './task-page.js?v=lesson-resume-20261005-1';
-import {bindStarterDownloads} from './starter-download.js?v=9b3f6db4c111';
-import {renderHome, renderTasks, renderStart} from './pages-home.js?v=9b3f6db4c111';
-import {renderRoute, renderSchedule, renderWork, bindWork} from './pages-course.js?v=9b3f6db4c111';
+import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentGroup, currentOpenLesson, isSetupMeeting} from './lib.js?v=05de98df22b4';
+import {renderTask, bindTaskPage} from './task-page.js?v=05de98df22b4';
+import {bindStarterDownloads} from './starter-download.js?v=05de98df22b4';
+import {renderHome, renderTasks, renderStart} from './pages-home.js?v=05de98df22b4';
+import {renderRoute, renderStack, renderSchedule, renderWork, bindWork} from './pages-course.js?v=05de98df22b4';
 let entered = false;
 // The sticky offset follows wrapped navigation, rotation and larger user text.
 if ('ResizeObserver' in window) {
@@ -30,26 +30,33 @@ function render() {
   else if (route === 'tasks') html = renderTasks();
   else if (route === 'start') html = renderStart();
   else if (route === 'route') html = renderRoute();
+  else if (route === 'stack') html = renderStack();
   else if (route === 'schedule') html = renderSchedule();
   else if (route === 'work') html = renderWork();
   else if (/^task-[1-6]$/.test(route)) html = renderTask(Number(route.split('-')[1]));
   else html = renderHome();
   $('#app').innerHTML = html; $('#selected-group').textContent = runtime.state.group;
   setActiveNav(route); updateProgressPill(); bindTaskPage(route, render); if (route === 'work') bindWork(render);
+  document.querySelectorAll('.code-block').forEach(container => {
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = 'copy-command'; button.textContent = 'Копировать';
+    button.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(container.querySelector('code').textContent); button.textContent = 'Скопировано'; }
+      catch { button.textContent = 'Выдели команду вручную'; }
+    });
+    container.append(button);
+  });
   const anchor = location.hash.split('/')[1];
   const target = anchor && /^(part-\d+|checks|submit|files)$/.test(anchor) ? document.getElementById(anchor) : null;
-  if (target) { if (target.tagName === 'DETAILS') target.open = true; requestAnimationFrame(() => { target.scrollIntoView({block: 'start'}); (target.querySelector('summary') || target).focus({preventScroll: true}); }); }
+  if (target) { if (target.tagName === 'DETAILS') target.open = true; requestAnimationFrame(() => { target.scrollIntoView({block: 'start'}); (target.tagName === 'DETAILS' ? target.querySelector('summary') : target).focus({preventScroll: true}); }); }
   else { window.scrollTo(0, 0); $('#app').focus({preventScroll: true}); }
 }
 function openGroupPicker() {
   const dialog = $('#group-dialog'); $('#close-group').hidden = !entered;
   $('#group-options').innerHTML = runtime.schedule.map((group, index) => {
-    const match = group.group.match(/^(24ИС\d{2})\/(\d+)$/i);
-    const name = match ? match[1].toUpperCase() : group.group;
-    const subgroupLabel = match ? `${match[2]} подгруппа` : '';
     const remembered = runtime.state.groupChosen && runtime.state.group === group.group;
     const indicator = remembered ? '<path d="m4 8 2.5 2.5L12 5"/>' : '<path d="m6 4 4 4-4 4"/>';
-    return `<button class="group-option ${remembered ? 'remembered' : ''}" type="button" data-group-index="${index}" aria-label="${esc(group.group)}"><span class="group-option-title"><span class="group-option-name">${esc(name)}</span><strong>${esc(subgroupLabel || group.group)}</strong></span><span class="group-option-time">${esc(dayLabel(group.dates[0]))} · ${esc(group.time)}</span><span class="choice-indicator" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${indicator}</svg></span>${remembered ? '<span class="sr-only">Ранее выбрана</span>' : ''}</button>`;
+    return `<button class="group-option ${remembered ? 'remembered' : ''}" type="button" data-group-index="${index}" aria-label="${esc(group.group)}"><span class="group-option-title"><strong>${esc(group.group)}</strong></span><span class="group-option-time">${esc(dayLabel(group.dates[0]))} · ${esc(group.time)}</span><span class="group-option-time">${esc(group.room)}</span><span class="choice-indicator" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${indicator}</svg></span>${remembered ? '<span class="sr-only">Ранее выбрана</span>' : ''}</button>`;
   }).join('');
   $('#group-options').querySelectorAll('[data-group-index]').forEach(button => {
     button.addEventListener('click', () => {
@@ -70,25 +77,23 @@ function validateData(course, schedule) {
 $('#group-dialog').addEventListener('cancel', event => { if (!entered) event.preventDefault(); });
 $('#close-group').addEventListener('click', () => { if (entered) $('#group-dialog').close(); });
 $('#change-group').addEventListener('click', openGroupPicker);
+document.querySelector('.skip[href="#app"]').addEventListener('click', event => {
+  event.preventDefault();
+  $('#app').focus({preventScroll: true});
+  $('#app').scrollIntoView({block: 'start'});
+});
 bindStarterDownloads();
-Promise.all([loadJson('assets/course.json?v=9b3f6db4c111'), loadJson('assets/schedule.json?v=9b3f6db4c111')]).then(([course, schedule]) => {
+Promise.all([loadJson('assets/course.json?v=05de98df22b4'), loadJson('assets/schedule.json?v=05de98df22b4')]).then(([course, schedule]) => {
   validateData(course, schedule);
   runtime.course = course;
   runtime.schedule = schedule;
   $('#boot-status').hidden = true;
   window.addEventListener('hashchange', render);
-
-  const savedGroupIsValid =
-    runtime.state.groupChosen &&
-    runtime.schedule.some(item => item.group === runtime.state.group);
-
-  if (savedGroupIsValid) {
+  if (runtime.state.groupChosen && currentGroup()) {
     entered = true;
     $('#course-shell').hidden = false;
     render();
-  } else {
-    openGroupPicker();
-  }
+  } else openGroupPicker();
 }).catch(error => {
   const status = $('#boot-status');
   status.textContent = 'Не получилось загрузить курс. Проверьте интернет. ' + error.message;

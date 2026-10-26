@@ -1,5 +1,84 @@
 {
-  "revision": "9b3f6db4c111",
-  "images": 9,
-  "lesson": 1
+  "revision": "05de98df22b4",
+  "images": 42,
+  "lesson": 1,
+  "collections": {
+    "lesson-01": {
+      "images": 5,
+      "ids": [
+        "git-download",
+        "vscode-download",
+        "node-download",
+        "project-terminal",
+        "project-running"
+      ]
+    },
+    "opencode": {
+      "images": 6,
+      "ids": [
+        "opencode-home",
+        "opencode-connect-command",
+        "opencode-connect",
+        "opencode-inception-account",
+        "opencode-session",
+        "opencode-diff"
+      ]
+    },
+    "web-guide": {
+      "images": 4,
+      "ids": [
+        "gitverse-home",
+        "gitverse-login",
+        "inception-login",
+        "servicedesk-start"
+      ]
+    },
+    "native-guide": {
+      "images": 18,
+      "ids": [
+        "vscode-folder",
+        "vscode-new-terminal",
+        "vscode-versions",
+        "vscode-git-version",
+        "vscode-node-npm",
+        "vscode-opencode-version",
+        "vscode-git-start",
+        "vscode-npm-start",
+        "vscode-report-preview",
+        "opencode-plan",
+        "opencode-build",
+        "opencode-prompt",
+        "opencode-models",
+        "native-opencode-connect",
+        "vscode-git-init",
+        "vscode-git-commit",
+        "vscode-git-branch",
+        "opencode-launch"
+      ]
+    },
+    "repository-guide": {
+      "images": 3,
+      "ids": [
+        "gitverse-teacher-repository",
+        "gitverse-clone-url",
+        "gitverse-download-zip"
+      ]
+    },
+    "folder-guide": {
+      "images": 5,
+      "ids": [
+        "folder-empty",
+        "folder-parent",
+        "folder-project",
+        "vscode-clone-command",
+        "vscode-clone-url"
+      ]
+    },
+    "inception-guide": {
+      "images": 1,
+      "ids": [
+        "inception-google"
+      ]
+    }
+  }
 }

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "gitverse-teacher-repository",
+    "file": "gitverse-teacher-repository.png",
+    "title": "Репозиторий преподавателя на GitVerse",
+    "caption": "Проверь адрес ultra_turbo_killer/Campus-ServiceDesk и выбранную ветку main. Справа над файлами находится кнопка «Код».",
+    "role": "Где взять исходный проект",
+    "sourceUrl": "https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk",
+    "width": 1270,
+    "height": 714,
+    "kind": "capture",
+    "sha256": "ed66ca56daf0133a7c94707fb50ba3641587344f29599da4f60936ba99546ef3",
+    "versionNotes": "Снят 26.10.2026 в отдельной скрытой вкладке встроенного браузера без входа в аккаунт. Ветка main, коммит c6751d7. Содержимое страницы не изменялось. Интерфейс проверен через DOM и просмотр PNG."
+  },
+  {
+    "id": "gitverse-clone-url",
+    "file": "gitverse-clone-url.png",
+    "title": "Адрес для клонирования",
+    "caption": "Нажми «Код» → «Клонирование». Строка с HTTPS-адресом и значком копирования нужна для команды git clone.",
+    "role": "Где скопировать адрес",
+    "sourceUrl": "https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk",
+    "width": 1270,
+    "height": 714,
+    "kind": "capture",
+    "sha256": "dd96b8fce5d89d8cdfe29a4fd3d78f73e1a4ff278bfca012b190ea5d61b52aae",
+    "versionNotes": "Снят 26.10.2026 в отдельной скрытой вкладке встроенного браузера без входа в аккаунт. Ветка main, коммит c6751d7. Содержимое страницы не изменялось. Интерфейс проверен через DOM и просмотр PNG."
+  },
+  {
+    "id": "gitverse-download-zip",
+    "file": "gitverse-download-zip.png",
+    "title": "Загрузка архива с исходниками",
+    "caption": "В меню «Код» выбери вкладку «Загрузка», затем «Скачать ZIP». Это архив файлов ветки main; история Git в ZIP не входит.",
+    "role": "Где скачать ZIP",
+    "sourceUrl": "https://gitverse.ru/ultra_turbo_killer/Campus-ServiceDesk",
+    "width": 1270,
+    "height": 714,
+    "kind": "capture",
+    "sha256": "5b469989e4b1df22d01fb8d80c18e4f6c64fb571ddab8849a52d314ed83fabe2",
+    "versionNotes": "Снят 26.10.2026 в отдельной скрытой вкладке встроенного браузера без входа в аккаунт. Ветка main, коммит c6751d7. Содержимое страницы не изменялось. Интерфейс проверен через DOM и просмотр PNG."
+  }
+]

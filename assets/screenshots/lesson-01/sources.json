@@ -1,61 +1,5 @@
 [
   {
-    "id": "gitverse-sign-in",
-    "part": 1,
-    "file": "gitverse-sign-in.webp",
-    "title": "Выбор способа входа в GitVerse",
-    "caption": "Скриншот из официальной инструкции. Выберите GigaID; затем создайте аккаунт или войдите в существующий. Здесь не показан личный кабинет преподавателя.",
-    "sourceUrl": "https://gitverse.ru/docs/gitverse/account-profile/quick-start",
-    "kind": "official",
-    "capturedAt": "2026-09-14T17:28:57.518100+00:00",
-    "width": 2701,
-    "height": 1491,
-    "sha256": "190d3a56de7a0434ebbfeabc1bdd224063472432411d6b75d6827b0ab6616471",
-    "originalUrl": "https://gitverse.ru/docs/gitverse/account-profile/resources/create-profile/img3.png"
-  },
-  {
-    "id": "gigacode-install-vsix",
-    "part": 5,
-    "file": "gigacode-install-vsix.webp",
-    "title": "Установка GigaCode из файла",
-    "caption": "В Visual Studio Code откройте Extensions (Расширения), нажмите многоточие и выберите Install from VSIX… (Установить из VSIX). Укажите скачанный файл расширения.",
-    "sourceUrl": "https://gitverse.ru/features/gigacode/install/",
-    "kind": "official",
-    "capturedAt": "2026-09-14T17:28:57.518100+00:00",
-    "width": 937,
-    "height": 493,
-    "sha256": "4bb6ec191468be2b27e0add6e683abc2e8bd3ef68a1d9f999ca1c1777ab8c447",
-    "originalUrl": "https://gitverse.ru/home/_next/static/media/vs_extensions.2d581e6d.png"
-  },
-  {
-    "id": "gigacode-connect",
-    "part": 5,
-    "file": "gigacode-connect.webp",
-    "title": "Подключение GigaCode",
-    "caption": "Нажмите Connect GigaCode (Подключить GigaCode) в нижней панели. Подтвердите вход в браузере и вернитесь в редактор.",
-    "sourceUrl": "https://gitverse.ru/features/gigacode/install/",
-    "kind": "official",
-    "capturedAt": "2026-09-14T17:28:57.518100+00:00",
-    "width": 696,
-    "height": 346,
-    "sha256": "c6ebd01486b7a1659e12b645af260994743ccd35422925bf921fd82efe41c5ea",
-    "originalUrl": "https://gitverse.ru/home/_next/static/media/vs_enable.4aa7b461.png"
-  },
-  {
-    "id": "gigacode-ready",
-    "part": 5,
-    "file": "gigacode-ready.webp",
-    "title": "Панель GigaCode после установки",
-    "caption": "Официальный скриншот открытой панели чата. Сам по себе этот экран не доказывает работоспособность: отправьте запрос и проверьте ответ. Название и положение индикатора подключения могут отличаться в вашей версии.",
-    "sourceUrl": "https://gitverse.ru/features/gigacode/install/",
-    "kind": "official",
-    "capturedAt": "2026-09-14T17:28:57.518100+00:00",
-    "width": 1389,
-    "height": 787,
-    "sha256": "e038bfaf68ab42481185d9fa83a5963576444fde613eab060d21547e810fd9b3",
-    "originalUrl": "https://gitverse.ru/home/_next/static/media/vs_complete.b1f7b1cd.png"
-  },
-  {
     "id": "git-download",
     "part": 2,
     "file": "git-download.webp",
@@ -66,7 +10,8 @@
     "capturedAt": "2026-09-14T17:28:57.518100+00:00",
     "width": 1280,
     "height": 900,
-    "sha256": "81876c3597f4c06792e7cce667cde7019ab55135314ab35aad7df2e5c5f5e200"
+    "sha256": "81876c3597f4c06792e7cce667cde7019ab55135314ab35aad7df2e5c5f5e200",
+    "role": "Где нажать на сайте"
   },
   {
     "id": "vscode-download",
@@ -79,20 +24,23 @@
     "capturedAt": "2026-09-14T17:28:57.518100+00:00",
     "width": 1280,
     "height": 900,
-    "sha256": "4ed7ea9d5418ad43d33a994dfbd6b902f0142942b400db749211aaf0f5ff5ce2"
+    "sha256": "4ed7ea9d5418ad43d33a994dfbd6b902f0142942b400db749211aaf0f5ff5ce2",
+    "role": "Где нажать на сайте"
   },
   {
     "id": "node-download",
     "part": 4,
-    "file": "node-download.webp",
+    "file": "node-download-windows.png",
     "title": "Где выбрать Node.js",
-    "caption": "Настоящая страница загрузки Node.js. Здесь сайт автоматически выбрал Linux. На вашем Windows-компьютере выберите Windows, архитектуру x64, ветку 22 LTS и установщик .msi. Команды установки для Linux копировать не нужно.",
+    "caption": "Нужный блок на настоящей странице Node.js: Windows, x64 и кнопка Windows Installer (.msi). Прокрути страницу до этого блока. Команды Docker выше для нашей работы не нужны.",
     "sourceUrl": "https://nodejs.org/en/download",
     "kind": "capture",
     "capturedAt": "2026-09-14T17:28:57.518100+00:00",
-    "width": 1280,
-    "height": 900,
-    "sha256": "a75a1fb616467d92d191c6b3b7a886b1f81bcabbae016c1d8ed8e20a150c20b4"
+    "width": 1050,
+    "height": 125,
+    "sha256": "f5cf5be28a519b0f6c1e3b8a8093bddbbfab556b6d373b8d948ddb1489b7e3ea",
+    "versionNotes": "Снят 26.10.2026 во встроенном браузере, на странице выбрана Node.js 24.22.1 LTS. Обрезан до блока готового установщика Windows; содержимое не изменялось.",
+    "role": "Где нажать на сайте"
   },
   {
     "id": "project-terminal",
@@ -105,7 +53,8 @@
     "capturedAt": "2026-09-14T17:28:57.518100+00:00",
     "width": 1204,
     "height": 650,
-    "sha256": "2a85110e3fc2fc9ab39f90b0d68e94b9e9a5b61d2bee1e2337ed9b6ee1e19a8a"
+    "sha256": "2a85110e3fc2fc9ab39f90b0d68e94b9e9a5b61d2bee1e2337ed9b6ee1e19a8a",
+    "role": "Ориентир в VS Code"
   },
   {
     "id": "project-running",
@@ -118,6 +67,7 @@
     "capturedAt": "2026-09-21T13:57:46.8961789+03:00",
     "width": 1280,
     "height": 1258,
-    "sha256": "dc0ed414a60ca45e0d01bee8c6dee6065e4251529cb0e6a9fef760d6fbd309cb"
+    "sha256": "dc0ed414a60ca45e0d01bee8c6dee6065e4251529cb0e6a9fef760d6fbd309cb",
+    "role": "Пример работающего сайта"
   }
 ]

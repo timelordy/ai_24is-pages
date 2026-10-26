@@ -1,0 +1,54 @@
+[
+  {
+    "id": "gitverse-home",
+    "file": "gitverse-home.png",
+    "title": "Главная страница GitVerse",
+    "caption": "На главной странице GitVerse нажми «Вход» в верхней части страницы. На снимке также открыто уведомление об использовании cookies.",
+    "sourceUrl": "https://gitverse.ru/home/",
+    "versionNotes": "Снят 26.10.2026 во встроенном браузере без входа в аккаунт. Кнопка на главной странице называется «Вход». Уведомление cookies не принято.",
+    "width": 1265,
+    "height": 712,
+    "kind": "capture",
+    "sha256": "948684c52adb5a624bd8203ee8f937c8a09a39a4405624c7ff9da7788041ead0",
+    "role": "Ориентир на сайте"
+  },
+  {
+    "id": "gitverse-login",
+    "file": "gitverse-login.png",
+    "title": "Способы входа в GitVerse",
+    "caption": "GitVerse предлагает вход через GigaID, Sber ID или Cloud.ru ID. Выбери доступный тебе способ; на снимке вход ещё не выполнен.",
+    "sourceUrl": "https://gitverse.ru/signin",
+    "versionNotes": "Снят 26.10.2026 во встроенном браузере. Страница перенаправлена на форму GitVerse OpenID Connect; показаны GigaID, Sber ID и Cloud.ru ID. Учётные данные не вводились.",
+    "width": 1280,
+    "height": 720,
+    "kind": "capture",
+    "sha256": "e0934cc15bb3ca289e977038dde5dd56480f35fdde0003b2d4a0c2da6e0d2fcc",
+    "role": "Ориентир на сайте"
+  },
+  {
+    "id": "inception-login",
+    "file": "inception-login.png",
+    "title": "Вход в Inception",
+    "caption": "Начальный экран кабинета Inception. Для регистрации доступна ссылка Sign up. Создание ключа API находится после входа и на этом снимке не показано.",
+    "sourceUrl": "https://platform.inceptionlabs.ai/auth/login?callbackUrl=%2F",
+    "versionNotes": "Снят 26.10.2026 во встроенном браузере после автоматической проверки Vercel. Вход не выполнен; учётные данные и ключи не вводились. Доступ к кабинету ключей без авторизации не проверен.",
+    "width": 1272,
+    "height": 716,
+    "kind": "capture",
+    "sha256": "aba0e586b3cf814417087e1d7b4e801af69ad604abc8274dac12821b675867c5",
+    "role": "Ориентир на сайте"
+  },
+  {
+    "id": "servicedesk-start",
+    "file": "servicedesk-start.png",
+    "title": "Список заявок в запущенном ServiceDesk",
+    "caption": "Результат запуска первой работы: вверху указано 12 заявок, ниже видна заявка №101 о проекторе. У твоего адреса может быть другой номер порта. Поиска и фильтров в этой версии ещё нет.",
+    "sourceUrl": "",
+    "width": 1265,
+    "height": 712,
+    "kind": "capture",
+    "sha256": "cc4bda76f2e5980035921466a30ea6155d1db22c5c24ddf4d442418c762d88f7",
+    "versionNotes": "Снят 26.10.2026 во встроенном браузере с реально запущенного стартового проекта work-01-discovery-contract, локальный сервер на 127.0.0.1:4175. Содержимое страницы не изменялось.",
+    "role": "Пример работающего сайта"
+  }
+]

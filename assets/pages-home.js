@@ -1,31 +1,34 @@
 'use strict';
-import {runtime, esc, nearestLesson, currentOpenLesson, currentGroup, taskCard, isSetupMeeting, doneSet} from './lib.js?v=9b3f6db4c111';
+import {runtime, esc, pad, dateLabel, nearestLesson, currentOpenLesson, currentGroup, doneSet, taskSteps, lessonPosition} from './lib.js?v=05de98df22b4';
 
-function shortDate(value) {
-  return new Date(`${value}T12:00:00+03:00`).toLocaleDateString('ru-RU', {day:'numeric', month:'long', timeZone:'Europe/Moscow'});
+function resumeStep(item) {
+  const steps=item.guide?.steps || [];
+  const saved=steps.find(step=>step.id===lessonPosition(item.number));
+  return saved || steps.find((_,index)=>!taskSteps(item.number).has(index)) || steps[0];
 }
-
-function nextClassCard(next) {
-  if (!next || next.finished) return '<aside class="next-class-card panel"><p class="eyebrow">Расписание</p><h2>Пары закончились</h2><a href="#schedule">Открыть расписание →</a></aside>';
-  return `<aside class="next-class-card panel"><p class="eyebrow">Следующая пара</p><h2>${shortDate(next.date)}</h2><p>${esc(next.group.time)}</p><p class="class-room">${esc(next.group.room)}</p><a href="#schedule">Расписание →</a></aside>`;
+function workList() {
+  const group=currentGroup(), done=doneSet();
+  return `<section class="handbook-work-list" aria-label="Работы по курсу">${runtime.course.map(item=>{
+    const step=resumeStep(item), date=group?.dates[item.number-1];
+    return `<article class="handbook-work-row ${item.locked ? 'is-locked' : ''}"><span class="handbook-work-number">${pad(item.number)}</span><div class="handbook-work-description"><h2>${esc(item.title)}</h2><p>${esc(item.ability)}</p>${date ? `<span class="handbook-work-date">По расписанию: ${dateLabel(date)}</span>` : ''}</div><div class="handbook-work-actions"><span class="handbook-work-status">${item.locked ? 'Материалы ещё не открыты' : done.has(item.number) ? 'Отмечено для себя' : 'Доступна'}</span>${item.locked ? '<span class="handbook-lock-note">Откроет преподаватель</span>' : `<a class="button primary" href="#task-${item.number}${step ? `/part-${step.id}` : ''}">Открыть работу</a>`}</div></article>`;
+  }).join('')}</section>`;
 }
-
 export function renderHome() {
-  const group = currentGroup(), current = currentOpenLesson(), next = nearestLesson(), setup = isSetupMeeting();
-  const href = setup ? '#start' : `#task-${current.number}`;
-  const title = setup ? 'Поставить программы и запустить проект' : current.title;
-  const note = setup ? 'Git, VS Code, Node.js и GigaCode. Цель — чтобы проект открылся и 5 тестов прошли. Отчёт пока не нужен.' : current.number === 1 ? 'Запусти готовый проект, проверь три ответа GigaCode по коду и сохрани REPORT.md в локальном коммите.' : (current.goal || current.ability);
-  const label = setup ? 'Открыть настройку' : doneSet().has(current.number) ? `Открыть работу ${current.number} ещё раз` : `Открыть работу ${current.number}`;
-  return `<section class="group-home page-head"><p class="eyebrow">${esc(group?.group)}</p><div class="group-dashboard"><a class="current-work panel" href="${href}"><div><span class="current-kicker">${setup ? 'Сначала' : 'Сейчас'}</span><h1>${esc(title)}</h1><p>${esc(note)}</p></div><span class="current-cta">${esc(label)} <span aria-hidden="true">→</span></span></a>${nextClassCard(next)}</div></section>`;
+  const group=currentGroup(), current=currentOpenLesson(), step=resumeStep(current), next=nearestLesson();
+  const href=`#task-${current.number}${step ? `/part-${step.id}` : ''}`;
+  return `<header class="handbook-heading"><div><h1>Методы искусственного интеллекта</h1><p>Интерактивная методичка · ${esc(group?.group)}</p></div><a class="button" href="#schedule">Расписание группы</a></header><section class="handbook-current" aria-label="Текущая работа"><div><p class="course-label">Работа ${pad(current.number)}</p><h2>${esc(current.guide?.title || current.title)}</h2>${step ? `<p class="handbook-resume">Шаг ${step.id}. ${esc(step.title)}</p>` : `<p>${esc(current.ability)}</p>`}<div class="actions"><a class="button primary" href="${href}">${lessonPosition(current.number) ? 'Продолжить с этого шага' : 'Начать работу'}</a><a class="button" href="#task-${current.number}/files">Материалы к работе</a></div></div><aside class="handbook-class"><strong>Ближайшее занятие</strong>${next && !next.finished ? `<p>${dateLabel(next.date)}</p><p>${esc(next.group.time)}</p><p>Аудитория ${esc(next.group.room)}</p>` : '<p>Встречи по расписанию завершены.</p>'}</aside></section><div class="section-head handbook-section-head"><h2>Работы по курсу</h2><a class="button" href="#tasks">Все работы</a></div>${workList()}<section class="handbook-help"><h2>Если нужна помощь</h2><div class="actions"><a class="button" href="#start">Установка программ</a><a class="button" href="#task-1/part-8">Подключение OpenCode</a><a class="button" href="#route">Порядок выполнения работы</a></div><p>Все действия находятся внутри работ. Дополнительные текстовые инструкции скачивать необязательно.</p></section>`;
 }
-
-export function renderTasks() { return `<header class="page-head"><p class="eyebrow">${esc(runtime.state.group)}</p><h1>Все работы</h1><p class="lead">Один проект на весь семестр. Сейчас открыта только текущая работа; следующую я открою позже.</p></header><section class="task-grid">${runtime.course.map(taskCard).join('')}</section>`; }
+export function renderTasks() {
+  return `<header class="handbook-heading"><div><h1>Работы по курсу</h1><p>${esc(runtime.state.group)} · Продолжаем один учебный проект на следующих занятиях.</p></div><a class="button" href="#home">К текущей работе</a></header>${workList()}`;
+}
 export function renderCurrent() { return renderHome(); }
 export function renderStart() {
-  return `<header class="page-head"><p class="eyebrow">${esc(runtime.state.group)} · Вводная</p><h1>Поставить программы и запустить проект</h1><p class="lead">Нужно открыть Campus ServiceDesk и получить 5 пройденных тестов. Код пока не меняем, отчёт не сдаём.</p><div class="actions"><a class="button primary" href="#task-1/part-1">Начать</a><a class="button" href="#task-1/part-7">Программы уже стоят — открыть проект</a></div></header><section class="setup-list">${[
-    ['GitVerse', 'Войти, чтобы подключить GigaCode в VS Code.', 1],
-    ['Программы', 'Поставить Git, VS Code, Node.js и GigaCode.', 2],
-    ['Проект', 'Открыть Campus ServiceDesk на компьютере.', 7],
-    ['Проверка', 'Получить 5 тестов и увидеть 12 заявок в браузере.', 9]
-  ].map(([title, text, part]) => `<article class="setup-step panel"><div><h2>${title}</h2><p>${text}</p><a href="#task-1/part-${part}">Открыть шаг →</a></div></article>`).join('')}</section><section class="notice panel setup-stop"><b>На вводной достаточно шагов 1–9.</b> Работа с ответами ИИ и REPORT.md начнётся в первой работе.</section>`;
+  return `<header class="handbook-heading"><div><h1>Подготовка к первой работе</h1><p>Установи программы, открой учебный сайт и подключи помощника.</p></div><a class="button primary" href="#task-1/part-1">Открыть пошаговую инструкцию</a></header><section class="setup-list">${[
+    ['Git', 'Хранит историю файлов на компьютере. Сохраним исходный сайт и посмотрим, что изменил агент.', 2],
+    ['VS Code', 'Редактор файлов проекта. В нём откроем код и терминал: панель для ввода команд.', 3],
+    ['Node.js и npm', 'Node.js — среда выполнения JavaScript. Она запустит сервер учебного сайта. npm — менеджер пакетов в комплекте: через него установим OpenCode.', 4],
+    ['OpenCode', 'Программа для общения с агентом в папке проекта. Попросим его объяснить код и заполнить отчёт. Модель ИИ подключим отдельно.', 5],
+    ['Учебный проект', 'Клонируй проект преподавателя с GitVerse. В пустой папке «Методы ИИ» появится Campus-ServiceDesk с файлами и историей Git.', 7],
+    ['Подключение ИИ', 'Введи личный ключ в OpenCode и выбери модель. Затем попросим агента запустить сайт.', 8]
+  ].map(([title,text,part])=>`<article class="setup-step panel"><div><h2>${title}</h2><p>${text}</p><a class="button" href="#task-1/part-${part}">Открыть шаг</a></div></article>`).join('')}</section>`;
 }
