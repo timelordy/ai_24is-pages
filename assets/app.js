@@ -14,12 +14,25 @@ if ('ResizeObserver' in window) {
   });
   headerObserver.observe(document.querySelector('.topbar'));
 }
+// Keep the selected section visible without scrolling the page itself.
+function keepActiveTabInView() {
+  const nav = document.querySelector('.tabs');
+  const selected = nav?.querySelector('a.active');
+  if (!selected || nav.scrollWidth <= nav.clientWidth) return;
+  const bounds = nav.getBoundingClientRect();
+  const tab = selected.getBoundingClientRect();
+  const gap = 12;
+  if (tab.left < bounds.left + gap) nav.scrollLeft += tab.left - bounds.left - gap;
+  else if (tab.right > bounds.right - gap) nav.scrollLeft += tab.right - bounds.right + gap;
+}
+window.addEventListener('resize', keepActiveTabInView);
 function setActiveNav(route) {
   document.querySelectorAll('.tabs a').forEach(link => {
     const active = link.dataset.route === route || ((route.startsWith('task-') || route === 'start') && link.dataset.route === 'tasks');
     link.classList.toggle('active', active);
     if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
+  keepActiveTabInView();
 }
 function render(focusContent = true) {
   if (!entered) return;
