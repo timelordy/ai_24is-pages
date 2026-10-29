@@ -1,6 +1,6 @@
 {
-  "revision": "9038b0b85a19",
-  "images": 42,
+  "revision": "85b64ff4da2c",
+  "images": 57,
   "lesson": 1,
   "collections": {
     "lesson-01": {
@@ -78,6 +78,26 @@
       "images": 1,
       "ids": [
         "inception-google"
+      ]
+    },
+    "semester-guide": {
+      "images": 15,
+      "ids": [
+        "search-before",
+        "search-305",
+        "search-all",
+        "search-match",
+        "search-empty",
+        "create-form",
+        "create-success",
+        "create-error",
+        "sqlite-persisted",
+        "workflow-status",
+        "comment-saved",
+        "ai-suggestion",
+        "ai-applied",
+        "ai-invalid",
+        "ai-unavailable"
       ]
     }
   }

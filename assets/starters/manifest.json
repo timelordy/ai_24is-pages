@@ -98,6 +98,10 @@
       "url": "assets/starters/work-01-discovery-contract/src/tickets.js"
     },
     {
+      "path": "static.mjs",
+      "url": "assets/starters/work-01-discovery-contract/static.mjs"
+    },
+    {
       "path": "styles.css",
       "url": "assets/starters/work-01-discovery-contract/styles.css"
     },
@@ -108,6 +112,732 @@
     {
       "path": "tests/base.test.mjs",
       "url": "assets/starters/work-01-discovery-contract/tests/base.test.mjs"
+    },
+    {
+      "path": "tests/static.test.mjs",
+      "url": "assets/starters/work-01-discovery-contract/tests/static.test.mjs"
+    }
+  ],
+  "work-02-frontend-query": [
+    {
+      "path": ".github/workflows/check.yml",
+      "url": "assets/starters/work-02-frontend-query/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": ".gitignore",
+      "url": "assets/starters/work-02-frontend-query/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": ".gitverse/workflows/check.yml",
+      "url": "assets/starters/work-02-frontend-query/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-02-frontend-query/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-02-frontend-query/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "COURSE_METADATA.json",
+      "url": "assets/starters/work-02-frontend-query/COURSE_METADATA.json"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-02-frontend-query/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-02-frontend-query/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-02-frontend-query/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "gitverse/issue-template.md",
+      "url": "assets/starters/work-02-frontend-query/gitverse/issue-template.md"
+    },
+    {
+      "path": "gitverse/merge-request-template.md",
+      "url": "assets/starters/work-02-frontend-query/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "HANDOFF.md",
+      "url": "assets/starters/work-02-frontend-query/HANDOFF.md"
+    },
+    {
+      "path": "index.html",
+      "url": "assets/starters/work-02-frontend-query/index.html"
+    },
+    {
+      "path": "opencode.json",
+      "url": "assets/starters/work-02-frontend-query/opencode.json"
+    },
+    {
+      "path": "package.json",
+      "url": "assets/starters/work-02-frontend-query/package.json"
+    },
+    {
+      "path": "README.md",
+      "url": "assets/starters/work-02-frontend-query/README.md"
+    },
+    {
+      "path": "REPORT.md",
+      "url": "assets/starters/work-02-frontend-query/REPORT.md"
+    },
+    {
+      "path": "server.mjs",
+      "url": "assets/starters/work-02-frontend-query/server.mjs"
+    },
+    {
+      "path": "src/app.js",
+      "url": "assets/starters/work-02-frontend-query/src/app.js"
+    },
+    {
+      "path": "src/data.js",
+      "url": "assets/starters/work-02-frontend-query/src/data.js"
+    },
+    {
+      "path": "src/tickets.js",
+      "url": "assets/starters/work-02-frontend-query/src/tickets.js"
+    },
+    {
+      "path": "static.mjs",
+      "url": "assets/starters/work-02-frontend-query/static.mjs"
+    },
+    {
+      "path": "styles.css",
+      "url": "assets/starters/work-02-frontend-query/styles.css"
+    },
+    {
+      "path": "TASK.md",
+      "url": "assets/starters/work-02-frontend-query/TASK.md"
+    },
+    {
+      "path": "tests/base.test.mjs",
+      "url": "assets/starters/work-02-frontend-query/tests/base.test.mjs"
+    },
+    {
+      "path": "tests/static.test.mjs",
+      "url": "assets/starters/work-02-frontend-query/tests/static.test.mjs"
+    }
+  ],
+  "work-03-rest-api": [
+    {
+      "path": ".github/workflows/check.yml",
+      "url": "assets/starters/work-03-rest-api/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": ".gitignore",
+      "url": "assets/starters/work-03-rest-api/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": ".gitverse/workflows/check.yml",
+      "url": "assets/starters/work-03-rest-api/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-03-rest-api/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-03-rest-api/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "COURSE_METADATA.json",
+      "url": "assets/starters/work-03-rest-api/COURSE_METADATA.json"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-03-rest-api/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-03-rest-api/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-03-rest-api/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "gitverse/issue-template.md",
+      "url": "assets/starters/work-03-rest-api/gitverse/issue-template.md"
+    },
+    {
+      "path": "gitverse/merge-request-template.md",
+      "url": "assets/starters/work-03-rest-api/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "HANDOFF.md",
+      "url": "assets/starters/work-03-rest-api/HANDOFF.md"
+    },
+    {
+      "path": "index.html",
+      "url": "assets/starters/work-03-rest-api/index.html"
+    },
+    {
+      "path": "opencode.json",
+      "url": "assets/starters/work-03-rest-api/opencode.json"
+    },
+    {
+      "path": "package.json",
+      "url": "assets/starters/work-03-rest-api/package.json"
+    },
+    {
+      "path": "README.md",
+      "url": "assets/starters/work-03-rest-api/README.md"
+    },
+    {
+      "path": "REPORT.md",
+      "url": "assets/starters/work-03-rest-api/REPORT.md"
+    },
+    {
+      "path": "server.mjs",
+      "url": "assets/starters/work-03-rest-api/server.mjs"
+    },
+    {
+      "path": "src/app.js",
+      "url": "assets/starters/work-03-rest-api/src/app.js"
+    },
+    {
+      "path": "src/data.js",
+      "url": "assets/starters/work-03-rest-api/src/data.js"
+    },
+    {
+      "path": "src/tickets.js",
+      "url": "assets/starters/work-03-rest-api/src/tickets.js"
+    },
+    {
+      "path": "static.mjs",
+      "url": "assets/starters/work-03-rest-api/static.mjs"
+    },
+    {
+      "path": "styles.css",
+      "url": "assets/starters/work-03-rest-api/styles.css"
+    },
+    {
+      "path": "TASK.md",
+      "url": "assets/starters/work-03-rest-api/TASK.md"
+    },
+    {
+      "path": "tests/base.test.mjs",
+      "url": "assets/starters/work-03-rest-api/tests/base.test.mjs"
+    },
+    {
+      "path": "tests/query.test.mjs",
+      "url": "assets/starters/work-03-rest-api/tests/query.test.mjs"
+    },
+    {
+      "path": "tests/static.test.mjs",
+      "url": "assets/starters/work-03-rest-api/tests/static.test.mjs"
+    }
+  ],
+  "work-04-sqlite-workflow": [
+    {
+      "path": ".github/workflows/check.yml",
+      "url": "assets/starters/work-04-sqlite-workflow/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": ".gitignore",
+      "url": "assets/starters/work-04-sqlite-workflow/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": ".gitverse/workflows/check.yml",
+      "url": "assets/starters/work-04-sqlite-workflow/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "backend/http-common.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/backend/http-common.mjs"
+    },
+    {
+      "path": "backend/http.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/backend/http.mjs"
+    },
+    {
+      "path": "backend/memory-store.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/backend/memory-store.mjs"
+    },
+    {
+      "path": "backend/validation.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/backend/validation.mjs"
+    },
+    {
+      "path": "course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-04-sqlite-workflow/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-04-sqlite-workflow/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "COURSE_METADATA.json",
+      "url": "assets/starters/work-04-sqlite-workflow/COURSE_METADATA.json"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-04-sqlite-workflow/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-04-sqlite-workflow/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-04-sqlite-workflow/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "gitverse/issue-template.md",
+      "url": "assets/starters/work-04-sqlite-workflow/gitverse/issue-template.md"
+    },
+    {
+      "path": "gitverse/merge-request-template.md",
+      "url": "assets/starters/work-04-sqlite-workflow/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "HANDOFF.md",
+      "url": "assets/starters/work-04-sqlite-workflow/HANDOFF.md"
+    },
+    {
+      "path": "index.html",
+      "url": "assets/starters/work-04-sqlite-workflow/index.html"
+    },
+    {
+      "path": "opencode.json",
+      "url": "assets/starters/work-04-sqlite-workflow/opencode.json"
+    },
+    {
+      "path": "package.json",
+      "url": "assets/starters/work-04-sqlite-workflow/package.json"
+    },
+    {
+      "path": "README.md",
+      "url": "assets/starters/work-04-sqlite-workflow/README.md"
+    },
+    {
+      "path": "REPORT.md",
+      "url": "assets/starters/work-04-sqlite-workflow/REPORT.md"
+    },
+    {
+      "path": "server.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/server.mjs"
+    },
+    {
+      "path": "src/api-client.js",
+      "url": "assets/starters/work-04-sqlite-workflow/src/api-client.js"
+    },
+    {
+      "path": "src/app.js",
+      "url": "assets/starters/work-04-sqlite-workflow/src/app.js"
+    },
+    {
+      "path": "src/data.js",
+      "url": "assets/starters/work-04-sqlite-workflow/src/data.js"
+    },
+    {
+      "path": "src/tickets.js",
+      "url": "assets/starters/work-04-sqlite-workflow/src/tickets.js"
+    },
+    {
+      "path": "static.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/static.mjs"
+    },
+    {
+      "path": "styles.css",
+      "url": "assets/starters/work-04-sqlite-workflow/styles.css"
+    },
+    {
+      "path": "TASK.md",
+      "url": "assets/starters/work-04-sqlite-workflow/TASK.md"
+    },
+    {
+      "path": "tests/api.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/api.test.mjs"
+    },
+    {
+      "path": "tests/base.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/base.test.mjs"
+    },
+    {
+      "path": "tests/boundary.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/boundary.test.mjs"
+    },
+    {
+      "path": "tests/form-feedback.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/form-feedback.test.mjs"
+    },
+    {
+      "path": "tests/query.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/query.test.mjs"
+    },
+    {
+      "path": "tests/static.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/static.test.mjs"
+    }
+  ],
+  "work-05-comments-engineering": [
+    {
+      "path": ".github/workflows/check.yml",
+      "url": "assets/starters/work-05-comments-engineering/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": ".gitignore",
+      "url": "assets/starters/work-05-comments-engineering/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": ".gitverse/workflows/check.yml",
+      "url": "assets/starters/work-05-comments-engineering/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "backend/http-common.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/http-common.mjs"
+    },
+    {
+      "path": "backend/http.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/http.mjs"
+    },
+    {
+      "path": "backend/memory-store.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/memory-store.mjs"
+    },
+    {
+      "path": "backend/sqlite-core.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/sqlite-core.mjs"
+    },
+    {
+      "path": "backend/sqlite-store.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/sqlite-store.mjs"
+    },
+    {
+      "path": "backend/validation.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/validation.mjs"
+    },
+    {
+      "path": "backend/workflow-http.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/workflow-http.mjs"
+    },
+    {
+      "path": "course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-05-comments-engineering/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-05-comments-engineering/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "COURSE_METADATA.json",
+      "url": "assets/starters/work-05-comments-engineering/COURSE_METADATA.json"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-05-comments-engineering/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-05-comments-engineering/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-05-comments-engineering/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "docs/RUNTIME.md",
+      "url": "assets/starters/work-05-comments-engineering/docs/RUNTIME.md"
+    },
+    {
+      "path": "gitverse/issue-template.md",
+      "url": "assets/starters/work-05-comments-engineering/gitverse/issue-template.md"
+    },
+    {
+      "path": "gitverse/merge-request-template.md",
+      "url": "assets/starters/work-05-comments-engineering/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "HANDOFF.md",
+      "url": "assets/starters/work-05-comments-engineering/HANDOFF.md"
+    },
+    {
+      "path": "index.html",
+      "url": "assets/starters/work-05-comments-engineering/index.html"
+    },
+    {
+      "path": "opencode.json",
+      "url": "assets/starters/work-05-comments-engineering/opencode.json"
+    },
+    {
+      "path": "package.json",
+      "url": "assets/starters/work-05-comments-engineering/package.json"
+    },
+    {
+      "path": "README.md",
+      "url": "assets/starters/work-05-comments-engineering/README.md"
+    },
+    {
+      "path": "REPORT.md",
+      "url": "assets/starters/work-05-comments-engineering/REPORT.md"
+    },
+    {
+      "path": "server.mjs",
+      "url": "assets/starters/work-05-comments-engineering/server.mjs"
+    },
+    {
+      "path": "src/api-client.js",
+      "url": "assets/starters/work-05-comments-engineering/src/api-client.js"
+    },
+    {
+      "path": "src/app.js",
+      "url": "assets/starters/work-05-comments-engineering/src/app.js"
+    },
+    {
+      "path": "src/data.js",
+      "url": "assets/starters/work-05-comments-engineering/src/data.js"
+    },
+    {
+      "path": "src/tickets.js",
+      "url": "assets/starters/work-05-comments-engineering/src/tickets.js"
+    },
+    {
+      "path": "static.mjs",
+      "url": "assets/starters/work-05-comments-engineering/static.mjs"
+    },
+    {
+      "path": "styles.css",
+      "url": "assets/starters/work-05-comments-engineering/styles.css"
+    },
+    {
+      "path": "TASK.md",
+      "url": "assets/starters/work-05-comments-engineering/TASK.md"
+    },
+    {
+      "path": "tests/api.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/api.test.mjs"
+    },
+    {
+      "path": "tests/base.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/base.test.mjs"
+    },
+    {
+      "path": "tests/boundary.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/boundary.test.mjs"
+    },
+    {
+      "path": "tests/form-feedback.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/form-feedback.test.mjs"
+    },
+    {
+      "path": "tests/query.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/query.test.mjs"
+    },
+    {
+      "path": "tests/sqlite.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/sqlite.test.mjs"
+    },
+    {
+      "path": "tests/static.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/static.test.mjs"
+    },
+    {
+      "path": "tests/transactions.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/transactions.test.mjs"
+    }
+  ],
+  "work-06-ai-triage-defense": [
+    {
+      "path": ".agents/skills/acceptance-check/SKILL.md",
+      "url": "assets/starters/work-06-ai-triage-defense/.agents/skills/acceptance-check/SKILL.md",
+      "content": "---\nname: acceptance-check\ndescription: Проверить задачу Campus ServiceDesk перед Merge Request.\n---\n\n1. Прочитай `TASK.md` и выпиши каждый пункт Definition of Done.\n2. Для каждого пункта укажи доказательство: тест, HTTP-сценарий, UI-сценарий или diff.\n3. Запусти `npm test`; не пересказывай ожидаемый результат вместо реального вывода.\n4. Проверь `git diff` на несвязанные изменения и новые dependencies.\n5. Перечисли непроверенные риски.\n6. Во время этой проверки не изменяй код автоматически.\n"
+    },
+    {
+      "path": ".github/workflows/check.yml",
+      "url": "assets/starters/work-06-ai-triage-defense/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": ".gitignore",
+      "url": "assets/starters/work-06-ai-triage-defense/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": ".gitverse/workflows/check.yml",
+      "url": "assets/starters/work-06-ai-triage-defense/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "AGENTS.md",
+      "url": "assets/starters/work-06-ai-triage-defense/AGENTS.md"
+    },
+    {
+      "path": "backend/http-common.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/http-common.mjs"
+    },
+    {
+      "path": "backend/http.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/http.mjs"
+    },
+    {
+      "path": "backend/memory-store.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/memory-store.mjs"
+    },
+    {
+      "path": "backend/sqlite-core.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/sqlite-core.mjs"
+    },
+    {
+      "path": "backend/sqlite-store.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/sqlite-store.mjs"
+    },
+    {
+      "path": "backend/validation.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/validation.mjs"
+    },
+    {
+      "path": "backend/workflow-http.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/workflow-http.mjs"
+    },
+    {
+      "path": "course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-06-ai-triage-defense/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-06-ai-triage-defense/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "COURSE_METADATA.json",
+      "url": "assets/starters/work-06-ai-triage-defense/COURSE_METADATA.json"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-06-ai-triage-defense/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-06-ai-triage-defense/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-06-ai-triage-defense/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "docs/RUNTIME.md",
+      "url": "assets/starters/work-06-ai-triage-defense/docs/RUNTIME.md"
+    },
+    {
+      "path": "gitverse/issue-template.md",
+      "url": "assets/starters/work-06-ai-triage-defense/gitverse/issue-template.md"
+    },
+    {
+      "path": "gitverse/merge-request-template.md",
+      "url": "assets/starters/work-06-ai-triage-defense/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "HANDOFF.md",
+      "url": "assets/starters/work-06-ai-triage-defense/HANDOFF.md"
+    },
+    {
+      "path": "index.html",
+      "url": "assets/starters/work-06-ai-triage-defense/index.html"
+    },
+    {
+      "path": "opencode.json",
+      "url": "assets/starters/work-06-ai-triage-defense/opencode.json"
+    },
+    {
+      "path": "package.json",
+      "url": "assets/starters/work-06-ai-triage-defense/package.json"
+    },
+    {
+      "path": "README.md",
+      "url": "assets/starters/work-06-ai-triage-defense/README.md"
+    },
+    {
+      "path": "REPORT.md",
+      "url": "assets/starters/work-06-ai-triage-defense/REPORT.md"
+    },
+    {
+      "path": "server.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/server.mjs"
+    },
+    {
+      "path": "src/api-client.js",
+      "url": "assets/starters/work-06-ai-triage-defense/src/api-client.js"
+    },
+    {
+      "path": "src/app.js",
+      "url": "assets/starters/work-06-ai-triage-defense/src/app.js"
+    },
+    {
+      "path": "src/data.js",
+      "url": "assets/starters/work-06-ai-triage-defense/src/data.js"
+    },
+    {
+      "path": "src/tickets.js",
+      "url": "assets/starters/work-06-ai-triage-defense/src/tickets.js"
+    },
+    {
+      "path": "static.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/static.mjs"
+    },
+    {
+      "path": "styles.css",
+      "url": "assets/starters/work-06-ai-triage-defense/styles.css"
+    },
+    {
+      "path": "TASK.md",
+      "url": "assets/starters/work-06-ai-triage-defense/TASK.md"
+    },
+    {
+      "path": "tests/api.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/api.test.mjs"
+    },
+    {
+      "path": "tests/base.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/base.test.mjs"
+    },
+    {
+      "path": "tests/boundary.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/boundary.test.mjs"
+    },
+    {
+      "path": "tests/comments-http.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/comments-http.test.mjs"
+    },
+    {
+      "path": "tests/comments.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/comments.test.mjs"
+    },
+    {
+      "path": "tests/form-feedback.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/form-feedback.test.mjs"
+    },
+    {
+      "path": "tests/query.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/query.test.mjs"
+    },
+    {
+      "path": "tests/sqlite.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/sqlite.test.mjs"
+    },
+    {
+      "path": "tests/static.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/static.test.mjs"
+    },
+    {
+      "path": "tests/transactions.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/transactions.test.mjs"
     }
   ],
   "course-all": [
@@ -209,6 +939,10 @@
       "url": "assets/starters/work-01-discovery-contract/src/tickets.js"
     },
     {
+      "path": "work-01-discovery-contract/static.mjs",
+      "url": "assets/starters/work-01-discovery-contract/static.mjs"
+    },
+    {
       "path": "work-01-discovery-contract/styles.css",
       "url": "assets/starters/work-01-discovery-contract/styles.css"
     },
@@ -219,6 +953,722 @@
     {
       "path": "work-01-discovery-contract/tests/base.test.mjs",
       "url": "assets/starters/work-01-discovery-contract/tests/base.test.mjs"
+    },
+    {
+      "path": "work-01-discovery-contract/tests/static.test.mjs",
+      "url": "assets/starters/work-01-discovery-contract/tests/static.test.mjs"
+    },
+    {
+      "path": "work-02-frontend-query/.github/workflows/check.yml",
+      "url": "assets/starters/work-02-frontend-query/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-02-frontend-query/.gitignore",
+      "url": "assets/starters/work-02-frontend-query/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": "work-02-frontend-query/.gitverse/workflows/check.yml",
+      "url": "assets/starters/work-02-frontend-query/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-02-frontend-query/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-02-frontend-query/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "work-02-frontend-query/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-02-frontend-query/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "work-02-frontend-query/COURSE_METADATA.json",
+      "url": "assets/starters/work-02-frontend-query/COURSE_METADATA.json"
+    },
+    {
+      "path": "work-02-frontend-query/docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-02-frontend-query/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "work-02-frontend-query/docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-02-frontend-query/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "work-02-frontend-query/docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-02-frontend-query/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "work-02-frontend-query/gitverse/issue-template.md",
+      "url": "assets/starters/work-02-frontend-query/gitverse/issue-template.md"
+    },
+    {
+      "path": "work-02-frontend-query/gitverse/merge-request-template.md",
+      "url": "assets/starters/work-02-frontend-query/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "work-02-frontend-query/HANDOFF.md",
+      "url": "assets/starters/work-02-frontend-query/HANDOFF.md"
+    },
+    {
+      "path": "work-02-frontend-query/index.html",
+      "url": "assets/starters/work-02-frontend-query/index.html"
+    },
+    {
+      "path": "work-02-frontend-query/opencode.json",
+      "url": "assets/starters/work-02-frontend-query/opencode.json"
+    },
+    {
+      "path": "work-02-frontend-query/package.json",
+      "url": "assets/starters/work-02-frontend-query/package.json"
+    },
+    {
+      "path": "work-02-frontend-query/README.md",
+      "url": "assets/starters/work-02-frontend-query/README.md"
+    },
+    {
+      "path": "work-02-frontend-query/REPORT.md",
+      "url": "assets/starters/work-02-frontend-query/REPORT.md"
+    },
+    {
+      "path": "work-02-frontend-query/server.mjs",
+      "url": "assets/starters/work-02-frontend-query/server.mjs"
+    },
+    {
+      "path": "work-02-frontend-query/src/app.js",
+      "url": "assets/starters/work-02-frontend-query/src/app.js"
+    },
+    {
+      "path": "work-02-frontend-query/src/data.js",
+      "url": "assets/starters/work-02-frontend-query/src/data.js"
+    },
+    {
+      "path": "work-02-frontend-query/src/tickets.js",
+      "url": "assets/starters/work-02-frontend-query/src/tickets.js"
+    },
+    {
+      "path": "work-02-frontend-query/static.mjs",
+      "url": "assets/starters/work-02-frontend-query/static.mjs"
+    },
+    {
+      "path": "work-02-frontend-query/styles.css",
+      "url": "assets/starters/work-02-frontend-query/styles.css"
+    },
+    {
+      "path": "work-02-frontend-query/TASK.md",
+      "url": "assets/starters/work-02-frontend-query/TASK.md"
+    },
+    {
+      "path": "work-02-frontend-query/tests/base.test.mjs",
+      "url": "assets/starters/work-02-frontend-query/tests/base.test.mjs"
+    },
+    {
+      "path": "work-02-frontend-query/tests/static.test.mjs",
+      "url": "assets/starters/work-02-frontend-query/tests/static.test.mjs"
+    },
+    {
+      "path": "work-03-rest-api/.github/workflows/check.yml",
+      "url": "assets/starters/work-03-rest-api/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-03-rest-api/.gitignore",
+      "url": "assets/starters/work-03-rest-api/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": "work-03-rest-api/.gitverse/workflows/check.yml",
+      "url": "assets/starters/work-03-rest-api/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-03-rest-api/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-03-rest-api/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "work-03-rest-api/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-03-rest-api/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "work-03-rest-api/COURSE_METADATA.json",
+      "url": "assets/starters/work-03-rest-api/COURSE_METADATA.json"
+    },
+    {
+      "path": "work-03-rest-api/docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-03-rest-api/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "work-03-rest-api/docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-03-rest-api/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "work-03-rest-api/docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-03-rest-api/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "work-03-rest-api/gitverse/issue-template.md",
+      "url": "assets/starters/work-03-rest-api/gitverse/issue-template.md"
+    },
+    {
+      "path": "work-03-rest-api/gitverse/merge-request-template.md",
+      "url": "assets/starters/work-03-rest-api/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "work-03-rest-api/HANDOFF.md",
+      "url": "assets/starters/work-03-rest-api/HANDOFF.md"
+    },
+    {
+      "path": "work-03-rest-api/index.html",
+      "url": "assets/starters/work-03-rest-api/index.html"
+    },
+    {
+      "path": "work-03-rest-api/opencode.json",
+      "url": "assets/starters/work-03-rest-api/opencode.json"
+    },
+    {
+      "path": "work-03-rest-api/package.json",
+      "url": "assets/starters/work-03-rest-api/package.json"
+    },
+    {
+      "path": "work-03-rest-api/README.md",
+      "url": "assets/starters/work-03-rest-api/README.md"
+    },
+    {
+      "path": "work-03-rest-api/REPORT.md",
+      "url": "assets/starters/work-03-rest-api/REPORT.md"
+    },
+    {
+      "path": "work-03-rest-api/server.mjs",
+      "url": "assets/starters/work-03-rest-api/server.mjs"
+    },
+    {
+      "path": "work-03-rest-api/src/app.js",
+      "url": "assets/starters/work-03-rest-api/src/app.js"
+    },
+    {
+      "path": "work-03-rest-api/src/data.js",
+      "url": "assets/starters/work-03-rest-api/src/data.js"
+    },
+    {
+      "path": "work-03-rest-api/src/tickets.js",
+      "url": "assets/starters/work-03-rest-api/src/tickets.js"
+    },
+    {
+      "path": "work-03-rest-api/static.mjs",
+      "url": "assets/starters/work-03-rest-api/static.mjs"
+    },
+    {
+      "path": "work-03-rest-api/styles.css",
+      "url": "assets/starters/work-03-rest-api/styles.css"
+    },
+    {
+      "path": "work-03-rest-api/TASK.md",
+      "url": "assets/starters/work-03-rest-api/TASK.md"
+    },
+    {
+      "path": "work-03-rest-api/tests/base.test.mjs",
+      "url": "assets/starters/work-03-rest-api/tests/base.test.mjs"
+    },
+    {
+      "path": "work-03-rest-api/tests/query.test.mjs",
+      "url": "assets/starters/work-03-rest-api/tests/query.test.mjs"
+    },
+    {
+      "path": "work-03-rest-api/tests/static.test.mjs",
+      "url": "assets/starters/work-03-rest-api/tests/static.test.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/.github/workflows/check.yml",
+      "url": "assets/starters/work-04-sqlite-workflow/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-04-sqlite-workflow/.gitignore",
+      "url": "assets/starters/work-04-sqlite-workflow/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": "work-04-sqlite-workflow/.gitverse/workflows/check.yml",
+      "url": "assets/starters/work-04-sqlite-workflow/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-04-sqlite-workflow/backend/http-common.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/backend/http-common.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/backend/http.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/backend/http.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/backend/memory-store.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/backend/memory-store.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/backend/validation.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/backend/validation.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-04-sqlite-workflow/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-04-sqlite-workflow/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/COURSE_METADATA.json",
+      "url": "assets/starters/work-04-sqlite-workflow/COURSE_METADATA.json"
+    },
+    {
+      "path": "work-04-sqlite-workflow/docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-04-sqlite-workflow/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-04-sqlite-workflow/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-04-sqlite-workflow/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/gitverse/issue-template.md",
+      "url": "assets/starters/work-04-sqlite-workflow/gitverse/issue-template.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/gitverse/merge-request-template.md",
+      "url": "assets/starters/work-04-sqlite-workflow/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/HANDOFF.md",
+      "url": "assets/starters/work-04-sqlite-workflow/HANDOFF.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/index.html",
+      "url": "assets/starters/work-04-sqlite-workflow/index.html"
+    },
+    {
+      "path": "work-04-sqlite-workflow/opencode.json",
+      "url": "assets/starters/work-04-sqlite-workflow/opencode.json"
+    },
+    {
+      "path": "work-04-sqlite-workflow/package.json",
+      "url": "assets/starters/work-04-sqlite-workflow/package.json"
+    },
+    {
+      "path": "work-04-sqlite-workflow/README.md",
+      "url": "assets/starters/work-04-sqlite-workflow/README.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/REPORT.md",
+      "url": "assets/starters/work-04-sqlite-workflow/REPORT.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/server.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/server.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/src/api-client.js",
+      "url": "assets/starters/work-04-sqlite-workflow/src/api-client.js"
+    },
+    {
+      "path": "work-04-sqlite-workflow/src/app.js",
+      "url": "assets/starters/work-04-sqlite-workflow/src/app.js"
+    },
+    {
+      "path": "work-04-sqlite-workflow/src/data.js",
+      "url": "assets/starters/work-04-sqlite-workflow/src/data.js"
+    },
+    {
+      "path": "work-04-sqlite-workflow/src/tickets.js",
+      "url": "assets/starters/work-04-sqlite-workflow/src/tickets.js"
+    },
+    {
+      "path": "work-04-sqlite-workflow/static.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/static.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/styles.css",
+      "url": "assets/starters/work-04-sqlite-workflow/styles.css"
+    },
+    {
+      "path": "work-04-sqlite-workflow/TASK.md",
+      "url": "assets/starters/work-04-sqlite-workflow/TASK.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/tests/api.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/api.test.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/tests/base.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/base.test.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/tests/boundary.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/boundary.test.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/tests/form-feedback.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/form-feedback.test.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/tests/query.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/query.test.mjs"
+    },
+    {
+      "path": "work-04-sqlite-workflow/tests/static.test.mjs",
+      "url": "assets/starters/work-04-sqlite-workflow/tests/static.test.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/.github/workflows/check.yml",
+      "url": "assets/starters/work-05-comments-engineering/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-05-comments-engineering/.gitignore",
+      "url": "assets/starters/work-05-comments-engineering/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": "work-05-comments-engineering/.gitverse/workflows/check.yml",
+      "url": "assets/starters/work-05-comments-engineering/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-05-comments-engineering/backend/http-common.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/http-common.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/backend/http.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/http.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/backend/memory-store.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/memory-store.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/backend/sqlite-core.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/sqlite-core.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/backend/sqlite-store.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/sqlite-store.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/backend/validation.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/validation.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/backend/workflow-http.mjs",
+      "url": "assets/starters/work-05-comments-engineering/backend/workflow-http.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-05-comments-engineering/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "work-05-comments-engineering/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-05-comments-engineering/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "work-05-comments-engineering/COURSE_METADATA.json",
+      "url": "assets/starters/work-05-comments-engineering/COURSE_METADATA.json"
+    },
+    {
+      "path": "work-05-comments-engineering/docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-05-comments-engineering/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "work-05-comments-engineering/docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-05-comments-engineering/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "work-05-comments-engineering/docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-05-comments-engineering/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "work-05-comments-engineering/docs/RUNTIME.md",
+      "url": "assets/starters/work-05-comments-engineering/docs/RUNTIME.md"
+    },
+    {
+      "path": "work-05-comments-engineering/gitverse/issue-template.md",
+      "url": "assets/starters/work-05-comments-engineering/gitverse/issue-template.md"
+    },
+    {
+      "path": "work-05-comments-engineering/gitverse/merge-request-template.md",
+      "url": "assets/starters/work-05-comments-engineering/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "work-05-comments-engineering/HANDOFF.md",
+      "url": "assets/starters/work-05-comments-engineering/HANDOFF.md"
+    },
+    {
+      "path": "work-05-comments-engineering/index.html",
+      "url": "assets/starters/work-05-comments-engineering/index.html"
+    },
+    {
+      "path": "work-05-comments-engineering/opencode.json",
+      "url": "assets/starters/work-05-comments-engineering/opencode.json"
+    },
+    {
+      "path": "work-05-comments-engineering/package.json",
+      "url": "assets/starters/work-05-comments-engineering/package.json"
+    },
+    {
+      "path": "work-05-comments-engineering/README.md",
+      "url": "assets/starters/work-05-comments-engineering/README.md"
+    },
+    {
+      "path": "work-05-comments-engineering/REPORT.md",
+      "url": "assets/starters/work-05-comments-engineering/REPORT.md"
+    },
+    {
+      "path": "work-05-comments-engineering/server.mjs",
+      "url": "assets/starters/work-05-comments-engineering/server.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/src/api-client.js",
+      "url": "assets/starters/work-05-comments-engineering/src/api-client.js"
+    },
+    {
+      "path": "work-05-comments-engineering/src/app.js",
+      "url": "assets/starters/work-05-comments-engineering/src/app.js"
+    },
+    {
+      "path": "work-05-comments-engineering/src/data.js",
+      "url": "assets/starters/work-05-comments-engineering/src/data.js"
+    },
+    {
+      "path": "work-05-comments-engineering/src/tickets.js",
+      "url": "assets/starters/work-05-comments-engineering/src/tickets.js"
+    },
+    {
+      "path": "work-05-comments-engineering/static.mjs",
+      "url": "assets/starters/work-05-comments-engineering/static.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/styles.css",
+      "url": "assets/starters/work-05-comments-engineering/styles.css"
+    },
+    {
+      "path": "work-05-comments-engineering/TASK.md",
+      "url": "assets/starters/work-05-comments-engineering/TASK.md"
+    },
+    {
+      "path": "work-05-comments-engineering/tests/api.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/api.test.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/tests/base.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/base.test.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/tests/boundary.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/boundary.test.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/tests/form-feedback.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/form-feedback.test.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/tests/query.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/query.test.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/tests/sqlite.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/sqlite.test.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/tests/static.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/static.test.mjs"
+    },
+    {
+      "path": "work-05-comments-engineering/tests/transactions.test.mjs",
+      "url": "assets/starters/work-05-comments-engineering/tests/transactions.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/.agents/skills/acceptance-check/SKILL.md",
+      "url": "assets/starters/work-06-ai-triage-defense/.agents/skills/acceptance-check/SKILL.md",
+      "content": "---\nname: acceptance-check\ndescription: Проверить задачу Campus ServiceDesk перед Merge Request.\n---\n\n1. Прочитай `TASK.md` и выпиши каждый пункт Definition of Done.\n2. Для каждого пункта укажи доказательство: тест, HTTP-сценарий, UI-сценарий или diff.\n3. Запусти `npm test`; не пересказывай ожидаемый результат вместо реального вывода.\n4. Проверь `git diff` на несвязанные изменения и новые dependencies.\n5. Перечисли непроверенные риски.\n6. Во время этой проверки не изменяй код автоматически.\n"
+    },
+    {
+      "path": "work-06-ai-triage-defense/.github/workflows/check.yml",
+      "url": "assets/starters/work-06-ai-triage-defense/.github/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  pull_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-06-ai-triage-defense/.gitignore",
+      "url": "assets/starters/work-06-ai-triage-defense/.gitignore",
+      "content": "node_modules/\ndist/\n.vite/\ndeep-dive/\n.env\n*.db\n*.sqlite\n*.db-shm\n*.db-wal\n.DS_Store\n"
+    },
+    {
+      "path": "work-06-ai-triage-defense/.gitverse/workflows/check.yml",
+      "url": "assets/starters/work-06-ai-triage-defense/.gitverse/workflows/check.yml",
+      "content": "name: Campus ServiceDesk checks\non:\n  push:\n  merge_request:\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - run: npm test\n"
+    },
+    {
+      "path": "work-06-ai-triage-defense/AGENTS.md",
+      "url": "assets/starters/work-06-ai-triage-defense/AGENTS.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/backend/http-common.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/http-common.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/backend/http.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/http.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/backend/memory-store.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/memory-store.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/backend/sqlite-core.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/sqlite-core.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/backend/sqlite-store.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/sqlite-store.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/backend/validation.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/validation.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/backend/workflow-http.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/backend/workflow-http.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/course-docs/ACCESS_MATRIX.md",
+      "url": "assets/starters/work-06-ai-triage-defense/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/course-docs/STUDENT_SETUP.md",
+      "url": "assets/starters/work-06-ai-triage-defense/course-docs/STUDENT_SETUP.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/COURSE_METADATA.json",
+      "url": "assets/starters/work-06-ai-triage-defense/COURSE_METADATA.json"
+    },
+    {
+      "path": "work-06-ai-triage-defense/docs/ARCHITECTURE.md",
+      "url": "assets/starters/work-06-ai-triage-defense/docs/ARCHITECTURE.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/docs/CHECKPOINTS.md",
+      "url": "assets/starters/work-06-ai-triage-defense/docs/CHECKPOINTS.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/docs/REQUIREMENTS.md",
+      "url": "assets/starters/work-06-ai-triage-defense/docs/REQUIREMENTS.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/docs/RUNTIME.md",
+      "url": "assets/starters/work-06-ai-triage-defense/docs/RUNTIME.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/gitverse/issue-template.md",
+      "url": "assets/starters/work-06-ai-triage-defense/gitverse/issue-template.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/gitverse/merge-request-template.md",
+      "url": "assets/starters/work-06-ai-triage-defense/gitverse/merge-request-template.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/HANDOFF.md",
+      "url": "assets/starters/work-06-ai-triage-defense/HANDOFF.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/index.html",
+      "url": "assets/starters/work-06-ai-triage-defense/index.html"
+    },
+    {
+      "path": "work-06-ai-triage-defense/opencode.json",
+      "url": "assets/starters/work-06-ai-triage-defense/opencode.json"
+    },
+    {
+      "path": "work-06-ai-triage-defense/package.json",
+      "url": "assets/starters/work-06-ai-triage-defense/package.json"
+    },
+    {
+      "path": "work-06-ai-triage-defense/README.md",
+      "url": "assets/starters/work-06-ai-triage-defense/README.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/REPORT.md",
+      "url": "assets/starters/work-06-ai-triage-defense/REPORT.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/server.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/server.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/src/api-client.js",
+      "url": "assets/starters/work-06-ai-triage-defense/src/api-client.js"
+    },
+    {
+      "path": "work-06-ai-triage-defense/src/app.js",
+      "url": "assets/starters/work-06-ai-triage-defense/src/app.js"
+    },
+    {
+      "path": "work-06-ai-triage-defense/src/data.js",
+      "url": "assets/starters/work-06-ai-triage-defense/src/data.js"
+    },
+    {
+      "path": "work-06-ai-triage-defense/src/tickets.js",
+      "url": "assets/starters/work-06-ai-triage-defense/src/tickets.js"
+    },
+    {
+      "path": "work-06-ai-triage-defense/static.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/static.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/styles.css",
+      "url": "assets/starters/work-06-ai-triage-defense/styles.css"
+    },
+    {
+      "path": "work-06-ai-triage-defense/TASK.md",
+      "url": "assets/starters/work-06-ai-triage-defense/TASK.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/api.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/api.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/base.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/base.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/boundary.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/boundary.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/comments-http.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/comments-http.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/comments.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/comments.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/form-feedback.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/form-feedback.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/query.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/query.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/sqlite.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/sqlite.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/static.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/static.test.mjs"
+    },
+    {
+      "path": "work-06-ai-triage-defense/tests/transactions.test.mjs",
+      "url": "assets/starters/work-06-ai-triage-defense/tests/transactions.test.mjs"
     }
   ]
 }

@@ -1,5 +1,6 @@
 {
-  "releasedThrough": 1,
-  "policy": "manual-after-all-groups",
-  "note": "Материалы будущих занятий не опубликованы."
+  "releasedThrough": 6,
+  "policy": "sequential-progress",
+  "localPreview": false,
+  "note": "Все шесть работ опубликованы. В интерфейсе проходи их по порядку; работа 05 необязательна. Отметки хранятся в этом браузере и не защищают публичные файлы от скачивания."
 }

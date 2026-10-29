@@ -1,5 +1,5 @@
 'use strict';
-import {esc} from './lib.js?v=9038b0b85a19';
+import {esc} from './lib.js?v=85b64ff4da2c';
 
 export function renderLessonImages(item, sectionTitle) {
   const part = Number(/^Часть\s+(\d+)\./.exec(sectionTitle)?.[1]);

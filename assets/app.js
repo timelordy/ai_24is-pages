@@ -1,9 +1,10 @@
 'use strict';
-import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentGroup, currentOpenLesson, isSetupMeeting} from './lib.js?v=9038b0b85a19';
-import {renderTask, bindTaskPage} from './task-page.js?v=9038b0b85a19';
-import {bindStarterDownloads} from './starter-download.js?v=9038b0b85a19';
-import {renderHome, renderTasks, renderStart} from './pages-home.js?v=9038b0b85a19';
-import {renderRoute, renderStack, renderSchedule, renderWork, bindWork} from './pages-course.js?v=9038b0b85a19';
+import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentGroup, isSetupMeeting} from './lib.js?v=85b64ff4da2c';
+import {renderTask, bindTaskPage, resolveTaskHash} from './task-page.js?v=85b64ff4da2c';
+import {nextCourseLesson} from './course-progress.js?v=85b64ff4da2c';
+import {bindStarterDownloads} from './starter-download.js?v=85b64ff4da2c';
+import {renderHome, renderTasks, renderStart} from './pages-home.js?v=85b64ff4da2c';
+import {renderRoute, renderStack, renderSchedule, renderWork, bindWork} from './pages-course.js?v=85b64ff4da2c';
 let entered = false;
 // The sticky offset follows wrapped navigation, rotation and larger user text.
 if ('ResizeObserver' in window) {
@@ -14,30 +15,26 @@ if ('ResizeObserver' in window) {
   });
   headerObserver.observe(document.querySelector('.topbar'));
 }
-// Keep the selected section visible without scrolling the page itself.
-function keepActiveTabInView() {
-  const nav = document.querySelector('.tabs');
-  const selected = nav?.querySelector('a.active');
-  if (!selected || nav.scrollWidth <= nav.clientWidth) return;
-  const bounds = nav.getBoundingClientRect();
-  const tab = selected.getBoundingClientRect();
-  const gap = 12;
-  if (tab.left < bounds.left + gap) nav.scrollLeft += tab.left - bounds.left - gap;
-  else if (tab.right > bounds.right - gap) nav.scrollLeft += tab.right - bounds.right + gap;
-}
-window.addEventListener('resize', keepActiveTabInView);
 function setActiveNav(route) {
   document.querySelectorAll('.tabs a').forEach(link => {
     const active = link.dataset.route === route || ((route.startsWith('task-') || route === 'start') && link.dataset.route === 'tasks');
     link.classList.toggle('active', active);
     if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
   });
-  keepActiveTabInView();
+}
+function revealTarget(target) {
+  if (target.tagName === 'DETAILS') target.open = true;
+  requestAnimationFrame(() => {
+    target.scrollIntoView({block: 'start'});
+    (target.tagName === 'DETAILS' ? target.querySelector('summary') : target).focus({preventScroll: true});
+  });
 }
 function render(focusContent = true) {
   if (!entered) return;
   let route = routeName();
-  if (route === 'current') { route = isSetupMeeting() ? 'start' : `task-${currentOpenLesson()?.number || 1}`; history.replaceState(null, '', `#${route}`); }
+  if (route === 'current') { route = isSetupMeeting() ? 'start' : `task-${nextCourseLesson()?.number || 1}`; history.replaceState(null, '', `#${route}`); }
+  const permittedHash=resolveTaskHash(location.hash);
+  if (permittedHash!==location.hash) history.replaceState(null,'',permittedHash);
   let html;
   if (route === 'home') html = renderHome();
   else if (route === 'tasks') html = renderTasks();
@@ -63,11 +60,12 @@ function render(focusContent = true) {
   if (!focusContent) return;
   const anchor = location.hash.split('/')[1];
   const target = anchor && /^(part-\d+|checks|submit|files)$/.test(anchor) ? document.getElementById(anchor) : null;
-  if (target) { if (target.tagName === 'DETAILS') target.open = true; requestAnimationFrame(() => { target.scrollIntoView({block: 'start'}); (target.tagName === 'DETAILS' ? target.querySelector('summary') : target).focus({preventScroll: true}); }); }
+  if (target) revealTarget(target);
   else { window.scrollTo(0, 0); $('#app').focus({preventScroll: true}); }
 }
 function openGroupPicker() {
   const dialog = $('#group-dialog'); $('#close-group').hidden = !entered;
+  dialog.setAttribute('closedby', entered ? 'closerequest' : 'none');
   $('#group-options').innerHTML = runtime.schedule.map((group, index) => {
     const remembered = runtime.state.groupChosen && runtime.state.group === group.group;
     const indicator = remembered ? '<path d="m4 8 2.5 2.5L12 5"/>' : '<path d="m6 4 4 4-4 4"/>';
@@ -90,6 +88,8 @@ function validateData(course, schedule) {
   if (!Array.isArray(schedule) || !schedule.length || !schedule.every(item => typeof item.group === 'string' && Array.isArray(item.dates) && item.dates.length && typeof item.time === 'string')) throw new Error('Список групп пока недоступен.');
 }
 $('#group-dialog').addEventListener('cancel', event => { if (!entered) event.preventDefault(); });
+// Older browsers ignore closedby; cancel can be noncancelable before user activation.
+$('#group-dialog').addEventListener('keydown', event => { if (!entered && event.key === 'Escape') event.preventDefault(); });
 $('#close-group').addEventListener('click', () => { if (entered) $('#group-dialog').close(); });
 $('#change-group').addEventListener('click', openGroupPicker);
 document.querySelector('.skip[href="#app"]').addEventListener('click', event => {
@@ -97,8 +97,20 @@ document.querySelector('.skip[href="#app"]').addEventListener('click', event => 
   $('#app').focus({preventScroll: true});
   $('#app').scrollIntoView({block: 'start'});
 });
+$('#app').addEventListener('click', event => {
+  if (!entered || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  const link = event.target.closest('a[href^="#task-"]');
+  if (!link || !$('#app').contains(link) || link.getAttribute('aria-disabled') === 'true' || link.hasAttribute('disabled') || link.hasAttribute('download')) return;
+  if (link.getAttribute('target') && link.getAttribute('target') !== '_self') return;
+  const hash = link.getAttribute('href');
+  if (hash !== location.hash || !/^#task-[1-6]\/(part-\d+|checks|submit|files)$/.test(hash) || resolveTaskHash(hash) !== hash) return;
+  const target = document.getElementById(hash.split('/')[1]);
+  if (!target || !$('#app').contains(target)) return;
+  event.preventDefault();
+  revealTarget(target);
+});
 bindStarterDownloads();
-Promise.all([loadJson('assets/course.json?v=9038b0b85a19'), loadJson('assets/schedule.json?v=9038b0b85a19')]).then(([course, schedule]) => {
+Promise.all([loadJson('assets/course.json?v=85b64ff4da2c'), loadJson('assets/schedule.json?v=85b64ff4da2c')]).then(([course, schedule]) => {
   validateData(course, schedule);
   runtime.course = course;
   runtime.schedule = schedule;

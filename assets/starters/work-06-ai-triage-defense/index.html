@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Campus ServiceDesk</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header><p class="eyebrow">Campus IT</p><h1>ServiceDesk</h1><p>Заявки небольшой IT-службы</p></header>
+  <main>
+    <section class="create-card">
+      <h2>Новая заявка</h2>
+      <form id="create-form">
+        <label>Краткий заголовок<input name="title" placeholder="Краткий заголовок" required></label>
+        <label>Описание<input name="description" placeholder="Описание"></label>
+        <label>Место<input name="location" placeholder="Место"></label>
+        <label>Приоритет<select name="priority">
+          <option value="normal">Обычный</option><option value="high">Высокий</option><option value="low">Низкий</option>
+        </select></label>
+        <label>Категория<select name="category">
+          <option value="equipment">Оборудование</option><option value="network">Сеть</option>
+          <option value="software">ПО</option><option value="access">Доступ</option><option value="other">Другое</option>
+        </select></label>
+        <button type="submit">Создать</button>
+      </form>
+      <p id="form-status" role="status"></p>
+    </section>
+    <section class="toolbar">
+      <label>Статус<select id="status"><option value="all">Все</option><option value="new">Новые</option><option value="in_progress">В работе</option><option value="resolved">Решены</option><option value="closed">Закрыты</option></select></label>
+      <label>Приоритет<select id="priority"><option value="all">Все</option><option value="high">Высокий</option><option value="normal">Обычный</option><option value="low">Низкий</option></select></label>
+      <label>Поиск<input id="search" type="search" placeholder="Проектор, 305…"></label>
+      <label>Сортировка<select id="sort"><option value="id">По ID</option><option value="title_asc">А-Я</option><option value="title_desc">Я-А</option></select></label>
+    </section>
+    <section class="summary">Показано: <b id="total-count">0</b></section>
+    <section id="tickets" class="tickets" aria-live="polite"></section>
+    <p id="empty" class="empty" hidden>Подходящих заявок нет.</p>
+    <section class="comments-card">
+      <h2>Комментарии к заявке (необязательное расширение)</h2>
+      <form id="comment-form">
+        <label>ID заявки<input name="ticketId" type="number" min="1" value="101" required></label>
+        <label>Автор<input name="author" value="Студент"></label>
+        <label>Комментарий<input name="text" placeholder="Комментарий" maxlength="1000" required></label>
+        <button type="submit">Добавить комментарий</button>
+      </form>
+      <p id="comment-status" role="status"></p><div id="comments"></div>
+    </section>
+  </main>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
