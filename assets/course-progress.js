@@ -1,4 +1,4 @@
-import {runtime, currentGroup, taskSteps} from './lib.js?v=85b64ff4da2c';
+import {runtime, currentGroup, taskSteps} from './lib.js?v=089533b3fb24';
 
 const optionalModules = () => currentGroup()?.optionalModules ?? [5];
 const orderedLessons = () => [...runtime.course].sort((a, b) => Number(a.number) - Number(b.number));

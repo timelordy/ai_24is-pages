@@ -1,10 +1,13 @@
 'use strict';
-import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentGroup, isSetupMeeting} from './lib.js?v=85b64ff4da2c';
-import {renderTask, bindTaskPage, resolveTaskHash} from './task-page.js?v=85b64ff4da2c';
-import {nextCourseLesson} from './course-progress.js?v=85b64ff4da2c';
-import {bindStarterDownloads} from './starter-download.js?v=85b64ff4da2c';
-import {renderHome, renderTasks, renderStart} from './pages-home.js?v=85b64ff4da2c';
-import {renderRoute, renderStack, renderSchedule, renderWork, bindWork} from './pages-course.js?v=85b64ff4da2c';
+import {$, esc, runtime, selectGroup, routeName, updateProgressPill, dayLabel, currentGroup, isSetupMeeting, recordDiagnostic} from './lib.js?v=089533b3fb24';
+import {renderTask, bindTaskPage, resolveTaskHash, routeDiagnostic} from './task-page.js?v=089533b3fb24';
+import {nextCourseLesson} from './course-progress.js?v=089533b3fb24';
+import {bindStarterDownloads} from './starter-download.js?v=089533b3fb24';
+import {renderHome, renderTasks, renderStart} from './pages-home.js?v=089533b3fb24';
+import {renderRoute, renderStack, renderSchedule, renderWork, bindWork} from './pages-course.js?v=089533b3fb24';
+import {TELEMETRY_CONFIG} from './telemetry.js?v=089533b3fb24';
+import {bindAgentChoice} from './visual-lesson.js?v=089533b3fb24';
+$('#telemetry-notice').hidden = !TELEMETRY_CONFIG.enabled;
 let entered = false;
 // The sticky offset follows wrapped navigation, rotation and larger user text.
 if ('ResizeObserver' in window) {
@@ -33,7 +36,9 @@ function render(focusContent = true) {
   if (!entered) return;
   let route = routeName();
   if (route === 'current') { route = isSetupMeeting() ? 'start' : `task-${nextCourseLesson()?.number || 1}`; history.replaceState(null, '', `#${route}`); }
+  const diagnostic=focusContent ? routeDiagnostic(location.hash) : null;
   const permittedHash=resolveTaskHash(location.hash);
+  const redirected=permittedHash!==location.hash;
   if (permittedHash!==location.hash) history.replaceState(null,'',permittedHash);
   let html;
   if (route === 'home') html = renderHome();
@@ -48,12 +53,17 @@ function render(focusContent = true) {
   $('#app').innerHTML = html; $('#selected-group').textContent = runtime.state.group;
   const rerender = () => render(false);
   setActiveNav(route); updateProgressPill(); bindTaskPage(route, rerender); if (route === 'work') bindWork(rerender);
+  if (!/^task-[1-6]$/.test(route)) bindAgentChoice(rerender);
+  if (diagnostic) recordDiagnostic(diagnostic.kind,diagnostic.detail,diagnostic.lesson,diagnostic.step);
+  const accepted=focusContent && redirected && diagnostic?.kind!=='route_view' ? routeDiagnostic(permittedHash) : null;
+  if (accepted?.kind==='route_view') recordDiagnostic(accepted.kind,accepted.detail,accepted.lesson,accepted.step);
   document.querySelectorAll('.code-block').forEach(container => {
     const button = document.createElement('button');
     button.type = 'button'; button.className = 'copy-command'; button.textContent = 'Копировать';
     button.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(container.querySelector('code').textContent); button.textContent = 'Скопировано'; }
-      catch { button.textContent = 'Выдели команду вручную'; }
+      const group=runtime.state.group, context=routeDiagnostic(location.hash);
+      try { await navigator.clipboard.writeText(container.querySelector('code').textContent); button.textContent = 'Скопировано'; recordDiagnostic('copy_result','success',context?.lesson || 0,context?.step || 0,group); }
+      catch { button.textContent = 'Выдели команду вручную'; recordDiagnostic('copy_result','failure',context?.lesson || 0,context?.step || 0,group); }
     });
     container.append(button);
   });
@@ -73,7 +83,10 @@ function openGroupPicker() {
   }).join('');
   $('#group-options').querySelectorAll('[data-group-index]').forEach(button => {
     button.addEventListener('click', () => {
-      const group = runtime.schedule[Number(button.dataset.groupIndex)]; if (!group || !selectGroup(group.group)) return;
+      const group = runtime.schedule[Number(button.dataset.groupIndex)]; if (!group) return;
+      if (TELEMETRY_CONFIG.enabled) runtime.state.diagnosticsNoticeSeen = true;
+      if (!selectGroup(group.group)) return;
+      recordDiagnostic('group_selected','selected');
       const switching = entered; entered = true; $('#course-shell').hidden = false;
       // Incoming lesson links survive entry. Switching later returns to the new group's dashboard.
       if (switching || !location.hash) history.replaceState(null, '', '#home');
@@ -99,6 +112,12 @@ document.querySelector('.skip[href="#app"]').addEventListener('click', event => 
 });
 $('#app').addEventListener('click', event => {
   if (!entered || event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  const download=event.target.closest('a[download]');
+  if (download && !download.hasAttribute('data-starter')) {
+    const context=routeDiagnostic(location.hash);
+    recordDiagnostic('download','requested',context?.lesson || 0,context?.step || 0);
+    return;
+  }
   const link = event.target.closest('a[href^="#task-"]');
   if (!link || !$('#app').contains(link) || link.getAttribute('aria-disabled') === 'true' || link.hasAttribute('disabled') || link.hasAttribute('download')) return;
   if (link.getAttribute('target') && link.getAttribute('target') !== '_self') return;
@@ -110,18 +129,19 @@ $('#app').addEventListener('click', event => {
   revealTarget(target);
 });
 bindStarterDownloads();
-Promise.all([loadJson('assets/course.json?v=85b64ff4da2c'), loadJson('assets/schedule.json?v=85b64ff4da2c')]).then(([course, schedule]) => {
+Promise.all([loadJson('assets/course.json?v=089533b3fb24'), loadJson('assets/schedule.json?v=089533b3fb24')]).then(([course, schedule]) => {
   validateData(course, schedule);
   runtime.course = course;
   runtime.schedule = schedule;
   $('#boot-status').hidden = true;
   window.addEventListener('hashchange', () => render());
-  if (runtime.state.groupChosen && currentGroup()) {
+  if (runtime.state.groupChosen && currentGroup() && (!TELEMETRY_CONFIG.enabled || runtime.state.diagnosticsNoticeSeen === true)) {
     entered = true;
     $('#course-shell').hidden = false;
     render();
   } else openGroupPicker();
 }).catch(error => {
+  recordDiagnostic('app_error','course_load');
   const status = $('#boot-status');
   status.textContent = 'Не получилось загрузить курс. Проверьте интернет. ' + error.message;
   const retry = document.createElement('button');

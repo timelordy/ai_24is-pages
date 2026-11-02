@@ -272,3 +272,11 @@
   .guide-tools,.guide-image-toolbar,.guide-image-dialog { background: var(--glass-solid); -webkit-backdrop-filter: none; backdrop-filter: none; border-color: var(--line); box-shadow: none; }
   .guide-image-dialog::backdrop { background: #1c1c1e; -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
+
+.agent-choice { display: grid; gap: .75rem; margin-block: 1rem; padding: clamp(1rem, 2vw, 1.5rem); }
+.agent-choice select { font: inherit; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: .5rem; padding: .75rem; width: 100%; max-width: 30rem; min-width: 0; }
+.agent-choice p { margin: 0; }
+.agent-choice-compact { margin: .25rem .5rem .75rem; padding: 0; gap: .5rem; font-size: var(--type-meta); }
+.agent-choice-compact select { padding: .5rem; min-height: 44px; }
+
+.freebuff-section { padding: clamp(1rem, 2vw, 1.5rem); margin-block: 1rem; }

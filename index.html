@@ -5,19 +5,19 @@
 <meta name="description" content="Методы ИИ. OpenCode, GitVerse и один проект ServiceDesk: от первого запуска к проверяемой системе с ИИ.">
 <title>Методы ИИ · Методичка</title>
 <link rel="preload" href="assets/fonts/MedeoSansVariable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=85b64ff4da2c">
-<link rel="stylesheet" href="assets/visual-lesson.css?v=85b64ff4da2c">
+<link rel="stylesheet" href="assets/style.css?v=089533b3fb24">
+<link rel="stylesheet" href="assets/visual-lesson.css?v=089533b3fb24">
 <script type="importmap">
-{"imports":{"./assets/lib.js":"./assets/lib.js?v=17","./assets/task-page.js":"./assets/task-page.js?v=17","./assets/starter-download.js":"./assets/starter-download.js?v=14","./assets/pages-home.js":"./assets/pages-home.js?v=19","./assets/pages-course.js":"./assets/pages-course.js?v=20","./assets/visual-lesson.js":"./assets/visual-lesson.js?v=22","./assets/lesson-diagrams.js":"./assets/lesson-diagrams.js?v=18","./assets/course-progress.js":"./assets/course-progress.js?v=18"}}
+{"imports":{"./assets/lib.js":"./assets/lib.js?v=19","./assets/telemetry.js":"./assets/telemetry.js?v=2","./assets/task-page.js":"./assets/task-page.js?v=18","./assets/starter-download.js":"./assets/starter-download.js?v=15","./assets/pages-home.js":"./assets/pages-home.js?v=19","./assets/pages-course.js":"./assets/pages-course.js?v=20","./assets/visual-lesson.js":"./assets/visual-lesson.js?v=23","./assets/lesson-diagrams.js":"./assets/lesson-diagrams.js?v=18","./assets/course-progress.js":"./assets/course-progress.js?v=18"}}
 </script>
-<script type="module" src="assets/app.js?v=85b64ff4da2c"></script>
-<link rel="stylesheet" href="assets/lesson-images.css?v=85b64ff4da2c">
+<script type="module" src="assets/app.js?v=089533b3fb24"></script>
+<link rel="stylesheet" href="assets/lesson-images.css?v=089533b3fb24">
 </head>
 <body>
 <noscript><style>#boot-status{display:none}</style><p class="notice">Для выбора группы и открытия заданий включите JavaScript. <a href="assets/materials/work-01/TASK.md">Скачать инструкцию к первой работе</a>.</p></noscript>
 <div id="course-shell" hidden>
 <a class="skip" href="#app">К содержанию</a>
-<header class="topbar"><a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">м<span>и</span></span><span><b>Методы ИИ</b><small>Интерактивная методичка</small></span></a>
+<header class="topbar"><a class="brand" href="#home"><span><b>Методы ИИ</b><small>Интерактивная методичка</small></span></a>
 <nav class="tabs" aria-label="Разделы курса">
 <a href="#home" data-route="home"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5.5C9 3.5 5.5 3.5 3 4.5v15c3-1 6-1 9 1 3-2 6-2 9-1v-15c-2.5-1-6-1-9 1Z"/><path d="M12 5.5v15"/></svg><span>Методичка</span></a>
 <a href="#route" data-route="route"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="5" cy="18" r="2"/><circle cx="19" cy="6" r="2"/><path d="M5 16v-5a5 5 0 0 1 5-5h3m-3-3 3 3-3 3M19 8v5a5 5 0 0 1-5 5h-3"/></svg><span>Как работать</span></a>
@@ -32,8 +32,13 @@
 </div>
 <section id="boot-status" class="loading" role="status">Загружаем группы и задания…</section>
 <dialog id="group-dialog" class="group-dialog" aria-labelledby="group-dialog-title" aria-describedby="group-dialog-description">
-<div class="group-dialog-head"><span class="brand-mark" aria-hidden="true">м<span>и</span></span><button id="close-group" type="button" aria-label="Закрыть выбор группы" hidden>×</button></div>
-<p class="entry-course">Методы искусственного интеллекта</p><h1 id="group-dialog-title" tabindex="-1">Выбери свою группу</h1><p id="group-dialog-description">Выбери свой код группы. Откроются её расписание и задания. Выбор можно изменить позже.</p>
+<div class="group-dialog-head"><button id="close-group" type="button" aria-label="Закрыть выбор группы" hidden>×</button></div>
+<p class="entry-course">Методы искусственного интеллекта</p><h1 id="group-dialog-title" tabindex="-1">Выбери свою группу</h1><p id="group-dialog-description">Откроются расписание и задания твоей группы. Позже можно выбрать другую.</p>
+<aside id="telemetry-notice" class="notice panel" aria-labelledby="telemetry-notice-title" hidden>
+<strong id="telemetry-notice-title">Диагностика курса</strong>
+<p>Преподаватель видит суммарные счётчики по группе, работе, шагу, действиям и техническим ошибкам. Это действия на сайте, не оценки. В отчёте счётчики доступны до 24 часов от начала часового интервала UTC; удаление выполняется раз в час. Резервная история Cloudflare D1 (Time Travel) на Free хранит прежние состояния базы до 7 дней.</p>
+<p>В событиях нет имён, идентификаторов пользователей и скопированного текста. При отправке Cloudflare получает IP-адрес и сетевые метаданные. <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer">Политика Cloudflare</a>.</p>
+</aside>
 <div id="group-options" class="group-options"></div><p class="group-footnote">Без регистрации. Выбор запомнится в этом браузере.</p>
 </dialog>
 </body></html>

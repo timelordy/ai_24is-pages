@@ -10,6 +10,10 @@
       "url": "assets/starters/work-01-discovery-contract/course-docs/ACCESS_MATRIX.md"
     },
     {
+      "path": "course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/FREEBUFF.md"
+    },
+    {
       "path": "course-docs/screenshots/git-download.webp",
       "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/git-download.webp"
     },
@@ -139,6 +143,10 @@
       "url": "assets/starters/work-02-frontend-query/course-docs/ACCESS_MATRIX.md"
     },
     {
+      "path": "course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-02-frontend-query/course-docs/FREEBUFF.md"
+    },
+    {
       "path": "course-docs/STUDENT_SETUP.md",
       "url": "assets/starters/work-02-frontend-query/course-docs/STUDENT_SETUP.md"
     },
@@ -246,6 +254,10 @@
     {
       "path": "course-docs/ACCESS_MATRIX.md",
       "url": "assets/starters/work-03-rest-api/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-03-rest-api/course-docs/FREEBUFF.md"
     },
     {
       "path": "course-docs/STUDENT_SETUP.md",
@@ -375,6 +387,10 @@
     {
       "path": "course-docs/ACCESS_MATRIX.md",
       "url": "assets/starters/work-04-sqlite-workflow/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-04-sqlite-workflow/course-docs/FREEBUFF.md"
     },
     {
       "path": "course-docs/STUDENT_SETUP.md",
@@ -532,6 +548,10 @@
     {
       "path": "course-docs/ACCESS_MATRIX.md",
       "url": "assets/starters/work-05-comments-engineering/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-05-comments-engineering/course-docs/FREEBUFF.md"
     },
     {
       "path": "course-docs/STUDENT_SETUP.md",
@@ -712,6 +732,10 @@
       "url": "assets/starters/work-06-ai-triage-defense/course-docs/ACCESS_MATRIX.md"
     },
     {
+      "path": "course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-06-ai-triage-defense/course-docs/FREEBUFF.md"
+    },
+    {
       "path": "course-docs/STUDENT_SETUP.md",
       "url": "assets/starters/work-06-ai-triage-defense/course-docs/STUDENT_SETUP.md"
     },
@@ -851,6 +875,10 @@
       "url": "assets/starters/work-01-discovery-contract/course-docs/ACCESS_MATRIX.md"
     },
     {
+      "path": "work-01-discovery-contract/course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-01-discovery-contract/course-docs/FREEBUFF.md"
+    },
+    {
       "path": "work-01-discovery-contract/course-docs/screenshots/git-download.webp",
       "url": "assets/starters/work-01-discovery-contract/course-docs/screenshots/git-download.webp"
     },
@@ -978,6 +1006,10 @@
       "url": "assets/starters/work-02-frontend-query/course-docs/ACCESS_MATRIX.md"
     },
     {
+      "path": "work-02-frontend-query/course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-02-frontend-query/course-docs/FREEBUFF.md"
+    },
+    {
       "path": "work-02-frontend-query/course-docs/STUDENT_SETUP.md",
       "url": "assets/starters/work-02-frontend-query/course-docs/STUDENT_SETUP.md"
     },
@@ -1083,6 +1115,10 @@
     {
       "path": "work-03-rest-api/course-docs/ACCESS_MATRIX.md",
       "url": "assets/starters/work-03-rest-api/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "work-03-rest-api/course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-03-rest-api/course-docs/FREEBUFF.md"
     },
     {
       "path": "work-03-rest-api/course-docs/STUDENT_SETUP.md",
@@ -1210,6 +1246,10 @@
     {
       "path": "work-04-sqlite-workflow/course-docs/ACCESS_MATRIX.md",
       "url": "assets/starters/work-04-sqlite-workflow/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "work-04-sqlite-workflow/course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-04-sqlite-workflow/course-docs/FREEBUFF.md"
     },
     {
       "path": "work-04-sqlite-workflow/course-docs/STUDENT_SETUP.md",
@@ -1365,6 +1405,10 @@
     {
       "path": "work-05-comments-engineering/course-docs/ACCESS_MATRIX.md",
       "url": "assets/starters/work-05-comments-engineering/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "work-05-comments-engineering/course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-05-comments-engineering/course-docs/FREEBUFF.md"
     },
     {
       "path": "work-05-comments-engineering/course-docs/STUDENT_SETUP.md",
@@ -1541,6 +1585,10 @@
     {
       "path": "work-06-ai-triage-defense/course-docs/ACCESS_MATRIX.md",
       "url": "assets/starters/work-06-ai-triage-defense/course-docs/ACCESS_MATRIX.md"
+    },
+    {
+      "path": "work-06-ai-triage-defense/course-docs/FREEBUFF.md",
+      "url": "assets/starters/work-06-ai-triage-defense/course-docs/FREEBUFF.md"
     },
     {
       "path": "work-06-ai-triage-defense/course-docs/STUDENT_SETUP.md",

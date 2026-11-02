@@ -1,12 +1,19 @@
 'use strict';
-import {courseProgress} from './course-progress.js?v=85b64ff4da2c';
+import {courseProgress} from './course-progress.js?v=089533b3fb24';
+import {telemetry} from './telemetry.js?v=089533b3fb24';
 export const $ = selector => document.querySelector(selector);
 export const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const pad = value => String(value).padStart(2, '0');
 const STORE = 'campus-servicedesk-progress-v11';
 const record = value => value && typeof value === 'object' && !Array.isArray(value);
 export const runtime = {course: [], schedule: [], state: {group: '', groupChosen: false, done: {}, steps: {}, positions: {}}};
-try { const saved = JSON.parse(localStorage.getItem(STORE) || '{}'); if (record(saved)) { runtime.state.group = typeof saved.group === 'string' ? saved.group : ''; runtime.state.groupChosen = saved.groupChosen === true; runtime.state.done = record(saved.done) ? saved.done : {}; runtime.state.steps = record(saved.steps) ? saved.steps : {}; runtime.state.positions = record(saved.positions) ? saved.positions : {}; runtime.state.lesson1Order = saved.lesson1Order; } } catch { /* Storage is optional. */ }
+const diagnosticGroups={'24ИС02/1':'24is02-1','24ИС02/2':'24is02-2','24ИС03/1':'24is03-1','24ИС03/2':'24is03-2'};
+export function recordDiagnostic(kind,detail,lesson=0,step=0,group=runtime.state.group) {
+  if (runtime.state.diagnosticsNoticeSeen !== true) return;
+  const cohort=Object.hasOwn(diagnosticGroups,group) ? diagnosticGroups[group] : 'unknown';
+  void telemetry.emit({group:cohort,lesson,step,kind,detail});
+}
+try { const saved = JSON.parse(localStorage.getItem(STORE) || '{}'); if (record(saved)) { runtime.state.group = typeof saved.group === 'string' ? saved.group : ''; runtime.state.groupChosen = saved.groupChosen === true; runtime.state.diagnosticsNoticeSeen = saved.diagnosticsNoticeSeen === true; runtime.state.done = record(saved.done) ? saved.done : {}; runtime.state.steps = record(saved.steps) ? saved.steps : {}; runtime.state.positions = record(saved.positions) ? saved.positions : {}; runtime.state.lesson1Order = saved.lesson1Order; } } catch { /* Storage is optional. */ }
 export function migrateLessonOrder() {
   if (runtime.state.lesson1Order === 2) return;
   const indices = {7:8,8:9,9:7}, ids = {8:9,9:10,10:8};

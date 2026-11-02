@@ -1,6 +1,6 @@
 {
-  "revision": "85b64ff4da2c",
-  "images": 57,
+  "revision": "089533b3fb24",
+  "images": 74,
   "lesson": 1,
   "collections": {
     "lesson-01": {
@@ -34,7 +34,7 @@
       ]
     },
     "native-guide": {
-      "images": 18,
+      "images": 35,
       "ids": [
         "vscode-folder",
         "vscode-new-terminal",
@@ -53,7 +53,24 @@
         "vscode-git-init",
         "vscode-git-commit",
         "vscode-git-branch",
-        "opencode-launch"
+        "opencode-launch",
+        "freebuff-install-windows",
+        "freebuff-launch-windows",
+        "freebuff-project-folder",
+        "gitverse-freebuff-setup-status",
+        "gitverse-servicedesk-running",
+        "gitverse-ticket-source",
+        "freebuff-read-files",
+        "freebuff-search-plan",
+        "freebuff-search-edit",
+        "freebuff-search-tests",
+        "freebuff-search-result",
+        "freebuff-search-empty",
+        "opencode-project-read",
+        "opencode-search-summary",
+        "opencode-search-tests",
+        "opencode-search-browser",
+        "opencode-search-empty"
       ]
     },
     "repository-guide": {

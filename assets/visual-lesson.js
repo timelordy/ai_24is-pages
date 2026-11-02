@@ -1,7 +1,24 @@
 'use strict';
-import {runtime, esc, inline, block, pad, taskSteps, setTaskStep, doneSet, setDone, lessonPosition, rememberLessonPosition, currentGroup} from './lib.js?v=85b64ff4da2c';
-import {renderConceptDiagram, bindConceptDiagrams} from './lesson-diagrams.js?v=85b64ff4da2c';
-import {lessonProgress, canVisitStep, resumeStepId} from './course-progress.js?v=85b64ff4da2c';
+import {runtime, esc, inline, block, pad, taskSteps, setTaskStep, doneSet, setDone, lessonPosition, rememberLessonPosition, currentGroup, recordDiagnostic} from './lib.js?v=089533b3fb24';
+import {renderConceptDiagram, bindConceptDiagrams} from './lesson-diagrams.js?v=089533b3fb24';
+import {lessonProgress, canVisitStep, resumeStepId} from './course-progress.js?v=089533b3fb24';
+
+const AGENT_STORE = 'kgasu-ai-course-agent-routes-v1';
+try {
+  const routes = JSON.parse(localStorage.getItem(AGENT_STORE) || '{}');
+  if (routes && typeof routes === 'object' && !Array.isArray(routes)) runtime.state.agentRoutes = routes;
+} catch { /* Выбор остаётся доступен в текущем сеансе. */ }
+export function selectedAgent() {
+  return runtime.state.agentRoutes?.[runtime.state.group] === 'freebuff' ? 'freebuff' : 'opencode';
+}
+export function lessonForAgent(item, agent = selectedAgent()) {
+  if (agent !== 'freebuff') return item;
+  return {...item, guide: {...item.guide, steps: item.guide.steps.map(step => ({...step, ...step.freebuff}))}};
+}
+export function agentChoice(compact = false) {
+  const id = compact ? 'course-agent-nav' : 'course-agent';
+  return `<section class="agent-choice ${compact ? 'agent-choice-compact' : 'panel'}" aria-label="Выбор помощника"><label for="${id}"><strong>${compact ? 'Помощник в этих шагах' : 'Выбери помощника: OpenCode или Freebuff'}</strong></label><select id="${id}" data-course-agent><option value="opencode"${selectedAgent()==='opencode' ? ' selected' : ''}>${compact ? 'OpenCode' : 'Основной вариант: OpenCode'}</option><option value="freebuff"${selectedAgent()==='freebuff' ? ' selected' : ''}>${compact ? 'Freebuff' : 'Альтернатива: Freebuff'}</option></select>${compact ? '' : '<p>От выбора меняются названия шагов, команды и примеры ниже. Проект и отметки остаются общими. Выбор сохранится для этой группы.</p><a href="#stack/freebuff">Инструкция по установке и работе с Freebuff</a>'}</section>`;
+}
 
 const workspaceIcons = {
   instructions:'<rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/>',
@@ -11,7 +28,7 @@ const workspaceIcons = {
 function workspaceMap() {
   return `<section class="workspace-map" aria-label="Где мы работаем"><h2>Три окна на занятии</h2><div class="workspace-nodes">${[
     ['instructions','Этот сайт','Читаем шаг и смотрим пример'],
-    ['editor','VS Code + OpenCode','Даём задачу агенту и смотрим файлы'],
+    ['editor','VS Code + выбранный агент','Даём задачу агенту и смотрим файлы'],
     ['browser','Учебный ServiceDesk','Проверяем результат в браузере']
   ].map(([icon,title,text])=>`<div class="workspace-node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">${workspaceIcons[icon]}</svg><div><strong>${title}</strong><span>${text}</span></div></div>`).join('')}</div></section>`;
 }
@@ -49,7 +66,7 @@ function messageBlock(action) {
   const prompt = action.kind === 'prompt';
   const inside = action.target === 'opencode';
   const repository = action.kind === 'repository';
-  const label = repository ? 'Адрес репозитория на GitVerse' : prompt ? 'Отправь агенту в OpenCode' : inside ? 'Введи в поле сообщения OpenCode' : 'Введи в терминал VS Code';
+  const label = repository ? 'Адрес репозитория на GitVerse' : prompt ? `Отправь агенту в ${selectedAgent()==='freebuff' ? 'Freebuff' : 'OpenCode'}` : inside ? 'Введи в поле сообщения OpenCode' : 'Введи в терминал VS Code';
   const hint = repository ? 'Вставь в поле Git: Clone в VS Code' : prompt || inside ? 'Вставь в поле сообщения и нажми Enter' : 'Вводи по одной строке, нажимая Enter после каждой';
   const copy = repository ? 'Скопировать адрес' : prompt ? 'Скопировать запрос' : action.code.includes('\n') ? 'Скопировать команды' : 'Скопировать команду';
   const body = prompt ? `<div class="guide-prompt-body">${readableText(action.code)}</div>` : `<pre><code>${esc(action.code)}</code></pre>`;
@@ -103,8 +120,8 @@ function nextPager(item,index) {
 }
 function materials(item, resume) {
   const recovery = item.number===1 ? 'Если GitVerse недоступен: ZIP с готовыми файлами и настройками. Основной порядок получения проекта показан на шаге 7.' : 'Продолжай свою папку. ZIP нужен только для восстановления с преподавателем; не распаковывай его поверх проекта.';
-  return `<section id="files" tabindex="-1" class="guide-materials"><h2>Материалы к работе</h2><p>${item.number>=3 ? 'Продолжай свою папку и свой форк. Готовые foundation/final передаёт только преподаватель после явного разрешения. Не распаковывай их поверх своей работы: сравни версии и перенеси согласованные части по инструкции.' : 'Скачай нужные файлы.'} Инструкцию можно проходить прямо на этом сайте.</p><div class="guide-file-grid">
-  ${item.number===1 ? `<article class="guide-file"><div><h3>Проект преподавателя на GitVerse</h3><p>Сначала клонируем его в свою папку, вместе с историей Git.</p></div><a class="button primary" href="#task-1/part-7">Открыть шаги</a></article><article class="guide-file"><div><h3>Набор для OpenCode</h3><p>Четыре актуальных файла: настройки, инструкция, необязательный шаблон отчёта и README. Добавляем их после клонирования, сохраняя свои заметки.</p></div><a class="button" href="${esc(item.downloads.setup)}" download>Скачать набор</a></article>` : ''}
+  return `<section id="files" tabindex="-1" class="guide-materials"><h2>Материалы к работе</h2><p>${item.number>=3 ? 'Продолжай свою папку и свой форк. Готовые foundation/final передаёт только преподаватель после явного разрешения. Не распаковывай их поверх своей работы: сравни версии и перенеси согласованные части по инструкции.' : 'Скачай нужные файлы.'} Шаги можно читать прямо на этом сайте.</p><div class="guide-file-grid">
+  ${item.number===1 ? `<article class="guide-file"><div><h3>Проект преподавателя на GitVerse</h3><p>Сначала клонируем его в свою папку, вместе с историей Git.</p></div><a class="button primary" href="#task-1/part-7">Открыть шаги</a></article><article class="guide-file"><div><h3>${selectedAgent()==='freebuff' ? 'Файлы подготовки' : 'Набор для OpenCode'}</h3><p>Четыре актуальных файла: настройки OpenCode, инструкция, необязательный шаблон отчёта и README. Добавь их после клонирования проекта. Свои заметки сохрани. Freebuff не использует настройки OpenCode; их можно оставить для смены агента.</p></div><a class="button" href="${esc(item.downloads.setup)}" download>Скачать набор</a></article>` : ''}
   ${item.number===2 ? '<article class="guide-file"><div><h3>Продолжай свою папку</h3><p>Создай форк и подключи его по карточкам. Повторное клонирование нужно только на новом компьютере или без прежней папки.</p></div><a class="button primary" href="#task-2/part-1">Своя копия на GitVerse</a></article>' : item.number>=3 ? `<article class="guide-file"><div><h3>Продолжай свою папку</h3><p>Открой свою принятую версию с прошлой работы. Сохрани историю, поиск, заметки и настройки; проверь свой форк перед отправкой.</p></div><a class="button primary" href="#task-${item.number}/part-1">Подготовить свою версию</a></article>` : ''}
   <article class="guide-file"><div><h3>Резервная копия проекта</h3><p>${recovery}</p></div><a class="button starter-download" href="#" data-starter="${esc(item.downloads.starterKey)}" data-filename="${esc(item.downloads.starterFilename)}">Скачать ZIP</a></article>
   <article class="guide-file"><div><h3>Шаблон отчёта</h3><p>Необязательная заготовка REPORT.md. Можно написать самому или с помощником, в удобной форме и объёме. Существующие заметки не заменяй шаблоном.</p></div><a class="button" href="${esc(item.downloads.report)}" download>Скачать шаблон</a></article>
@@ -116,7 +133,7 @@ function showcase(item) {
   const complete=lessonProgress(item).complete;
   const optional=(currentGroup()?.optionalModules ?? [5]).includes(item.number);
   const skip=optional ? '<aside class="notice panel"><h3>Если пропускаешь работу</h3><p>Ничего отмечать не нужно: не ставь галочки за невыполненные действия. Пропуск не снижает общий прогресс и не мешает переходу к следующей обязательной работе, когда она открыта преподавателем. Результаты ниже относятся только к выбранному дополнению.</p><a class="button" href="#tasks">К обязательным работам</a></aside>' : '';
-  return `<section id="submit" tabindex="-1" class="guide-showcase"><span class="guide-place">Итог работы</span><h2>Что должно получиться в конце</h2>${skip}<p>Сверь свой проект с результатами ниже. Проверь, что всё работает, и разберись в собственных изменениях.</p><p>REPORT.md необязателен; заметку можно сохранить в удобной форме, не заменяя прежние записи.</p><ol class="showcase-list">${guide.showcase.map(text=>`<li>${inline(text)}</li>`).join('')}</ol><h3>Вопросы для самопроверки</h3><ul>${guide.questions.map(text=>`<li>${inline(text)}</li>`).join('')}</ul><div class="guide-completion"><div><strong>Результат проверен?</strong><p>Личная отметка сохранится в этом браузере.</p>${!complete ? `<p id="guide-completion-reason">${optional ? 'Если выполняешь дополнение и хочешь отметить его завершённым, пройди и отметь его обязательные шаги. При пропуске эта отметка не нужна.' : 'Сначала выполни и отметь обязательные шаги работы. Необязательные дополнения можно пропустить без галочек.'} <a href="#task-${item.number}/part-${resumeStepId(item)}">Вернуться к незавершённому шагу</a></p>` : ''}</div><button id="toggle-done" type="button" aria-pressed="${done}"${!complete && !done ? ' disabled aria-describedby="guide-completion-reason"' : ''}>${done ? 'Снять отметку' : 'Отметить для себя'}</button></div></section>`;
+  return `<section id="submit" tabindex="-1" class="guide-showcase"><span class="guide-place">Итог работы</span><h2>Что должно получиться в конце</h2>${skip}<p>Сравни свой проект с результатами ниже. Проверь работу приложения и объясни свои изменения.</p><p>REPORT.md необязателен; заметку можно сохранить в удобной форме, не заменяя прежние записи.</p><ol class="showcase-list">${guide.showcase.map(text=>`<li>${inline(text)}</li>`).join('')}</ol><h3>Вопросы для самопроверки</h3><ul>${guide.questions.map(text=>`<li>${inline(text)}</li>`).join('')}</ul><div class="guide-completion"><div><strong>Результат проверен?</strong><p>Личная отметка сохранится в этом браузере.</p>${!complete ? `<p id="guide-completion-reason">${optional ? 'Если выполняешь дополнение и хочешь отметить его завершённым, пройди и отметь его обязательные шаги. При пропуске эта отметка не нужна.' : 'Сначала выполни и отметь обязательные шаги работы. Необязательные дополнения можно пропустить без галочек.'} <a href="#task-${item.number}/part-${resumeStepId(item)}">Вернуться к незавершённому шагу</a></p>` : ''}</div><button id="toggle-done" type="button" aria-pressed="${done}"${!complete && !done ? ' disabled aria-describedby="guide-completion-reason"' : ''}>${done ? 'Снять отметку' : 'Отметить для себя'}</button></div></section>`;
 }
 function lessonStep(item, step, index) {
   const guide = item.guide;
@@ -124,9 +141,10 @@ function lessonStep(item, step, index) {
   const shown = new Set();
   const example = step.example ? `<section class="guide-example" aria-label="Пример до и после"><h3>${esc(step.example.title)}</h3><div class="guide-example-grid">${[step.example.before,step.example.after].map(side=>`<section><h4>${esc(side.title)}</h4>${prose(side.text)}${actionScreenshots(item,side,shown)}</section>`).join('')}</div>${step.example.note ? prose(step.example.note,'guide-example-note') : ''}</section>` : '';
   const explanation = example + (step.terms?.length ? `<section class="guide-explainer" aria-label="Что это и зачем"><h3>Что это и зачем</h3><dl>${step.terms.map(({term,text})=>`<div><dt>${esc(term)}</dt><dd>${prose(text)}</dd></div>`).join('')}</dl></section>` : '');
-  return `<article id="part-${step.id}" tabindex="-1" class="guide-step"><div class="guide-step-heading"><span class="guide-place">${esc(step.where)}</span><span>Шаг ${index+1} из ${guide.steps.length}</span></div><h2>${esc(step.title)}</h2>${prose(step.intro,'guide-step-intro')}${step.diagram ? renderConceptDiagram(step.diagram,item.illustrations || []) : ''}${explanation}<ol class="guide-actions">${step.actions.map((action,actionIndex)=>`<li><span class="guide-action-index" aria-hidden="true">${actionIndex+1}</span><div class="guide-action-body"><h3>${esc(action.title)}</h3>${prose(action.text)}${action.diagram ? renderConceptDiagram(action.diagram,item.illustrations || []) : ''}${action.setupDownload && item.downloads.setup ? `<a class="button primary" href="${esc(item.downloads.setup)}" download>Скачать набор для OpenCode</a>` : ''}${action.downloadProject ? `<a class="button primary starter-download" href="#" data-starter="${esc(item.downloads.starterKey)}" data-filename="${esc(item.downloads.starterFilename)}">Скачать учебный проект</a>` : ''}${action.link ? `<a class="button primary" href="${esc(action.link.href)}" target="_blank" rel="noopener noreferrer">${esc(action.link.label)}</a>` : ''}${messageBlock(action)}${actionResult(item,action,shown)}${action.tip ? `<details class="guide-tip"><summary>Подсказка</summary>${prose(action.tip)}</details>` : ''}</div></li>`).join('')}</ol><div class="guide-step-result"><strong>В конце этого шага</strong>${prose(step.result)}</div><div class="guide-pager">${previous ? `<a class="button" href="#task-${item.number}/part-${previous.id}">Предыдущий шаг</a>` : '<a class="button" href="#tasks">Все работы</a>'}${nextPager(item,index)}</div></article>`;
+  return `<article id="part-${step.id}" tabindex="-1" class="guide-step"><div class="guide-step-heading"><span class="guide-place">${esc(step.where)}</span><span>Шаг ${index+1} из ${guide.steps.length}</span></div><h2>${esc(step.title)}</h2>${prose(step.intro,'guide-step-intro')}${step.diagram ? renderConceptDiagram(step.diagram,item.illustrations || []) : ''}${explanation}<ol class="guide-actions">${step.actions.map((action,actionIndex)=>`<li><span class="guide-action-index" aria-hidden="true">${actionIndex+1}</span><div class="guide-action-body"><h3>${esc(action.title)}</h3>${prose(action.text)}${action.diagram ? renderConceptDiagram(action.diagram,item.illustrations || []) : ''}${action.setupDownload && item.downloads.setup ? `<a class="button primary" href="${esc(item.downloads.setup)}" download>${selectedAgent()==='freebuff' ? 'Скачать файлы подготовки' : 'Скачать набор для OpenCode'}</a>` : ''}${action.downloadProject ? `<a class="button primary starter-download" href="#" data-starter="${esc(item.downloads.starterKey)}" data-filename="${esc(item.downloads.starterFilename)}">Скачать учебный проект</a>` : ''}${action.link ? `<a class="button primary" href="${esc(action.link.href)}" target="_blank" rel="noopener noreferrer">${esc(action.link.label)}</a>` : ''}${messageBlock(action)}${actionResult(item,action,shown)}${action.tip ? `<details class="guide-tip"><summary>Подсказка</summary>${prose(action.tip)}</details>` : ''}</div></li>`).join('')}</ol><div class="guide-step-result"><strong>В конце этого шага</strong>${prose(step.result)}</div><div class="guide-pager">${previous ? `<a class="button" href="#task-${item.number}/part-${previous.id}">Предыдущий шаг</a>` : '<a class="button" href="#tasks">Все работы</a>'}${nextPager(item,index)}</div></article>`;
 }
 export function renderVisualLesson(item) {
+  item = lessonForAgent(item);
   const guide = item.guide, progress = lessonProgress(item), anchor = location.hash.split('/')[1] || '';
   const requested = /^part-(\d+)$/.exec(anchor);
   let index = requested ? guide.steps.findIndex(step=>step.id===Number(requested[1])) : guide.steps.findIndex(step=>step.id===lessonPosition(item.number));
@@ -136,13 +154,27 @@ export function renderVisualLesson(item) {
   const projectIndex=item.number===1 ? 6 : 0, projectAvailable=canVisitStep(item,projectIndex);
   const projectLabel=item.number===1 ? 'Взять проект с GitVerse' : item.number===2 ? 'Своя копия на GitVerse' : 'Продолжить свою папку';
   const projectLink=`<a class="button" data-guide-project href="#task-${item.number}/part-${projectAvailable ? guide.steps[projectIndex].id : resumeStepId(item)}"${!projectAvailable ? ' aria-describedby="guide-project-reason"' : ''}>${projectLabel}</a>`;
-  return `<div class="guided-lesson" data-guided-lesson><header class="guided-heading"><div class="guide-header-top"><a class="button guide-back" href="#tasks">← Все работы</a><span class="course-label">${esc(runtime.state.group)} · Работа ${pad(item.number)}</span></div><h1>${esc(guide.title)}</h1><p class="lead">${esc(guide.lead)}</p><div class="guide-header-actions"><a class="button primary" href="#task-${item.number}/part-${guide.steps[index].id}">${progress.completed || lessonPosition(item.number) || index>0 ? 'Продолжить работу' : 'Начать работу'}</a>${projectLink}<a class="button" href="#task-${item.number}/files">Все материалы</a><a class="button" href="#task-${item.number}/submit">Итог работы</a></div><p id="guide-project-reason" class="guide-gate-reason"${projectAvailable ? ' hidden' : ''}>${item.number===1 ? 'Проект будет на шаге 7. ' : ''}Пока вернись к первому незавершённому шагу.</p><div class="guide-targets"><strong>Задачи занятия</strong><ul>${guide.outcomes.map(text=>`<li>${esc(text)}</li>`).join('')}</ul></div></header><nav class="guide-tools" aria-label="Управление работой"><a class="button" href="#tasks">Все работы</a><a class="button" href="#task-${item.number}/files">Материалы</a><a class="button" href="#task-${item.number}/submit">Итог работы</a></nav>${item.number===1 && index===0 && !special ? workspaceMap() : ''}<div class="guide-layout"><aside class="guide-sidebar"><div class="guide-sidebar-heading"><strong>Шаги работы</strong><span id="guide-progress" aria-live="polite">${progress.completed} / ${progress.total}</span></div><p id="guide-nav-reason" class="guide-gate-reason">Следующие шаги открываются после отметки о выполнении предыдущих.</p><nav class="guide-nav" aria-label="Шаги работы">${stepNavigation(item,index,special)}<a class="guide-nav-extra ${anchor==='submit' || anchor==='checks' ? 'active' : ''}" href="#task-${item.number}/submit"><span>◎</span><span>Итог работы</span></a><a class="guide-nav-extra ${anchor==='files' ? 'active' : ''}" href="#task-${item.number}/files"><span>↓</span><span>Файлы проекта</span></a></nav><a class="guide-help-link" href="#stack">Помощник не подключается?</a></aside><div class="guide-main">${body}</div></div><dialog id="guide-image-dialog" class="guide-image-dialog" aria-label="Увеличенное изображение" aria-describedby="guide-image-caption"><div class="guide-image-toolbar"><strong id="guide-image-title"></strong><div class="guide-image-controls"><button type="button" id="guide-image-fit">Показать 100%</button><button type="button" id="guide-image-close" aria-label="Закрыть скриншот">×</button></div></div><p id="guide-image-caption" class="guide-image-caption" hidden></p><img id="guide-image-full" alt=""></dialog></div>`;
+  return `<div class="guided-lesson" data-guided-lesson><header class="guided-heading"><div class="guide-header-top"><a class="button guide-back" href="#tasks">← Все работы</a><span class="course-label">${esc(runtime.state.group)} · Работа ${pad(item.number)}</span></div><h1>${esc(guide.title)}</h1>${agentChoice()}<p class="lead">${esc(guide.lead)}</p><div class="guide-header-actions"><a class="button primary" href="#task-${item.number}/part-${guide.steps[index].id}">${progress.completed || lessonPosition(item.number) || index>0 ? 'Продолжить работу' : 'Начать работу'}</a>${projectLink}<a class="button" href="#task-${item.number}/files">Все материалы</a><a class="button" href="#task-${item.number}/submit">Итог работы</a></div><p id="guide-project-reason" class="guide-gate-reason"${projectAvailable ? ' hidden' : ''}>${item.number===1 ? 'Проект будет на шаге 7. ' : ''}Пока вернись к первому незавершённому шагу.</p><div class="guide-targets"><strong>Задачи занятия</strong><ul>${guide.outcomes.map(text=>`<li>${esc(text)}</li>`).join('')}</ul></div></header><nav class="guide-tools" aria-label="Управление работой"><a class="button" href="#tasks">Все работы</a><a class="button" href="#task-${item.number}/files">Материалы</a><a class="button" href="#task-${item.number}/submit">Итог работы</a></nav>${item.number===1 && index===0 && !special ? workspaceMap() : ''}<div class="guide-layout"><aside class="guide-sidebar">${agentChoice(true)}<div class="guide-sidebar-heading"><strong>Шаги работы</strong><span id="guide-progress" aria-live="polite">${progress.completed} / ${progress.total}</span></div><p id="guide-nav-reason" class="guide-gate-reason">Следующие шаги открываются после отметки о выполнении предыдущих.</p><nav class="guide-nav" aria-label="Шаги работы">${stepNavigation(item,index,special)}<a class="guide-nav-extra ${anchor==='submit' || anchor==='checks' ? 'active' : ''}" href="#task-${item.number}/submit"><span>◎</span><span>Итог работы</span></a><a class="guide-nav-extra ${anchor==='files' ? 'active' : ''}" href="#task-${item.number}/files"><span>↓</span><span>Файлы проекта</span></a></nav><a class="guide-help-link" href="#stack">Помощник не подключается?</a></aside><div class="guide-main">${body}</div></div><dialog id="guide-image-dialog" class="guide-image-dialog" aria-label="Увеличенное изображение" aria-describedby="guide-image-caption"><div class="guide-image-toolbar"><strong id="guide-image-title"></strong><div class="guide-image-controls"><button type="button" id="guide-image-fit">Показать 100%</button><button type="button" id="guide-image-close" aria-label="Закрыть скриншот">×</button></div></div><p id="guide-image-caption" class="guide-image-caption" hidden></p><img id="guide-image-full" alt=""></dialog></div>`;
+}
+export function bindAgentChoice(rerender) {
+  document.querySelectorAll('[data-course-agent]').forEach(selector => selector.addEventListener('change', event => {
+    const agent = event.currentTarget.value;
+    if (!currentGroup() || !['opencode','freebuff'].includes(agent)) return;
+    if (!runtime.state.agentRoutes || typeof runtime.state.agentRoutes !== 'object' || Array.isArray(runtime.state.agentRoutes)) runtime.state.agentRoutes = {};
+    runtime.state.agentRoutes[runtime.state.group] = agent;
+    try { localStorage.setItem(AGENT_STORE, JSON.stringify(runtime.state.agentRoutes)); } catch { /* Хранилище может быть недоступно. */ }
+    const selectorId = event.currentTarget.id;
+    rerender(); document.getElementById(selectorId)?.focus({preventScroll:true});
+  }));
 }
 export function bindVisualLesson(route, rerender) {
+  bindAgentChoice(rerender);
   bindConceptDiagrams();
   const number = Number(route.split('-')[1]);
   const item = runtime.course.find(entry=>entry.number===number);
+  const diagnosticGroup=runtime.state.group;
   const anchor = /^part-(\d+)$/.exec(location.hash.split('/')[1] || '');
+  const diagnosticStep=anchor && item.guide.steps.some(step=>step.id===Number(anchor[1])) ? Number(anchor[1]) : 0;
   if (anchor) {
     const index=item.guide.steps.findIndex(step=>step.id===Number(anchor[1]));
     rememberLessonPosition(number,canVisitStep(item,index) ? Number(anchor[1]) : resumeStepId(item));
@@ -166,6 +198,7 @@ export function bindVisualLesson(route, rerender) {
     const input = event.currentTarget, index = Number(input.dataset.guideCheck);
     if (!canVisitStep(item,index)) return;
     setTaskStep(number,index,input.checked);
+    recordDiagnostic('step_toggle',input.checked ? 'checked' : 'unchecked',number,item.guide.steps[index].id,diagnosticGroup);
     const marks=taskSteps(number), progress=lessonProgress(item);
     document.querySelectorAll('[data-guide-nav]').forEach(node=>{
       const position=Number(node.dataset.guideNav), available=canVisitStep(item,position), checked=marks.has(position);
@@ -194,19 +227,22 @@ export function bindVisualLesson(route, rerender) {
   });
   document.querySelectorAll('[data-guide-nav], [data-guide-next]').forEach(node=>{
     const blocked=()=>!stepAvailable(item,Number(node.dataset.guideNav ?? node.dataset.guideNext));
-    node.addEventListener('click',event=>{ if (blocked()) event.preventDefault(); });
-    node.addEventListener('keydown',event=>{ if (blocked() && ['Enter',' '].includes(event.key)) event.preventDefault(); });
+    const recordBlock=()=>recordDiagnostic('navigation_blocked','required_step',number,item.guide.steps[Number(node.dataset.guideNav ?? node.dataset.guideNext)]?.id || 0,diagnosticGroup);
+    node.addEventListener('click',event=>{ if (blocked()) { event.preventDefault(); recordBlock(); } });
+    node.addEventListener('keydown',event=>{ if (blocked() && ['Enter',' '].includes(event.key)) { event.preventDefault(); recordBlock(); } });
   });
   document.querySelectorAll('[data-guide-copy]').forEach(button=>button.addEventListener('click',async()=>{
     const source = JSON.parse(button.dataset.guideCopy);
     try {
       await navigator.clipboard.writeText(source);
       button.textContent='Скопировано';
+      recordDiagnostic('copy_result','success',number,diagnosticStep,diagnosticGroup);
       const fallback = button.closest?.('.guide-code')?.querySelector('.guide-copy-fallback');
       if (fallback) fallback.hidden=true;
     }
     catch {
       button.textContent='Не скопировано. Повторить';
+      recordDiagnostic('copy_result','failure',number,diagnosticStep,diagnosticGroup);
       const fallback = button.closest('.guide-code').querySelector('.guide-copy-fallback');
       const field = fallback.querySelector('textarea');
       field.value=source;
@@ -231,6 +267,7 @@ export function bindVisualLesson(route, rerender) {
     document.querySelector('#guide-image-fit').textContent='Показать 100%';
     imageOpener=button;
     dialog.showModal();
+    recordDiagnostic('image_open',(item.illustrations || []).includes(shot) ? 'illustration' : 'screenshot',number,diagnosticStep,diagnosticGroup);
   }));
   document.querySelector('#guide-image-fit')?.addEventListener('click',event=>{ const fit=dialog.classList.toggle('is-fit'); event.currentTarget.textContent=fit ? 'Показать 100%' : 'Вписать в окно'; });
   document.querySelector('#guide-image-close')?.addEventListener('click',()=>dialog.close());

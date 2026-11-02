@@ -1,4 +1,5 @@
 'use strict';
+import {runtime, recordDiagnostic} from './lib.js?v=089533b3fb24';
 
 let manifestPromise;
 
@@ -89,7 +90,7 @@ function makeStoredZip(files) {
 }
 
 async function getManifest() {
-  manifestPromise ||= fetch('assets/starters/manifest.json?v=85b64ff4da2c', {cache: 'no-cache'}).then(response => {
+  manifestPromise ||= fetch('assets/starters/manifest.json?v=089533b3fb24', {cache: 'no-cache'}).then(response => {
     if (!response.ok) throw new Error('Не удалось загрузить состав архива проекта.');
     return response.json();
   }).catch(error => {
@@ -142,6 +143,8 @@ export function bindStarterDownloads() {
     if (!button) return;
     event.preventDefault();
     if (button.getAttribute('aria-busy') === 'true') return;
+    const group=runtime.state.group, lesson=runtime.course.find(item=>item.downloads?.starterKey===button.dataset.starter)?.number || 0;
+    recordDiagnostic('download','requested',lesson,0,group);
     let status = statuses.get(button);
     if (!status) {
       status = document.createElement('p');
@@ -152,10 +155,12 @@ export function bindStarterDownloads() {
     status.textContent = '';
     try {
       await downloadStarter(button);
-      status.textContent = 'ZIP подготовлен. Проверьте загрузки браузера.';
+      status.textContent = 'ZIP подготовлен. Проверь загрузки браузера.';
+      recordDiagnostic('download','prepared',lesson,0,group);
     } catch (error) {
+      recordDiagnostic('download','failure',lesson,0,group);
       status.setAttribute('role', 'alert');
-      status.textContent = `Архив не скачан: ${error.message} Нажмите кнопку скачивания ещё раз, чтобы повторить.`;
+      status.textContent = `Архив не скачан: ${error.message} Нажми кнопку скачивания ещё раз.`;
     }
   });
 }
